@@ -1,4 +1,4 @@
-package com.inlay.hotelroomservice.presentation
+package com.inlay.hotelroomservice.presentation.activities
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
