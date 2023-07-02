@@ -16,4 +16,8 @@
         android:id="@+id/fragmentSettings"
         android:name="com.inlay.hotelroomservice.presentation.fragments.settings.FragmentSettings"
         android:label="FragmentSettings" />
+    <fragment
+        android:id="@+id/fragmentProfile"
+        android:name="com.inlay.hotelroomservice.presentation.fragments.profile.FragmentProfile"
+        android:label="FragmentProfile" />
 </navigation>

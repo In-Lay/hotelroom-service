@@ -6,4 +6,5 @@
     <string name="settings_item_title">Settings</string>
     <string name="nav_drawer_open">Open Drawer</string>
     <string name="nav_drawer_close">Close Drawer</string>
+    <string name="header_profile">Profile</string>
 </resources>

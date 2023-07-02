@@ -1,8 +1,10 @@
 package com.inlay.hotelroomservice.presentation.activities
 
 import android.os.Bundle
-import android.view.Gravity
 import android.view.View
+import android.widget.ImageView
+import android.widget.TextView
+import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
@@ -32,9 +34,12 @@ class MainActivity : AppCompatActivity() {
         binding.drawerLayout.addDrawerListener(drawerToggle)
         drawerToggle.syncState()
 
+        setupHeader(false)
+
         val navHostFragment =
             supportFragmentManager.findFragmentById(R.id.fragment_container_view) as NavHostFragment
         navController = navHostFragment.navController
+
         binding.navigationView.setupWithNavController(navController)
 
         binding.navigationView.setNavigationItemSelectedListener {
@@ -43,6 +48,7 @@ class MainActivity : AppCompatActivity() {
                     binding.toolbar.title = "Hotels"
                     binding.fabSearch.visibility = View.VISIBLE
                     binding.drawerLayout.closeDrawer(GravityCompat.START)
+                    navController.navigate(R.id.hotelsFragment)
                     true
                 }
 
@@ -50,6 +56,7 @@ class MainActivity : AppCompatActivity() {
                     binding.toolbar.title = "User hotels"
                     binding.fabSearch.visibility = View.GONE
                     binding.drawerLayout.closeDrawer(GravityCompat.START)
+                    navController.navigate(R.id.fragmentUserList)
                     true
                 }
 
@@ -57,11 +64,53 @@ class MainActivity : AppCompatActivity() {
                     binding.toolbar.title = "Settings"
                     binding.fabSearch.visibility = View.GONE
                     binding.drawerLayout.closeDrawer(GravityCompat.START)
+                    navController.navigate(R.id.fragmentSettings)
                     true
                 }
 
                 else -> false
             }
+        }
+
+        onBackPressedDispatcher.addCallback(this,
+            object : OnBackPressedCallback(true) {
+                override fun handleOnBackPressed() {
+                    if (binding.drawerLayout.isDrawerOpen(GravityCompat.START)) {
+                        binding.drawerLayout.closeDrawer(GravityCompat.START)
+                    } else if (navController.currentDestination?.id == R.id.hotelsFragment) {
+                        finish()
+                    } else {
+                        binding.toolbar.title = "Hotels"
+                        binding.fabSearch.visibility = View.VISIBLE
+                        binding.navigationView.setCheckedItem(R.id.item_hotels)
+                        navController.navigate(R.id.hotelsFragment)
+                    }
+                }
+            }
+        )
+        binding.lifecycleOwner = this
+    }
+
+    private fun setupHeader(isUserLogged: Boolean) {
+        val headerView = binding.navigationView.getHeaderView(0)
+        val headerImage = headerView.findViewById<ImageView>(R.id.header_image)
+        val headerUserName = headerView.findViewById<TextView>(R.id.tv_user_name)
+        val headerMail = headerView.findViewById<TextView>(R.id.tv_user_mail)
+
+        if (!isUserLogged) {
+            headerImage.setImageResource(R.drawable.baseline_person_24)
+            headerUserName.text = this.resources.getText(R.string.header_profile)
+        }
+        headerImage.setOnClickListener {
+            binding.drawerLayout.closeDrawer(GravityCompat.START)
+            binding.toolbar.title = "Profile"
+            navController.navigate(R.id.fragmentProfile)
+        }
+
+        headerUserName.setOnClickListener {
+            binding.drawerLayout.closeDrawer(GravityCompat.START)
+            binding.toolbar.title = "Profile"
+            navController.navigate(R.id.fragmentProfile)
         }
     }
 }
