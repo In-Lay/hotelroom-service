@@ -1,5 +1,7 @@
 package com.inlay.hotelroomservice.data.models.hoteldetails
 
+import com.squareup.moshi.Json
+
 data class QA(
-    val content: List<ContentXXX>
+    @Json(name = "content") val qaContent: List<QAContent>
 )

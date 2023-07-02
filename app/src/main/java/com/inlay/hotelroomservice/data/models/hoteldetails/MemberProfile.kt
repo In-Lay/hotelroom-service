@@ -1,5 +1,7 @@
 package com.inlay.hotelroomservice.data.models.hoteldetails
 
+import com.squareup.moshi.Json
+
 data class MemberProfile(
-    val profileImage: ProfileImage
+    @Json(name = "profileImage") val profileImage: ProfileImage?
 )

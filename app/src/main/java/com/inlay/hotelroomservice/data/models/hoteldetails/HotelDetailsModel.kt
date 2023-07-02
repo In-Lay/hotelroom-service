@@ -1,8 +1,10 @@
 package com.inlay.hotelroomservice.data.models.hoteldetails
 
+import com.squareup.moshi.Json
+
 data class HotelDetailsModel(
-    val `data`: Data,
-    val message: String,
-    val status: Boolean,
-    val timestamp: Long
+    @Json(name = "status") val status: Boolean,
+    @Json(name = "message") val message: String,
+    @Json(name = "timestamp") val timestamp: Long,
+    @Json(name = "data") val data: Data
 )

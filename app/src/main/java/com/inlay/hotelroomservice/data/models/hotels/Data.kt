@@ -1,6 +1,20 @@
 package com.inlay.hotelroomservice.data.models.hotels
 
+import com.squareup.moshi.Json
+
 data class Data(
-    val `data`: List<DataX>,
-    val sortDisclaimer: String
+    @Json(name = "id") val id: String,
+    @Json(name = "title") val title: String,
+    @Json(name = "primaryInfo") val primaryInfo: String?,
+    @Json(name = "secondaryInfo") val secondaryInfo: String,
+    @Json(name = "badge") val badge: Badge,
+    @Json(name = "bubbleRating") val bubbleRating: BubbleRating,
+    @Json(name = "isSponsored") val isSponsored: Boolean,
+    @Json(name = "accentedLabel") val accentedLabel: Boolean,
+    @Json(name = "provider") val provider: String,
+    @Json(name = "priceForDisplay") val priceForDisplay: String,
+    @Json(name = "strikethroughPrice") val strikethroughPrice: String?,
+    @Json(name = "priceDetails") val priceDetails: String?,
+    @Json(name = "priceSummary") val priceSummary: String?,
+    @Json(name = "cardPhotos") val cardPhotos: List<CardPhoto>
 )

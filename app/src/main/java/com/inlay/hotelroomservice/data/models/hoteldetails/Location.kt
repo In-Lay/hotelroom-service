@@ -1,9 +1,11 @@
 package com.inlay.hotelroomservice.data.models.hoteldetails
 
+import com.squareup.moshi.Json
+
 data class Location(
-    val address: String,
-    val gettingThere: GettingThere,
-    val neighborhood: Neighborhood,
-    val title: String,
-    val walkability: Any
+    @Json(name = "address") val address: String,
+    @Json(name = "gettingThere") val gettingThere: GettingThere,
+    @Json(name = "neighborhood") val neighborhood: Neighborhood,
+    @Json(name = "title") val title: String,
+    @Json(name = "walkability") val walkability: String?
 )

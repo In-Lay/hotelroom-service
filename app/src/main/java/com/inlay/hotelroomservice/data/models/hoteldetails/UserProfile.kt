@@ -1,6 +1,8 @@
 package com.inlay.hotelroomservice.data.models.hoteldetails
 
+import com.squareup.moshi.Json
+
 data class UserProfile(
-    val avatar: Avatar,
-    val deprecatedContributionCount: String
+    @Json(name = "deprecatedContributionCount") val deprecatedContributionCount: String,
+    @Json(name = "avatar") val avatar: Avatar
 )

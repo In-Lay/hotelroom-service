@@ -1,6 +1,8 @@
 package com.inlay.hotelroomservice.data.models.hoteldetails
 
+import com.squareup.moshi.Json
+
 data class Poor(
-    val count: String,
-    val percentage: Int
+    @Json(name = "count") val count: String,
+    @Json(name = "percentage") val percentage: Int
 )

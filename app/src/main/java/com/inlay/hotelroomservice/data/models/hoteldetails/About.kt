@@ -1,7 +1,9 @@
 package com.inlay.hotelroomservice.data.models.hoteldetails
 
+import com.squareup.moshi.Json
+
 data class About(
-    val content: List<Content>,
-    val tags: List<String>,
-    val title: String
+    @Json(name = "title") val title: String,
+    @Json(name = "contentGeneral") val aboutContentGeneral: List<AboutContentGeneral>,
+    @Json(name = "tags") val tags: List<String>,
 )

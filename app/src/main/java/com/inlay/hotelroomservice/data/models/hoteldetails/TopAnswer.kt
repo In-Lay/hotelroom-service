@@ -1,8 +1,10 @@
 package com.inlay.hotelroomservice.data.models.hoteldetails
 
+import com.squareup.moshi.Json
+
 data class TopAnswer(
-    val memberProfile: MemberProfileX,
-    val text: String,
-    val thumbsUpCount: Int,
-    val writtenDate: String
+    @Json(name = "memberProfile") val topAnswerMemberProfile: TopAnswerMemberProfile,
+    @Json(name = "text") val text: String,
+    @Json(name = "thumbsUpCount") val thumbsUpCount: Int,
+    @Json(name = "writtenDate") val writtenDate: String
 )

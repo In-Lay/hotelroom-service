@@ -1,6 +1,8 @@
 package com.inlay.hotelroomservice.data.models.hoteldetails
 
+import com.squareup.moshi.Json
+
 data class AttractionsNearby(
-    val content: List<ContentXX>,
-    val sectionTitle: String
+    @Json(name = "content") val content: List<AttractionsNearbyContent>,
+    @Json(name = "sectionTitle")  val sectionTitle: String
 )

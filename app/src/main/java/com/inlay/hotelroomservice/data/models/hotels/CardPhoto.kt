@@ -1,6 +1,8 @@
 package com.inlay.hotelroomservice.data.models.hotels
 
+import com.squareup.moshi.Json
+
 data class CardPhoto(
-    val __typename: String,
-    val sizes: Sizes
+    @Json(name = "typename") val typename: String,
+    @Json(name = "sizes") val sizes: Sizes
 )
