@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/hotelsFragment">
+
+    <fragment
+        android:id="@+id/hotelsFragment"
+        android:name="com.inlay.hotelroomservice.presentation.fragments.hotels.HotelsFragment"
+        android:label="HotelsFragment" />
+    <fragment
+        android:id="@+id/fragmentUserList"
+        android:name="com.inlay.hotelroomservice.presentation.fragments.userlist.FragmentUserList"
+        android:label="FragmentUserList" />
+    <fragment
+        android:id="@+id/fragmentSettings"
+        android:name="com.inlay.hotelroomservice.presentation.fragments.settings.FragmentSettings"
+        android:label="FragmentSettings" />
+</navigation>

@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">HotelRoom Service</string>
+    <string name="fab_search_description">Search button</string>
+    <string name="hotels_item_title">Hotels</string>
+    <string name="user_hotels_item_title">User Hotels</string>
+    <string name="settings_item_title">Settings</string>
+    <string name="nav_drawer_open">Open Drawer</string>
+    <string name="nav_drawer_close">Close Drawer</string>
 </resources>

@@ -1,4 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-
+    <item
+        android:id="@+id/item_hotels"
+        android:checkable="true"
+        android:title="@string/hotels_item_title" />
+    <item
+        android:id="@+id/item_user_hotels"
+        android:checkable="true"
+        android:title="@string/user_hotels_item_title" />
+    <item
+        android:id="@+id/item_settings"
+        android:checkable="true"
+        android:title="@string/settings_item_title" />
 </menu>
