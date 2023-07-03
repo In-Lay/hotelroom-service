@@ -72,22 +72,20 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-        onBackPressedDispatcher.addCallback(this,
-            object : OnBackPressedCallback(true) {
-                override fun handleOnBackPressed() {
-                    if (binding.drawerLayout.isDrawerOpen(GravityCompat.START)) {
-                        binding.drawerLayout.closeDrawer(GravityCompat.START)
-                    } else if (navController.currentDestination?.id == R.id.hotelsFragment) {
-                        finish()
-                    } else {
-                        binding.toolbar.title = "Hotels"
-                        binding.fabSearch.visibility = View.VISIBLE
-                        binding.navigationView.setCheckedItem(R.id.item_hotels)
-                        navController.navigate(R.id.hotelsFragment)
-                    }
+        onBackPressedDispatcher.addCallback(this, object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                if (binding.drawerLayout.isDrawerOpen(GravityCompat.START)) {
+                    binding.drawerLayout.closeDrawer(GravityCompat.START)
+                } else if (navController.currentDestination?.id == R.id.hotelsFragment) {
+                    finish()
+                } else {
+                    binding.toolbar.title = "Hotels"
+                    binding.fabSearch.visibility = View.VISIBLE
+                    binding.navigationView.setCheckedItem(R.id.item_hotels)
+                    navController.navigate(R.id.hotelsFragment)
                 }
             }
-        )
+        })
         binding.lifecycleOwner = this
     }
 
@@ -112,5 +110,9 @@ class MainActivity : AppCompatActivity() {
             binding.toolbar.title = "Profile"
             navController.navigate(R.id.fragmentProfile)
         }
+    }
+
+    val goToDetails: (String) -> Unit = {
+
     }
 }

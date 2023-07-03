@@ -6,11 +6,21 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
+import androidx.recyclerview.widget.GridLayoutManager
 import com.inlay.hotelroomservice.R
 import com.inlay.hotelroomservice.databinding.FragmentHotelsBinding
+import com.inlay.hotelroomservice.presentation.activities.MainActivity
+import com.inlay.hotelroomservice.presentation.adapters.HotelsListAdapter
+import com.inlay.hotelroomservice.presentation.viewmodels.hotels.HotelsViewModel
+import kotlinx.coroutines.launch
+import org.koin.androidx.viewmodel.ext.android.activityViewModel
 
 class HotelsFragment : Fragment() {
     private lateinit var binding: FragmentHotelsBinding
+    private val hotelsViewModel: HotelsViewModel by activityViewModel()
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -23,5 +33,20 @@ class HotelsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        bindAdapter()
+    }
+
+    private fun bindAdapter() {
+        lifecycleScope.launch {
+            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                hotelsViewModel.hotelsDataList.collect {
+                    binding.recyclerView.adapter =
+                        HotelsListAdapter(it, (activity as MainActivity).goToDetails)
+                    binding.recyclerView.layoutManager = GridLayoutManager(requireContext(), 2)
+                    binding.recyclerView.setHasFixedSize(false)
+                }
+            }
+        }
     }
 }
