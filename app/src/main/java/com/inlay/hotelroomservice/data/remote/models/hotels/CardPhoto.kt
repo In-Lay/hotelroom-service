@@ -6,5 +6,5 @@ import com.squareup.moshi.JsonClass
 @JsonClass(generateAdapter = true)
 data class CardPhoto(
     @Json(name = "typename") val typename: String?,
-    @Json(name = "sizes") val sizes: Sizes
+    @Json(name = "sizes") val sizes: Sizes?
 )

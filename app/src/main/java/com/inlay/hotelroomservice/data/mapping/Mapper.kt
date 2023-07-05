@@ -1,4 +1,4 @@
-package com.inlay.hotelroomservice.data.remote.mapping
+package com.inlay.hotelroomservice.data.mapping
 
 import com.inlay.hotelroomservice.data.local.models.HotelsItemEntity
 import com.inlay.hotelroomservice.data.remote.models.hotels.CardPhoto
@@ -19,7 +19,7 @@ fun Data.toUiItem(): HotelsItemUiModel = HotelsItemUiModel(
 
 private fun List<CardPhoto>.toHotelsItemPhotos(): List<String> {
     return this.map {
-        it.sizes.urlTemplate
+        it.sizes?.urlTemplate ?: ""
     }
 }
 

@@ -1,9 +1,12 @@
 package com.inlay.hotelroomservice.di
 
+import android.app.Application
+import android.content.pm.ApplicationInfo
+import android.content.pm.PackageManager
 import androidx.room.Room
 import com.inlay.hotelroomservice.data.local.HotelsRoomDatabase
-import com.inlay.hotelroomservice.data.local.api.HotelRoomApi
 import com.inlay.hotelroomservice.data.remote.RetrofitObject
+import com.inlay.hotelroomservice.data.remote.api.HotelRoomApi
 import com.inlay.hotelroomservice.data.remote.apiservice.HotelRoomApiService
 import com.inlay.hotelroomservice.data.remote.apiservice.HotelRoomApiServiceImpl
 import com.inlay.hotelroomservice.data.repository.HotelRoomRepository
@@ -26,6 +29,15 @@ import java.text.SimpleDateFormat
 import java.util.Locale
 
 val appModule = module {
+//    single {
+//        get<Application>().packageManager.getApplicationInfo(
+//            get<Application>().packageName,
+//            PackageManager.GET_META_DATA
+//        )
+//    }
+//
+//    single { get<ApplicationInfo>().metaData["HOTELSROOM_SERVICE_API_KEY"] }
+
     single {
         Room.databaseBuilder(
             androidContext(),

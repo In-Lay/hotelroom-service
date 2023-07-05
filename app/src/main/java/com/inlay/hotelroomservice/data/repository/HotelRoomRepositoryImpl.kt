@@ -1,7 +1,7 @@
 package com.inlay.hotelroomservice.data.repository
 
-import com.inlay.hotelroomservice.data.remote.mapping.toEntity
-import com.inlay.hotelroomservice.data.remote.mapping.toUiItem
+import com.inlay.hotelroomservice.data.mapping.toEntity
+import com.inlay.hotelroomservice.data.mapping.toUiItem
 import com.inlay.hotelroomservice.domain.local.LocalDataSource
 import com.inlay.hotelroomservice.domain.remote.RemoteDataSource
 import com.inlay.hotelroomservice.presentation.models.hotelsitem.HotelsItemUiModel

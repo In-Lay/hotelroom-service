@@ -8,7 +8,8 @@ import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 
 object RetrofitObject {
-    private val moshi: Moshi = Moshi.Builder().add(KotlinJsonAdapterFactory()).build()
+    private val moshi: Moshi =
+        Moshi.Builder().add(KotlinJsonAdapterFactory()).add(CustomMoshiAdapter()).build()
     private val loggingInterceptor =
         HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY)
     private val client: OkHttpClient =

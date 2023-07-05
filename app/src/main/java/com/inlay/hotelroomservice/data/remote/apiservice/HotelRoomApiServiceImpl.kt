@@ -1,6 +1,6 @@
 package com.inlay.hotelroomservice.data.remote.apiservice
 
-import com.inlay.hotelroomservice.data.local.api.HotelRoomApi
+import com.inlay.hotelroomservice.data.remote.api.HotelRoomApi
 import com.inlay.hotelroomservice.data.remote.models.hoteldetails.HotelDetailsModel
 import com.inlay.hotelroomservice.data.remote.models.hotels.HotelsModel
 import com.inlay.hotelroomservice.data.remote.models.searchlocation.SearchLocationModel
