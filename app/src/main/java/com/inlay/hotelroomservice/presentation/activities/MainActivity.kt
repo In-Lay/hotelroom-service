@@ -13,10 +13,20 @@ import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import com.inlay.hotelroomservice.R
 import com.inlay.hotelroomservice.databinding.ActivityMainBinding
+import com.inlay.hotelroomservice.extensions.isNetworkAvailable
+import com.inlay.hotelroomservice.presentation.models.hotelsitem.DatesModel
+import com.inlay.hotelroomservice.presentation.viewmodels.hotels.HotelsViewModel
+import org.koin.android.ext.android.inject
+import org.koin.androidx.viewmodel.ext.android.viewModel
+import java.text.SimpleDateFormat
+import java.util.Calendar
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private lateinit var navController: NavController
+    private val hotelsViewModel: HotelsViewModel by viewModel()
+    private val dateFormat: SimpleDateFormat by inject()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -24,6 +34,24 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
         setSupportActionBar(binding.toolbar)
 
+        setupNavigationDrawer()
+        setupNavigation()
+        setupHeader(false)
+
+        setupBackPressed()
+
+        binding.lifecycleOwner = this
+
+        val dummyDates = getDummyDates()
+        hotelsViewModel.getHotelsRepo(
+            isNetworkAvailable(),
+            "255104",
+            dummyDates.checkInDate,
+            dummyDates.checkOutDate
+        )
+    }
+
+    private fun setupNavigationDrawer() {
         val drawerToggle = ActionBarDrawerToggle(
             this,
             binding.drawerLayout,
@@ -34,13 +62,31 @@ class MainActivity : AppCompatActivity() {
         binding.drawerLayout.addDrawerListener(drawerToggle)
         drawerToggle.syncState()
 
-        setupHeader(false)
-
         val navHostFragment =
             supportFragmentManager.findFragmentById(R.id.fragment_container_view) as NavHostFragment
         navController = navHostFragment.navController
 
         binding.navigationView.setupWithNavController(navController)
+    }
+
+    private fun setupBackPressed() {
+        onBackPressedDispatcher.addCallback(this, object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                if (binding.drawerLayout.isDrawerOpen(GravityCompat.START)) {
+                    binding.drawerLayout.closeDrawer(GravityCompat.START)
+                } else if (navController.currentDestination?.id == R.id.hotelsFragment) {
+                    finish()
+                } else {
+                    binding.toolbar.title = "Hotels"
+                    binding.fabSearch.visibility = View.VISIBLE
+                    binding.navigationView.setCheckedItem(R.id.item_hotels)
+                    navController.navigate(R.id.hotelsFragment)
+                }
+            }
+        })
+    }
+
+    private fun setupNavigation() {
 
         binding.navigationView.setNavigationItemSelectedListener {
             when (it.itemId) {
@@ -71,22 +117,6 @@ class MainActivity : AppCompatActivity() {
                 else -> false
             }
         }
-
-        onBackPressedDispatcher.addCallback(this, object : OnBackPressedCallback(true) {
-            override fun handleOnBackPressed() {
-                if (binding.drawerLayout.isDrawerOpen(GravityCompat.START)) {
-                    binding.drawerLayout.closeDrawer(GravityCompat.START)
-                } else if (navController.currentDestination?.id == R.id.hotelsFragment) {
-                    finish()
-                } else {
-                    binding.toolbar.title = "Hotels"
-                    binding.fabSearch.visibility = View.VISIBLE
-                    binding.navigationView.setCheckedItem(R.id.item_hotels)
-                    navController.navigate(R.id.hotelsFragment)
-                }
-            }
-        })
-        binding.lifecycleOwner = this
     }
 
     private fun setupHeader(isUserLogged: Boolean) {
@@ -110,6 +140,17 @@ class MainActivity : AppCompatActivity() {
             binding.toolbar.title = "Profile"
             navController.navigate(R.id.fragmentProfile)
         }
+    }
+
+    private fun getDummyDates(): DatesModel {
+        val calendar = Calendar.getInstance()
+        calendar.add(Calendar.DAY_OF_YEAR, 1)
+        val checkInDate = dateFormat.format(calendar.time)
+
+        calendar.add(Calendar.DAY_OF_YEAR, 7)
+        val checkOutDate = dateFormat.format(calendar.time)
+
+        return DatesModel(checkInDate, checkOutDate)
     }
 
     val goToDetails: (String) -> Unit = {

@@ -4,14 +4,14 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.lifecycle.findViewTreeLifecycleOwner
 import androidx.recyclerview.widget.RecyclerView.Adapter
-import com.inlay.hotelroomservice.data.models.hotels.Data
 import com.inlay.hotelroomservice.databinding.HotelsItemBinding
+import com.inlay.hotelroomservice.presentation.models.hotelsitem.HotelsItemUiModel
 import com.inlay.hotelroomservice.presentation.viewmodels.hotels.item.HotelsItemViewModel
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 
 class HotelsListAdapter(
-    private val hotelsList: List<Data>,
+    private val hotelsList: List<HotelsItemUiModel>,
     private val goToDetails: (String) -> Unit
 ) : Adapter<HotelsItemViewHolder>(),
     KoinComponent {
@@ -27,14 +27,10 @@ class HotelsListAdapter(
         val viewModel: HotelsItemViewModel by inject()
         val singleHotelData = hotelsList[position]
         viewModel.initializeData(
-            singleHotelData.id,
-            singleHotelData.title,
-            singleHotelData.secondaryInfo,
-            singleHotelData.bubbleRating.rating,
-            singleHotelData.priceForDisplay,
-            singleHotelData.cardPhotos,
+            singleHotelData,
             goToDetails
         )
+        holder.bind(viewModel)
     }
 
     override fun getItemCount(): Int {

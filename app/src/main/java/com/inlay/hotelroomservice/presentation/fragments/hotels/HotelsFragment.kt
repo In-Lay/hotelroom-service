@@ -9,7 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
-import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.inlay.hotelroomservice.R
 import com.inlay.hotelroomservice.databinding.FragmentHotelsBinding
 import com.inlay.hotelroomservice.presentation.activities.MainActivity
@@ -43,7 +43,7 @@ class HotelsFragment : Fragment() {
                 hotelsViewModel.hotelsDataList.collect {
                     binding.recyclerView.adapter =
                         HotelsListAdapter(it, (activity as MainActivity).goToDetails)
-                    binding.recyclerView.layoutManager = GridLayoutManager(requireContext(), 2)
+                    binding.recyclerView.layoutManager = LinearLayoutManager(context)
                     binding.recyclerView.setHasFixedSize(false)
                 }
             }
