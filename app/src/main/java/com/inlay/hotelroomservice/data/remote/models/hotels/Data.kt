@@ -5,7 +5,7 @@ import com.inlay.hotelroomservice.data.local.models.hotels.BubbleRating
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 
-//@JsonClass(generateAdapter = true)
+@JsonClass(generateAdapter = true)
 data class Data(
     @Json(name = "id") val id: String,
     @Json(name = "title") val title: String,

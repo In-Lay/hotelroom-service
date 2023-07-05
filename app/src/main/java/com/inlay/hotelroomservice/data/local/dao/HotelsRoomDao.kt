@@ -10,7 +10,7 @@ import kotlinx.coroutines.flow.Flow
 @Dao
 interface HotelsRoomDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun saveRepo(repos: List<HotelsItemEntity>)
+    fun saveRepo(repos: List<HotelsItemEntity>)
 
     @Query("SELECT * FROM hotels")
     fun fetchRepos(): Flow<List<HotelsItemEntity>>

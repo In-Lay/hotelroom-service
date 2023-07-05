@@ -45,7 +45,7 @@ class MainActivity : AppCompatActivity() {
         val dummyDates = getDummyDates()
         hotelsViewModel.getHotelsRepo(
             isNetworkAvailable(),
-            "255104",
+            "60763",
             dummyDates.checkInDate,
             dummyDates.checkOutDate
         )
