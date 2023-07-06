@@ -1,6 +1,11 @@
 package com.inlay.hotelroomservice.presentation.viewmodels.search.item
 
+import android.widget.ImageView
+import androidx.databinding.BindingAdapter
 import androidx.lifecycle.asLiveData
+import coil.load
+import coil.transform.RoundedCornersTransformation
+import com.inlay.hotelroomservice.R
 import com.inlay.hotelroomservice.presentation.models.locations.SearchLocationsUiModel
 import kotlinx.coroutines.flow.MutableStateFlow
 
@@ -32,5 +37,21 @@ class AppSearchLocationsItemViewModel : SearchLocationsItemViewModel() {
 
     override fun selectCurrentItem() {
         selectCurrentItemLambda(_geoId.value)
+    }
+
+    companion object {
+        @JvmStatic
+        @BindingAdapter("imgSource")
+        fun loadImage(view: ImageView, imageUrl: String) {
+            if (imageUrl.isNotEmpty()) {
+                view.load(imageUrl) {
+                    transformations(RoundedCornersTransformation(50F))
+                }
+            } else {
+                view.load(R.drawable.sample_locations_image) {
+                    transformations(RoundedCornersTransformation(50F))
+                }
+            }
+        }
     }
 }

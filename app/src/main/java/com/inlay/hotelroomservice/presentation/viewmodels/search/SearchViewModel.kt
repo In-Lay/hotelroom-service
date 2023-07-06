@@ -31,7 +31,7 @@ abstract class SearchViewModel : ViewModel() {
 
     abstract fun setCurrentItemGeoId(geoId: String)
 
-    abstract fun getSearchLocations()
+    abstract fun getSearchLocations(searchInput: String)
 
     abstract fun searchHotels()
 

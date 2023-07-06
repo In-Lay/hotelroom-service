@@ -1,9 +1,11 @@
 package com.inlay.hotelroomservice.presentation.fragments.search
 
 import android.os.Bundle
+import android.text.Editable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.EditorInfo
 import android.widget.Toast
 import androidx.core.util.Pair
 import androidx.databinding.DataBindingUtil
@@ -16,6 +18,7 @@ import com.google.android.material.datepicker.MaterialDatePicker
 import com.inlay.hotelroomservice.R
 import com.inlay.hotelroomservice.databinding.FragmentSearchBinding
 import com.inlay.hotelroomservice.extensions.isNetworkAvailable
+import com.inlay.hotelroomservice.presentation.activities.MainActivity
 import com.inlay.hotelroomservice.presentation.adapters.search.SearchLocationsAdapter
 import com.inlay.hotelroomservice.presentation.models.SearchDataUiModel
 import com.inlay.hotelroomservice.presentation.models.hotelsitem.DatesModel
@@ -39,6 +42,9 @@ class FragmentSearch : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_search, container, false)
+        
+        (activity as MainActivity).setSupportActionBar(binding.searchBar)
+
         isOnline = requireContext().isNetworkAvailable()
         searchViewModel.init(isOnline, openDatePicker, searchHotels)
         binding.lifecycleOwner = viewLifecycleOwner
@@ -54,8 +60,17 @@ class FragmentSearch : Fragment() {
 
         bindAdapter()
 
-        //TODO Handle search
-//        binding.searchView
+        searchViewModel.dates.observe(viewLifecycleOwner) {
+            binding.tvDates.editText?.text =
+                Editable.Factory.getInstance().newEditable(it.toString())
+        }
+
+        binding.searchView.editText.setOnEditorActionListener { textView, actionId, _ ->
+            if (actionId == EditorInfo.IME_ACTION_DONE) {
+                searchViewModel.getSearchLocations(textView.text.toString())
+            }
+            true
+        }
     }
 
     private fun bindAdapter() {

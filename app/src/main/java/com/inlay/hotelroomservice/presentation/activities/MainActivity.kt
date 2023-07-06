@@ -11,6 +11,7 @@ import androidx.core.view.GravityCompat
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
+import com.google.android.material.search.SearchBar
 import com.inlay.hotelroomservice.R
 import com.inlay.hotelroomservice.databinding.ActivityMainBinding
 import com.inlay.hotelroomservice.extensions.isNetworkAvailable
@@ -40,7 +41,6 @@ class MainActivity : AppCompatActivity() {
 
         setupBackPressed()
 
-        binding.lifecycleOwner = this
 
         val dummyDates = getDummyDates()
         hotelsViewModel.getHotelsRepo(
@@ -49,6 +49,8 @@ class MainActivity : AppCompatActivity() {
             dummyDates.checkInDate,
             dummyDates.checkOutDate
         )
+
+        binding.lifecycleOwner = this
     }
 
     private fun setupNavigationDrawer() {
@@ -156,6 +158,10 @@ class MainActivity : AppCompatActivity() {
         val checkOutDate = dateFormat.format(calendar.time)
 
         return DatesModel(checkInDate, checkOutDate)
+    }
+
+    val setupSearchBar: (SearchBar) -> Unit = {
+        setSupportActionBar(it)
     }
 
     val goToDetails: (String) -> Unit = {

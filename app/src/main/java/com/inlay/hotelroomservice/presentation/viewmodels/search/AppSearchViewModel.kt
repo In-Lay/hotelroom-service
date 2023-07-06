@@ -53,7 +53,8 @@ class AppSearchViewModel(private val repositoryUseCase: RepositoryUseCase) : Sea
         _selectedItemGeoId.value = geoId
     }
 
-    override fun getSearchLocations() {
+    override fun getSearchLocations(searchInput: String) {
+        _searchUserInput.value = searchInput
         if (_searchUserInput.value.isEmpty()) {
             _supportText.value = "Enter location"
         } else {
