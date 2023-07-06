@@ -3,6 +3,9 @@
 
     <data>
 
+        <variable
+            name="viewModel"
+            type="com.inlay.hotelroomservice.presentation.viewmodels.search.item.SearchLocationsItemViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

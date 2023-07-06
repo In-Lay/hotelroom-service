@@ -1,4 +1,4 @@
-package com.inlay.hotelroomservice.presentation.adapters
+package com.inlay.hotelroomservice.presentation.adapters.hotels
 
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.inlay.hotelroomservice.databinding.HotelsItemBinding

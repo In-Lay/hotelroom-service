@@ -1,4 +1,4 @@
-package com.inlay.hotelroomservice.presentation.adapters
+package com.inlay.hotelroomservice.presentation.adapters.hotels
 
 import android.view.LayoutInflater
 import android.view.ViewGroup

@@ -20,4 +20,8 @@
         android:id="@+id/fragmentProfile"
         android:name="com.inlay.hotelroomservice.presentation.fragments.profile.FragmentProfile"
         android:label="FragmentProfile" />
+    <fragment
+        android:id="@+id/fragmentSearch"
+        android:name="com.inlay.hotelroomservice.presentation.fragments.search.FragmentSearch"
+        android:label="FragmentSearch" />
 </navigation>

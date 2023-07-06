@@ -67,6 +67,12 @@ class MainActivity : AppCompatActivity() {
         navController = navHostFragment.navController
 
         binding.navigationView.setupWithNavController(navController)
+
+        binding.fabSearch.setOnClickListener {
+            binding.toolbar.title = "Search"
+            binding.navigationView.setCheckedItem(R.id.item_hotels)
+            navController.navigate(R.id.fragmentSearch)
+        }
     }
 
     private fun setupBackPressed() {
@@ -87,7 +93,6 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setupNavigation() {
-
         binding.navigationView.setNavigationItemSelectedListener {
             when (it.itemId) {
                 R.id.item_hotels -> {

@@ -13,7 +13,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.inlay.hotelroomservice.R
 import com.inlay.hotelroomservice.databinding.FragmentHotelsBinding
 import com.inlay.hotelroomservice.presentation.activities.MainActivity
-import com.inlay.hotelroomservice.presentation.adapters.HotelsListAdapter
+import com.inlay.hotelroomservice.presentation.adapters.hotels.HotelsListAdapter
 import com.inlay.hotelroomservice.presentation.viewmodels.hotels.HotelsViewModel
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.activityViewModel

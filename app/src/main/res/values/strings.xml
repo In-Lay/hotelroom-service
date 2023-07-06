@@ -7,4 +7,9 @@
     <string name="nav_drawer_open">Open Drawer</string>
     <string name="nav_drawer_close">Close Drawer</string>
     <string name="header_profile">Profile</string>
+    <string name="searchbar_hint">Search Location</string>
+    <string name="btn_pick_dates">Pick dates</string>
+    <string name="tv_dates_hint">Dates</string>
+    <string name="tv_currencies_dropdown_hint">Currencies</string>
+    <string name="search">Search</string>
 </resources>
