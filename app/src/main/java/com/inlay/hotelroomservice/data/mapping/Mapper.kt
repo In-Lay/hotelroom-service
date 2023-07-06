@@ -10,10 +10,10 @@ import com.inlay.hotelroomservice.presentation.models.locations.SearchLocationsU
 
 fun Data.toUiItem(): HotelsItemUiModel = HotelsItemUiModel(
     id = this.id,
-    title = this.title,
-    hotelInfo = this.secondaryInfo,
-    rating = this.bubbleRating.rating.toString(),
-    price = this.priceForDisplay,
+    title = this.title.orEmpty(),
+    hotelInfo = this.secondaryInfo.orEmpty(),
+    rating = this.bubbleRating?.rating.toString(),
+    price = this.priceForDisplay.orEmpty(),
     photosUrls = this.cardPhotos.toHotelsItemPhotos()
 )
 
@@ -59,10 +59,10 @@ fun HotelsItemEntity.toUiItem(): HotelsItemUiModel = HotelsItemUiModel(
 
 fun Data.toEntity(): HotelsItemEntity = HotelsItemEntity(
     id = this.id.toInt(),
-    title = this.title,
-    hotelInfo = this.secondaryInfo,
-    rating = this.bubbleRating.rating.toString(),
-    price = this.priceForDisplay,
+    title = this.title.orEmpty(),
+    hotelInfo = this.secondaryInfo.orEmpty(),
+    rating = this.bubbleRating?.rating.toString(),
+    price = this.priceForDisplay.orEmpty(),
     cardPhotos = this.cardPhotos.toHotelsItemPhotos()
 )
 

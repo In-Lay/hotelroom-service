@@ -28,6 +28,9 @@ class HotelRoomRepositoryImpl(
         checkOutDate: String,
         currencyCode: String
     ): List<HotelsItemUiModel> {
+//        val hotelsData =
+//            remoteDataSource.getHotelsRepo(geoId, checkInDate, checkOutDate, currencyCode)
+//        return listOf()
         return if (isOnline) {
             val hotelsData =
                 remoteDataSource.getHotelsRepo(geoId, checkInDate, checkOutDate, currencyCode)

@@ -42,7 +42,7 @@ class FragmentSearch : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_search, container, false)
-        
+
         (activity as MainActivity).setSupportActionBar(binding.searchBar)
 
         isOnline = requireContext().isNetworkAvailable()

@@ -17,12 +17,16 @@ import com.inlay.hotelroomservice.domain.remote.RemoteDataSource
 import com.inlay.hotelroomservice.domain.remote.RemoteDataSourceImpl
 import com.inlay.hotelroomservice.domain.usecase.RepositoryUseCase
 import com.inlay.hotelroomservice.domain.usecase.RepositoryUseCaseImpl
+import com.inlay.hotelroomservice.presentation.viewmodels.details.AppDetailsViewModel
+import com.inlay.hotelroomservice.presentation.viewmodels.details.DetailsViewModel
 import com.inlay.hotelroomservice.presentation.viewmodels.hotels.AppHotelsViewModel
 import com.inlay.hotelroomservice.presentation.viewmodels.hotels.HotelsViewModel
 import com.inlay.hotelroomservice.presentation.viewmodels.hotels.item.AppHotelsItemViewModel
 import com.inlay.hotelroomservice.presentation.viewmodels.hotels.item.HotelsItemViewModel
 import com.inlay.hotelroomservice.presentation.viewmodels.search.AppSearchViewModel
 import com.inlay.hotelroomservice.presentation.viewmodels.search.SearchViewModel
+import com.inlay.hotelroomservice.presentation.viewmodels.search.item.AppSearchLocationsItemViewModel
+import com.inlay.hotelroomservice.presentation.viewmodels.search.item.SearchLocationsItemViewModel
 import org.koin.android.ext.koin.androidContext
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
@@ -68,5 +72,9 @@ val appModule = module {
 
     viewModel<HotelsViewModel> { AppHotelsViewModel(get()) }
     viewModel<HotelsItemViewModel> { AppHotelsItemViewModel() }
+
     viewModel<SearchViewModel> { AppSearchViewModel(repositoryUseCase = get()) }
+    viewModel<SearchLocationsItemViewModel> { AppSearchLocationsItemViewModel() }
+
+    viewModel<DetailsViewModel> { AppDetailsViewModel() }
 }

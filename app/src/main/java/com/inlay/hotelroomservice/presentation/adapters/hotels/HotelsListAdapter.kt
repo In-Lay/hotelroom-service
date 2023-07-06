@@ -19,7 +19,7 @@ class HotelsListAdapter(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HotelsItemViewHolder {
         binding = HotelsItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        binding.lifecycleOwner = parent.findViewTreeLifecycleOwner()
+//        binding.lifecycleOwner = parent.findViewTreeLifecycleOwner()
         return HotelsItemViewHolder(binding)
     }
 

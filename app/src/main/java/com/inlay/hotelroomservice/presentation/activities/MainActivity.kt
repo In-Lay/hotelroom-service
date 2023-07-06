@@ -160,10 +160,6 @@ class MainActivity : AppCompatActivity() {
         return DatesModel(checkInDate, checkOutDate)
     }
 
-    val setupSearchBar: (SearchBar) -> Unit = {
-        setSupportActionBar(it)
-    }
-
     val goToDetails: (String) -> Unit = {
 
     }

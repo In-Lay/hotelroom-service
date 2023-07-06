@@ -6,18 +6,21 @@ import com.squareup.moshi.JsonReader
 import com.squareup.moshi.JsonWriter
 import com.squareup.moshi.ToJson
 
-class CustomMoshiAdapter : JsonAdapter<String>() {
+class CustomMoshiAdapter {
     @FromJson
-    override fun fromJson(p0: JsonReader): String? {
-        return when (p0.peek()) {
-            JsonReader.Token.STRING -> p0.nextString()
-            JsonReader.Token.BOOLEAN -> p0.nextBoolean().toString()
-            else -> null
+    fun fromJson(reader: JsonReader): String {
+        return when (reader.peek()) {
+            JsonReader.Token.BOOLEAN -> reader.nextBoolean().toString()
+            JsonReader.Token.STRING -> reader.nextString()
+            else -> {
+                reader.skipValue() // skip if the value is neither Boolean nor String
+                "Invalid type" // return a default string or throw an exception
+            }
         }
     }
 
     @ToJson
-    override fun toJson(p0: JsonWriter, p1: String?) {
-        p0.value(p1)
+    fun toJson(writer: JsonWriter, value: String) {
+        writer.value(value)
     }
 }
