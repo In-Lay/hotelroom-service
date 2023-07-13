@@ -10,6 +10,7 @@ abstract class HotelsItemViewModel : ViewModel() {
     abstract val hotelName: LiveData<String>
     abstract val hotelInfo: LiveData<String>
     abstract val rating: LiveData<String>
+    abstract val ratingCount: LiveData<String>
     abstract val price: LiveData<String>
     abstract val imageUrl: LiveData<String>
 

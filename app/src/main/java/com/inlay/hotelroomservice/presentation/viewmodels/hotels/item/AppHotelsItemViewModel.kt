@@ -5,6 +5,7 @@ import androidx.databinding.BindingAdapter
 import androidx.lifecycle.asLiveData
 import coil.load
 import coil.transform.RoundedCornersTransformation
+import com.inlay.hotelroomservice.R
 import com.inlay.hotelroomservice.presentation.models.hotelsitem.HotelsItemUiModel
 import kotlinx.coroutines.flow.MutableStateFlow
 
@@ -21,6 +22,9 @@ class AppHotelsItemViewModel : HotelsItemViewModel() {
     private val _rating = MutableStateFlow("")
     override val rating = _rating.asLiveData()
 
+    private val _ratingCount = MutableStateFlow("")
+    override val ratingCount = _ratingCount.asLiveData()
+
     private val _price = MutableStateFlow("")
     override val price = _price.asLiveData()
 
@@ -35,22 +39,31 @@ class AppHotelsItemViewModel : HotelsItemViewModel() {
 
     override fun initializeData(hotelsUiModel: HotelsItemUiModel, openDetails: (String) -> Unit) {
         _hotelId.value = hotelsUiModel.id
-        _hotelName.value = hotelsUiModel.title
+
+        _hotelName.value = if (hotelsUiModel.title[0].isDigit()) hotelsUiModel.title.removeRange(
+            0, hotelsUiModel.title.indexOf(' ') + 1
+        ) else hotelsUiModel.title
+
         _hotelInfo.value = hotelsUiModel.hotelInfo
-        _rating.value = hotelsUiModel.rating
+        _rating.value = hotelsUiModel.rating.rating.toString()
+        _ratingCount.value = "(${hotelsUiModel.rating.count})"
         _price.value = hotelsUiModel.price
-        val formattedUrl = hotelsUiModel.photosUrls?.get(0)?.replace("{width}", "500")
-            ?.replace("{height}", "300") ?: ""
-        _imageUrl.value = formattedUrl
+        _imageUrl.value = hotelsUiModel.photosUrls[0]
         goToDetailsLambda = openDetails
     }
 
     companion object {
         @JvmStatic
         @BindingAdapter("imageSource")
-        fun loadImage(view: ImageView, imageUrl: String) {
-            view.load(imageUrl) {
-                transformations(RoundedCornersTransformation(50F))
+        fun loadImage(view: ImageView, imageUrl: String?) {
+            if (imageUrl.isNullOrEmpty()) {
+                view.load(R.drawable.sample_hotel_item_img_500x300) {
+                    transformations(
+                        RoundedCornersTransformation(50F)
+                    )
+                }
+            } else {
+                view.load(imageUrl) { transformations(RoundedCornersTransformation(50F)) }
             }
         }
     }

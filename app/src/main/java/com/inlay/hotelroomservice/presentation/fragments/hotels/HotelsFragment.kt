@@ -15,6 +15,7 @@ import com.inlay.hotelroomservice.databinding.FragmentHotelsBinding
 import com.inlay.hotelroomservice.presentation.activities.MainActivity
 import com.inlay.hotelroomservice.presentation.adapters.hotels.HotelsListAdapter
 import com.inlay.hotelroomservice.presentation.viewmodels.hotels.HotelsViewModel
+import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.activityViewModel
 
@@ -27,7 +28,8 @@ class HotelsFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_hotels, container, false)
-        binding.lifecycleOwner = viewLifecycleOwner
+        binding.lifecycleOwner = this
+
         return binding.root
     }
 
@@ -40,9 +42,12 @@ class HotelsFragment : Fragment() {
     private fun bindAdapter() {
         lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
-                hotelsViewModel.hotelsDataList.collect {
+                hotelsViewModel.hotelsDataList.collectLatest {
                     binding.recyclerView.adapter =
-                        HotelsListAdapter(it, (activity as MainActivity).goToDetails)
+                        HotelsListAdapter(
+                            it,
+                            (activity as MainActivity).goToDetails
+                        )
                     binding.recyclerView.layoutManager = LinearLayoutManager(context)
                     binding.recyclerView.setHasFixedSize(false)
                 }

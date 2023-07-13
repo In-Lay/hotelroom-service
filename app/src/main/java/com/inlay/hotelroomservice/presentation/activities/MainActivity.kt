@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
@@ -11,7 +12,6 @@ import androidx.core.view.GravityCompat
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
-import com.google.android.material.search.SearchBar
 import com.inlay.hotelroomservice.R
 import com.inlay.hotelroomservice.databinding.ActivityMainBinding
 import com.inlay.hotelroomservice.extensions.isNetworkAvailable
@@ -50,6 +50,13 @@ class MainActivity : AppCompatActivity() {
             dummyDates.checkOutDate
         )
 
+        binding.fabSearch.setOnClickListener {
+            binding.navigationView.setCheckedItem(R.id.item_hotels)
+            supportActionBar?.hide()
+            navController.navigate(R.id.fragmentSearch)
+            binding.fabSearch.visibility = View.GONE
+        }
+
         binding.lifecycleOwner = this
     }
 
@@ -69,12 +76,6 @@ class MainActivity : AppCompatActivity() {
         navController = navHostFragment.navController
 
         binding.navigationView.setupWithNavController(navController)
-
-        binding.fabSearch.setOnClickListener {
-            binding.toolbar.title = "Search"
-            binding.navigationView.setCheckedItem(R.id.item_hotels)
-            navController.navigate(R.id.fragmentSearch)
-        }
     }
 
     private fun setupBackPressed() {
@@ -84,6 +85,15 @@ class MainActivity : AppCompatActivity() {
                     binding.drawerLayout.closeDrawer(GravityCompat.START)
                 } else if (navController.currentDestination?.id == R.id.hotelsFragment) {
                     finish()
+                } else if (navController.currentDestination?.id == R.id.fragmentSearch) {
+                    setSupportActionBar(binding.toolbar)
+                    binding.toolbar.title = "Hotels"
+                    supportActionBar?.show()
+                    setupNavigationDrawer()
+                    setupNavigation()
+                    binding.navigationView.setCheckedItem(R.id.item_hotels)
+                    binding.fabSearch.visibility = View.VISIBLE
+                    navController.navigate(R.id.hotelsFragment)
                 } else {
                     binding.toolbar.title = "Hotels"
                     binding.fabSearch.visibility = View.VISIBLE
@@ -161,6 +171,6 @@ class MainActivity : AppCompatActivity() {
     }
 
     val goToDetails: (String) -> Unit = {
-
+        Toast.makeText(this, "Selected item: $it", Toast.LENGTH_SHORT).show()
     }
 }

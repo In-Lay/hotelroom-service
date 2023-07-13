@@ -2,9 +2,7 @@ package com.inlay.hotelroomservice.data.remote.models.hoteldetails
 
 import com.inlay.hotelroomservice.data.local.models.hoteldetails.AmenitiesScreen
 import com.inlay.hotelroomservice.data.local.models.hoteldetails.AttractionsNearby
-import com.inlay.hotelroomservice.data.local.models.hoteldetails.GeoPoint
 import com.inlay.hotelroomservice.data.local.models.hoteldetails.Location
-import com.inlay.hotelroomservice.data.local.models.hoteldetails.Price
 import com.inlay.hotelroomservice.data.local.models.hoteldetails.QA
 import com.inlay.hotelroomservice.data.local.models.hoteldetails.RestaurantsNearby
 import com.inlay.hotelroomservice.data.local.models.hoteldetails.Reviews

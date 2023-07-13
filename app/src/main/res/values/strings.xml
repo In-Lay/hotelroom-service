@@ -12,4 +12,6 @@
     <string name="tv_dates_hint">Dates</string>
     <string name="tv_currencies_dropdown_hint">Currencies</string>
     <string name="search">Search</string>
+    <string name="btn_add">Add To Stay</string>
+    <string name="details"><u>More Details</u></string>
 </resources>

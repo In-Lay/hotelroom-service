@@ -4,7 +4,7 @@ data class HotelsItemUiModel(
     val id: String,
     val title: String,
     val hotelInfo: String,
-    val rating: String,
+    val rating: RatingUiModel,
     val price: String,
-    val photosUrls: List<String>?
+    val photosUrls: List<String> = listOf()
 )

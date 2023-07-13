@@ -47,6 +47,7 @@
                 app:navGraph="@navigation/nav_graph"
                 tools:layout="@layout/fragment_hotels" />
 
+
             <com.google.android.material.floatingactionbutton.FloatingActionButton
                 android:id="@+id/fab_search"
                 android:layout_width="wrap_content"
@@ -58,7 +59,6 @@
                 app:layout_constraintEnd_toEndOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <!--        TODO Add Profile Header-->
         <com.google.android.material.navigation.NavigationView
             android:id="@+id/navigation_view"
             style="@style/Widget.Material3.NavigationView"

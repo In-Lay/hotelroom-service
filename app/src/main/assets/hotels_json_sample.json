@@ -1,0 +1,2142 @@
+{
+  "status": true,
+  "message": "Success",
+  "timestamp": 1688558768178,
+  "data": {
+    "sortDisclaimer": "903 of 913 places are available, sorted by <span class=\"underline\">best value</span>",
+    "data": [
+      {
+        "id": "23124360",
+        "title": "1. Hotel Riu Plaza Manhattan Times Square",
+        "primaryInfo": null,
+        "secondaryInfo": "Theater District",
+        "badge": {
+          "size": "SMALL",
+          "type": "TRAVELLER_CHOICE",
+          "year": "2023"
+        },
+        "bubbleRating": {
+          "count": "643",
+          "rating": 4.5
+        },
+        "isSponsored": false,
+        "accentedLabel": false,
+        "provider": "Booking.com",
+        "priceForDisplay": "$375",
+        "strikethroughPrice": null,
+        "priceDetails": "Reserve now, pay at stay",
+        "priceSummary": null,
+        "cardPhotos": [
+          {
+            "__typename": "AppPresentation_PhotoItem",
+            "sizes": {
+              "__typename": "AppPresentation_PhotoItemSizeDynamic",
+              "maxHeight": 1200,
+              "maxWidth": 1800,
+              "urlTemplate": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/1c/97/84/37/model.jpg?w={width}&h={height}&s=1"
+            }
+          },
+          {
+            "__typename": "AppPresentation_PhotoItem",
+            "sizes": {
+              "__typename": "AppPresentation_PhotoItemSizeDynamic",
+              "maxHeight": 600,
+              "maxWidth": 900,
+              "urlTemplate": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/26/6e/b0/c6/hotel-riu-plaza-manhattan.jpg?w={width}&h={height}&s=1"
+            }
+          },
+          {
+            "__typename": "AppPresentation_PhotoItem",
+            "sizes": {
+              "__typename": "AppPresentation_PhotoItemSizeDynamic",
+              "maxHeight": 600,
+              "maxWidth": 900,
+              "urlTemplate": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/26/6e/b0/c5/hotel-riu-plaza-manhattan.jpg?w={width}&h={height}&s=1"
+            }
+          },
+          {
+            "__typename": "AppPresentation_PhotoItem",
+            "sizes": {
+              "__typename": "AppPresentation_PhotoItemSizeDynamic",
+              "maxHeight": 600,
+              "maxWidth": 900,
+              "urlTemplate": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/26/6e/b0/c1/hotel-riu-plaza-manhattan.jpg?w={width}&h={height}&s=1"
+            }
+          }
+        ]
+      },
+      {
+        "id": "1456416",
+        "title": "2. The Dominick Hotel",
+        "primaryInfo": null,
+        "secondaryInfo": "Downtown Manhattan (Downtown)",
+        "badge": {
+          "size": "SMALL",
+          "type": "TRAVELLER_CHOICE",
+          "year": "2023"
+        },
+        "bubbleRating": {
+          "count": "4,336",
+          "rating": 4.5
+        },
+        "isSponsored": false,
+        "accentedLabel": false,
+        "provider": "Booking.com",
+        "priceForDisplay": "$679",
+        "strikethroughPrice": null,
+        "priceDetails": null,
+        "priceSummary": null,
+        "cardPhotos": [
+          {
+            "__typename": "AppPresentation_PhotoItem",
+            "sizes": {
+              "__typename": "AppPresentation_PhotoItemSizeDynamic",
+              "maxHeight": 1500,
+              "maxWidth": 1941,
+              "urlTemplate": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/0e/9d/a8/28/trump-soho-new-york.jpg?w={width}&h={height}&s=1"
+            }
+          },
+          {
+            "__typename": "AppPresentation_PhotoItem",
+            "sizes": {
+              "__typename": "AppPresentation_PhotoItemSizeDynamic",
+              "maxHeight": 1319,
+              "maxWidth": 2000,
+              "urlTemplate": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/0e/9d/b1/cd/trump-soho-new-york.jpg?w={width}&h={height}&s=1"
+            }
+          },
+          {
+            "__typename": "AppPresentation_PhotoItem",
+            "sizes": {
+              "__typename": "AppPresentation_PhotoItemSizeDynamic",
+              "maxHeight": 1334,
+              "maxWidth": 2000,
+              "urlTemplate": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/0e/9d/a8/07/trump-soho-new-york.jpg?w={width}&h={height}&s=1"
+            }
+          },
+          {
+            "__typename": "AppPresentation_PhotoItem",
+            "sizes": {
+              "__typename": "AppPresentation_PhotoItemSizeDynamic",
+              "maxHeight": 1334,
+              "maxWidth": 2000,
+              "urlTemplate": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/0e/9d/a7/e5/trump-soho-new-york.jpg?w={width}&h={height}&s=1"
+            }
+          }
+        ]
+      },
+      {
+        "id": "675616",
+        "title": "3. The Plaza New York - A Fairmont Managed Hotel",
+        "primaryInfo": null,
+        "secondaryInfo": "Midtown",
+        "badge": {
+          "size": "SMALL",
+          "type": "TRAVELLER_CHOICE",
+          "year": "2023"
+        },
+        "bubbleRating": {
+          "count": "3,757",
+          "rating": 4.5
+        },
+        "isSponsored": false,
+        "accentedLabel": false,
+        "provider": "Booking.com",
+        "priceForDisplay": "$1,019",
+        "strikethroughPrice": null,
+        "priceDetails": null,
+        "priceSummary": null,
+        "cardPhotos": [
+          {
+            "__typename": "AppPresentation_PhotoItem",
+            "sizes": {
+              "__typename": "AppPresentation_PhotoItemSizeDynamic",
+              "maxHeight": 1486,
+              "maxWidth": 2000,
+              "urlTemplate": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/08/e1/a6/8c/the-plaza.jpg?w={width}&h={height}&s=1"
+            }
+          },
+          {
+            "__typename": "AppPresentation_PhotoItem",
+            "sizes": {
+              "__typename": "AppPresentation_PhotoItemSizeDynamic",
+              "maxHeight": 900,
+              "maxWidth": 1200,
+              "urlTemplate": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/08/02/03/76/the-plaza-hotel.jpg?w={width}&h={height}&s=1"
+            }
+          },
+          {
+            "__typename": "AppPresentation_PhotoItem",
+            "sizes": {
+              "__typename": "AppPresentation_PhotoItemSizeDynamic",
+              "maxHeight": 1000,
+              "maxWidth": 1500,
+              "urlTemplate": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/1b/42/df/ea/exterior.jpg?w={width}&h={height}&s=1"
+            }
+          },
+          {
+            "__typename": "AppPresentation_PhotoItem",
+            "sizes": {
+              "__typename": "AppPresentation_PhotoItemSizeDynamic",
+              "maxHeight": 1000,
+              "maxWidth": 1500,
+              "urlTemplate": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/1b/42/e0/1c/exterior.jpg?w={width}&h={height}&s=1"
+            }
+          }
+        ]
+      },
+      {
+        "id": "12301470",
+        "title": "4. Moxy NYC Times Square",
+        "primaryInfo": null,
+        "secondaryInfo": "Tenderloin",
+        "badge": {
+          "size": "SMALL",
+          "type": "TRAVELLER_CHOICE",
+          "year": "2023"
+        },
+        "bubbleRating": {
+          "count": "2,978",
+          "rating": 4
+        },
+        "isSponsored": false,
+        "accentedLabel": "14% LESS THAN USUAL",
+        "provider": "Booking.com",
+        "priceForDisplay": "$304",
+        "strikethroughPrice": null,
+        "priceDetails": null,
+        "priceSummary": null,
+        "cardPhotos": [
+          {
+            "__typename": "AppPresentation_PhotoItem",
+            "sizes": {
+              "__typename": "AppPresentation_PhotoItemSizeDynamic",
+              "maxHeight": 2667,
+              "maxWidth": 4000,
+              "urlTemplate": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/29/36/e7/ff/magic-hour-rooftop-bar.jpg?w={width}&h={height}&s=1"
+            }
+          },
+          {
+            "__typename": "AppPresentation_PhotoItem",
+            "sizes": {
+              "__typename": "AppPresentation_PhotoItemSizeDynamic",
+              "maxHeight": 1458,
+              "maxWidth": 1900,
+              "urlTemplate": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/18/7c/cf/c4/magic-hour.jpg?w={width}&h={height}&s=1"
+            }
+          },
+          {
+            "__typename": "AppPresentation_PhotoItem",
+            "sizes": {
+              "__typename": "AppPresentation_PhotoItemSizeDynamic",
+              "maxHeight": 4431,
+              "maxWidth": 6720,
+              "urlTemplate": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/18/7c/cf/ad/studio-3.jpg?w={width}&h={height}&s=1"
+            }
+          },
+          {
+            "__typename": "AppPresentation_PhotoItem",
+            "sizes": {
+              "__typename": "AppPresentation_PhotoItemSizeDynamic",
+              "maxHeight": 1289,
+              "maxWidth": 1900,
+              "urlTemplate": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/18/7c/ce/c2/magic-hour-elephant-room.jpg?w={width}&h={height}&s=1"
+            }
+          }
+        ]
+      },
+      {
+        "id": "5040757",
+        "title": "5. Homewood Suites by Hilton New York/Midtown Manhattan Times Square-South, NY",
+        "primaryInfo": null,
+        "secondaryInfo": "Midtown West",
+        "badge": {
+          "size": "SMALL",
+          "type": "TRAVELLER_CHOICE",
+          "year": "2023"
+        },
+        "bubbleRating": {
+          "count": "4,310",
+          "rating": 4.5
+        },
+        "isSponsored": false,
+        "accentedLabel": false,
+        "provider": "Trip.com",
+        "priceForDisplay": "$429",
+        "strikethroughPrice": null,
+        "priceDetails": "Free cancellation",
+        "priceSummary": null,
+        "cardPhotos": [
+          {
+            "__typename": "AppPresentation_PhotoItem",
+            "sizes": {
+              "__typename": "AppPresentation_PhotoItemSizeDynamic",
+              "maxHeight": 683,
+              "maxWidth": 1023,
+              "urlTemplate": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/26/74/3b/fe/exterior.jpg?w={width}&h={height}&s=1"
+            }
+          },
+          {
+            "__typename": "AppPresentation_PhotoItem",
+            "sizes": {
+              "__typename": "AppPresentation_PhotoItemSizeDynamic",
+              "maxHeight": 1335,
+              "maxWidth": 2000,
+              "urlTemplate": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/06/82/d4/f7/homewood-suites-by-hilton.jpg?w={width}&h={height}&s=1"
+            }
+          },
+          {
+            "__typename": "AppPresentation_PhotoItem",
+            "sizes": {
+              "__typename": "AppPresentation_PhotoItemSizeDynamic",
+              "maxHeight": 1335,
+              "maxWidth": 2000,
+              "urlTemplate": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/06/82/d4/c7/homewood-suites-by-hilton.jpg?w={width}&h={height}&s=1"
+            }
+          },
+          {
+            "__typename": "AppPresentation_PhotoItem",
+            "sizes": {
+              "__typename": "AppPresentation_PhotoItemSizeDynamic",
+              "maxHeight": 3500,
+              "maxWidth": 5250,
+              "urlTemplate": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/14/e8/45/77/midtown-manhattan-times.jpg?w={width}&h={height}&s=1"
+            }
+          }
+        ]
+      },
+      {
+        "id": "10679074",
+        "title": "Luma Hotel Time Square",
+        "primaryInfo": null,
+        "secondaryInfo": "Tenderloin",
+        "badge": {
+          "size": "SMALL",
+          "type": "TRAVELLER_CHOICE",
+          "year": "2023"
+        },
+        "bubbleRating": {
+          "count": "2,305",
+          "rating": 5
+        },
+        "isSponsored": true,
+        "accentedLabel": false,
+        "provider": "Booking.com",
+        "priceForDisplay": "$414",
+        "strikethroughPrice": null,
+        "priceDetails": null,
+        "priceSummary": null,
+        "cardPhotos": [
+          {
+            "__typename": "AppPresentation_PhotoItem",
+            "sizes": {
+              "__typename": "AppPresentation_PhotoItemSizeDynamic",
+              "maxHeight": 3969,
+              "maxWidth": 5946,
+              "urlTemplate": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/29/09/24/dd/luma-hotel-times-square.jpg?w={width}&h={height}&s=1"
+            }
+          },
+          {
+            "__typename": "AppPresentation_PhotoItem",
+            "sizes": {
+              "__typename": "AppPresentation_PhotoItemSizeDynamic",
+              "maxHeight": 1331,
+              "maxWidth": 2000,
+              "urlTemplate": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/0f/2b/93/52/luma-hotel-times-square.jpg?w={width}&h={height}&s=1"
+            }
+          },
+          {
+            "__typename": "AppPresentation_PhotoItem",
+            "sizes": {
+              "__typename": "AppPresentation_PhotoItemSizeDynamic",
+              "maxHeight": 1335,
+              "maxWidth": 2000,
+              "urlTemplate": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/0e/c5/15/62/luma-robe.jpg?w={width}&h={height}&s=1"
+            }
+          },
+          {
+            "__typename": "AppPresentation_PhotoItem",
+            "sizes": {
+              "__typename": "AppPresentation_PhotoItemSizeDynamic",
+              "maxHeight": 1282,
+              "maxWidth": 2000,
+              "urlTemplate": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/0f/2b/93/ec/luma-hotel-times-square.jpg?w={width}&h={height}&s=1"
+            }
+          }
+        ]
+      },
+      {
+        "id": "6883205",
+        "title": "6. 1 Hotel Central Park",
+        "primaryInfo": null,
+        "secondaryInfo": "Midtown",
+        "badge": {
+          "size": "SMALL",
+          "type": "TRAVELLER_CHOICE",
+          "year": "2023"
+        },
+        "bubbleRating": {
+          "count": "2,561",
+          "rating": 4.5
+        },
+        "isSponsored": false,
+        "accentedLabel": "18% LESS THAN USUAL",
+        "provider": "Agoda.com",
+        "priceForDisplay": "$467",
+        "strikethroughPrice": "$567",
+        "priceDetails": null,
+        "priceSummary": null,
+        "cardPhotos": [
+          {
+            "__typename": "AppPresentation_PhotoItem",
+            "sizes": {
+              "__typename": "AppPresentation_PhotoItemSizeDynamic",
+              "maxHeight": 5412,
+              "maxWidth": 7216,
+              "urlTemplate": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/29/08/b7/54/park-king-room.jpg?w={width}&h={height}&s=1"
+            }
+          },
+          {
+            "__typename": "AppPresentation_PhotoItem",
+            "sizes": {
+              "__typename": "AppPresentation_PhotoItemSizeDynamic",
+              "maxHeight": 1500,
+              "maxWidth": 2000,
+              "urlTemplate": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/08/bd/89/df/1-hotel-central-park.jpg?w={width}&h={height}&s=1"
+            }
+          },
+          {
+            "__typename": "AppPresentation_PhotoItem",
+            "sizes": {
+              "__typename": "AppPresentation_PhotoItemSizeDynamic",
+              "maxHeight": 1733,
+              "maxWidth": 2600,
+              "urlTemplate": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/0e/73/61/2c/street--v14918126.jpg?w={width}&h={height}&s=1"
+            }
+          },
+          {
+            "__typename": "AppPresentation_PhotoItem",
+            "sizes": {
+              "__typename": "AppPresentation_PhotoItemSizeDynamic",
+              "maxHeight": 1733,
+              "maxWidth": 2600,
+              "urlTemplate": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/0e/73/61/29/elevators--v14918158.jpg?w={width}&h={height}&s=1"
+            }
+          }
+        ]
+      },
+      {
+        "id": "1776857",
+        "title": "7. The Langham New York Fifth Avenue",
+        "primaryInfo": null,
+        "secondaryInfo": "Tenderloin",
+        "badge": {
+          "size": "SMALL",
+          "type": "TRAVELLER_CHOICE",
+          "year": "2023"
+        },
+        "bubbleRating": {
+          "count": "3,022",
+          "rating": 4.5
+        },
+        "isSponsored": false,
+        "accentedLabel": false,
+        "provider": "Booking.com",
+        "priceForDisplay": "$746",
+        "strikethroughPrice": "$877",
+        "priceDetails": null,
+        "priceSummary": null,
+        "cardPhotos": [
+          {
+            "__typename": "AppPresentation_PhotoItem",
+            "sizes": {
+              "__typename": "AppPresentation_PhotoItemSizeDynamic",
+              "maxHeight": 2158,
+              "maxWidth": 2880,
+              "urlTemplate": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/29/34/cc/35/deluxe-room-bedroom.jpg?w={width}&h={height}&s=1"
+            }
+          },
+          {
+            "__typename": "AppPresentation_PhotoItem",
+            "sizes": {
+              "__typename": "AppPresentation_PhotoItemSizeDynamic",
+              "maxHeight": 974,
+              "maxWidth": 1300,
+              "urlTemplate": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/12/e5/5a/4e/the-langham-new-york.jpg?w={width}&h={height}&s=1"
+            }
+          },
+          {
+            "__typename": "AppPresentation_PhotoItem",
+            "sizes": {
+              "__typename": "AppPresentation_PhotoItemSizeDynamic",
+              "maxHeight": 1200,
+              "maxWidth": 1600,
+              "urlTemplate": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/12/e5/5a/01/the-langham-new-york.jpg?w={width}&h={height}&s=1"
+            }
+          },
+          {
+            "__typename": "AppPresentation_PhotoItem",
+            "sizes": {
+              "__typename": "AppPresentation_PhotoItemSizeDynamic",
+              "maxHeight": 1488,
+              "maxWidth": 1985,
+              "urlTemplate": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/12/e5/5f/d7/the-langham-new-york.jpg?w={width}&h={height}&s=1"
+            }
+          }
+        ]
+      },
+      {
+        "id": "17780633",
+        "title": "8. Equinox Hotel New York",
+        "primaryInfo": null,
+        "secondaryInfo": "Hudson Yards",
+        "badge": {
+          "size": "SMALL",
+          "type": "BEST_OF_BEST",
+          "year": "2023"
+        },
+        "bubbleRating": {
+          "count": "557",
+          "rating": 4.5
+        },
+        "isSponsored": false,
+        "accentedLabel": false,
+        "provider": "Booking.com",
+        "priceForDisplay": "$1,050",
+        "strikethroughPrice": null,
+        "priceDetails": "Reserve now, pay at stay",
+        "priceSummary": null,
+        "cardPhotos": [
+          {
+            "__typename": "AppPresentation_PhotoItem",
+            "sizes": {
+              "__typename": "AppPresentation_PhotoItemSizeDynamic",
+              "maxHeight": 3000,
+              "maxWidth": 3999,
+              "urlTemplate": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/21/07/32/ee/equinox-hotel-new-york.jpg?w={width}&h={height}&s=1"
+            }
+          },
+          {
+            "__typename": "AppPresentation_PhotoItem",
+            "sizes": {
+              "__typename": "AppPresentation_PhotoItemSizeDynamic",
+              "maxHeight": 682,
+              "maxWidth": 1023,
+              "urlTemplate": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/21/90/59/04/equinox-apres-outdoor.jpg?w={width}&h={height}&s=1"
+            }
+          },
+          {
+            "__typename": "AppPresentation_PhotoItem",
+            "sizes": {
+              "__typename": "AppPresentation_PhotoItemSizeDynamic",
+              "maxHeight": 768,
+              "maxWidth": 1024,
+              "urlTemplate": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/21/90/59/2c/equinoxsuite-bedroom.jpg?w={width}&h={height}&s=1"
+            }
+          },
+          {
+            "__typename": "AppPresentation_PhotoItem",
+            "sizes": {
+              "__typename": "AppPresentation_PhotoItemSizeDynamic",
+              "maxHeight": 768,
+              "maxWidth": 1024,
+              "urlTemplate": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/21/90/59/16/outdoor-pool-deck-sunset.jpg?w={width}&h={height}&s=1"
+            }
+          }
+        ]
+      },
+      {
+        "id": "93358",
+        "title": "9. Pod 51 Hotel",
+        "primaryInfo": null,
+        "secondaryInfo": "Midtown East",
+        "badge": {},
+        "bubbleRating": {
+          "count": "6,040",
+          "rating": 4
+        },
+        "isSponsored": false,
+        "accentedLabel": "26% LESS THAN USUAL",
+        "provider": "Booking.com",
+        "priceForDisplay": "$144",
+        "strikethroughPrice": null,
+        "priceDetails": null,
+        "priceSummary": null,
+        "cardPhotos": [
+          {
+            "__typename": "AppPresentation_PhotoItem",
+            "sizes": {
+              "__typename": "AppPresentation_PhotoItemSizeDynamic",
+              "maxHeight": 691,
+              "maxWidth": 1023,
+              "urlTemplate": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/28/9d/6c/d4/pod-roof.jpg?w={width}&h={height}&s=1"
+            }
+          },
+          {
+            "__typename": "AppPresentation_PhotoItem",
+            "sizes": {
+              "__typename": "AppPresentation_PhotoItemSizeDynamic",
+              "maxHeight": 1429,
+              "maxWidth": 2000,
+              "urlTemplate": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/11/16/f8/4e/pod-51-hotel.jpg?w={width}&h={height}&s=1"
+            }
+          },
+          {
+            "__typename": "AppPresentation_PhotoItem",
+            "sizes": {
+              "__typename": "AppPresentation_PhotoItemSizeDynamic",
+              "maxHeight": 1500,
+              "maxWidth": 1875,
+              "urlTemplate": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/11/16/f8/2b/pod-51-hotel.jpg?w={width}&h={height}&s=1"
+            }
+          },
+          {
+            "__typename": "AppPresentation_PhotoItem",
+            "sizes": {
+              "__typename": "AppPresentation_PhotoItemSizeDynamic",
+              "maxHeight": 1335,
+              "maxWidth": 2000,
+              "urlTemplate": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/10/85/b2/3d/pod-51-hotel.jpg?w={width}&h={height}&s=1"
+            }
+          }
+        ]
+      },
+      {
+        "id": "1785018",
+        "title": "10. ModernHaus SoHo",
+        "primaryInfo": null,
+        "secondaryInfo": "Downtown Manhattan (Downtown)",
+        "badge": {
+          "size": "SMALL",
+          "type": "TRAVELLER_CHOICE",
+          "year": "2023"
+        },
+        "bubbleRating": {
+          "count": "2,299",
+          "rating": 4.5
+        },
+        "isSponsored": false,
+        "accentedLabel": false,
+        "provider": "Booking.com",
+        "priceForDisplay": "$490",
+        "strikethroughPrice": null,
+        "priceDetails": null,
+        "priceSummary": null,
+        "cardPhotos": [
+          {
+            "__typename": "AppPresentation_PhotoItem",
+            "sizes": {
+              "__typename": "AppPresentation_PhotoItemSizeDynamic",
+              "maxHeight": 1604,
+              "maxWidth": 2333,
+              "urlTemplate": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/1c/e8/ea/bb/modernhaus-soho.jpg?w={width}&h={height}&s=1"
+            }
+          },
+          {
+            "__typename": "AppPresentation_PhotoItem",
+            "sizes": {
+              "__typename": "AppPresentation_PhotoItemSizeDynamic",
+              "maxHeight": 1733,
+              "maxWidth": 2600,
+              "urlTemplate": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/0c/6f/82/26/pool--v13299075.jpg?w={width}&h={height}&s=1"
+            }
+          },
+          {
+            "__typename": "AppPresentation_PhotoItem",
+            "sizes": {
+              "__typename": "AppPresentation_PhotoItemSizeDynamic",
+              "maxHeight": 1733,
+              "maxWidth": 2600,
+              "urlTemplate": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/0c/6f/82/63/the-garden--v13298935.jpg?w={width}&h={height}&s=1"
+            }
+          },
+          {
+            "__typename": "AppPresentation_PhotoItem",
+            "sizes": {
+              "__typename": "AppPresentation_PhotoItemSizeDynamic",
+              "maxHeight": 1733,
+              "maxWidth": 2600,
+              "urlTemplate": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/0c/6f/83/94/street--v13299061.jpg?w={width}&h={height}&s=1"
+            }
+          }
+        ]
+      },
+      {
+        "id": "93589",
+        "title": "The Michelangelo New York",
+        "primaryInfo": null,
+        "secondaryInfo": "Theater District",
+        "badge": {
+          "size": "SMALL",
+          "type": "TRAVELLER_CHOICE",
+          "year": "2023"
+        },
+        "bubbleRating": {
+          "count": "4,760",
+          "rating": 4.5
+        },
+        "isSponsored": true,
+        "accentedLabel": false,
+        "provider": "Booking.com",
+        "priceForDisplay": "$419",
+        "strikethroughPrice": null,
+        "priceDetails": null,
+        "priceSummary": null,
+        "cardPhotos": [
+          {
+            "__typename": "AppPresentation_PhotoItem",
+            "sizes": {
+              "__typename": "AppPresentation_PhotoItemSizeDynamic",
+              "maxHeight": 1200,
+              "maxWidth": 1800,
+              "urlTemplate": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/16/4e/3c/30/hotel-facade.jpg?w={width}&h={height}&s=1"
+            }
+          },
+          {
+            "__typename": "AppPresentation_PhotoItem",
+            "sizes": {
+              "__typename": "AppPresentation_PhotoItemSizeDynamic",
+              "maxHeight": 3582,
+              "maxWidth": 5130,
+              "urlTemplate": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/1a/df/02/d0/michelangelo-hotel.jpg?w={width}&h={height}&s=1"
+            }
+          },
+          {
+            "__typename": "AppPresentation_PhotoItem",
+            "sizes": {
+              "__typename": "AppPresentation_PhotoItemSizeDynamic",
+              "maxHeight": 1733,
+              "maxWidth": 2600,
+              "urlTemplate": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/0a/22/4a/99/lobby--v10405499.jpg?w={width}&h={height}&s=1"
+            }
+          },
+          {
+            "__typename": "AppPresentation_PhotoItem",
+            "sizes": {
+              "__typename": "AppPresentation_PhotoItemSizeDynamic",
+              "maxHeight": 768,
+              "maxWidth": 1000,
+              "urlTemplate": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/12/0d/b7/37/lobby.jpg?w={width}&h={height}&s=1"
+            }
+          }
+        ]
+      },
+      {
+        "id": "208452",
+        "title": "11. Conrad New York Downtown",
+        "primaryInfo": null,
+        "secondaryInfo": "Downtown Manhattan (Downtown)",
+        "badge": {
+          "size": "SMALL",
+          "type": "TRAVELLER_CHOICE",
+          "year": "2023"
+        },
+        "bubbleRating": {
+          "count": "4,599",
+          "rating": 4.5
+        },
+        "isSponsored": false,
+        "accentedLabel": false,
+        "provider": "Booking.com",
+        "priceForDisplay": "$563",
+        "strikethroughPrice": null,
+        "priceDetails": null,
+        "priceSummary": null,
+        "cardPhotos": [
+          {
+            "__typename": "AppPresentation_PhotoItem",
+            "sizes": {
+              "__typename": "AppPresentation_PhotoItemSizeDynamic",
+              "maxHeight": 768,
+              "maxWidth": 1024,
+              "urlTemplate": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/25/bb/1f/6c/exterior.jpg?w={width}&h={height}&s=1"
+            }
+          },
+          {
+            "__typename": "AppPresentation_PhotoItem",
+            "sizes": {
+              "__typename": "AppPresentation_PhotoItemSizeDynamic",
+              "maxHeight": 803,
+              "maxWidth": 1200,
+              "urlTemplate": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/02/60/e5/c3/superior-riverview-suite.jpg?w={width}&h={height}&s=1"
+            }
+          },
+          {
+            "__typename": "AppPresentation_PhotoItem",
+            "sizes": {
+              "__typename": "AppPresentation_PhotoItemSizeDynamic",
+              "maxHeight": 650,
+              "maxWidth": 974,
+              "urlTemplate": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/0c/b9/23/ce/brookfield-place-nearby.jpg?w={width}&h={height}&s=1"
+            }
+          },
+          {
+            "__typename": "AppPresentation_PhotoItem",
+            "sizes": {
+              "__typename": "AppPresentation_PhotoItemSizeDynamic",
+              "maxHeight": 565,
+              "maxWidth": 848,
+              "urlTemplate": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/0c/b9/21/6a/loopy-doopy-rooftop-bar.jpg?w={width}&h={height}&s=1"
+            }
+          }
+        ]
+      },
+      {
+        "id": "93464",
+        "title": "12. Thompson Central Park New York",
+        "primaryInfo": null,
+        "secondaryInfo": "Midtown",
+        "badge": {
+          "size": "SMALL",
+          "type": "TRAVELLER_CHOICE",
+          "year": "2023"
+        },
+        "bubbleRating": {
+          "count": "330",
+          "rating": 4.5
+        },
+        "isSponsored": false,
+        "accentedLabel": "12% LESS THAN USUAL",
+        "provider": "Booking.com",
+        "priceForDisplay": "$518",
+        "strikethroughPrice": null,
+        "priceDetails": "Free cancellation • Reserve now, pay at stay",
+        "priceSummary": null,
+        "cardPhotos": [
+          {
+            "__typename": "AppPresentation_PhotoItem",
+            "sizes": {
+              "__typename": "AppPresentation_PhotoItemSizeDynamic",
+              "maxHeight": 658,
+              "maxWidth": 1023,
+              "urlTemplate": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/23/e1/50/8f/guest-room.jpg?w={width}&h={height}&s=1"
+            }
+          },
+          {
+            "__typename": "AppPresentation_PhotoItem",
+            "sizes": {
+              "__typename": "AppPresentation_PhotoItemSizeDynamic",
+              "maxHeight": 858,
+              "maxWidth": 1280,
+              "urlTemplate": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/22/4b/96/1e/thompson-central-park.jpg?w={width}&h={height}&s=1"
+            }
+          },
+          {
+            "__typename": "AppPresentation_PhotoItem",
+            "sizes": {
+              "__typename": "AppPresentation_PhotoItemSizeDynamic",
+              "maxHeight": 682,
+              "maxWidth": 1023,
+              "urlTemplate": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/23/e1/50/d2/room-view.jpg?w={width}&h={height}&s=1"
+            }
+          },
+          {
+            "__typename": "AppPresentation_PhotoItem",
+            "sizes": {
+              "__typename": "AppPresentation_PhotoItemSizeDynamic",
+              "maxHeight": 761,
+              "maxWidth": 1023,
+              "urlTemplate": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/23/e1/50/b3/bathroom.jpg?w={width}&h={height}&s=1"
+            }
+          }
+        ]
+      },
+      {
+        "id": "8035866",
+        "title": "13. Hampton Inn Manhattan / Times Square Central",
+        "primaryInfo": "Free breakfast included",
+        "secondaryInfo": "Hudson Yards",
+        "badge": {
+          "size": "SMALL",
+          "type": "TRAVELLER_CHOICE",
+          "year": "2023"
+        },
+        "bubbleRating": {
+          "count": "3,564",
+          "rating": 4.5
+        },
+        "isSponsored": false,
+        "accentedLabel": false,
+        "provider": "Booking.com",
+        "priceForDisplay": "$292",
+        "strikethroughPrice": null,
+        "priceDetails": null,
+        "priceSummary": null,
+        "cardPhotos": [
+          {
+            "__typename": "AppPresentation_PhotoItem",
+            "sizes": {
+              "__typename": "AppPresentation_PhotoItemSizeDynamic",
+              "maxHeight": 576,
+              "maxWidth": 1024,
+              "urlTemplate": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/26/7f/cb/1f/exterior.jpg?w={width}&h={height}&s=1"
+            }
+          },
+          {
+            "__typename": "AppPresentation_PhotoItem",
+            "sizes": {
+              "__typename": "AppPresentation_PhotoItemSizeDynamic",
+              "maxHeight": 1340,
+              "maxWidth": 2000,
+              "urlTemplate": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/13/2c/13/0c/lobby.jpg?w={width}&h={height}&s=1"
+            }
+          },
+          {
+            "__typename": "AppPresentation_PhotoItem",
+            "sizes": {
+              "__typename": "AppPresentation_PhotoItemSizeDynamic",
+              "maxHeight": 1333,
+              "maxWidth": 2000,
+              "urlTemplate": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/11/14/9d/b7/times-square-central.jpg?w={width}&h={height}&s=1"
+            }
+          },
+          {
+            "__typename": "AppPresentation_PhotoItem",
+            "sizes": {
+              "__typename": "AppPresentation_PhotoItemSizeDynamic",
+              "maxHeight": 1333,
+              "maxWidth": 2000,
+              "urlTemplate": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/11/14/9d/0b/times-square-central.jpg?w={width}&h={height}&s=1"
+            }
+          }
+        ]
+      },
+      {
+        "id": "93623",
+        "title": "14. Trump International Hotel and Tower New York",
+        "primaryInfo": null,
+        "secondaryInfo": "Lincoln Square",
+        "badge": {
+          "size": "SMALL",
+          "type": "TRAVELLER_CHOICE",
+          "year": "2023"
+        },
+        "bubbleRating": {
+          "count": "1,976",
+          "rating": 4.5
+        },
+        "isSponsored": false,
+        "accentedLabel": false,
+        "provider": "Booking.com",
+        "priceForDisplay": "$944",
+        "strikethroughPrice": null,
+        "priceDetails": "Reserve now, pay at stay",
+        "priceSummary": null,
+        "cardPhotos": [
+          {
+            "__typename": "AppPresentation_PhotoItem",
+            "sizes": {
+              "__typename": "AppPresentation_PhotoItemSizeDynamic",
+              "maxHeight": 7819,
+              "maxWidth": 8679,
+              "urlTemplate": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/29/0c/64/75/central-park-columbus.jpg?w={width}&h={height}&s=1"
+            }
+          },
+          {
+            "__typename": "AppPresentation_PhotoItem",
+            "sizes": {
+              "__typename": "AppPresentation_PhotoItemSizeDynamic",
+              "maxHeight": 1333,
+              "maxWidth": 2000,
+              "urlTemplate": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/15/8a/9a/03/trump-international-hotel.jpg?w={width}&h={height}&s=1"
+            }
+          },
+          {
+            "__typename": "AppPresentation_PhotoItem",
+            "sizes": {
+              "__typename": "AppPresentation_PhotoItemSizeDynamic",
+              "maxHeight": 3457,
+              "maxWidth": 5185,
+              "urlTemplate": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/14/d5/70/28/trump-international-hotel.jpg?w={width}&h={height}&s=1"
+            }
+          },
+          {
+            "__typename": "AppPresentation_PhotoItem",
+            "sizes": {
+              "__typename": "AppPresentation_PhotoItemSizeDynamic",
+              "maxHeight": 1333,
+              "maxWidth": 2000,
+              "urlTemplate": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/15/8a/98/d1/trump-international-hotel.jpg?w={width}&h={height}&s=1"
+            }
+          }
+        ]
+      },
+      {
+        "id": "93454",
+        "title": "15. Crowne Plaza Times Square Manhattan, an IHG Hotel",
+        "primaryInfo": null,
+        "secondaryInfo": "Theater District",
+        "badge": {},
+        "bubbleRating": {
+          "count": "12,112",
+          "rating": 4
+        },
+        "isSponsored": false,
+        "accentedLabel": false,
+        "provider": "Booking.com",
+        "priceForDisplay": "$304",
+        "strikethroughPrice": null,
+        "priceDetails": null,
+        "priceSummary": null,
+        "cardPhotos": [
+          {
+            "__typename": "AppPresentation_PhotoItem",
+            "sizes": {
+              "__typename": "AppPresentation_PhotoItemSizeDynamic",
+              "maxHeight": 3840,
+              "maxWidth": 5760,
+              "urlTemplate": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/29/0e/d2/62/the-crowne-plaza-times.jpg?w={width}&h={height}&s=1"
+            }
+          },
+          {
+            "__typename": "AppPresentation_PhotoItem",
+            "sizes": {
+              "__typename": "AppPresentation_PhotoItemSizeDynamic",
+              "maxHeight": 1333,
+              "maxWidth": 2000,
+              "urlTemplate": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/12/0d/76/ed/step-out-our-front-door.jpg?w={width}&h={height}&s=1"
+            }
+          },
+          {
+            "__typename": "AppPresentation_PhotoItem",
+            "sizes": {
+              "__typename": "AppPresentation_PhotoItemSizeDynamic",
+              "maxHeight": 1472,
+              "maxWidth": 2000,
+              "urlTemplate": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/12/23/8d/f4/times-square-view-on.jpg?w={width}&h={height}&s=1"
+            }
+          },
+          {
+            "__typename": "AppPresentation_PhotoItem",
+            "sizes": {
+              "__typename": "AppPresentation_PhotoItemSizeDynamic",
+              "maxHeight": 1333,
+              "maxWidth": 2000,
+              "urlTemplate": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/06/00/f6/0e/corner-king-day.jpg?w={width}&h={height}&s=1"
+            }
+          }
+        ]
+      },
+      {
+        "id": "93507",
+        "title": "New York Marriott Marquis",
+        "primaryInfo": null,
+        "secondaryInfo": "Theater District",
+        "badge": {},
+        "bubbleRating": {
+          "count": "13,463",
+          "rating": 4
+        },
+        "isSponsored": true,
+        "accentedLabel": false,
+        "provider": "Booking.com",
+        "priceForDisplay": "$480",
+        "strikethroughPrice": null,
+        "priceDetails": "Reserve now, pay at stay",
+        "priceSummary": null,
+        "cardPhotos": [
+          {
+            "__typename": "AppPresentation_PhotoItem",
+            "sizes": {
+              "__typename": "AppPresentation_PhotoItemSizeDynamic",
+              "maxHeight": 2667,
+              "maxWidth": 4000,
+              "urlTemplate": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/29/0f/8f/00/exterior.jpg?w={width}&h={height}&s=1"
+            }
+          },
+          {
+            "__typename": "AppPresentation_PhotoItem",
+            "sizes": {
+              "__typename": "AppPresentation_PhotoItemSizeDynamic",
+              "maxHeight": 2667,
+              "maxWidth": 4000,
+              "urlTemplate": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/29/0f/8f/70/odets.jpg?w={width}&h={height}&s=1"
+            }
+          },
+          {
+            "__typename": "AppPresentation_PhotoItem",
+            "sizes": {
+              "__typename": "AppPresentation_PhotoItemSizeDynamic",
+              "maxHeight": 2667,
+              "maxWidth": 4000,
+              "urlTemplate": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/29/0f/8f/6f/times-square-new-year.jpg?w={width}&h={height}&s=1"
+            }
+          },
+          {
+            "__typename": "AppPresentation_PhotoItem",
+            "sizes": {
+              "__typename": "AppPresentation_PhotoItemSizeDynamic",
+              "maxHeight": 2667,
+              "maxWidth": 4000,
+              "urlTemplate": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/29/0f/8f/6d/broadway-ballroom-holiday.jpg?w={width}&h={height}&s=1"
+            }
+          }
+        ]
+      },
+      {
+        "id": "634696",
+        "title": "16. The Bowery Hotel",
+        "primaryInfo": null,
+        "secondaryInfo": "Downtown Manhattan (Downtown)",
+        "badge": {
+          "size": "SMALL",
+          "type": "BEST_OF_BEST",
+          "year": "2023"
+        },
+        "bubbleRating": {
+          "count": "899",
+          "rating": 4.5
+        },
+        "isSponsored": false,
+        "accentedLabel": false,
+        "provider": "Booking.com",
+        "priceForDisplay": "$588",
+        "strikethroughPrice": null,
+        "priceDetails": "Reserve now, pay at stay",
+        "priceSummary": null,
+        "cardPhotos": [
+          {
+            "__typename": "AppPresentation_PhotoItem",
+            "sizes": {
+              "__typename": "AppPresentation_PhotoItemSizeDynamic",
+              "maxHeight": 666,
+              "maxWidth": 1000,
+              "urlTemplate": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/23/e3/c8/9a/lobby.jpg?w={width}&h={height}&s=1"
+            }
+          },
+          {
+            "__typename": "AppPresentation_PhotoItem",
+            "sizes": {
+              "__typename": "AppPresentation_PhotoItemSizeDynamic",
+              "maxHeight": 1333,
+              "maxWidth": 2000,
+              "urlTemplate": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/10/e1/54/57/hotel-lobby.jpg?w={width}&h={height}&s=1"
+            }
+          },
+          {
+            "__typename": "AppPresentation_PhotoItem",
+            "sizes": {
+              "__typename": "AppPresentation_PhotoItemSizeDynamic",
+              "maxHeight": 1335,
+              "maxWidth": 2000,
+              "urlTemplate": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/11/14/9d/0d/the-bowery-hotel.jpg?w={width}&h={height}&s=1"
+            }
+          },
+          {
+            "__typename": "AppPresentation_PhotoItem",
+            "sizes": {
+              "__typename": "AppPresentation_PhotoItemSizeDynamic",
+              "maxHeight": 666,
+              "maxWidth": 1000,
+              "urlTemplate": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/09/7c/05/f5/the-bowery-hotel.jpg?w={width}&h={height}&s=1"
+            }
+          }
+        ]
+      },
+      {
+        "id": "630409",
+        "title": "17. Conrad New York Midtown",
+        "primaryInfo": null,
+        "secondaryInfo": "Midtown",
+        "badge": {
+          "size": "SMALL",
+          "type": "TRAVELLER_CHOICE",
+          "year": "2023"
+        },
+        "bubbleRating": {
+          "count": "4,727",
+          "rating": 4
+        },
+        "isSponsored": false,
+        "accentedLabel": false,
+        "provider": "Booking.com",
+        "priceForDisplay": "$643",
+        "strikethroughPrice": null,
+        "priceDetails": null,
+        "priceSummary": null,
+        "cardPhotos": [
+          {
+            "__typename": "AppPresentation_PhotoItem",
+            "sizes": {
+              "__typename": "AppPresentation_PhotoItemSizeDynamic",
+              "maxHeight": 682,
+              "maxWidth": 1024,
+              "urlTemplate": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/29/9a/1b/4f/exterior.jpg?w={width}&h={height}&s=1"
+            }
+          },
+          {
+            "__typename": "AppPresentation_PhotoItem",
+            "sizes": {
+              "__typename": "AppPresentation_PhotoItemSizeDynamic",
+              "maxHeight": 1333,
+              "maxWidth": 2000,
+              "urlTemplate": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/07/f1/8e/dd/the-london-nyc.jpg?w={width}&h={height}&s=1"
+            }
+          },
+          {
+            "__typename": "AppPresentation_PhotoItem",
+            "sizes": {
+              "__typename": "AppPresentation_PhotoItemSizeDynamic",
+              "maxHeight": 683,
+              "maxWidth": 1024,
+              "urlTemplate": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/29/a8/27/14/exterior.jpg?w={width}&h={height}&s=1"
+            }
+          },
+          {
+            "__typename": "AppPresentation_PhotoItem",
+            "sizes": {
+              "__typename": "AppPresentation_PhotoItemSizeDynamic",
+              "maxHeight": 682,
+              "maxWidth": 1023,
+              "urlTemplate": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/29/a8/27/13/exterior.jpg?w={width}&h={height}&s=1"
+            }
+          }
+        ]
+      },
+      {
+        "id": "224226",
+        "title": "18. City Club Hotel",
+        "primaryInfo": null,
+        "secondaryInfo": "Midtown",
+        "badge": {},
+        "bubbleRating": {
+          "count": "1,090",
+          "rating": 4
+        },
+        "isSponsored": false,
+        "accentedLabel": false,
+        "provider": "Booking.com",
+        "priceForDisplay": "$222",
+        "strikethroughPrice": null,
+        "priceDetails": null,
+        "priceSummary": null,
+        "cardPhotos": [
+          {
+            "__typename": "AppPresentation_PhotoItem",
+            "sizes": {
+              "__typename": "AppPresentation_PhotoItemSizeDynamic",
+              "maxHeight": 679,
+              "maxWidth": 1023,
+              "urlTemplate": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/28/94/ee/30/grand-duplex-suite-living.jpg?w={width}&h={height}&s=1"
+            }
+          },
+          {
+            "__typename": "AppPresentation_PhotoItem",
+            "sizes": {
+              "__typename": "AppPresentation_PhotoItemSizeDynamic",
+              "maxHeight": 2740,
+              "maxWidth": 3000,
+              "urlTemplate": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/16/01/fa/09/exterior-and-entrance.jpg?w={width}&h={height}&s=1"
+            }
+          },
+          {
+            "__typename": "AppPresentation_PhotoItem",
+            "sizes": {
+              "__typename": "AppPresentation_PhotoItemSizeDynamic",
+              "maxHeight": 232,
+              "maxWidth": 534,
+              "urlTemplate": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/0e/f2/89/6e/city-club-hotel.jpg?w={width}&h={height}&s=1"
+            }
+          },
+          {
+            "__typename": "AppPresentation_PhotoItem",
+            "sizes": {
+              "__typename": "AppPresentation_PhotoItemSizeDynamic",
+              "maxHeight": 1500,
+              "maxWidth": 835,
+              "urlTemplate": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/07/9f/ec/24/city-club-hotel.jpg?w={width}&h={height}&s=1"
+            }
+          }
+        ]
+      },
+      {
+        "id": "93585",
+        "title": "19. Lowell Hotel",
+        "primaryInfo": null,
+        "secondaryInfo": "Upper East Side",
+        "badge": {
+          "size": "SMALL",
+          "type": "TRAVELLER_CHOICE",
+          "year": "2023"
+        },
+        "bubbleRating": {
+          "count": "518",
+          "rating": 4.5
+        },
+        "isSponsored": false,
+        "accentedLabel": "25% LESS THAN USUAL",
+        "provider": "Booking.com",
+        "priceForDisplay": "$1,212",
+        "strikethroughPrice": null,
+        "priceDetails": null,
+        "priceSummary": null,
+        "cardPhotos": [
+          {
+            "__typename": "AppPresentation_PhotoItem",
+            "sizes": {
+              "__typename": "AppPresentation_PhotoItemSizeDynamic",
+              "maxHeight": 5096,
+              "maxWidth": 3397,
+              "urlTemplate": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/29/0c/63/4b/hotel-exterior.jpg?w={width}&h={height}&s=1"
+            }
+          },
+          {
+            "__typename": "AppPresentation_PhotoItem",
+            "sizes": {
+              "__typename": "AppPresentation_PhotoItemSizeDynamic",
+              "maxHeight": 2340,
+              "maxWidth": 3122,
+              "urlTemplate": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/29/0c/63/cf/2-bedroom-suite.jpg?w={width}&h={height}&s=1"
+            }
+          },
+          {
+            "__typename": "AppPresentation_PhotoItem",
+            "sizes": {
+              "__typename": "AppPresentation_PhotoItemSizeDynamic",
+              "maxHeight": 5304,
+              "maxWidth": 7952,
+              "urlTemplate": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/29/0c/63/ce/the-pembroke-room.jpg?w={width}&h={height}&s=1"
+            }
+          },
+          {
+            "__typename": "AppPresentation_PhotoItem",
+            "sizes": {
+              "__typename": "AppPresentation_PhotoItemSizeDynamic",
+              "maxHeight": 3802,
+              "maxWidth": 5696,
+              "urlTemplate": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/29/0c/63/cd/the-lowell-lobby.jpg?w={width}&h={height}&s=1"
+            }
+          }
+        ]
+      },
+      {
+        "id": "281071",
+        "title": "20. Mandarin Oriental, New York",
+        "primaryInfo": null,
+        "secondaryInfo": "Hell's Kitchen",
+        "badge": {
+          "size": "SMALL",
+          "type": "TRAVELLER_CHOICE",
+          "year": "2023"
+        },
+        "bubbleRating": {
+          "count": "2,030",
+          "rating": 4.5
+        },
+        "isSponsored": false,
+        "accentedLabel": "30% LESS THAN USUAL",
+        "provider": "Mandarin Oriental",
+        "priceForDisplay": "$745",
+        "strikethroughPrice": null,
+        "priceDetails": null,
+        "priceSummary": null,
+        "cardPhotos": [
+          {
+            "__typename": "AppPresentation_PhotoItem",
+            "sizes": {
+              "__typename": "AppPresentation_PhotoItemSizeDynamic",
+              "maxHeight": 1140,
+              "maxWidth": 1713,
+              "urlTemplate": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/29/07/5d/28/hotel-exterior.jpg?w={width}&h={height}&s=1"
+            }
+          },
+          {
+            "__typename": "AppPresentation_PhotoItem",
+            "sizes": {
+              "__typename": "AppPresentation_PhotoItemSizeDynamic",
+              "maxHeight": 1500,
+              "maxWidth": 1917,
+              "urlTemplate": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/12/01/70/5c/view-from-hotel.jpg?w={width}&h={height}&s=1"
+            }
+          },
+          {
+            "__typename": "AppPresentation_PhotoItem",
+            "sizes": {
+              "__typename": "AppPresentation_PhotoItemSizeDynamic",
+              "maxHeight": 622,
+              "maxWidth": 825,
+              "urlTemplate": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/08/22/93/75/view-from-mandarin-oriental.jpg?w={width}&h={height}&s=1"
+            }
+          },
+          {
+            "__typename": "AppPresentation_PhotoItem",
+            "sizes": {
+              "__typename": "AppPresentation_PhotoItemSizeDynamic",
+              "maxHeight": 1333,
+              "maxWidth": 2000,
+              "urlTemplate": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/12/01/6f/bb/35th-floor-sky-lobby.jpg?w={width}&h={height}&s=1"
+            }
+          }
+        ]
+      },
+      {
+        "id": "1456411",
+        "title": "Royalton Park Avenue",
+        "primaryInfo": null,
+        "secondaryInfo": "NoMad",
+        "badge": {
+          "size": "SMALL",
+          "type": "TRAVELLER_CHOICE",
+          "year": "2023"
+        },
+        "bubbleRating": {
+          "count": "3,438",
+          "rating": 4.5
+        },
+        "isSponsored": true,
+        "accentedLabel": false,
+        "provider": "Booking.com",
+        "priceForDisplay": "$445",
+        "strikethroughPrice": null,
+        "priceDetails": null,
+        "priceSummary": null,
+        "cardPhotos": [
+          {
+            "__typename": "AppPresentation_PhotoItem",
+            "sizes": {
+              "__typename": "AppPresentation_PhotoItemSizeDynamic",
+              "maxHeight": 1750,
+              "maxWidth": 2400,
+              "urlTemplate": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/28/24/c5/16/rooftop-swimming-pool.jpg?w={width}&h={height}&s=1"
+            }
+          },
+          {
+            "__typename": "AppPresentation_PhotoItem",
+            "sizes": {
+              "__typename": "AppPresentation_PhotoItemSizeDynamic",
+              "maxHeight": 1413,
+              "maxWidth": 2000,
+              "urlTemplate": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/11/e1/49/ba/royalton-park-avenue.jpg?w={width}&h={height}&s=1"
+            }
+          },
+          {
+            "__typename": "AppPresentation_PhotoItem",
+            "sizes": {
+              "__typename": "AppPresentation_PhotoItemSizeDynamic",
+              "maxHeight": 991,
+              "maxWidth": 1280,
+              "urlTemplate": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/11/e1/53/f5/royalton-park-avenue.jpg?w={width}&h={height}&s=1"
+            }
+          },
+          {
+            "__typename": "AppPresentation_PhotoItem",
+            "sizes": {
+              "__typename": "AppPresentation_PhotoItemSizeDynamic",
+              "maxHeight": 900,
+              "maxWidth": 1500,
+              "urlTemplate": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/06/d7/86/a0/gansevoort-park-avenue.jpg?w={width}&h={height}&s=1"
+            }
+          }
+        ]
+      },
+      {
+        "id": "287626",
+        "title": "21. Gansevoort Meatpacking NYC",
+        "primaryInfo": null,
+        "secondaryInfo": "Greenwich Village",
+        "badge": {
+          "size": "SMALL",
+          "type": "TRAVELLER_CHOICE",
+          "year": "2023"
+        },
+        "bubbleRating": {
+          "count": "121",
+          "rating": 4.5
+        },
+        "isSponsored": false,
+        "accentedLabel": false,
+        "provider": "Booking.com",
+        "priceForDisplay": "$474",
+        "strikethroughPrice": null,
+        "priceDetails": null,
+        "priceSummary": null,
+        "cardPhotos": [
+          {
+            "__typename": "AppPresentation_PhotoItem",
+            "sizes": {
+              "__typename": "AppPresentation_PhotoItemSizeDynamic",
+              "maxHeight": 741,
+              "maxWidth": 1024,
+              "urlTemplate": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/26/4f/bc/f6/heated-rooftop-pool-open.jpg?w={width}&h={height}&s=1"
+            }
+          },
+          {
+            "__typename": "AppPresentation_PhotoItem",
+            "sizes": {
+              "__typename": "AppPresentation_PhotoItemSizeDynamic",
+              "maxHeight": 2400,
+              "maxWidth": 3000,
+              "urlTemplate": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/23/3f/7c/5d/gansevoort-meatpacking.jpg?w={width}&h={height}&s=1"
+            }
+          },
+          {
+            "__typename": "AppPresentation_PhotoItem",
+            "sizes": {
+              "__typename": "AppPresentation_PhotoItemSizeDynamic",
+              "maxHeight": 731,
+              "maxWidth": 1023,
+              "urlTemplate": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/29/18/40/ef/gansevoort-rooftop.jpg?w={width}&h={height}&s=1"
+            }
+          },
+          {
+            "__typename": "AppPresentation_PhotoItem",
+            "sizes": {
+              "__typename": "AppPresentation_PhotoItemSizeDynamic",
+              "maxHeight": 819,
+              "maxWidth": 1024,
+              "urlTemplate": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/26/4f/bc/9c/coffee-cocktails.jpg?w={width}&h={height}&s=1"
+            }
+          }
+        ]
+      },
+      {
+        "id": "93603",
+        "title": "22. The Pierre, A Taj Hotel",
+        "primaryInfo": null,
+        "secondaryInfo": "Upper East Side",
+        "badge": {
+          "size": "SMALL",
+          "type": "TRAVELLER_CHOICE",
+          "year": "2023"
+        },
+        "bubbleRating": {
+          "count": "2,565",
+          "rating": 4.5
+        },
+        "isSponsored": false,
+        "accentedLabel": "14% LESS THAN USUAL",
+        "provider": "Booking.com",
+        "priceForDisplay": "$715",
+        "strikethroughPrice": null,
+        "priceDetails": null,
+        "priceSummary": null,
+        "cardPhotos": [
+          {
+            "__typename": "AppPresentation_PhotoItem",
+            "sizes": {
+              "__typename": "AppPresentation_PhotoItemSizeDynamic",
+              "maxHeight": 1499,
+              "maxWidth": 2000,
+              "urlTemplate": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/11/21/2d/82/view-of-the-hotel-and.jpg?w={width}&h={height}&s=1"
+            }
+          },
+          {
+            "__typename": "AppPresentation_PhotoItem",
+            "sizes": {
+              "__typename": "AppPresentation_PhotoItemSizeDynamic",
+              "maxHeight": 683,
+              "maxWidth": 1024,
+              "urlTemplate": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/11/21/2f/27/hotel-lobby.jpg?w={width}&h={height}&s=1"
+            }
+          },
+          {
+            "__typename": "AppPresentation_PhotoItem",
+            "sizes": {
+              "__typename": "AppPresentation_PhotoItemSizeDynamic",
+              "maxHeight": 468,
+              "maxWidth": 640,
+              "urlTemplate": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/11/21/37/07/the-famous-rorunda.jpg?w={width}&h={height}&s=1"
+            }
+          },
+          {
+            "__typename": "AppPresentation_PhotoItem",
+            "sizes": {
+              "__typename": "AppPresentation_PhotoItemSizeDynamic",
+              "maxHeight": 1333,
+              "maxWidth": 2000,
+              "urlTemplate": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/11/21/34/c4/central-park-view-from.jpg?w={width}&h={height}&s=1"
+            }
+          }
+        ]
+      },
+      {
+        "id": "6555841",
+        "title": "23. The Leon Hotel",
+        "primaryInfo": null,
+        "secondaryInfo": "Chinatown",
+        "badge": {},
+        "bubbleRating": {
+          "count": "484",
+          "rating": 4.5
+        },
+        "isSponsored": false,
+        "accentedLabel": false,
+        "provider": "Booking.com",
+        "priceForDisplay": "$248",
+        "strikethroughPrice": null,
+        "priceDetails": null,
+        "priceSummary": null,
+        "cardPhotos": [
+          {
+            "__typename": "AppPresentation_PhotoItem",
+            "sizes": {
+              "__typename": "AppPresentation_PhotoItemSizeDynamic",
+              "maxHeight": 3840,
+              "maxWidth": 5760,
+              "urlTemplate": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/05/d1/ea/63/loft-suite.jpg?w={width}&h={height}&s=1"
+            }
+          },
+          {
+            "__typename": "AppPresentation_PhotoItem",
+            "sizes": {
+              "__typename": "AppPresentation_PhotoItemSizeDynamic",
+              "maxHeight": 1332,
+              "maxWidth": 2000,
+              "urlTemplate": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/05/d2/3c/ee/be-hotel.jpg?w={width}&h={height}&s=1"
+            }
+          },
+          {
+            "__typename": "AppPresentation_PhotoItem",
+            "sizes": {
+              "__typename": "AppPresentation_PhotoItemSizeDynamic",
+              "maxHeight": 2000,
+              "maxWidth": 3000,
+              "urlTemplate": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/05/d1/e5/74/be-hotel.jpg?w={width}&h={height}&s=1"
+            }
+          },
+          {
+            "__typename": "AppPresentation_PhotoItem",
+            "sizes": {
+              "__typename": "AppPresentation_PhotoItemSizeDynamic",
+              "maxHeight": 250,
+              "maxWidth": 250,
+              "urlTemplate": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/07/4e/b9/af/be-hotel.jpg?w={width}&h={height}&s=1"
+            }
+          }
+        ]
+      },
+      {
+        "id": "10330604",
+        "title": "24. Four Seasons Hotel New York Downtown",
+        "primaryInfo": null,
+        "secondaryInfo": "Downtown Manhattan (Downtown)",
+        "badge": {
+          "size": "SMALL",
+          "type": "TRAVELLER_CHOICE",
+          "year": "2023"
+        },
+        "bubbleRating": {
+          "count": "757",
+          "rating": 4.5
+        },
+        "isSponsored": false,
+        "accentedLabel": false,
+        "provider": "Booking.com",
+        "priceForDisplay": "$919",
+        "strikethroughPrice": null,
+        "priceDetails": "Reserve now, pay at stay",
+        "priceSummary": null,
+        "cardPhotos": [
+          {
+            "__typename": "AppPresentation_PhotoItem",
+            "sizes": {
+              "__typename": "AppPresentation_PhotoItemSizeDynamic",
+              "maxHeight": 1280,
+              "maxWidth": 1920,
+              "urlTemplate": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/27/18/fa/b0/four-seasons-hotel-new.jpg?w={width}&h={height}&s=1"
+            }
+          },
+          {
+            "__typename": "AppPresentation_PhotoItem",
+            "sizes": {
+              "__typename": "AppPresentation_PhotoItemSizeDynamic",
+              "maxHeight": 1280,
+              "maxWidth": 1920,
+              "urlTemplate": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/29/08/fe/20/exterior.jpg?w={width}&h={height}&s=1"
+            }
+          },
+          {
+            "__typename": "AppPresentation_PhotoItem",
+            "sizes": {
+              "__typename": "AppPresentation_PhotoItemSizeDynamic",
+              "maxHeight": 1280,
+              "maxWidth": 1919,
+              "urlTemplate": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/29/08/fe/72/dining-in-local-destination.jpg?w={width}&h={height}&s=1"
+            }
+          },
+          {
+            "__typename": "AppPresentation_PhotoItem",
+            "sizes": {
+              "__typename": "AppPresentation_PhotoItemSizeDynamic",
+              "maxHeight": 1280,
+              "maxWidth": 1918,
+              "urlTemplate": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/29/08/fe/71/whitney-museum.jpg?w={width}&h={height}&s=1"
+            }
+          }
+        ]
+      },
+      {
+        "id": "93614",
+        "title": "25. The St. Regis New York",
+        "primaryInfo": null,
+        "secondaryInfo": "Midtown",
+        "badge": {},
+        "bubbleRating": {
+          "count": "1,205",
+          "rating": 4.5
+        },
+        "isSponsored": false,
+        "accentedLabel": "15% LESS THAN USUAL",
+        "provider": "Booking.com",
+        "priceForDisplay": "$881",
+        "strikethroughPrice": null,
+        "priceDetails": "Free cancellation • Reserve now, pay at stay",
+        "priceSummary": null,
+        "cardPhotos": [
+          {
+            "__typename": "AppPresentation_PhotoItem",
+            "sizes": {
+              "__typename": "AppPresentation_PhotoItemSizeDynamic",
+              "maxHeight": 2667,
+              "maxWidth": 4000,
+              "urlTemplate": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/29/10/57/53/bentley-courtesy-car.jpg?w={width}&h={height}&s=1"
+            }
+          },
+          {
+            "__typename": "AppPresentation_PhotoItem",
+            "sizes": {
+              "__typename": "AppPresentation_PhotoItemSizeDynamic",
+              "maxHeight": 1331,
+              "maxWidth": 2000,
+              "urlTemplate": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/07/44/ef/26/the-st-regis-new-york.jpg?w={width}&h={height}&s=1"
+            }
+          },
+          {
+            "__typename": "AppPresentation_PhotoItem",
+            "sizes": {
+              "__typename": "AppPresentation_PhotoItemSizeDynamic",
+              "maxHeight": 2667,
+              "maxWidth": 4000,
+              "urlTemplate": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/29/10/57/c8/wedding-reception.jpg?w={width}&h={height}&s=1"
+            }
+          },
+          {
+            "__typename": "AppPresentation_PhotoItem",
+            "sizes": {
+              "__typename": "AppPresentation_PhotoItemSizeDynamic",
+              "maxHeight": 2667,
+              "maxWidth": 4000,
+              "urlTemplate": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/29/10/57/c7/the-versailles-room-banquet.jpg?w={width}&h={height}&s=1"
+            }
+          }
+        ]
+      },
+      {
+        "id": "99371",
+        "title": "Courtyard by Marriott New York Manhattan / Midtown East",
+        "primaryInfo": null,
+        "secondaryInfo": "Midtown East",
+        "badge": {
+          "size": "SMALL",
+          "type": "TRAVELLER_CHOICE",
+          "year": "2023"
+        },
+        "bubbleRating": {
+          "count": "2,983",
+          "rating": 4.5
+        },
+        "isSponsored": true,
+        "accentedLabel": false,
+        "provider": "Booking.com",
+        "priceForDisplay": "$433",
+        "strikethroughPrice": null,
+        "priceDetails": null,
+        "priceSummary": null,
+        "cardPhotos": [
+          {
+            "__typename": "AppPresentation_PhotoItem",
+            "sizes": {
+              "__typename": "AppPresentation_PhotoItemSizeDynamic",
+              "maxHeight": 1260,
+              "maxWidth": 2000,
+              "urlTemplate": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/04/54/09/ae/midtown-east.jpg?w={width}&h={height}&s=1"
+            }
+          },
+          {
+            "__typename": "AppPresentation_PhotoItem",
+            "sizes": {
+              "__typename": "AppPresentation_PhotoItemSizeDynamic",
+              "maxHeight": 2667,
+              "maxWidth": 4000,
+              "urlTemplate": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/29/52/b6/37/lobby-sitting-area.jpg?w={width}&h={height}&s=1"
+            }
+          },
+          {
+            "__typename": "AppPresentation_PhotoItem",
+            "sizes": {
+              "__typename": "AppPresentation_PhotoItemSizeDynamic",
+              "maxHeight": 2667,
+              "maxWidth": 4000,
+              "urlTemplate": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/29/0f/6d/2a/macmillan-room-classroom.jpg?w={width}&h={height}&s=1"
+            }
+          },
+          {
+            "__typename": "AppPresentation_PhotoItem",
+            "sizes": {
+              "__typename": "AppPresentation_PhotoItemSizeDynamic",
+              "maxHeight": 2667,
+              "maxWidth": 4000,
+              "urlTemplate": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/29/0f/6d/29/macmillan-room-u-shape.jpg?w={width}&h={height}&s=1"
+            }
+          }
+        ]
+      },
+      {
+        "id": "93419",
+        "title": "26. The Carlyle, A Rosewood Hotel",
+        "primaryInfo": null,
+        "secondaryInfo": "Upper East Side",
+        "badge": {
+          "size": "SMALL",
+          "type": "TRAVELLER_CHOICE",
+          "year": "2023"
+        },
+        "bubbleRating": {
+          "count": "86",
+          "rating": 4
+        },
+        "isSponsored": false,
+        "accentedLabel": false,
+        "provider": "Official Site",
+        "priceForDisplay": "$810",
+        "strikethroughPrice": "$838",
+        "priceDetails": null,
+        "priceSummary": null,
+        "cardPhotos": [
+          {
+            "__typename": "AppPresentation_PhotoItem",
+            "sizes": {
+              "__typename": "AppPresentation_PhotoItemSizeDynamic",
+              "maxHeight": 1874,
+              "maxWidth": 2500,
+              "urlTemplate": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/29/38/d7/37/aeriel-view.jpg?w={width}&h={height}&s=1"
+            }
+          },
+          {
+            "__typename": "AppPresentation_PhotoItem",
+            "sizes": {
+              "__typename": "AppPresentation_PhotoItemSizeDynamic",
+              "maxHeight": 1679,
+              "maxWidth": 2500,
+              "urlTemplate": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/21/54/0a/e9/the-carlyle-a-rosewood.jpg?w={width}&h={height}&s=1"
+            }
+          },
+          {
+            "__typename": "AppPresentation_PhotoItem",
+            "sizes": {
+              "__typename": "AppPresentation_PhotoItemSizeDynamic",
+              "maxHeight": 1682,
+              "maxWidth": 2500,
+              "urlTemplate": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/21/54/0a/e8/the-carlyle-a-rosewood.jpg?w={width}&h={height}&s=1"
+            }
+          },
+          {
+            "__typename": "AppPresentation_PhotoItem",
+            "sizes": {
+              "__typename": "AppPresentation_PhotoItemSizeDynamic",
+              "maxHeight": 951,
+              "maxWidth": 1426,
+              "urlTemplate": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/21/54/0b/a5/the-carlyle-a-rosewood.jpg?w={width}&h={height}&s=1"
+            }
+          }
+        ]
+      },
+      {
+        "id": "23528665",
+        "title": "27. Pendry Manhattan West",
+        "primaryInfo": null,
+        "secondaryInfo": "Hudson Yards",
+        "badge": {
+          "size": "SMALL",
+          "type": "BEST_OF_BEST",
+          "year": "2023"
+        },
+        "bubbleRating": {
+          "count": "315",
+          "rating": 5
+        },
+        "isSponsored": false,
+        "accentedLabel": false,
+        "provider": "Booking.com",
+        "priceForDisplay": "$1,792",
+        "strikethroughPrice": null,
+        "priceDetails": "Reserve now, pay at stay",
+        "priceSummary": null,
+        "cardPhotos": [
+          {
+            "__typename": "AppPresentation_PhotoItem",
+            "sizes": {
+              "__typename": "AppPresentation_PhotoItemSizeDynamic",
+              "maxHeight": 1829,
+              "maxWidth": 3000,
+              "urlTemplate": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/21/53/f1/82/pendry-manhattan-west.jpg?w={width}&h={height}&s=1"
+            }
+          },
+          {
+            "__typename": "AppPresentation_PhotoItem",
+            "sizes": {
+              "__typename": "AppPresentation_PhotoItemSizeDynamic",
+              "maxHeight": 695,
+              "maxWidth": 1024,
+              "urlTemplate": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/21/ba/93/b7/pendry-manhattan-west.jpg?w={width}&h={height}&s=1"
+            }
+          },
+          {
+            "__typename": "AppPresentation_PhotoItem",
+            "sizes": {
+              "__typename": "AppPresentation_PhotoItemSizeDynamic",
+              "maxHeight": 1996,
+              "maxWidth": 3000,
+              "urlTemplate": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/21/53/f1/79/pendry-manhattan-west.jpg?w={width}&h={height}&s=1"
+            }
+          },
+          {
+            "__typename": "AppPresentation_PhotoItem",
+            "sizes": {
+              "__typename": "AppPresentation_PhotoItemSizeDynamic",
+              "maxHeight": 680,
+              "maxWidth": 1024,
+              "urlTemplate": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/21/ba/93/da/pendry-manhattan-west.jpg?w={width}&h={height}&s=1"
+            }
+          }
+        ]
+      },
+      {
+        "id": "93607",
+        "title": "28. Loews Regency New York Hotel",
+        "primaryInfo": null,
+        "secondaryInfo": "Upper East Side",
+        "badge": {
+          "size": "SMALL",
+          "type": "TRAVELLER_CHOICE",
+          "year": "2023"
+        },
+        "bubbleRating": {
+          "count": "2,516",
+          "rating": 4.5
+        },
+        "isSponsored": false,
+        "accentedLabel": false,
+        "provider": "Booking.com",
+        "priceForDisplay": "$1,848",
+        "strikethroughPrice": null,
+        "priceDetails": "Reserve now, pay at stay",
+        "priceSummary": null,
+        "cardPhotos": [
+          {
+            "__typename": "AppPresentation_PhotoItem",
+            "sizes": {
+              "__typename": "AppPresentation_PhotoItemSizeDynamic",
+              "maxHeight": 3384,
+              "maxWidth": 3703,
+              "urlTemplate": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/29/10/32/8f/exterior.jpg?w={width}&h={height}&s=1"
+            }
+          },
+          {
+            "__typename": "AppPresentation_PhotoItem",
+            "sizes": {
+              "__typename": "AppPresentation_PhotoItemSizeDynamic",
+              "maxHeight": 365,
+              "maxWidth": 600,
+              "urlTemplate": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/07/1a/a5/22/loews-regency-hotel.jpg?w={width}&h={height}&s=1"
+            }
+          },
+          {
+            "__typename": "AppPresentation_PhotoItem",
+            "sizes": {
+              "__typename": "AppPresentation_PhotoItemSizeDynamic",
+              "maxHeight": 400,
+              "maxWidth": 600,
+              "urlTemplate": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/07/1a/a5/2e/loews-regency-hotel.jpg?w={width}&h={height}&s=1"
+            }
+          },
+          {
+            "__typename": "AppPresentation_PhotoItem",
+            "sizes": {
+              "__typename": "AppPresentation_PhotoItemSizeDynamic",
+              "maxHeight": 397,
+              "maxWidth": 600,
+              "urlTemplate": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/07/1a/a5/41/loews-regency-hotel.jpg?w={width}&h={height}&s=1"
+            }
+          }
+        ]
+      },
+      {
+        "id": "7314002",
+        "title": "29. Baccarat Hotel & Residences New York",
+        "primaryInfo": null,
+        "secondaryInfo": "Midtown",
+        "badge": {
+          "size": "SMALL",
+          "type": "TRAVELLER_CHOICE",
+          "year": "2023"
+        },
+        "bubbleRating": {
+          "count": "921",
+          "rating": 4.5
+        },
+        "isSponsored": false,
+        "accentedLabel": false,
+        "provider": "Official Site",
+        "priceForDisplay": "$1,788",
+        "strikethroughPrice": null,
+        "priceDetails": null,
+        "priceSummary": null,
+        "cardPhotos": [
+          {
+            "__typename": "AppPresentation_PhotoItem",
+            "sizes": {
+              "__typename": "AppPresentation_PhotoItemSizeDynamic",
+              "maxHeight": 1500,
+              "maxWidth": 2000,
+              "urlTemplate": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/07/e4/3f/05/baccarat-hotel-residences.jpg?w={width}&h={height}&s=1"
+            }
+          },
+          {
+            "__typename": "AppPresentation_PhotoItem",
+            "sizes": {
+              "__typename": "AppPresentation_PhotoItemSizeDynamic",
+              "maxHeight": 400,
+              "maxWidth": 800,
+              "urlTemplate": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/07/e4/4b/fd/baccarat-hotel-residences.jpg?w={width}&h={height}&s=1"
+            }
+          },
+          {
+            "__typename": "AppPresentation_PhotoItem",
+            "sizes": {
+              "__typename": "AppPresentation_PhotoItemSizeDynamic",
+              "maxHeight": 1500,
+              "maxWidth": 2000,
+              "urlTemplate": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/07/e4/3e/0e/baccarat-hotel-residences.jpg?w={width}&h={height}&s=1"
+            }
+          },
+          {
+            "__typename": "AppPresentation_PhotoItem",
+            "sizes": {
+              "__typename": "AppPresentation_PhotoItemSizeDynamic",
+              "maxHeight": 1500,
+              "maxWidth": 1949,
+              "urlTemplate": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/07/e4/3d/ce/baccarat-hotel-residences.jpg?w={width}&h={height}&s=1"
+            }
+          }
+        ]
+      },
+      {
+        "id": "113311",
+        "title": "30. The Peninsula New York",
+        "primaryInfo": null,
+        "secondaryInfo": "Midtown",
+        "badge": {
+          "size": "SMALL",
+          "type": "TRAVELLER_CHOICE",
+          "year": "2023"
+        },
+        "bubbleRating": {
+          "count": "1,442",
+          "rating": 4.5
+        },
+        "isSponsored": false,
+        "accentedLabel": false,
+        "provider": "Booking.com",
+        "priceForDisplay": "$1,547",
+        "strikethroughPrice": null,
+        "priceDetails": null,
+        "priceSummary": null,
+        "cardPhotos": [
+          {
+            "__typename": "AppPresentation_PhotoItem",
+            "sizes": {
+              "__typename": "AppPresentation_PhotoItemSizeDynamic",
+              "maxHeight": 535,
+              "maxWidth": 952,
+              "urlTemplate": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/29/07/60/dc/the-lobby.jpg?w={width}&h={height}&s=1"
+            }
+          },
+          {
+            "__typename": "AppPresentation_PhotoItem",
+            "sizes": {
+              "__typename": "AppPresentation_PhotoItemSizeDynamic",
+              "maxHeight": 1409,
+              "maxWidth": 2000,
+              "urlTemplate": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/0e/8c/b8/0b/a-grand-entrance-on-fifth.jpg?w={width}&h={height}&s=1"
+            }
+          },
+          {
+            "__typename": "AppPresentation_PhotoItem",
+            "sizes": {
+              "__typename": "AppPresentation_PhotoItemSizeDynamic",
+              "maxHeight": 1444,
+              "maxWidth": 2000,
+              "urlTemplate": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/0e/8c/b8/15/the-elegant-and-spacious.jpg?w={width}&h={height}&s=1"
+            }
+          },
+          {
+            "__typename": "AppPresentation_PhotoItem",
+            "sizes": {
+              "__typename": "AppPresentation_PhotoItemSizeDynamic",
+              "maxHeight": 1333,
+              "maxWidth": 2000,
+              "urlTemplate": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/11/2a/1f/89/grand-luxe-room.jpg?w={width}&h={height}&s=1"
+            }
+          }
+        ]
+      },
+      {
+        "id": "262330",
+        "title": "Millennium Downtown New York",
+        "primaryInfo": null,
+        "secondaryInfo": "Downtown Manhattan (Downtown)",
+        "badge": {},
+        "bubbleRating": {
+          "count": "6,421",
+          "rating": 4
+        },
+        "isSponsored": true,
+        "accentedLabel": false,
+        "provider": "Booking.com",
+        "priceForDisplay": "$261",
+        "strikethroughPrice": null,
+        "priceDetails": "Free cancellation",
+        "priceSummary": null,
+        "cardPhotos": [
+          {
+            "__typename": "AppPresentation_PhotoItem",
+            "sizes": {
+              "__typename": "AppPresentation_PhotoItemSizeDynamic",
+              "maxHeight": 3335,
+              "maxWidth": 5000,
+              "urlTemplate": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/22/43/cb/4e/view-from-a-room.jpg?w={width}&h={height}&s=1"
+            }
+          },
+          {
+            "__typename": "AppPresentation_PhotoItem",
+            "sizes": {
+              "__typename": "AppPresentation_PhotoItemSizeDynamic",
+              "maxHeight": 688,
+              "maxWidth": 1280,
+              "urlTemplate": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/29/52/3c/b1/manhattan-sky-view.jpg?w={width}&h={height}&s=1"
+            }
+          },
+          {
+            "__typename": "AppPresentation_PhotoItem",
+            "sizes": {
+              "__typename": "AppPresentation_PhotoItemSizeDynamic",
+              "maxHeight": 1333,
+              "maxWidth": 2000,
+              "urlTemplate": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/12/9a/28/76/liquid-assets-lobby-bar.jpg?w={width}&h={height}&s=1"
+            }
+          },
+          {
+            "__typename": "AppPresentation_PhotoItem",
+            "sizes": {
+              "__typename": "AppPresentation_PhotoItemSizeDynamic",
+              "maxHeight": 4096,
+              "maxWidth": 6144,
+              "urlTemplate": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/22/43/cb/5f/luxury-suite.jpg?w={width}&h={height}&s=1"
+            }
+          }
+        ]
+      }
+    ]
+  }
+}

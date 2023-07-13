@@ -6,8 +6,10 @@ import androidx.lifecycle.asLiveData
 import coil.load
 import coil.transform.RoundedCornersTransformation
 import com.inlay.hotelroomservice.R
+import com.inlay.hotelroomservice.presentation.models.locations.SearchLocationsImageUiModel
 import com.inlay.hotelroomservice.presentation.models.locations.SearchLocationsUiModel
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
 
 class AppSearchLocationsItemViewModel : SearchLocationsItemViewModel() {
     private val _geoId = MutableStateFlow("")
@@ -22,12 +24,22 @@ class AppSearchLocationsItemViewModel : SearchLocationsItemViewModel() {
     private val _imageUrl = MutableStateFlow("")
     override val imageUrl = _imageUrl.asLiveData()
 
-    private lateinit var selectCurrentItemLambda: (String) -> Unit
+    private val _searchLocationsUiModel = MutableStateFlow(
+        SearchLocationsUiModel(
+            "",
+            "",
+            "",
+            SearchLocationsImageUiModel("", "")
+        )
+    )
+    override val searchLocationsUiModel = _searchLocationsUiModel
+
+    private lateinit var selectCurrentItemLambda: (SearchLocationsUiModel) -> Unit
 
     override fun initialize(
-        searchLocationsUiModel: SearchLocationsUiModel,
-        selectItem: (String) -> Unit
+        searchLocationsUiModel: SearchLocationsUiModel, selectItem: (SearchLocationsUiModel) -> Unit
     ) {
+        _searchLocationsUiModel.value = searchLocationsUiModel
         _geoId.value = searchLocationsUiModel.geoId ?: ""
         _title.value = searchLocationsUiModel.title
         _secondaryText.value = searchLocationsUiModel.secondaryText
@@ -36,19 +48,19 @@ class AppSearchLocationsItemViewModel : SearchLocationsItemViewModel() {
     }
 
     override fun selectCurrentItem() {
-        selectCurrentItemLambda(_geoId.value)
+        selectCurrentItemLambda(_searchLocationsUiModel.value)
     }
 
     companion object {
         @JvmStatic
         @BindingAdapter("imgSource")
-        fun loadImage(view: ImageView, imageUrl: String) {
-            if (imageUrl.isNotEmpty()) {
-                view.load(imageUrl) {
+        fun loadImage(view: ImageView, imageUrl: String?) {
+            if (imageUrl.isNullOrEmpty()) {
+                view.load(R.drawable.sample_locations_image) {
                     transformations(RoundedCornersTransformation(50F))
                 }
             } else {
-                view.load(R.drawable.sample_locations_image) {
+                view.load(imageUrl) {
                     transformations(RoundedCornersTransformation(50F))
                 }
             }

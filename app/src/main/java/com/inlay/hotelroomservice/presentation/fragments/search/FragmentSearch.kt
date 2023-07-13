@@ -2,11 +2,14 @@ package com.inlay.hotelroomservice.presentation.fragments.search
 
 import android.os.Bundle
 import android.text.Editable
+import android.util.Log
 import android.view.LayoutInflater
+import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.util.Pair
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
@@ -22,6 +25,7 @@ import com.inlay.hotelroomservice.presentation.activities.MainActivity
 import com.inlay.hotelroomservice.presentation.adapters.search.SearchLocationsAdapter
 import com.inlay.hotelroomservice.presentation.models.SearchDataUiModel
 import com.inlay.hotelroomservice.presentation.models.hotelsitem.DatesModel
+import com.inlay.hotelroomservice.presentation.models.locations.SearchLocationsUiModel
 import com.inlay.hotelroomservice.presentation.viewmodels.hotels.HotelsViewModel
 import com.inlay.hotelroomservice.presentation.viewmodels.search.SearchViewModel
 import kotlinx.coroutines.launch
@@ -29,6 +33,7 @@ import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.activityViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.text.SimpleDateFormat
+import java.util.Calendar
 
 class FragmentSearch : Fragment() {
     private lateinit var binding: FragmentSearchBinding
@@ -37,18 +42,32 @@ class FragmentSearch : Fragment() {
     private val simpleDateFormat: SimpleDateFormat by inject()
     private var isOnline = false
     override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
+        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
-        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_search, container, false)
-
-        (activity as MainActivity).setSupportActionBar(binding.searchBar)
-
         isOnline = requireContext().isNetworkAvailable()
         searchViewModel.init(isOnline, openDatePicker, searchHotels)
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_search, container, false)
+        Log.d("SearchTag", "onCreate")
+
+        (requireActivity() as AppCompatActivity).setSupportActionBar(binding.supportToolbar)
+        (requireActivity() as AppCompatActivity).supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        (requireActivity() as AppCompatActivity).supportActionBar?.setDisplayShowHomeEnabled(true)
+        setHasOptionsMenu(true)
+
+
         binding.lifecycleOwner = viewLifecycleOwner
         return binding.root
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            android.R.id.home -> {
+                requireActivity().onBackPressed()
+                true
+            }
+
+            else -> super.onOptionsItemSelected(item)
+        }
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -66,11 +85,16 @@ class FragmentSearch : Fragment() {
         }
 
         binding.searchView.editText.setOnEditorActionListener { textView, actionId, _ ->
-            if (actionId == EditorInfo.IME_ACTION_DONE) {
+            if (actionId == EditorInfo.IME_ACTION_SEARCH) {
                 searchViewModel.getSearchLocations(textView.text.toString())
             }
             true
         }
+
+        binding.efabSearch.setOnClickListener {
+            Log.d("SearchTag", "Clicked")
+        }
+
     }
 
     private fun bindAdapter() {
@@ -85,11 +109,15 @@ class FragmentSearch : Fragment() {
         }
     }
 
-    private val selectItem: (String) -> Unit = {
-        searchViewModel.setCurrentItemGeoId(it)
+    private val selectItem: (SearchLocationsUiModel) -> Unit = {
+        Log.d("SearchTag", "Item selected")
+        searchViewModel.setCurrentItemModel(it)
+        binding.searchBar.text = it.title
+        binding.searchView.hide()
     }
 
     private val searchHotels: (SearchDataUiModel) -> Unit = {
+        Toast.makeText(context, "Search", Toast.LENGTH_SHORT).show()
         if (isOnline) {
             lifecycleScope.launch {
                 viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
@@ -106,25 +134,46 @@ class FragmentSearch : Fragment() {
     }
 
     private val openDatePicker: () -> DatesModel = {
+        Toast.makeText(context, "Date picker", Toast.LENGTH_SHORT).show()
+        Log.d("SearchTag", "Date picker opened")
         var checkIn = ""
         var checkOut = ""
+        val calendar = Calendar.getInstance()
+        calendar.add(Calendar.DAY_OF_YEAR, 1)
+        val checkInDate = calendar.timeInMillis
+
+        calendar.add(Calendar.DAY_OF_YEAR, 7)
+        val checkOutDate = calendar.timeInMillis
+
         val materialDatePicker =
             MaterialDatePicker.Builder.dateRangePicker().setTitleText("Select Dates").setSelection(
                 Pair.create(
-                    MaterialDatePicker.thisMonthInUtcMilliseconds(),
-                    MaterialDatePicker.todayInUtcMilliseconds()
+                    checkInDate, checkOutDate
                 )
             ).build()
 
         materialDatePicker.addOnDismissListener {
-            materialDatePicker.dismiss()
+            Log.d("SearchTag", "materialDatePicker: cancel")
+            it.dismiss()
         }
 
         materialDatePicker.addOnPositiveButtonClickListener {
             checkIn = simpleDateFormat.format(it.first)
             checkOut = simpleDateFormat.format(it.second)
+            Log.d(
+                "SearchTag",
+                "materialDatePicker: positive button: checkIn: $checkIn, checkOut: $checkOut"
+            )
             materialDatePicker.dismiss()
         }
+        materialDatePicker.show(activity?.supportFragmentManager!!, "Date picker")
+        Log.d("SearchTag", "materialDatePicker: isVisible: ${materialDatePicker.isVisible}")
+
+        Log.d("SearchTag", "checkIn: $checkIn, checkOut: $checkOut")
         DatesModel(checkIn, checkOut)
     }
+
+//    private fun makeDatePickerDialog(): MaterialDatePicker<Pair<Long, Long>> {
+//
+//    }
 }

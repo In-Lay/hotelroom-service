@@ -1,14 +1,15 @@
 package com.inlay.hotelroomservice.di
 
-import android.app.Application
-import android.content.pm.ApplicationInfo
-import android.content.pm.PackageManager
 import androidx.room.Room
+import com.inlay.hotelroomservice.data.getSampleHotelsDataFromAssets
+import com.inlay.hotelroomservice.data.getSampleLocationsDataFromAssets
 import com.inlay.hotelroomservice.data.local.HotelsRoomDatabase
-import com.inlay.hotelroomservice.data.remote.RetrofitObject
 import com.inlay.hotelroomservice.data.remote.api.HotelRoomApi
 import com.inlay.hotelroomservice.data.remote.apiservice.HotelRoomApiService
 import com.inlay.hotelroomservice.data.remote.apiservice.HotelRoomApiServiceImpl
+import com.inlay.hotelroomservice.data.remote.makeHttpClient
+import com.inlay.hotelroomservice.data.remote.makeMoshi
+import com.inlay.hotelroomservice.data.remote.makeNetworkService
 import com.inlay.hotelroomservice.data.repository.HotelRoomRepository
 import com.inlay.hotelroomservice.data.repository.HotelRoomRepositoryImpl
 import com.inlay.hotelroomservice.domain.local.LocalDataSource
@@ -53,9 +54,16 @@ val appModule = module {
     }
     single { get<HotelsRoomDatabase>().hotelsRoomDao() }
 
-    single { RetrofitObject.makeRetrofit }
+
+
+    single { makeMoshi() }
+    single { makeHttpClient() }
+    single { makeNetworkService(moshi = get(), client = get()) }
     single { get<Retrofit>().create(HotelRoomApi::class.java) }
     single<HotelRoomApiService> { HotelRoomApiServiceImpl(hotelRoomApi = get()) }
+
+    single { getSampleHotelsDataFromAssets(moshi = get(), context = androidContext()) }
+    single { getSampleLocationsDataFromAssets(context = androidContext(), moshi = get()) }
 
     single<RemoteDataSource> { RemoteDataSourceImpl(hotelRoomApiService = get()) }
     single<LocalDataSource> { LocalDataSourceImpl(hotelsRoomDao = get()) }

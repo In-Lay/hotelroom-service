@@ -12,7 +12,7 @@ import org.koin.core.component.inject
 
 class SearchLocationsAdapter(
     private val searchLocationsList: List<SearchLocationsUiModel>,
-    private val selectItem: (String) -> Unit
+    private val selectItem: (SearchLocationsUiModel) -> Unit
 ) : Adapter<SearchLocationsItemViewHolder>(), KoinComponent {
     private lateinit var binding: SearchLocationItemBinding
 

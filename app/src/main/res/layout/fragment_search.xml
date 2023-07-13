@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
 
@@ -16,24 +17,78 @@
         <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            app:layout_behavior="@string/searchbar_scrolling_view_behavior">
-
+            app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
+            <!--            app:layout_behavior="@string/searchbar_scrolling_view_behavior"-->
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
-                <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/tv_dates"
-                    android:layout_width="250dp"
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/cv_selected_location"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
-                    android:layout_marginTop="116dp"
-                    android:layout_marginEnd="50dp"
-                    android:hint="@string/tv_dates_hint"
-                    app:endIconDrawable="@drawable/outline_calendar_month_24"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginBottom="16dp"
+                    android:elevation="8dp"
+                    app:cardCornerRadius="16dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+
+                        <com.google.android.material.imageview.ShapeableImageView
+                            android:id="@+id/img_selected_location"
+                            android:layout_width="match_parent"
+                            android:layout_height="150dp"
+                            android:scaleType="centerCrop"
+                            app:imgSource="@{viewModel.selectedItemImage}"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            tools:src="@drawable/sample_locations_image" />
+
+                        <com.google.android.material.textview.MaterialTextView
+                            android:id="@+id/tv_selected_location_title"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="8dp"
+                            android:text="@{viewModel.selectedItemTitle}"
+                            android:textAppearance="?attr/textAppearanceBodyLarge"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/img_selected_location"
+                            tools:text="Selected Location title" />
+
+                        <com.google.android.material.textview.MaterialTextView
+                            android:id="@+id/tv_selected_location_info"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="8dp"
+                            android:text="@{viewModel.selectedItemInfo}"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/tv_selected_location_title"
+                            tools:text="Selected Location Secondary Info" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                </androidx.cardview.widget.CardView>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/tv_dates"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:hint="@string/tv_dates_hint"
+                    android:onClick="@{() -> viewModel.openDatePicker()}"
+                    app:endIconDrawable="@drawable/outline_calendar_month_24"
+                    app:layout_constraintEnd_toStartOf="@id/btn_set_dates"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/cv_selected_location">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:layout_width="match_parent"
@@ -46,11 +101,12 @@
                     android:id="@+id/btn_set_dates"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="16dp"
                     android:onClick="@{() -> viewModel.openDatePicker()}"
                     android:text="@string/btn_pick_dates"
-                    app:layout_constraintStart_toStartOf="@id/tv_dates"
-                    app:layout_constraintTop_toBottomOf="@id/tv_dates" />
+                    app:layout_constraintBottom_toBottomOf="@id/tv_dates"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/tv_dates" />
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/dropdown_menu_currencies"
@@ -59,11 +115,11 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
                     android:layout_marginTop="16dp"
-                    android:layout_marginEnd="50dp"
+                    android:layout_marginEnd="16dp"
                     android:hint="@string/tv_currencies_dropdown_hint"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/btn_set_dates">
+                    app:layout_constraintTop_toBottomOf="@id/tv_dates">
 
                     <com.google.android.material.textfield.MaterialAutoCompleteTextView
                         android:layout_width="match_parent"
@@ -72,6 +128,7 @@
                         app:simpleItems="@array/currencies_array" />
                 </com.google.android.material.textfield.TextInputLayout>
 
+                <!--                    android:onClick="@{() -> viewModel.searchHotels()}"-->
                 <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
                     android:id="@+id/efab_search"
                     android:layout_width="wrap_content"
@@ -79,7 +136,6 @@
                     android:layout_marginTop="50dp"
                     android:layout_marginEnd="16dp"
                     android:layout_marginBottom="16dp"
-                    android:onClick="@{() -> viewModel.searchHotels()}"
                     android:text="@string/search"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -91,12 +147,30 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <com.google.android.material.search.SearchBar
-                android:id="@+id/search_bar"
+            <com.google.android.material.appbar.MaterialToolbar
+                android:id="@+id/support_toolbar"
+                style="@style/Widget.Material3.Toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
-                android:contentDescription="@string/searchbar_hint"
-                android:hint="@string/searchbar_hint" />
+                android:background="?attr/colorPrimary">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <com.google.android.material.search.SearchBar
+                        android:id="@+id/search_bar"
+                        style="@style/Widget.Material3.SearchBar"
+                        android:layout_width="0dp"
+                        android:layout_height="56dp"
+                        android:background="?attr/colorPrimary"
+                        android:hint="@string/searchbar_hint"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </com.google.android.material.appbar.MaterialToolbar>
         </com.google.android.material.appbar.AppBarLayout>
 
         <com.google.android.material.search.SearchView
@@ -104,7 +178,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:hint="@string/searchbar_hint"
-            android:imeOptions="actionDone"
+            android:imeOptions="actionSearch"
             android:inputType="text"
             app:layout_anchor="@id/search_bar">
 

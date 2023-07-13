@@ -16,7 +16,10 @@ abstract class SearchViewModel : ViewModel() {
 
     abstract val searchLocationsData: StateFlow<List<SearchLocationsUiModel>>
 
-    abstract val selectedItemGeoId: StateFlow<String>
+    abstract val selectedItemModel: StateFlow<SearchLocationsUiModel>
+    abstract val selectedItemImage: LiveData<String>
+    abstract val selectedItemTitle: LiveData<String>
+    abstract val selectedItemInfo: LiveData<String>
 
     abstract val dates: LiveData<DatesModel>
     abstract val currencyCode: LiveData<String>
@@ -29,7 +32,7 @@ abstract class SearchViewModel : ViewModel() {
         searchHotels: (SearchDataUiModel) -> Unit
     )
 
-    abstract fun setCurrentItemGeoId(geoId: String)
+    abstract fun setCurrentItemModel(model: SearchLocationsUiModel)
 
     abstract fun getSearchLocations(searchInput: String)
 

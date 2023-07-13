@@ -11,9 +11,11 @@ abstract class SearchLocationsItemViewModel : ViewModel() {
     abstract val secondaryText: LiveData<String>
     abstract val imageUrl: LiveData<String>
 
+    abstract val searchLocationsUiModel: StateFlow<SearchLocationsUiModel>
+
     abstract fun initialize(
         searchLocationsUiModel: SearchLocationsUiModel,
-        selectItem: (String) -> Unit
+        selectItem: (SearchLocationsUiModel) -> Unit
     )
 
     abstract fun selectCurrentItem()

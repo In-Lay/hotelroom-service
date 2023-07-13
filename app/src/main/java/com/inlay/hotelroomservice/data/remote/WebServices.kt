@@ -8,26 +8,29 @@ import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 import java.util.concurrent.TimeUnit
 
-object RetrofitObject {
+fun makeNetworkService(moshi: Moshi, client: OkHttpClient): Retrofit {
+    return Retrofit.Builder()
+        .baseUrl("https://tripadvisor16.p.rapidapi.com/api/v1/hotels/")
+        .addConverterFactory(MoshiConverterFactory.create(moshi))
+        .client(client)
+        .build()
+}
 
-    private val moshi: Moshi = Moshi.Builder()
+fun makeMoshi(): Moshi {
+    return Moshi.Builder()
         .add(KotlinJsonAdapterFactory())
         .add(CustomMoshiAdapter())
         .build()
+}
 
-    private val loggingInterceptor = HttpLoggingInterceptor()
+fun makeHttpClient(): OkHttpClient {
+    val loggingInterceptor = HttpLoggingInterceptor()
         .setLevel(HttpLoggingInterceptor.Level.BODY)
 
-    private val client: OkHttpClient = OkHttpClient.Builder()
+    return OkHttpClient.Builder()
         .addInterceptor(loggingInterceptor)
         .writeTimeout(60, TimeUnit.SECONDS)
         .readTimeout(60, TimeUnit.SECONDS)
         .connectTimeout(60, TimeUnit.SECONDS)
-        .build()
-
-    val makeRetrofit: Retrofit = Retrofit.Builder()
-        .baseUrl("https://tripadvisor16.p.rapidapi.com/api/v1/hotels/")
-        .addConverterFactory(MoshiConverterFactory.create(moshi))
-        .client(client)
         .build()
 }

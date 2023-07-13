@@ -13,13 +13,13 @@ import org.koin.core.component.inject
 class HotelsListAdapter(
     private val hotelsList: List<HotelsItemUiModel>,
     private val goToDetails: (String) -> Unit
-) : Adapter<HotelsItemViewHolder>(),
-    KoinComponent {
+) : Adapter<HotelsItemViewHolder>(), KoinComponent {
     private lateinit var binding: HotelsItemBinding
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HotelsItemViewHolder {
         binding = HotelsItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-//        binding.lifecycleOwner = parent.findViewTreeLifecycleOwner()
+
+        binding.lifecycleOwner = parent.findViewTreeLifecycleOwner()
         return HotelsItemViewHolder(binding)
     }
 
@@ -27,8 +27,7 @@ class HotelsListAdapter(
         val viewModel: HotelsItemViewModel by inject()
         val singleHotelData = hotelsList[position]
         viewModel.initializeData(
-            singleHotelData,
-            goToDetails
+            singleHotelData, goToDetails
         )
         holder.bind(viewModel)
     }

@@ -1,6 +1,5 @@
 package com.inlay.hotelroomservice.data.remote.models.hoteldetails
 
-import com.inlay.hotelroomservice.data.local.models.hoteldetails.AboutContentGeneral
 import com.squareup.moshi.Json
 
 data class About(
