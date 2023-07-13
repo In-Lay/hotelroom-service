@@ -113,6 +113,7 @@ class FragmentSearch : Fragment() {
         Log.d("SearchTag", "Item selected")
         searchViewModel.setCurrentItemModel(it)
         binding.searchBar.text = it.title
+//        binding.tvCurrentLocation.text = it.title
         binding.searchView.hide()
     }
 
