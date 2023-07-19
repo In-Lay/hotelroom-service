@@ -4,6 +4,8 @@ import android.os.Bundle
 import android.text.Editable
 import android.util.Log
 import android.view.LayoutInflater
+import android.view.Menu
+import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
@@ -16,7 +18,10 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
+import com.google.android.material.appbar.AppBarLayout
+import com.google.android.material.appbar.CollapsingToolbarLayout
 import com.google.android.material.datepicker.MaterialDatePicker
 import com.inlay.hotelroomservice.R
 import com.inlay.hotelroomservice.databinding.FragmentSearchBinding
@@ -47,27 +52,37 @@ class FragmentSearch : Fragment() {
         isOnline = requireContext().isNetworkAvailable()
         searchViewModel.init(isOnline, openDatePicker, searchHotels)
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_search, container, false)
-        Log.d("SearchTag", "onCreate")
 
         (requireActivity() as AppCompatActivity).setSupportActionBar(binding.supportToolbar)
         (requireActivity() as AppCompatActivity).supportActionBar?.setDisplayHomeAsUpEnabled(true)
         (requireActivity() as AppCompatActivity).supportActionBar?.setDisplayShowHomeEnabled(true)
-        setHasOptionsMenu(true)
-
-
-        binding.lifecycleOwner = viewLifecycleOwner
-        return binding.root
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return when (item.itemId) {
-            android.R.id.home -> {
-                requireActivity().onBackPressed()
-                true
-            }
-
-            else -> super.onOptionsItemSelected(item)
+        binding.supportToolbar.setNavigationOnClickListener {
+            findNavController().popBackStack()
         }
+
+//        binding.appbarLayout.addOnOffsetChangedListener(AppBarLayout.OnOffsetChangedListener { appBarLayout, verticalOffset ->
+//            val progress: Float = -verticalOffset / appBarLayout.totalScrollRange.toFloat()
+//
+//            // Adjust the width of the SearchView
+//            val layoutParams = binding.searchBar.layoutParams
+//            layoutParams.width = (((binding.supportToolbar.width - binding.supportToolbar.contentInsetStart * 2) * progress).toInt() +
+//                    (appBarLayout.width - binding.supportToolbar.contentInsetStart * 2) * (1 - progress)).toInt()
+//            binding.searchBar.layoutParams = layoutParams
+//
+//            // Adjust the margins of the SearchView
+//            val params = binding.searchBar.layoutParams as CollapsingToolbarLayout.LayoutParams
+//            params.setMargins(
+//                (binding.supportToolbar.contentInsetStart * progress).toInt(),
+//                0,
+//                (binding.supportToolbar.contentInsetStart * progress).toInt(),
+//                (appBarLayout.height - binding.searchBar.height) / 2 * (1 - progress).toInt()
+//            )
+//            binding.searchBar.requestLayout()
+//        })
+
+        binding.viewModel = searchViewModel
+        binding.lifecycleOwner = this
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -91,10 +106,9 @@ class FragmentSearch : Fragment() {
             true
         }
 
-        binding.efabSearch.setOnClickListener {
-            Log.d("SearchTag", "Clicked")
+        binding.tvDates.setEndIconOnClickListener {
+            openDatePicker()
         }
-
     }
 
     private fun bindAdapter() {
@@ -113,28 +127,30 @@ class FragmentSearch : Fragment() {
         Log.d("SearchTag", "Item selected")
         searchViewModel.setCurrentItemModel(it)
         binding.searchBar.text = it.title
-//        binding.tvCurrentLocation.text = it.title
+        binding.tvCurrentLocation.text = it.title
         binding.searchView.hide()
     }
 
     private val searchHotels: (SearchDataUiModel) -> Unit = {
         Toast.makeText(context, "Search", Toast.LENGTH_SHORT).show()
         if (isOnline) {
-            lifecycleScope.launch {
-                viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
-                    hotelsViewModel.getHotelsRepo(
-                        isOnline,
-                        it.geoId ?: "60763",
-                        it.checkInDate,
-                        it.checkOutDate,
-                        it.currencyCode
-                    )
-                }
-            }
+            //TODO To uncomment
+//            lifecycleScope.launch {
+//                viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
+//                    hotelsViewModel.getHotelsRepo(
+//                        isOnline,
+//                        it.geoId ?: "60763",
+//                        it.checkInDate,
+//                        it.checkOutDate,
+//                        it.currencyCode
+//                    )
+//                }
+//            }
+            (activity as MainActivity).goToHotels()
         } else Toast.makeText(context, "Check Internet connection", Toast.LENGTH_SHORT).show()
     }
 
-    private val openDatePicker: () -> DatesModel = {
+    private val openDatePicker: () -> Unit = {
         Toast.makeText(context, "Date picker", Toast.LENGTH_SHORT).show()
         Log.d("SearchTag", "Date picker opened")
         var checkIn = ""
@@ -153,11 +169,6 @@ class FragmentSearch : Fragment() {
                 )
             ).build()
 
-        materialDatePicker.addOnDismissListener {
-            Log.d("SearchTag", "materialDatePicker: cancel")
-            it.dismiss()
-        }
-
         materialDatePicker.addOnPositiveButtonClickListener {
             checkIn = simpleDateFormat.format(it.first)
             checkOut = simpleDateFormat.format(it.second)
@@ -165,16 +176,12 @@ class FragmentSearch : Fragment() {
                 "SearchTag",
                 "materialDatePicker: positive button: checkIn: $checkIn, checkOut: $checkOut"
             )
+            searchViewModel.setDates(DatesModel(checkIn, checkOut))
             materialDatePicker.dismiss()
         }
         materialDatePicker.show(activity?.supportFragmentManager!!, "Date picker")
         Log.d("SearchTag", "materialDatePicker: isVisible: ${materialDatePicker.isVisible}")
 
         Log.d("SearchTag", "checkIn: $checkIn, checkOut: $checkOut")
-        DatesModel(checkIn, checkOut)
     }
-
-//    private fun makeDatePickerDialog(): MaterialDatePicker<Pair<Long, Long>> {
-//
-//    }
 }

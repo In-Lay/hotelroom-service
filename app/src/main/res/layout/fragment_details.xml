@@ -1,0 +1,547 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.inlay.hotelroomservice.presentation.viewmodels.details.DetailsViewModel" />
+    </data>
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.google.android.material.appbar.AppBarLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <com.google.android.material.appbar.MaterialToolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:background="?attr/colorPrimary" />
+        </com.google.android.material.appbar.AppBarLayout>
+
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <com.google.android.material.imageview.ShapeableImageView
+                    android:id="@+id/img_hotel_image"
+                    android:layout_width="160dp"
+                    android:layout_height="160dp"
+                    android:layout_margin="8dp"
+                    android:onClick="@{() -> viewModel.openImageDialog()}"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/sample_hotel_item_img_500x300"
+                    app:detailsHotelImage="@{viewModel.hotelImage}"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/tv_hotel_name"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="8dp"
+                    android:text="@{viewModel.hotelName}"
+                    android:textAppearance="?attr/textAppearanceHeadline6"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/img_hotel_image"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:text="Hotel Riu Plaza Manhattan Times Square" />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/tv_hotel_address"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="4dp"
+                    android:layout_marginEnd="8dp"
+                    android:text="@{viewModel.hotelAddress}"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/img_hotel_image"
+                    app:layout_constraintTop_toBottomOf="@id/tv_hotel_name"
+                    tools:text="768 Fifth Avenue, New York City, NY 10019" />
+
+                <com.google.android.material.imageview.ShapeableImageView
+                    android:id="@+id/img_rating_icon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="8dp"
+                    android:src="@drawable/outline_star_half_24"
+                    app:layout_constraintStart_toEndOf="@id/img_hotel_image"
+                    app:layout_constraintTop_toBottomOf="@id/tv_hotel_address" />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/tv_hotel_rating"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="4dp"
+                    android:text="@{viewModel.hotelRating}"
+                    android:textAppearance="?attr/textAppearanceBody1"
+                    android:textColor="#C99200"
+                    app:layout_constraintBottom_toBottomOf="@id/img_rating_icon"
+                    app:layout_constraintStart_toEndOf="@id/img_rating_icon"
+                    app:layout_constraintTop_toTopOf="@id/img_rating_icon"
+                    tools:text="4.5" />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/tv_hotel_rating_count"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="4dp"
+                    android:text="@{viewModel.hotelRatingCount}"
+                    app:layout_constraintBottom_toBottomOf="@id/tv_hotel_rating"
+                    app:layout_constraintStart_toEndOf="@id/tv_hotel_rating"
+                    app:layout_constraintTop_toTopOf="@id/tv_hotel_rating"
+                    tools:text="(1250)" />
+
+                <HorizontalScrollView
+                    android:id="@+id/chips_scroll_view"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="8dp"
+                    android:scrollbars="none"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/img_hotel_image">
+
+                    <com.google.android.material.chip.ChipGroup
+                        android:id="@+id/chips_amenities"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        app:singleLine="true">
+
+                        <com.google.android.material.chip.Chip
+                            android:id="@+id/chip_parking"
+                            style="?attr/materialCardViewFilledStyle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@{viewModel.chipParkingText}"
+                            app:chipIcon="@drawable/outline_directions_car_24"
+                            tools:text="Valet parking" />
+
+                        <com.google.android.material.chip.Chip
+                            android:id="@+id/chip_internet"
+                            style="?attr/materialCardViewFilledStyle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@{viewModel.chipInternetText}"
+                            app:chipIcon="@drawable/baseline_wifi_24"
+                            tools:text="Wifi" />
+
+                        <com.google.android.material.chip.Chip
+                            android:id="@+id/chip_gym"
+                            style="?attr/materialCardViewFilledStyle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@{viewModel.chipGymText}"
+                            app:chipIcon="@drawable/baseline_fitness_center_24"
+                            tools:text="Fitness Centre with Gym / Workout Room" />
+
+                        <com.google.android.material.chip.Chip
+                            android:id="@+id/chip_bars"
+                            style="?attr/materialCardViewFilledStyle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@{viewModel.chipFoodText}"
+                            app:chipIcon="@drawable/outline_restaurant_24"
+                            tools:text="Bar / lounge" />
+
+                    </com.google.android.material.chip.ChipGroup>
+                </HorizontalScrollView>
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/card_info"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="8dp"
+                    app:cardCornerRadius="16dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/chips_scroll_view">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <com.google.android.material.textview.MaterialTextView
+                            android:id="@+id/tv_price_label"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="8dp"
+                            android:text="@string/price"
+                            android:textAppearance="?attr/textAppearanceHeadline6"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <com.google.android.material.textview.MaterialTextView
+                            android:id="@+id/tv_provider"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="8dp"
+                            android:text="@{viewModel.hotelProvider}"
+                            app:layout_constraintBottom_toBottomOf="@id/tv_price_label"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="@id/tv_price_label"
+                            tools:text="by Booking.com" />
+
+                        <com.google.android.material.textview.MaterialTextView
+                            android:id="@+id/tv_price"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:text="@{viewModel.hotelPrice}"
+                            android:textAppearance="?attr/textAppearanceBodyLarge"
+                            app:layout_constraintStart_toStartOf="@id/tv_price_label"
+                            app:layout_constraintTop_toBottomOf="@id/tv_price_label"
+                            tools:text="$250" />
+
+                        <com.google.android.material.divider.MaterialDivider
+                            android:id="@+id/divider_price"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="8dp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/tv_price" />
+
+                        <com.google.android.material.textview.MaterialTextView
+                            android:id="@+id/tv_link_label"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="8dp"
+                            android:text="@string/link"
+                            android:textAppearance="?attr/textAppearanceHeadline6"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/divider_price" />
+
+                        <com.google.android.material.textview.MaterialTextView
+                            android:id="@+id/tv_link"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:text="@string/tripadvisor"
+                            android:textAppearance="?attr/textAppearanceBodyLarge"
+                            app:layout_constraintStart_toStartOf="@id/tv_link_label"
+                            app:layout_constraintTop_toBottomOf="@id/tv_link_label" />
+
+                        <com.google.android.material.divider.MaterialDivider
+                            android:id="@+id/divider_link"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="8dp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/tv_link" />
+
+                        <com.google.android.material.textview.MaterialTextView
+                            android:id="@+id/tv_about_label"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="8dp"
+                            android:text="@string/about"
+                            android:textAppearance="?attr/textAppearanceHeadline6"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/divider_link" />
+
+                        <com.google.android.material.textview.MaterialTextView
+                            android:id="@+id/tv_about"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:layout_marginBottom="8dp"
+                            android:text="@{viewModel.hotelAbout}"
+                            android:textAppearance="?attr/textAppearanceBodyLarge"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="@id/tv_about_label"
+                            app:layout_constraintTop_toBottomOf="@id/tv_about_label"
+                            tools:text="English, French, Russian, Spanish, Arabic, Chinese, Dutch, German, Greek, Hungarian, Italian, Japanese, Korean, Portuguese" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                </androidx.cardview.widget.CardView>
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/tv_restaurants_nearby"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="16dp"
+                    android:text="@string/restaurants_nearby"
+                    android:textAppearance="?attr/textAppearanceHeadline6"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/card_info" />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/tv_restaurants_see_all"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="8dp"
+                    android:onClick="@{() -> viewModel.viewAllRestaurants()}"
+                    android:text="@string/view_all"
+                    android:textAppearance="?attr/textAppearanceBody1"
+                    app:layout_constraintBottom_toBottomOf="@id/tv_restaurants_nearby"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/tv_restaurants_nearby" />
+
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/card_restaurant_nearby"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="8dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tv_restaurants_nearby">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <com.google.android.material.imageview.ShapeableImageView
+                            android:id="@+id/img_restaurant_nearby_image"
+                            android:layout_width="100dp"
+                            android:layout_height="100dp"
+                            android:layout_margin="8dp"
+                            android:scaleType="centerCrop"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            tools:src="@drawable/sample_locations_image" />
+
+                        <com.google.android.material.textview.MaterialTextView
+                            android:id="@+id/tv_restaurants_nearby_name"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="8dp"
+                            android:textAppearance="?attr/textAppearanceBody1"
+                            app:detailsRestaurantNearbyImage="@{viewModel.restaurantNearbyPhoto}"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toEndOf="@id/img_restaurant_nearby_image"
+                            app:layout_constraintTop_toTopOf="parent"
+                            tools:text="Jams, 6th Avenue, New York, NY, USA" />
+
+                        <com.google.android.material.textview.MaterialTextView
+                            android:id="@+id/tv_restaurants_nearby_info"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="8dp"
+                            android:text="@{viewModel.restaurantNearbyInfo}"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toEndOf="@id/img_restaurant_nearby_image"
+                            app:layout_constraintTop_toBottomOf="@id/tv_restaurants_nearby_name"
+                            tools:text="Jams, 6th Avenue, New York, NY, USA" />
+
+                        <com.google.android.material.imageview.ShapeableImageView
+                            android:id="@+id/img_restaurant_nearby_rating_icon"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="8dp"
+                            android:src="@drawable/outline_star_half_24"
+                            app:layout_constraintStart_toEndOf="@id/img_restaurant_nearby_image"
+                            app:layout_constraintTop_toBottomOf="@id/tv_restaurants_nearby_info" />
+
+                        <com.google.android.material.textview.MaterialTextView
+                            android:id="@+id/tv_restaurants_nearby_rating"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="4dp"
+                            android:text="@{viewModel.restaurantNearbyRating}"
+                            android:textAppearance="?attr/textAppearanceBody1"
+                            android:textColor="#C99200"
+                            app:layout_constraintStart_toEndOf="@+id/img_restaurant_nearby_rating_icon"
+                            app:layout_constraintTop_toTopOf="@+id/img_restaurant_nearby_rating_icon"
+                            tools:text="4.5" />
+
+                        <com.google.android.material.textview.MaterialTextView
+                            android:id="@+id/tv_restaurants_nearby_rating_count"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="4dp"
+                            android:text="@{viewModel.restaurantNearbyRatingCount}"
+                            app:layout_constraintBottom_toBottomOf="@+id/tv_restaurants_nearby_rating"
+                            app:layout_constraintStart_toEndOf="@+id/tv_restaurants_nearby_rating"
+                            app:layout_constraintTop_toTopOf="@+id/tv_restaurants_nearby_rating"
+                            tools:text="(650)" />
+
+                        <com.google.android.material.textview.MaterialTextView
+                            android:id="@+id/tv_restaurants_nearby_distance"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="8dp"
+                            android:text="@{viewModel.restaurantNearbyDistance}"
+                            app:layout_constraintBottom_toBottomOf="@+id/img_restaurant_nearby_rating_icon"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="@+id/img_restaurant_nearby_rating_icon"
+                            tools:text="0.3 km" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                </com.google.android.material.card.MaterialCardView>
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/tv_attractions_nearby"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="16dp"
+                    android:text="@string/attractions_nearby"
+                    android:textAppearance="?attr/textAppearanceHeadline6"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/card_restaurant_nearby" />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/tv_attractions_see_all"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="8dp"
+                    android:onClick="@{() -> viewModel.viewAllAttractions()}"
+                    android:text="@string/view_all"
+                    android:textAppearance="?attr/textAppearanceBody1"
+                    app:layout_constraintBottom_toBottomOf="@id/tv_attractions_nearby"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/tv_attractions_nearby" />
+
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/card_attractions_nearby"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="8dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tv_attractions_nearby">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <com.google.android.material.imageview.ShapeableImageView
+                            android:id="@+id/img_attraction_nearby_image"
+                            android:layout_width="100dp"
+                            android:layout_height="100dp"
+                            android:layout_margin="8dp"
+                            android:scaleType="centerCrop"
+                            app:detailsAttractionNearbyImage="@{viewModel.attractionNearbyPhoto}"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            tools:src="@drawable/sample_locations_image" />
+
+                        <com.google.android.material.textview.MaterialTextView
+                            android:id="@+id/tv_attraction_nearby_name"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="8dp"
+                            android:text="@{viewModel.attractionNearbyName}"
+                            android:textAppearance="?attr/textAppearanceBody1"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toEndOf="@id/img_attraction_nearby_image"
+                            app:layout_constraintTop_toTopOf="parent"
+                            tools:text="A La Vieille Russie" />
+
+                        <com.google.android.material.textview.MaterialTextView
+                            android:id="@+id/tv_attraction_nearby_info"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="8dp"
+                            android:text="@{viewModel.attractionNearbyInfo}"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toEndOf="@id/img_attraction_nearby_image"
+                            app:layout_constraintTop_toBottomOf="@id/tv_attraction_nearby_name"
+                            tools:text="Art Galleries • Art Museums" />
+
+                        <com.google.android.material.imageview.ShapeableImageView
+                            android:id="@+id/img_attraction_nearby_rating_icon"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="8dp"
+                            android:src="@drawable/outline_star_half_24"
+                            app:layout_constraintStart_toEndOf="@id/img_attraction_nearby_image"
+                            app:layout_constraintTop_toBottomOf="@id/tv_attraction_nearby_info" />
+
+                        <com.google.android.material.textview.MaterialTextView
+                            android:id="@+id/tv_attraction_nearby_rating"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="4dp"
+                            android:text="@{viewModel.attractionNearbyRating}"
+                            android:textAppearance="?attr/textAppearanceBody1"
+                            android:textColor="#C99200"
+                            app:layout_constraintStart_toEndOf="@+id/img_attraction_nearby_rating_icon"
+                            app:layout_constraintTop_toTopOf="@+id/img_attraction_nearby_rating_icon"
+                            tools:text="3" />
+
+                        <com.google.android.material.textview.MaterialTextView
+                            android:id="@+id/tv_attraction_nearby_rating_count"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="4dp"
+                            android:text="@{viewModel.attractionNearbyRatingCount}"
+                            app:layout_constraintBottom_toBottomOf="@+id/tv_attraction_nearby_rating"
+                            app:layout_constraintStart_toEndOf="@+id/tv_attraction_nearby_rating"
+                            app:layout_constraintTop_toTopOf="@+id/tv_attraction_nearby_rating"
+                            tools:text="(2)" />
+
+                        <com.google.android.material.textview.MaterialTextView
+                            android:id="@+id/tv_attraction_nearby_distance"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="8dp"
+                            android:text="@{viewModel.attractionNearbyDistance}"
+                            app:layout_constraintBottom_toBottomOf="@+id/img_attraction_nearby_rating_icon"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="@+id/img_attraction_nearby_rating_icon"
+                            tools:text="32 m" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                </com.google.android.material.card.MaterialCardView>
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/tv_map_label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="16dp"
+                    android:text="@string/map"
+                    android:textAppearance="?attr/textAppearanceHeadline6"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/card_attractions_nearby" />
+
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/card_map"
+                    style="?attr/materialCardViewOutlinedStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="264dp"
+                    android:layout_margin="8dp"
+                    app:cardCornerRadius="16dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_map_label">
+
+                    <androidx.fragment.app.FragmentContainerView
+                        android:id="@+id/fragment_container_view_map"
+                        android:name="com.inlay.hotelroomservice.presentation.fragments.details.FragmentMap"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        tools:layout="@layout/fragment_map" />
+                </com.google.android.material.card.MaterialCardView>
+                <!-- TODO additional photos-->
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.core.widget.NestedScrollView>
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+</layout>

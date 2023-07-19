@@ -28,7 +28,7 @@ abstract class SearchViewModel : ViewModel() {
 
     abstract fun init(
         onlineStatus: Boolean,
-        openDatePicker: () -> DatesModel,
+        openDatePicker: () -> Unit,
         searchHotels: (SearchDataUiModel) -> Unit
     )
 
@@ -39,4 +39,6 @@ abstract class SearchViewModel : ViewModel() {
     abstract fun searchHotels()
 
     abstract fun openDatePicker()
+
+    abstract fun setDates(dates: DatesModel)
 }

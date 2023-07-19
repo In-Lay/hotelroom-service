@@ -53,7 +53,7 @@ class AppSearchLocationsItemViewModel : SearchLocationsItemViewModel() {
 
     companion object {
         @JvmStatic
-        @BindingAdapter("imgSource")
+        @BindingAdapter("locationsItemImageSource")
         fun loadImage(view: ImageView, imageUrl: String?) {
             if (imageUrl.isNullOrEmpty()) {
                 view.load(R.drawable.sample_locations_image) {

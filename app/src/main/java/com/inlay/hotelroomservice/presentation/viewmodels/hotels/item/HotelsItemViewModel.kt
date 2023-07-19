@@ -16,6 +16,8 @@ abstract class HotelsItemViewModel : ViewModel() {
 
     abstract fun goToDetails()
 
+    abstract fun addToStay()
+
     abstract fun initializeData(
         hotelsUiModel: HotelsItemUiModel,
         openDetails: (String) -> Unit

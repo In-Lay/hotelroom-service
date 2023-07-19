@@ -28,6 +28,8 @@ import com.inlay.hotelroomservice.presentation.viewmodels.search.AppSearchViewMo
 import com.inlay.hotelroomservice.presentation.viewmodels.search.SearchViewModel
 import com.inlay.hotelroomservice.presentation.viewmodels.search.item.AppSearchLocationsItemViewModel
 import com.inlay.hotelroomservice.presentation.viewmodels.search.item.SearchLocationsItemViewModel
+import com.inlay.hotelroomservice.presentation.viewmodels.userstays.AppUserStaysViewModel
+import com.inlay.hotelroomservice.presentation.viewmodels.userstays.UserStaysViewModel
 import org.koin.android.ext.koin.androidContext
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
@@ -78,11 +80,13 @@ val appModule = module {
 
     single { SimpleDateFormat("yyy-MM-dd", Locale.ENGLISH) }
 
-    viewModel<HotelsViewModel> { AppHotelsViewModel(get()) }
+    viewModel<HotelsViewModel> { AppHotelsViewModel(repositoryUseCase = get()) }
     viewModel<HotelsItemViewModel> { AppHotelsItemViewModel() }
 
     viewModel<SearchViewModel> { AppSearchViewModel(repositoryUseCase = get()) }
     viewModel<SearchLocationsItemViewModel> { AppSearchLocationsItemViewModel() }
 
-    viewModel<DetailsViewModel> { AppDetailsViewModel() }
+    viewModel<DetailsViewModel> { AppDetailsViewModel(repositoryUseCase = get()) }
+
+    viewModel<UserStaysViewModel> { AppUserStaysViewModel() }
 }

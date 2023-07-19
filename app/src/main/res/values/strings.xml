@@ -2,7 +2,8 @@
     <string name="app_name">HotelRoom Service</string>
     <string name="fab_search_description">Search button</string>
     <string name="hotels_item_title">Hotels</string>
-    <string name="user_hotels_item_title">User Hotels</string>
+    <string name="my_stay_item_title">My Stays</string>
+    <string name="user_stay_empty">Looks like you haven\'t choose any hotel.\n <u>You can browse here</u></string>
     <string name="settings_item_title">Settings</string>
     <string name="nav_drawer_open">Open Drawer</string>
     <string name="nav_drawer_close">Close Drawer</string>
@@ -11,8 +12,18 @@
     <string name="btn_pick_dates">Pick dates</string>
     <string name="tv_dates_hint">Dates</string>
     <string name="tv_currencies_dropdown_hint">Currencies</string>
-    <string name="search">Search</string>
+    <string name="search">Search Hotels</string>
     <string name="btn_add">Add To Stay</string>
     <string name="details"><u>More Details</u></string>
     <string name="current_location">Current Location</string>
+    <string name="search_bar_description">Search for location</string>
+    <string name="usd">USD</string>
+    <string name="restaurants_nearby">Restaurants Nearby</string>
+    <string name="view_all"><u>View All</u></string>
+    <string name="attractions_nearby">Attractions Nearby</string>
+    <string name="price">Price</string>
+    <string name="link">Link</string>
+    <string name="tripadvisor"><u>Tripadvisor</u></string>
+    <string name="about">About</string>
+    <string name="map">Location on Map</string>
 </resources>

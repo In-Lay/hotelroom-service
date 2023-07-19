@@ -1,6 +1,7 @@
 package com.inlay.hotelroomservice.domain.usecase
 
 import com.inlay.hotelroomservice.data.repository.HotelRoomRepository
+import com.inlay.hotelroomservice.presentation.models.details.HotelDetailsUiModel
 import com.inlay.hotelroomservice.presentation.models.hotelsitem.HotelsItemUiModel
 import com.inlay.hotelroomservice.presentation.models.locations.SearchLocationsUiModel
 
@@ -18,20 +19,19 @@ class RepositoryUseCaseImpl(private val hotelRoomRepository: HotelRoomRepository
         currencyCode: String
     ): List<HotelsItemUiModel> {
         return hotelRoomRepository.getHotelRepo(
-            isOnline,
-            geoId,
-            checkInDate,
-            checkOutDate,
-            currencyCode
+            isOnline, geoId, checkInDate, checkOutDate, currencyCode
         )
     }
 
-//    override suspend fun getHotelDetailsRepo(
-//        id: String,
-//        checkInDate: String,
-//        checkOutDate: String,
-//        currencyCode: String
-//    ): List<com.inlay.hotelroomservice.data.remote.models.hoteldetails.Data> {
-//        return hotelRoomRepository.getHotelDetails(id, checkInDate, checkOutDate, currencyCode)
-//    }
+    override suspend fun getHotelDetailsRepo(
+        isOnline: Boolean,
+        id: String,
+        checkInDate: String,
+        checkOutDate: String,
+        currencyCode: String
+    ): HotelDetailsUiModel {
+        return hotelRoomRepository.getHotelDetails(
+            isOnline, id, checkInDate, checkOutDate, currencyCode
+        )
+    }
 }

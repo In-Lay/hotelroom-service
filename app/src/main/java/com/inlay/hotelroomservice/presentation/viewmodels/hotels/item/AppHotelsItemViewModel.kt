@@ -37,6 +37,10 @@ class AppHotelsItemViewModel : HotelsItemViewModel() {
         goToDetailsLambda(_hotelId.value)
     }
 
+    override fun addToStay() {
+        TODO("Not yet implemented")
+    }
+
     override fun initializeData(hotelsUiModel: HotelsItemUiModel, openDetails: (String) -> Unit) {
         _hotelId.value = hotelsUiModel.id
 
@@ -54,7 +58,7 @@ class AppHotelsItemViewModel : HotelsItemViewModel() {
 
     companion object {
         @JvmStatic
-        @BindingAdapter("imageSource")
+        @BindingAdapter("hotelsItemImageSource")
         fun loadImage(view: ImageView, imageUrl: String?) {
             if (imageUrl.isNullOrEmpty()) {
                 view.load(R.drawable.sample_hotel_item_img_500x300) {

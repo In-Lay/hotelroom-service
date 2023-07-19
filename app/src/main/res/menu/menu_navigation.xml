@@ -3,11 +3,12 @@
     <item
         android:id="@+id/item_hotels"
         android:checkable="true"
+        android:checked="true"
         android:title="@string/hotels_item_title" />
     <item
-        android:id="@+id/item_user_hotels"
+        android:id="@+id/item_user_stays"
         android:checkable="true"
-        android:title="@string/user_hotels_item_title" />
+        android:title="@string/my_stay_item_title" />
     <item
         android:id="@+id/item_settings"
         android:checkable="true"

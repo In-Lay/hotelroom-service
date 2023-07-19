@@ -1,5 +1,6 @@
 package com.inlay.hotelroomservice.domain.usecase
 
+import com.inlay.hotelroomservice.presentation.models.details.HotelDetailsUiModel
 import com.inlay.hotelroomservice.presentation.models.hotelsitem.HotelsItemUiModel
 import com.inlay.hotelroomservice.presentation.models.locations.SearchLocationsUiModel
 
@@ -14,10 +15,11 @@ interface RepositoryUseCase {
         currencyCode: String = "USD"
     ): List<HotelsItemUiModel>
 
-//    suspend fun getHotelDetailsRepo(
-//        id: String,
-//        checkInDate: String,
-//        checkOutDate: String,
-//        currencyCode: String
-//    ): List<Data>
+    suspend fun getHotelDetailsRepo(
+        isOnline: Boolean,
+        id: String,
+        checkInDate: String,
+        checkOutDate: String,
+        currencyCode: String
+    ): HotelDetailsUiModel
 }

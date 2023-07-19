@@ -7,21 +7,21 @@
     <fragment
         android:id="@+id/hotelsFragment"
         android:name="com.inlay.hotelroomservice.presentation.fragments.hotels.HotelsFragment"
-        android:label="HotelsFragment" />
+        android:label="Hotels" />
     <fragment
-        android:id="@+id/fragmentUserList"
-        android:name="com.inlay.hotelroomservice.presentation.fragments.userlist.FragmentUserList"
-        android:label="FragmentUserList" />
+        android:id="@+id/fragmentUserStays"
+        android:name="com.inlay.hotelroomservice.presentation.fragments.userstays.FragmentUserStays"
+        android:label="My Stay" />
     <fragment
         android:id="@+id/fragmentSettings"
         android:name="com.inlay.hotelroomservice.presentation.fragments.settings.FragmentSettings"
-        android:label="FragmentSettings" />
+        android:label="Settings" />
     <fragment
         android:id="@+id/fragmentProfile"
         android:name="com.inlay.hotelroomservice.presentation.fragments.profile.FragmentProfile"
-        android:label="FragmentProfile" />
+        android:label="Profile" />
     <fragment
         android:id="@+id/fragmentSearch"
         android:name="com.inlay.hotelroomservice.presentation.fragments.search.FragmentSearch"
-        android:label="FragmentSearch" />
+        android:label="Search" />
 </navigation>

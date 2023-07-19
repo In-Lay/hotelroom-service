@@ -27,7 +27,7 @@
                 android:layout_width="216dp"
                 android:layout_height="180dp"
                 android:scaleType="centerCrop"
-                app:imgSource="@{viewModel.imageUrl}"
+                app:locationsItemImageSource="@{viewModel.imageUrl}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"

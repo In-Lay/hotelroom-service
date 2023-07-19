@@ -6,6 +6,7 @@ import kotlinx.coroutines.flow.StateFlow
 
 abstract class HotelsViewModel : ViewModel() {
     abstract val hotelsDataList: StateFlow<List<HotelsItemUiModel>>
+    abstract val selectedHotelsDataList: StateFlow<List<HotelsItemUiModel>>
 
     abstract fun getHotelsRepo(
         isOnline: Boolean,

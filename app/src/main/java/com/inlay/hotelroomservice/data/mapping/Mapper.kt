@@ -3,10 +3,16 @@ package com.inlay.hotelroomservice.data.mapping
 import com.inlay.hotelroomservice.data.local.models.HotelRatingEntity
 import com.inlay.hotelroomservice.data.local.models.HotelsItemEntity
 import com.inlay.hotelroomservice.data.local.models.HotelsItemWithRatingEntity
+import com.inlay.hotelroomservice.data.remote.models.hoteldetails.AttractionsNearbyContent
+import com.inlay.hotelroomservice.data.remote.models.hoteldetails.HotelDetailsModel
+import com.inlay.hotelroomservice.data.remote.models.hoteldetails.RestaurantsNearbyContent
 import com.inlay.hotelroomservice.data.remote.models.hotels.BubbleRating
 import com.inlay.hotelroomservice.data.remote.models.hotels.CardPhoto
 import com.inlay.hotelroomservice.data.remote.models.hotels.Data
 import com.inlay.hotelroomservice.data.remote.models.searchlocation.Image
+import com.inlay.hotelroomservice.presentation.models.details.AttractionNearby
+import com.inlay.hotelroomservice.presentation.models.details.HotelDetailsUiModel
+import com.inlay.hotelroomservice.presentation.models.details.RestaurantNearby
 import com.inlay.hotelroomservice.presentation.models.hotelsitem.HotelsItemUiModel
 import com.inlay.hotelroomservice.presentation.models.hotelsitem.RatingUiModel
 import com.inlay.hotelroomservice.presentation.models.locations.SearchLocationsImageUiModel
@@ -86,6 +92,44 @@ private fun Image.toSearchLocationsImageUiModel(): SearchLocationsImageUiModel =
         typename = this.typename.orEmpty(),
         urlTemplate = this.urlTemplate.orEmpty()
     )
+
+
+fun HotelDetailsModel.toUiModel(): HotelDetailsUiModel = HotelDetailsUiModel(
+    title = this.data.title,
+    rating = this.data.rating,
+    numberReviews = this.data.numberReviews,
+    rankingDetails = this.data.rankingDetails,
+    displayPrice = this.data.price.displayPrice.orEmpty(),
+    providerName = this.data.price.providerName,
+    photos = this.data.photos.map { it.urlTemplate },
+    aboutTitle = this.data.about.title,
+    aboutLink = this.data.about.aboutContentGeneral[2].contentAbout[0].content,
+    aboutAmenities = this.data.about.aboutContentGeneral[3].contentAbout.map { it.title },
+    address = this.data.location.address,
+    restaurantsNearby = this.data.restaurantsNearby.restaurantsNearbyContent.map { it.toRestaurantNearby() },
+    attractionsNearby = this.data.attractionsNearby.content.map { it.toAttractionNearby() },
+    latitude = this.data.geoPoint.latitude,
+    longitude = this.data.geoPoint.longitude
+)
+
+
+private fun RestaurantsNearbyContent.toRestaurantNearby(): RestaurantNearby = RestaurantNearby(
+    title = this.title,
+    primaryInfo = this.primaryInfo,
+    distance = this.distance,
+    photoUrlTemplate = this.restaurantsNearbyCardPhoto.urlTemplate,
+    rating = this.bubbleRating.rating,
+    numberReviews = this.bubbleRating.numberReviews
+)
+
+private fun AttractionsNearbyContent.toAttractionNearby(): AttractionNearby = AttractionNearby(
+    title = this.title,
+    primaryInfo = this.primaryInfo,
+    distance = this.distance,
+    photoUrlTemplate = this.cardPhoto.urlTemplate,
+    rating = this.bubbleRating.rating,
+    numberReviews = this.bubbleRating.numberReviews
+)
 
 private fun String?.extractNumber(): String? {
     val startIndex = (this?.indexOf(';')?.plus(1)) ?: 0

@@ -1,66 +1,65 @@
 {
   "status": true,
   "message": "Success",
-  "timestamp": 1661619809941,
+  "timestamp": 1689709653615,
   "data": {
     "photos": [
       {
-        "maxHeight": 1733,
-        "maxWidth": 2600,
-        "urlTemplate": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/0e/e5/ee/a4/superior-luxury-room--v15259560.jpg?w={width}&h={height}&s=1"
+        "maxHeight": 1486,
+        "maxWidth": 2000,
+        "urlTemplate": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/08/e1/a6/8c/the-plaza.jpg?w={width}&h={height}&s=1"
       },
       {
-        "maxHeight": 886,
-        "maxWidth": 1737,
-        "urlTemplate": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/05/4c/29/80/bedroom.jpg?w={width}&h={height}&s=1"
+        "maxHeight": 900,
+        "maxWidth": 1200,
+        "urlTemplate": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/08/02/03/76/the-plaza-hotel.jpg?w={width}&h={height}&s=1"
+      },
+      {
+        "maxHeight": 1000,
+        "maxWidth": 1500,
+        "urlTemplate": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/1b/42/df/ea/exterior.jpg?w={width}&h={height}&s=1"
+      },
+      {
+        "maxHeight": 1000,
+        "maxWidth": 1500,
+        "urlTemplate": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/1b/42/e0/1c/exterior.jpg?w={width}&h={height}&s=1"
       },
       {
         "maxHeight": 1329,
-        "maxWidth": 886,
-        "urlTemplate": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/05/4c/29/7e/lobby.jpg?w={width}&h={height}&s=1"
+        "maxWidth": 2000,
+        "urlTemplate": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/08/e1/a6/b5/the-plaza.jpg?w={width}&h={height}&s=1"
       },
       {
-        "maxHeight": 886,
-        "maxWidth": 1297,
-        "urlTemplate": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/05/4c/29/83/bathroom.jpg?w={width}&h={height}&s=1"
+        "maxHeight": 1329,
+        "maxWidth": 2000,
+        "urlTemplate": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/08/e1/9d/20/the-plaza.jpg?w={width}&h={height}&s=1"
       },
       {
-        "maxHeight": 1440,
-        "maxWidth": 960,
-        "urlTemplate": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/05/6a/33/4f/bathroom.jpg?w={width}&h={height}&s=1"
+        "maxHeight": 1330,
+        "maxWidth": 2000,
+        "urlTemplate": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/08/e1/9d/2a/the-plaza.jpg?w={width}&h={height}&s=1"
       },
       {
-        "maxHeight": 1440,
-        "maxWidth": 960,
-        "urlTemplate": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/05/6a/33/53/abode-bombay.jpg?w={width}&h={height}&s=1"
+        "maxHeight": 1330,
+        "maxWidth": 2000,
+        "urlTemplate": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/08/e1/9c/fe/the-plaza.jpg?w={width}&h={height}&s=1"
       },
       {
-        "maxHeight": 1388,
-        "maxWidth": 960,
-        "urlTemplate": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/05/6a/33/52/abode-bombay.jpg?w={width}&h={height}&s=1"
+        "maxHeight": 681,
+        "maxWidth": 1000,
+        "urlTemplate": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/08/21/32/76/the-plaza-hotel.jpg?w={width}&h={height}&s=1"
       },
       {
-        "maxHeight": 960,
-        "maxWidth": 1440,
-        "urlTemplate": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/05/6a/33/50/luxury-room.jpg?w={width}&h={height}&s=1"
-      },
-      {
-        "maxHeight": 960,
-        "maxWidth": 1440,
-        "urlTemplate": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/05/6a/33/54/basic-room.jpg?w={width}&h={height}&s=1"
-      },
-      {
-        "maxHeight": 886,
-        "maxWidth": 1387,
-        "urlTemplate": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/05/4c/29/87/cafe.jpg?w={width}&h={height}&s=1"
+        "maxHeight": 1329,
+        "maxWidth": 2000,
+        "urlTemplate": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/08/e1/a6/a0/the-plaza.jpg?w={width}&h={height}&s=1"
       }
     ],
-    "title": "Abode Bombay",
+    "title": "The Plaza New York - A Fairmont Managed Hotel",
     "rating": 4.5,
-    "numberReviews": 1037,
-    "rankingDetails": "#1 of 568 hotels in <a>Mumbai</a>",
+    "numberReviews": 3768,
+    "rankingDetails": "#57 of 536 hotels in <a>New York City</a>",
     "price": {
-      "displayPrice": null,
       "strikeThroughPrice": null,
       "status": "IN_PROGRESS",
       "providerName": "Booking.com",
@@ -68,14 +67,26 @@
       "pricingPeriod": null
     },
     "about": {
-      "title": "Abode Bombay; the city's first authentic boutique hotel. The ultimate anti-chain hotel, Abode is fabulously unconventional in its individuality and style, yet suitably refined when it comes to meeting guests’ expectations. Abode defines a new breed of independent hotel, offering a refreshing contemporary approach to the modern global explorer who seeks an authentic, personal and genuinely engaging experience.",
       "content": [
+        {
+          "title": "Awards",
+          "content": []
+        },
         {
           "title": "Available languages",
           "content": [
             {
               "title": "",
-              "content": "English, Hindi"
+              "content": "English, French, Russian, Spanish, Arabic, Chinese, Dutch, German, Greek, Hungarian, Italian, Japanese, Korean, Portuguese"
+            }
+          ]
+        },
+        {
+          "title": "Related links",
+          "content": [
+            {
+              "title": "Packages",
+              "content": "https://www.tripadvisor.in/Commerce?p=TABAIndependentHotels&src=0&geo=675616&from=&area=&slot=4&matchID=1&oos=0&cnt=1&silo=30355&bucket=875169&ubucket=875169&nrank=1&crank=1&clt=CPM&tm=269621252&managed=false&capped=false&gosox=5_3Y6UYwwGjgw_c7hEwIkZUgwPzmiM-CKozt0T4j5IyC3d6C2f-lCuA02_kWOMf_eaLKlbF3F7Q2afMWAWNxaA&adults=1&child_rm_ages=&inDay=19&outDay=26&rooms=1&inMonth=7&inYear=2023&outMonth=7&outYear=2023&def_d=false&bapid=4&cs=13217de353fbcd3b3bf1ae2e4879da84d&ba_uid=74d14691-5330-4dcd-aa55-c57a9eac8e4f"
             }
           ]
         },
@@ -83,260 +94,263 @@
           "title": "Amenities",
           "content": [
             {
-              "title": "Free High Speed Internet (WiFi)"
+              "title": "Valet parking"
             },
             {
-              "title": "Free breakfast"
+              "title": "Wifi"
             },
             {
-              "title": "Airport transportation"
+              "title": "Fitness Centre with Gym / Workout Room"
             },
             {
-              "title": "24-hour security"
+              "title": "Bar / lounge"
             }
           ]
         }
       ],
       "tags": [
-        "Quiet",
-        "Modern",
-        "Centrally Located",
-        "Quaint"
+        "Classic",
+        "Luxury",
+        "Charming",
+        "Romantic"
       ]
     },
     "reviews": {
       "content": [
         {
-          "title": "Abode visit",
-          "text": "We had an excellent stay at Abode and would highly recommend it to anyone visiting Mumbai. Abode provided transportation from a woman-run taxi service which picked us up from the airport as well as dropped us off early in the morning (4AM)  at the train station. Not only was this service smooth, but also provides jobs to local women, particularly single mothers or widows, which was a nice touch. <br /><br />Upon arrival, we were offered an in depth explanation of local sites including restaurants, markets, and historical sites. We decided to do the street food tour, led by Vasu, which we would also highly recommend. The tour visited local markets and allowed us to try different types of street food. We were a bit hesitant to try street food without a guide, but Vasu did an excellent job, and we were able to sample some amazing food with the comfort of not worrying about “Delhi Belly” after eating. <br /><br />We also got massages offered by Abode. While the spa set up was somewhat simplistic, the massages were great and were done by blind locals, which provides them with jobs which again was a nice touch.<br /><br />The rooms were very clean and the beds were comfortable. Abode is also zero waste, and offered filtered water in glass bottles which was a welcome change from all of the plastic water bottles we had used previously on our trip. Our departure train was very early in the morning, and Abode provided us with sandwiches for the train and a light breakfast which was great. Overall the stay was amazing and we would definitely stay there again!",
-          "bubbleRatingText": "Couples",
-          "publishedDate": "Written 11/08/22",
+          "title": "Tea at the Plaza",
+          "text": "Fantastic service and a great atmosphere…simply great. Our server Shalim was so accommodating and the food and tea were delicious and surprisingly satisfying. I would highly recommend it for a special experience when you are in NYC.",
+          "bubbleRatingText": "Jul 2023 • Family",
+          "publishedDate": "Written 16/07/23",
           "userProfile": {
-            "deprecatedContributionCount": "5 contributions",
-            "avatar": {
-              "maxHeight": 205,
-              "maxWidth": 205,
-              "urlTemplate": "https://dynamic-media-cdn.tripadvisor.com/media/photo-f/01/2e/70/83/avatar004.jpg?w={width}&h={height}&s=1"
-            }
-          },
-          "photos": []
-        },
-        {
-          "title": "perfectly located and intimate",
-          "text": "The hotel has a discreet elegance, subtel and chic, refined but never overdoing it. It does feel homely.<br />The staff is helpful and friendly.<br />The location is excellent and manages to be rather quiet too ! Which is a performance in a city such as Mumbai",
-          "bubbleRatingText": "",
-          "publishedDate": "Written 16/06/22",
-          "userProfile": {
-            "deprecatedContributionCount": "23 contributions",
-            "avatar": {
-              "maxHeight": 576,
-              "maxWidth": 576,
-              "urlTemplate": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/07/94/2f/f0/sylvain-g.jpg?w={width}&h={height}&s=1"
-            }
-          },
-          "photos": []
-        },
-        {
-          "title": "A bit over hyped Botique hotel",
-          "text": "We took two rooms, one for us as a couple with two small children, one for our parents. One was a Superior Luxury room and one was a Luxury room. The difference between Superior and not-superior was the availability of a bathtub in the middle of the room. <br />Pros:<br />The rooms were charming, nicely decorated with vintage photographs and old style furniture. <br />The staff were courteous, always willing to help.<br />Location, very very close to the Gateway of India.<br />Cons:<br />Ok we should be honest, this hotel would have been great for young travellers who dont have any specific needs. If you go with young children, you need to note - there is no bottled water as they are plastic free, no kettle to boil the water they give, which you generally expect in a hotel at this cost. Once I tried request for warm water from the staff and I got it in a very dirty cup sadly. If it is just us as a couple, we wouldnt have found this a big discomfort. <br />Location - though it was a pro because it is close to attractions, it is a con because it is a very cramped road and the hotel is not visible at all from the road. If you are super comfortable in hailing taxis in Indian cities, you can manage. Sometimes Uber/Ola drops you somewhere on the road. Surprisingly, I couldnt find many convenience stores in the area that is supposedly a very busy market place.<br />They did not come for housekeeping until we called. We did go out during the day, but when we came back the bed was not made and trash was not emptied. As they were a plastic free hotel, there was a beautiful copper water pot used as a trash can. Though it was beautiful, it was super full very fast. But once we called they did come and clean.<br /><br />Overall, we were having issues only because we had old parents and young kids with us in the trip. If you are backpacking travellers, you may love this hotel and have a lot of fun.",
-          "bubbleRatingText": "",
-          "publishedDate": "Written 09/06/22",
-          "userProfile": {
-            "deprecatedContributionCount": "27 contributions",
+            "deprecatedContributionCount": "1 contribution",
             "avatar": {
               "maxHeight": 1200,
               "maxWidth": 1200,
-              "urlTemplate": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/1a/f6/ea/74/default-avatar-2020-68.jpg?w={width}&h={height}&s=1"
+              "urlTemplate": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/1a/f6/f4/5d/default-avatar-2020-32.jpg?w={width}&h={height}&s=1"
+            }
+          },
+          "photos": []
+        },
+        {
+          "title": "Best Breakfast I’ve Ever Had",
+          "text": "This is the type of experience money can’t buy. It is worth every penny, and even more. It is an experience that is out of this world!<br /><br />I have a younger brother with Autism Spectrum Disorder who is mostly nonverbal, and the staff went out of their way to attend to his every wants and needs, interact with him, and make him feel special. This right here is the reason why my family and I will be coming back as often as we can.",
+          "bubbleRatingText": "Nov 2022 • Business",
+          "publishedDate": "Written 27/11/22",
+          "userProfile": {
+            "deprecatedContributionCount": "4 contributions",
+            "avatar": {
+              "maxHeight": 1200,
+              "maxWidth": 1200,
+              "urlTemplate": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/1a/f6/e8/5b/default-avatar-2020-61.jpg?w={width}&h={height}&s=1"
+            }
+          },
+          "photos": []
+        },
+        {
+          "title": "The Palm Court Tea",
+          "text": "Afternoon tea at The Palm Court was incredible. The Plaza Hotel exceeded expectations. <br />Kazi Jalal was awesome, he made the experience even more memorable and his knowledge of the teas, caviar, and hotel/restaurant history made the experience even more enjoyable. ",
+          "bubbleRatingText": "Jul 2023 • Family",
+          "publishedDate": "Written 13/07/23",
+          "userProfile": {
+            "deprecatedContributionCount": "1 contribution",
+            "avatar": {
+              "maxHeight": 1200,
+              "maxWidth": 1200,
+              "urlTemplate": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/1a/f6/e4/59/default-avatar-2020-49.jpg?w={width}&h={height}&s=1"
             }
           },
           "photos": []
         }
       ],
-      "count": 1037,
+      "count": 3768,
       "ratingValue": 4.5,
       "ratingCounts": {
         "average": {
-          "percentage": 3,
-          "count": "35"
+          "percentage": 8,
+          "count": "302"
         },
         "excellent": {
-          "percentage": 81,
-          "count": "835"
+          "percentage": 67,
+          "count": "2,540"
         },
         "poor": {
-          "percentage": 1,
-          "count": "12"
+          "percentage": 5,
+          "count": "192"
         },
         "terrible": {
-          "percentage": 1,
-          "count": "7"
+          "percentage": 4,
+          "count": "157"
         },
         "veryGood": {
-          "percentage": 14,
-          "count": "148"
+          "percentage": 15,
+          "count": "577"
         }
       }
     },
     "location": {
       "title": "The area",
-      "address": "Lansdowne House M.B. Marg, behind Regal Cinema, Mumbai 400001 India",
+      "address": "768 Fifth Avenue, New York City, NY 10019",
       "neighborhood": {
-        "name": "Wellington Pier",
-        "text": null
+        "name": "Midtown",
+        "text": "This is the iconic New York that so many visitors imagine before they visit—spectacular skyscrapers like the Chrysler Building and Empire State Building, iconic public buildings like Grand Central Terminal and the New York Public Library, and the non-stop hustle and bustle of the city streets. Fifth Avenue is a shopper's heaven where you can find every kind of store imaginable, with fashion brands ranging from the affordable to the ultra-fancy. Visit the Rockefeller Center to experience towering Art Deco grandeur, and foodies will love the busy restaurants that stay open late in Koreatown. After dark, Midtown calms down a bit, but at any time of day or night it still feels 100% New York."
       },
       "gettingThere": {
         "title": "How to get there",
         "content": [
-          "Mumbai Airport • 19 km"
+          "LaGuardia Airport • 8.51 km",
+          "Teterboro Airport • 12.13 km",
+          "5th Ave / 59th St • 3 min walk",
+          "57th St • 5 min walk"
         ]
       },
       "walkability": null
     },
     "geoPoint": {
-      "latitude": 18.92383,
-      "longitude": 72.8325
+      "latitude": 40.7642,
+      "longitude": -73.973
     },
     "restaurantsNearby": {
       "sectionTitle": "Restaurants nearby",
       "content": [
         {
-          "title": "Shamiana",
+          "title": "Jams, 6th Avenue, New York, NY, USA",
           "bubbleRating": {
             "rating": 4.5,
-            "numberReviews": "568"
+            "numberReviews": "650"
           },
-          "primaryInfo": "₹₹₹₹ • American • Indian • International",
-          "distance": "0.2 km",
-          "cardPhoto": {
-            "maxHeight": 1280,
-            "maxWidth": 1596,
-            "urlTemplate": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/0c/f3/dd/5f/homemade-pancakes.jpg?w={width}&h={height}&s=1"
-          }
-        },
-        {
-          "title": "Sea Lounge",
-          "bubbleRating": {
-            "rating": 4.5,
-            "numberReviews": "1,137"
-          },
-          "primaryInfo": "₹₹₹₹ • Indian • International • Vegetarian Friendly",
-          "distance": "0.2 km",
-          "cardPhoto": {
-            "maxHeight": 1400,
-            "maxWidth": 2000,
-            "urlTemplate": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/0d/f2/ac/a3/sea-lounge.jpg?w={width}&h={height}&s=1"
-          }
-        },
-        {
-          "title": "Souk",
-          "bubbleRating": {
-            "rating": 4.5,
-            "numberReviews": "358"
-          },
-          "primaryInfo": "₹₹₹₹ • Lebanese • Mediterranean • Turkish",
+          "primaryInfo": "₹₹ - ₹₹₹ • American • Vegetarian Friendly • Vegan Options",
           "distance": "0.3 km",
           "cardPhoto": {
-            "maxHeight": 1335,
-            "maxWidth": 2000,
-            "urlTemplate": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/0d/f2/87/2a/souk.jpg?w={width}&h={height}&s=1"
+            "maxHeight": 2880,
+            "maxWidth": 4320,
+            "urlTemplate": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/28/90/84/82/lunch-at-jams.jpg?w={width}&h={height}&s=1"
           }
         },
         {
-          "title": "Bombay Vintage",
+          "title": "Loi Estiatorio",
           "bubbleRating": {
             "rating": 4.5,
-            "numberReviews": "224"
+            "numberReviews": "643"
           },
-          "primaryInfo": "₹₹ - ₹₹₹ • Indian • Bar • Vegetarian Friendly",
-          "distance": "0.2 km",
+          "primaryInfo": "₹₹ - ₹₹₹ • Seafood • Mediterranean • European",
+          "distance": "0.4 km",
           "cardPhoto": {
-            "maxHeight": 628,
-            "maxWidth": 1200,
-            "urlTemplate": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/16/c6/19/17/spread.jpg?w={width}&h={height}&s=1"
+            "maxHeight": 2048,
+            "maxWidth": 2048,
+            "urlTemplate": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/1b/e5/8a/20/photo0jpg.jpg?w={width}&h={height}&s=1"
           }
         },
         {
-          "title": "Golden Dragon",
+          "title": "Ora Di Pasta",
           "bubbleRating": {
             "rating": 4.5,
-            "numberReviews": "439"
+            "numberReviews": "237"
           },
-          "primaryInfo": "₹₹₹₹ • Chinese • Cantonese • Szechuan",
-          "distance": "0.2 km",
-          "cardPhoto": {
-            "maxHeight": 1500,
-            "maxWidth": 1970,
-            "urlTemplate": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/0d/f2/8c/b7/golden-dragon.jpg?w={width}&h={height}&s=1"
-          }
-        },
-        {
-          "title": "The Table",
-          "bubbleRating": {
-            "rating": 4.5,
-            "numberReviews": "532"
-          },
-          "primaryInfo": "₹₹₹₹ • International • European • Vegetarian Friendly",
-          "distance": "71 m",
-          "cardPhoto": {
-            "maxHeight": 361,
-            "maxWidth": 550,
-            "urlTemplate": "https://dynamic-media-cdn.tripadvisor.com/media/photo-s/02/96/d3/ab/filename-mezzanine-jpg.jpg?w={width}&h={height}&s=1"
-          }
-        },
-        {
-          "title": "Woodside Inn",
-          "bubbleRating": {
-            "rating": 4,
-            "numberReviews": "294"
-          },
-          "primaryInfo": "₹₹ - ₹₹₹ • Italian • Bar • European",
+          "primaryInfo": "₹₹ - ₹₹₹ • Italian • Vegetarian Friendly • Vegan Options",
           "distance": "0.1 km",
           "cardPhoto": {
-            "maxHeight": 675,
-            "maxWidth": 1200,
-            "urlTemplate": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/1b/00/c3/7c/interior.jpg?w={width}&h={height}&s=1"
+            "maxHeight": 3024,
+            "maxWidth": 4032,
+            "urlTemplate": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/16/94/00/49/ora-di-pasta.jpg?w={width}&h={height}&s=1"
           }
         },
         {
-          "title": "Smoke House Deli",
+          "title": "Beyond Sushi",
           "bubbleRating": {
-            "rating": 4,
-            "numberReviews": "276"
+            "rating": 4.5,
+            "numberReviews": "235"
           },
-          "primaryInfo": "₹₹ - ₹₹₹ • Italian • European • Vegetarian Friendly",
-          "distance": "0.2 km",
+          "primaryInfo": "₹₹ - ₹₹₹ • American • Mediterranean • Fusion",
+          "distance": "0.4 km",
           "cardPhoto": {
-            "maxHeight": 750,
-            "maxWidth": 1000,
-            "urlTemplate": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/1a/b3/87/de/img-20200125-130008-largejpg.jpg?w={width}&h={height}&s=1"
+            "maxHeight": 1536,
+            "maxWidth": 2048,
+            "urlTemplate": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/19/3d/77/43/photo0jpg.jpg?w={width}&h={height}&s=1"
           }
         },
         {
-          "title": "Cafe Mondegar",
+          "title": "Bengal Tiger Indian Food",
           "bubbleRating": {
-            "rating": 4,
-            "numberReviews": "1,636"
+            "rating": 4.5,
+            "numberReviews": "553"
           },
           "primaryInfo": "₹₹ - ₹₹₹ • Indian • Vegetarian Friendly • Vegan Options",
-          "distance": "55 m",
+          "distance": "0.4 km",
           "cardPhoto": {
-            "maxHeight": 452,
-            "maxWidth": 678,
-            "urlTemplate": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/15/eb/35/34/cafe-mondegar.jpg?w={width}&h={height}&s=1"
+            "maxHeight": 1536,
+            "maxWidth": 2048,
+            "urlTemplate": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/18/eb/07/24/photo1jpg.jpg?w={width}&h={height}&s=1"
           }
         },
         {
-          "title": "Masala Kraft",
+          "title": "BG - Bergdorf Goodman",
           "bubbleRating": {
-            "rating": 4,
-            "numberReviews": "420"
+            "rating": 4.5,
+            "numberReviews": "533"
           },
-          "primaryInfo": "₹₹₹₹ • Indian • Asian • Vegetarian Friendly",
-          "distance": "0.2 km",
+          "primaryInfo": "₹₹₹₹ • American • Vegetarian Friendly • Vegan Options",
+          "distance": "0.1 km",
+          "cardPhoto": {
+            "maxHeight": 2048,
+            "maxWidth": 2048,
+            "urlTemplate": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/14/6d/2d/3b/photo0jpg.jpg?w={width}&h={height}&s=1"
+          }
+        },
+        {
+          "title": "Il Corso",
+          "bubbleRating": {
+            "rating": 4.5,
+            "numberReviews": "1,019"
+          },
+          "primaryInfo": "₹₹ - ₹₹₹ • Italian • Vegetarian Friendly • Vegan Options",
+          "distance": "0.4 km",
+          "cardPhoto": {
+            "maxHeight": 630,
+            "maxWidth": 750,
+            "urlTemplate": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/1c/4f/1d/ed/new-logo.jpg?w={width}&h={height}&s=1"
+          }
+        },
+        {
+          "title": "The Polo Bar",
+          "bubbleRating": {
+            "rating": 4.5,
+            "numberReviews": "657"
+          },
+          "primaryInfo": "₹₹₹₹ • American • Vegetarian Friendly • Vegan Options",
+          "distance": "0.3 km",
           "cardPhoto": {
             "maxHeight": 1500,
             "maxWidth": 2000,
-            "urlTemplate": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/13/28/48/c8/lovely-classy-interiors.jpg?w={width}&h={height}&s=1"
+            "urlTemplate": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/10/44/f4/36/prawns.jpg?w={width}&h={height}&s=1"
+          }
+        },
+        {
+          "title": "Nerai",
+          "bubbleRating": {
+            "rating": 4.5,
+            "numberReviews": "687"
+          },
+          "primaryInfo": "₹₹₹₹ • Seafood • Mediterranean • Greek",
+          "distance": "0.4 km",
+          "cardPhoto": {
+            "maxHeight": 1333,
+            "maxWidth": 2000,
+            "urlTemplate": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/11/6c/17/12/sommelier-s-table.jpg?w={width}&h={height}&s=1"
+          }
+        },
+        {
+          "title": "Il Gattopardo",
+          "bubbleRating": {
+            "rating": 4.5,
+            "numberReviews": "777"
+          },
+          "primaryInfo": "₹₹₹₹ • Italian • Pizza • Southern-Italian",
+          "distance": "0.4 km",
+          "cardPhoto": {
+            "maxHeight": 1152,
+            "maxWidth": 2000,
+            "urlTemplate": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/09/34/fe/bb/il-gattopardo.jpg?w={width}&h={height}&s=1"
           }
         }
       ]
@@ -345,139 +359,135 @@
       "sectionTitle": "Attractions nearby",
       "content": [
         {
-          "title": "Popli Art Gallery",
+          "title": "A La Vieille Russie",
           "bubbleRating": {
-            "rating": 5,
-            "numberReviews": "3"
+            "rating": 3,
+            "numberReviews": "2"
           },
-          "primaryInfo": "Art Galleries",
-          "distance": "41 m",
+          "primaryInfo": "Art Galleries • Art Museums",
+          "distance": "32 m",
           "cardPhoto": {}
         },
         {
-          "title": "Gateway of India",
+          "title": "William Tecumseh Sherman Monument",
+          "bubbleRating": {
+            "rating": 4.5,
+            "numberReviews": "21"
+          },
+          "primaryInfo": "Monuments & Statues",
+          "distance": "55 m",
+          "cardPhoto": {
+            "maxHeight": 2000,
+            "maxWidth": 1500,
+            "urlTemplate": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/12/e9/85/b5/william-tecumseh-sherman.jpg?w={width}&h={height}&s=1"
+          }
+        },
+        {
+          "title": "Pulitzer Fountain",
           "bubbleRating": {
             "rating": 4,
-            "numberReviews": "12,497"
+            "numberReviews": "16"
           },
-          "primaryInfo": "Points of Interest & Landmarks • Monuments & Statues",
-          "distance": "0.3 km",
+          "primaryInfo": "Points of Interest & Landmarks • Fountains",
+          "distance": "0.1 km",
           "cardPhoto": {
-            "maxHeight": 642,
-            "maxWidth": 960,
-            "urlTemplate": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/0d/16/f3/a1/fb-img-1474806779807.jpg?w={width}&h={height}&s=1"
+            "maxHeight": 1000,
+            "maxWidth": 1500,
+            "urlTemplate": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/14/28/60/a9/pulitzer-fountain.jpg?w={width}&h={height}&s=1"
           }
         },
         {
-          "title": "Cathedral of the Holy Name",
+          "title": "Discovering Columbus",
           "bubbleRating": {
-            "rating": 4.5,
-            "numberReviews": "34"
+            "rating": 5,
+            "numberReviews": "7"
           },
-          "primaryInfo": "Churches & Cathedrals",
-          "distance": "0.2 km",
+          "primaryInfo": "Art Museums",
+          "distance": "88 m",
+          "cardPhoto": {}
+        },
+        {
+          "title": "The Paris Theatre",
+          "bubbleRating": {
+            "rating": 4,
+            "numberReviews": "7"
+          },
+          "primaryInfo": "Theatres",
+          "distance": "0.1 km",
           "cardPhoto": {
-            "maxHeight": 3648,
-            "maxWidth": 5472,
-            "urlTemplate": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/17/21/3d/48/interno.jpg?w={width}&h={height}&s=1"
+            "maxHeight": 1536,
+            "maxWidth": 2048,
+            "urlTemplate": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/18/6c/b8/e5/photo0jpg.jpg?w={width}&h={height}&s=1"
           }
         },
         {
-          "title": "Bowen Memorial Methodist Church",
+          "title": "East River Roundabout",
           "bubbleRating": {
-            "rating": 4.5,
+            "rating": 4,
             "numberReviews": "4"
           },
-          "primaryInfo": "Historic Sites • Churches & Cathedrals",
+          "primaryInfo": "Mysterious Sites • Monuments & Statues",
+          "distance": "95 m",
+          "cardPhoto": {
+            "maxHeight": 1280,
+            "maxWidth": 960,
+            "urlTemplate": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/0c/d9/20/9e/from-roosevelt-island.jpg?w={width}&h={height}&s=1"
+          }
+        },
+        {
+          "title": "Doris C. Freedman Plaza",
+          "bubbleRating": {
+            "rating": 4,
+            "numberReviews": "4"
+          },
+          "primaryInfo": "Scenic Walking Areas",
+          "distance": "0.1 km",
+          "cardPhoto": {
+            "maxHeight": 801,
+            "maxWidth": 800,
+            "urlTemplate": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/0d/f3/51/a4/paola-pivi-past-exhibit.jpg?w={width}&h={height}&s=1"
+          }
+        },
+        {
+          "title": "Edwynn Houk",
+          "bubbleRating": {
+            "rating": 5,
+            "numberReviews": "1"
+          },
+          "primaryInfo": "Art Galleries",
           "distance": "0.1 km",
           "cardPhoto": {
             "maxHeight": 2048,
-            "maxWidth": 1638,
-            "urlTemplate": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/0e/42/82/ef/church-view-from-the.jpg?w={width}&h={height}&s=1"
+            "maxWidth": 1536,
+            "urlTemplate": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/0a/b5/d3/18/excellent-exhibit.jpg?w={width}&h={height}&s=1"
           }
         },
         {
-          "title": "Flora Fountain",
-          "bubbleRating": {
-            "rating": 4,
-            "numberReviews": "217"
-          },
-          "primaryInfo": "Points of Interest & Landmarks • Fountains",
-          "distance": "0.2 km",
-          "cardPhoto": {
-            "maxHeight": 1500,
-            "maxWidth": 2000,
-            "urlTemplate": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/05/a7/98/8b/flora-fountain.jpg?w={width}&h={height}&s=1"
-          }
-        },
-        {
-          "title": "Lion Gate",
-          "bubbleRating": {
-            "rating": 3,
-            "numberReviews": "27"
-          },
-          "primaryInfo": "Points of Interest & Landmarks",
-          "distance": "0.2 km",
-          "cardPhoto": {
-            "maxHeight": 1936,
-            "maxWidth": 2592,
-            "urlTemplate": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/07/f1/9b/9f/caption.jpg?w={width}&h={height}&s=1"
-          }
-        },
-        {
-          "title": "L.B. Shastri Statue- Jai Jawan Jai Kisan",
-          "bubbleRating": {
-            "rating": 3,
-            "numberReviews": "1"
-          },
-          "primaryInfo": "Monuments & Statues",
-          "distance": "0.1 km",
-          "cardPhoto": {
-            "maxHeight": 1152,
-            "maxWidth": 648,
-            "urlTemplate": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/1a/30/0e/f3/statue-of-lal-bahadur.jpg?w={width}&h={height}&s=1"
-          }
-        },
-        {
-          "title": "Statue Of Chhatrapati Shivaji Maharaj",
+          "title": "Trump Tower",
           "bubbleRating": {
             "rating": 3.5,
-            "numberReviews": "11"
+            "numberReviews": "1,183"
           },
-          "primaryInfo": "Points of Interest & Landmarks • Monuments & Statues",
+          "primaryInfo": "Points of Interest & Landmarks • Observation Decks & Towers",
           "distance": "0.2 km",
           "cardPhoto": {
-            "maxHeight": 2000,
-            "maxWidth": 1125,
-            "urlTemplate": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/12/3f/41/ff/impressive-statue.jpg?w={width}&h={height}&s=1"
+            "maxHeight": 960,
+            "maxWidth": 1280,
+            "urlTemplate": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/17/f8/4e/bf/caption.jpg?w={width}&h={height}&s=1"
           }
         },
         {
-          "title": "Colaba",
+          "title": "Barney's",
           "bubbleRating": {
-            "rating": 4.5,
-            "numberReviews": "2,494"
+            "rating": 4,
+            "numberReviews": "115"
           },
-          "primaryInfo": "Neighbourhoods",
-          "distance": "0.3 km",
-          "cardPhoto": {
-            "maxHeight": 1338,
-            "maxWidth": 1999,
-            "urlTemplate": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/07/38/3d/94/colaba.jpg?w={width}&h={height}&s=1"
-          }
-        },
-        {
-          "title": "Chhatrapati Shivaji Maharaj Vastu Sangrahalaya",
-          "bubbleRating": {
-            "rating": 4.5,
-            "numberReviews": "966"
-          },
-          "primaryInfo": "History Museums",
-          "distance": "0.3 km",
+          "primaryInfo": "Department Stores",
+          "distance": "0.2 km",
           "cardPhoto": {
             "maxHeight": 1500,
             "maxWidth": 2000,
-            "urlTemplate": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/11/0c/42/80/museum-visit.jpg?w={width}&h={height}&s=1"
+            "urlTemplate": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/02/3b/c8/6c/filename-img-5974-jpg.jpg?w={width}&h={height}&s=1"
           }
         }
       ]
@@ -485,22 +495,22 @@
     "qA": {
       "content": [
         {
-          "title": "Is this place suitable for a family of 5?",
-          "writtenDate": "12 March 2022",
+          "title": "is a key card required to access the elevator? are there safes in the room? single traveller and very security conscious so need to know.\n\nMandy Z",
+          "writtenDate": "8 June 2023",
           "memberProfile": {
             "profileImage": {}
           },
           "topAnswer": {
-            "text": "Hi...We had booked their superior deluxe room and were a family of 3 but it was just right for us. They might have bigger rooms for a family of 5 but I cannot confirm that. You can email Nelcia at their email id. She is super helpful. Hope this helps.",
-            "writtenDate": "12 March 2022",
+            "text": "Yes there is a safe in the room and yes a key card to access the elevator. Hope this helps",
+            "writtenDate": "9 June 2023",
             "thumbsUpCount": 0,
             "memberProfile": {
-              "displayName": "Jyo Dmello",
+              "displayName": "Javon J",
               "hometown": null,
               "profileImage": {
-                "maxHeight": 3024,
-                "maxWidth": 3024,
-                "urlTemplate": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/24/7b/28/22/alisong1038.jpg?w={width}&h={height}&s=1"
+                "maxHeight": 1200,
+                "maxWidth": 1200,
+                "urlTemplate": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/1a/f6/e5/66/default-avatar-2020-53.jpg?w={width}&h={height}&s=1"
               },
               "contributionCounts": null,
               "deprecatedContributionCount": "1 contribution"
@@ -508,25 +518,25 @@
           }
         },
         {
-          "title": "Is it a couple friendly hotel?\n",
-          "writtenDate": "6 September 2020",
+          "title": "Are there any mini refrigerator, microwave oven and coffeemaker in rooms and suites?",
+          "writtenDate": "5 January 2023",
           "memberProfile": {
             "profileImage": {}
           },
           "topAnswer": {
-            "text": "Definitly",
-            "writtenDate": "7 September 2020",
-            "thumbsUpCount": 0,
+            "text": "There was no coffee maker in room but when we asked they gave us one. There was a mini bar fridge yes. No microwave oven.",
+            "writtenDate": "6 January 2023",
+            "thumbsUpCount": 2,
             "memberProfile": {
-              "displayName": "Darren",
-              "hometown": null,
+              "displayName": "Sue Shone",
+              "hometown": "Newcastle upon Tyne, UK",
               "profileImage": {
                 "maxHeight": 1200,
                 "maxWidth": 1200,
-                "urlTemplate": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/1a/f6/f4/5d/default-avatar-2020-32.jpg?w={width}&h={height}&s=1"
+                "urlTemplate": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/1a/f6/f6/0d/default-avatar-2020-34.jpg?w={width}&h={height}&s=1"
               },
               "contributionCounts": null,
-              "deprecatedContributionCount": "4 contributions"
+              "deprecatedContributionCount": "148 contributions"
             }
           }
         }
@@ -534,25 +544,164 @@
     },
     "amenitiesScreen": [
       {
+        "title": "Parking",
+        "content": [
+          "Valet parking"
+        ]
+      },
+      {
         "title": "Internet",
         "content": [
-          "Free High Speed Internet (WiFi)",
-          "Wifi"
+          "Wifi",
+          "Free wifi in the business centre",
+          "Paid wifi"
+        ]
+      },
+      {
+        "title": "Fitness",
+        "content": [
+          "Fitness Centre with Gym / Workout Room"
         ]
       },
       {
         "title": "Food & drink",
         "content": [
-          "Free breakfast",
-          "Breakfast buffet",
-          "Special diet menus"
+          "Bar / lounge",
+          "Coffee shop",
+          "Restaurant",
+          "Breakfast available",
+          "Breakfast in the room",
+          "Happy hour",
+          "Kids' meals",
+          "Snack bar",
+          "Special diet menus",
+          "Wine / champagne"
+        ]
+      },
+      {
+        "title": "Things to do",
+        "content": [
+          "Bicycle rental",
+          "Bowling offsite",
+          "Evening entertainment",
+          "Walking tours",
+          "Board games / puzzles"
+        ]
+      },
+      {
+        "title": "Family",
+        "content": [
+          "Babysitting",
+          "Books, DVDs, music for children",
+          "Children's television networks",
+          "Indoor play area for children",
+          "Highchairs available"
+        ]
+      },
+      {
+        "title": "View",
+        "content": [
+          "City view"
+        ]
+      },
+      {
+        "title": "Room types",
+        "content": [
+          "Bridal suite",
+          "Non-smoking rooms",
+          "Suites",
+          "Family rooms"
+        ]
+      },
+      {
+        "title": "Comfort",
+        "content": [
+          "Blackout curtains",
+          "Bathrobes"
+        ]
+      },
+      {
+        "title": "Room features",
+        "content": [
+          "Air conditioning",
+          "Additional bathroom",
+          "Desk",
+          "Dining area",
+          "Housekeeping",
+          "Interconnected rooms available",
+          "Room service",
+          "Safe",
+          "Seating area",
+          "Separate living room",
+          "Sofa",
+          "Telephone",
+          "VIP room facilities",
+          "Wardrobe / wardrobe",
+          "Bottled water",
+          "Clothes rack",
+          "Iron",
+          "Laptop safe",
+          "Private bathrooms",
+          "Tile / marble floor",
+          "Wake-up service / alarm clock"
+        ]
+      },
+      {
+        "title": "Kitchen",
+        "content": [
+          "Minibar",
+          "Refrigerator"
+        ]
+      },
+      {
+        "title": "Entertainment",
+        "content": [
+          "Cable / satellite TV",
+          "Flatscreen TV",
+          "On-demand films",
+          "Radio"
+        ]
+      },
+      {
+        "title": "Pets",
+        "content": [
+          "Pets Allowed ( Dog / Pet Friendly )"
         ]
       },
       {
         "title": "Transportation",
         "content": [
           "Airport transportation",
+          "Car hire",
           "Taxi service"
+        ]
+      },
+      {
+        "title": "Business",
+        "content": [
+          "Business Centre with Internet Access",
+          "Conference facilities",
+          "Banquet room",
+          "Meeting rooms"
+        ]
+      },
+      {
+        "title": "Beauty & wellness",
+        "content": [
+          "Spa",
+          "Couples massage",
+          "Facial treatments",
+          "Foot massage",
+          "Full body massage",
+          "Hand massage",
+          "Head massage",
+          "Makeup services",
+          "Manicure",
+          "Massage",
+          "Neck massage",
+          "Pedicure",
+          "Salon",
+          "Waxing services"
         ]
       },
       {
@@ -561,18 +710,24 @@
           "24-hour security",
           "Baggage storage",
           "Concierge",
+          "Convenience store",
           "Currency exchange",
+          "Gift shop",
           "Newspaper",
           "Non-smoking hotel",
-          "Shared lounge / TV area"
+          "Shops",
+          "ATM on site",
+          "Butler service",
+          "Doorperson",
+          "First aid kit",
+          "Umbrella"
         ]
       },
       {
         "title": "Reception services",
         "content": [
           "24-hour check-in",
-          "24-hour front desk",
-          "Private check-in / check-out"
+          "24-hour front desk"
         ]
       },
       {
@@ -580,28 +735,16 @@
         "content": [
           "Dry cleaning",
           "Laundry service",
-          "Ironing service"
+          "Ironing service",
+          "Shoeshine"
         ]
       },
       {
-        "title": "Room types",
+        "title": "Bath",
         "content": [
-          "Non-smoking rooms"
-        ]
-      },
-      {
-        "title": "Room features",
-        "content": [
-          "Air conditioning",
-          "Safe",
-          "Bottled water",
-          "Wake-up service / alarm clock"
-        ]
-      },
-      {
-        "title": "Entertainment",
-        "content": [
-          "Flatscreen TV"
+          "Bath / shower",
+          "Complimentary toiletries",
+          "Hair dryer"
         ]
       }
     ]

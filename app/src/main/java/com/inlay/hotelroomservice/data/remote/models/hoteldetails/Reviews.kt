@@ -1,5 +1,7 @@
-package com.inlay.hotelroomservice.data.local.models.hoteldetails
+package com.inlay.hotelroomservice.data.remote.models.hoteldetails
 
+import com.inlay.hotelroomservice.data.local.models.hoteldetails.RatingCounts
+import com.inlay.hotelroomservice.data.local.models.hoteldetails.ReviewsContent
 import com.squareup.moshi.Json
 
 data class Reviews(
