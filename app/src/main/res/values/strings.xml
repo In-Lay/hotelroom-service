@@ -26,4 +26,5 @@
     <string name="tripadvisor"><u>Tripadvisor</u></string>
     <string name="about">About</string>
     <string name="map">Location on Map</string>
+    <string name="fab_close_web_view">Close Web View</string>
 </resources>

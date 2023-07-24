@@ -19,19 +19,25 @@ class RepositoryUseCaseImpl(private val hotelRoomRepository: HotelRoomRepository
         currencyCode: String
     ): List<HotelsItemUiModel> {
         return hotelRoomRepository.getHotelRepo(
-            isOnline, geoId, checkInDate, checkOutDate, currencyCode
+            isOnline,
+            geoId,
+            checkInDate,
+            checkOutDate,
+            currencyCode
         )
     }
 
     override suspend fun getHotelDetailsRepo(
-        isOnline: Boolean,
         id: String,
         checkInDate: String,
         checkOutDate: String,
         currencyCode: String
     ): HotelDetailsUiModel {
         return hotelRoomRepository.getHotelDetails(
-            isOnline, id, checkInDate, checkOutDate, currencyCode
+            id,
+            checkInDate,
+            checkOutDate,
+            currencyCode
         )
     }
 }

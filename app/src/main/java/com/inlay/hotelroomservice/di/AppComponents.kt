@@ -1,6 +1,7 @@
 package com.inlay.hotelroomservice.di
 
 import androidx.room.Room
+import com.inlay.hotelroomservice.data.getSampleDetailsDataFromAssets
 import com.inlay.hotelroomservice.data.getSampleHotelsDataFromAssets
 import com.inlay.hotelroomservice.data.getSampleLocationsDataFromAssets
 import com.inlay.hotelroomservice.data.local.HotelsRoomDatabase
@@ -20,6 +21,8 @@ import com.inlay.hotelroomservice.domain.usecase.RepositoryUseCase
 import com.inlay.hotelroomservice.domain.usecase.RepositoryUseCaseImpl
 import com.inlay.hotelroomservice.presentation.viewmodels.details.AppDetailsViewModel
 import com.inlay.hotelroomservice.presentation.viewmodels.details.DetailsViewModel
+import com.inlay.hotelroomservice.presentation.viewmodels.details.dialog.AppPlaceNearbyViewModel
+import com.inlay.hotelroomservice.presentation.viewmodels.details.dialog.PlaceNearbyViewModel
 import com.inlay.hotelroomservice.presentation.viewmodels.hotels.AppHotelsViewModel
 import com.inlay.hotelroomservice.presentation.viewmodels.hotels.HotelsViewModel
 import com.inlay.hotelroomservice.presentation.viewmodels.hotels.item.AppHotelsItemViewModel
@@ -66,6 +69,7 @@ val appModule = module {
 
     single { getSampleHotelsDataFromAssets(moshi = get(), context = androidContext()) }
     single { getSampleLocationsDataFromAssets(context = androidContext(), moshi = get()) }
+    single { getSampleDetailsDataFromAssets(context = androidContext(), moshi = get()) }
 
     single<RemoteDataSource> { RemoteDataSourceImpl(hotelRoomApiService = get()) }
     single<LocalDataSource> { LocalDataSourceImpl(hotelsRoomDao = get()) }
@@ -80,13 +84,19 @@ val appModule = module {
 
     single { SimpleDateFormat("yyy-MM-dd", Locale.ENGLISH) }
 
-    viewModel<HotelsViewModel> { AppHotelsViewModel(repositoryUseCase = get()) }
+    viewModel<HotelsViewModel> {
+        AppHotelsViewModel(
+            repositoryUseCase = get(),
+            dateFormat = get()
+        )
+    }
     viewModel<HotelsItemViewModel> { AppHotelsItemViewModel() }
 
     viewModel<SearchViewModel> { AppSearchViewModel(repositoryUseCase = get()) }
     viewModel<SearchLocationsItemViewModel> { AppSearchLocationsItemViewModel() }
 
     viewModel<DetailsViewModel> { AppDetailsViewModel(repositoryUseCase = get()) }
+    viewModel<PlaceNearbyViewModel> { AppPlaceNearbyViewModel() }
 
     viewModel<UserStaysViewModel> { AppUserStaysViewModel() }
 }

@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.inlay.hotelroomservice.presentation.viewmodels.details.dialog.PlaceNearbyViewModel" />
+    </data>
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/card_places_nearby"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/img_places_nearby_image"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_margin="8dp"
+                android:scaleType="centerCrop"
+                app:detailsRestaurantNearbyImage="@{viewModel.placeNearbyPhoto}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:src="@drawable/sample_locations_image" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tv_places_nearby_name"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:text="@{viewModel.placeNearbyName}"
+                android:textAppearance="?attr/textAppearanceBody1"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/img_places_nearby_image"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="Jams, 6th Avenue, New York, NY, USA" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tv_places_nearby_info"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:text="@{viewModel.placeNearbyInfo}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/img_places_nearby_image"
+                app:layout_constraintTop_toBottomOf="@id/tv_places_nearby_name"
+                tools:text="₹₹ - ₹₹₹ • American • Vegetarian Friendly • Vegan Options" />
+
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/img_places_nearby_rating_icon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:src="@drawable/outline_star_half_24"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@id/img_places_nearby_image"
+                app:layout_constraintTop_toBottomOf="@id/tv_places_nearby_info" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tv_places_nearby_rating"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:text="@{viewModel.placeNearbyRating}"
+                android:textAppearance="?attr/textAppearanceBody1"
+                android:textColor="#C99200"
+                app:layout_constraintStart_toEndOf="@+id/img_places_nearby_rating_icon"
+                app:layout_constraintTop_toTopOf="@+id/img_places_nearby_rating_icon"
+                tools:text="4.5" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tv_places_nearby_rating_count"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:text="@{viewModel.placeNearbyRatingCount}"
+                app:layout_constraintBottom_toBottomOf="@+id/tv_places_nearby_rating"
+                app:layout_constraintStart_toEndOf="@+id/tv_places_nearby_rating"
+                app:layout_constraintTop_toTopOf="@+id/tv_places_nearby_rating"
+                tools:text="(650)" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tv_places_nearby_distance"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:text="@{viewModel.placeNearbyDistance}"
+                app:layout_constraintBottom_toBottomOf="@+id/img_places_nearby_rating_icon"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/img_places_nearby_rating_icon"
+                tools:text="0.3 km" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </com.google.android.material.card.MaterialCardView>
+</layout>

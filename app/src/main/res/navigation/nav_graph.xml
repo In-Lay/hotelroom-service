@@ -24,4 +24,8 @@
         android:id="@+id/fragmentSearch"
         android:name="com.inlay.hotelroomservice.presentation.fragments.search.FragmentSearch"
         android:label="Search" />
+    <fragment
+        android:id="@+id/fragmentDetails"
+        android:name="com.inlay.hotelroomservice.presentation.fragments.details.FragmentDetails"
+        android:label="FragmentDetails" />
 </navigation>

@@ -2,11 +2,16 @@ package com.inlay.hotelroomservice.presentation.viewmodels.details
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
-import com.inlay.hotelroomservice.presentation.models.details.HotelDetailsUiModel
+import com.inlay.hotelroomservice.presentation.models.details.NearbyPlace
+import com.inlay.hotelroomservice.presentation.models.hotelsitem.DatesModel
 import kotlinx.coroutines.flow.StateFlow
 
 abstract class DetailsViewModel : ViewModel() {
-    abstract val selectedItem: StateFlow<Int>
+//    abstract val selectedItemId: StateFlow<String>
+//    abstract val selectedDates: StateFlow<DatesModel>
+//    abstract val selectedCurrency: StateFlow<String>
+
+    abstract val hotelImagesList: StateFlow<List<String>>
 
     abstract val hotelImage: LiveData<String>
     abstract val hotelName: LiveData<String>
@@ -23,6 +28,9 @@ abstract class DetailsViewModel : ViewModel() {
     abstract val hotelProvider: LiveData<String>
     abstract val hotelLink: LiveData<String>
     abstract val hotelAbout: LiveData<String>
+
+    abstract val restaurantsNearby: StateFlow<List<NearbyPlace.RestaurantNearby>>
+    abstract val attractionsNearby: StateFlow<List<NearbyPlace.AttractionNearby>>
 
     abstract val restaurantNearbyPhoto: LiveData<String>
     abstract val restaurantNearbyName: LiveData<String>
@@ -41,10 +49,17 @@ abstract class DetailsViewModel : ViewModel() {
     abstract fun openImageDialog()
     abstract fun viewAllRestaurants()
     abstract fun viewAllAttractions()
+    abstract fun openLinkInBrowser()
+    abstract fun closeWebView()
 
     abstract fun initializeData(
         openImageDialog: () -> Unit,
         viewAllRestaurants: () -> Unit,
-        viewAllAttractions: () -> Unit
+        viewAllAttractions: () -> Unit,
+        openLinkInBrowser: (String) -> Unit,
+        closeWebView: () -> Unit,
+        id: String,
+        dates: DatesModel,
+        currency: String
     )
 }

@@ -127,6 +127,7 @@
                             style="?attr/materialCardViewFilledStyle"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:clickable="false"
                             android:text="@{viewModel.chipParkingText}"
                             app:chipIcon="@drawable/outline_directions_car_24"
                             tools:text="Valet parking" />
@@ -136,6 +137,7 @@
                             style="?attr/materialCardViewFilledStyle"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:clickable="false"
                             android:text="@{viewModel.chipInternetText}"
                             app:chipIcon="@drawable/baseline_wifi_24"
                             tools:text="Wifi" />
@@ -145,6 +147,7 @@
                             style="?attr/materialCardViewFilledStyle"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:clickable="false"
                             android:text="@{viewModel.chipGymText}"
                             app:chipIcon="@drawable/baseline_fitness_center_24"
                             tools:text="Fitness Centre with Gym / Workout Room" />
@@ -154,6 +157,7 @@
                             style="?attr/materialCardViewFilledStyle"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:clickable="false"
                             android:text="@{viewModel.chipFoodText}"
                             app:chipIcon="@drawable/outline_restaurant_24"
                             tools:text="Bar / lounge" />
@@ -233,6 +237,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="8dp"
+                            android:onClick="@{() -> viewModel.openLinkInBrowser()}"
                             android:text="@string/tripadvisor"
                             android:textAppearance="?attr/textAppearanceBodyLarge"
                             app:layout_constraintStart_toStartOf="@id/tv_link_label"
@@ -313,38 +318,39 @@
                         android:layout_height="wrap_content">
 
                         <com.google.android.material.imageview.ShapeableImageView
-                            android:id="@+id/img_restaurant_nearby_image"
+                            android:id="@+id/img_places_nearby_image"
                             android:layout_width="100dp"
                             android:layout_height="100dp"
                             android:layout_margin="8dp"
                             android:scaleType="centerCrop"
+                            app:detailsRestaurantNearbyImage="@{viewModel.restaurantNearbyPhoto}"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent"
                             tools:src="@drawable/sample_locations_image" />
 
                         <com.google.android.material.textview.MaterialTextView
-                            android:id="@+id/tv_restaurants_nearby_name"
+                            android:id="@+id/tv_places_nearby_name"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_margin="8dp"
+                            android:text="@{viewModel.restaurantNearbyName}"
                             android:textAppearance="?attr/textAppearanceBody1"
-                            app:detailsRestaurantNearbyImage="@{viewModel.restaurantNearbyPhoto}"
                             app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toEndOf="@id/img_restaurant_nearby_image"
+                            app:layout_constraintStart_toEndOf="@id/img_places_nearby_image"
                             app:layout_constraintTop_toTopOf="parent"
                             tools:text="Jams, 6th Avenue, New York, NY, USA" />
 
                         <com.google.android.material.textview.MaterialTextView
-                            android:id="@+id/tv_restaurants_nearby_info"
+                            android:id="@+id/tv_places_nearby_info"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_margin="8dp"
                             android:text="@{viewModel.restaurantNearbyInfo}"
                             app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toEndOf="@id/img_restaurant_nearby_image"
-                            app:layout_constraintTop_toBottomOf="@id/tv_restaurants_nearby_name"
-                            tools:text="Jams, 6th Avenue, New York, NY, USA" />
+                            app:layout_constraintStart_toEndOf="@id/img_places_nearby_image"
+                            app:layout_constraintTop_toBottomOf="@id/tv_places_nearby_name"
+                            tools:text="₹₹ - ₹₹₹ • American • Vegetarian Friendly • Vegan Options" />
 
                         <com.google.android.material.imageview.ShapeableImageView
                             android:id="@+id/img_restaurant_nearby_rating_icon"
@@ -352,8 +358,9 @@
                             android:layout_height="wrap_content"
                             android:layout_margin="8dp"
                             android:src="@drawable/outline_star_half_24"
-                            app:layout_constraintStart_toEndOf="@id/img_restaurant_nearby_image"
-                            app:layout_constraintTop_toBottomOf="@id/tv_restaurants_nearby_info" />
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toEndOf="@id/img_places_nearby_image"
+                            app:layout_constraintTop_toBottomOf="@id/tv_places_nearby_info" />
 
                         <com.google.android.material.textview.MaterialTextView
                             android:id="@+id/tv_restaurants_nearby_rating"
@@ -471,6 +478,7 @@
                             android:layout_height="wrap_content"
                             android:layout_margin="8dp"
                             android:src="@drawable/outline_star_half_24"
+                            app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintStart_toEndOf="@id/img_attraction_nearby_image"
                             app:layout_constraintTop_toBottomOf="@id/tv_attraction_nearby_info" />
 
@@ -543,5 +551,22 @@
                 <!-- TODO additional photos-->
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.core.widget.NestedScrollView>
+
+        <WebView
+            android:id="@+id/web_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="gone" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fab_close_web_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end|bottom"
+            android:layout_margin="8dp"
+            android:contentDescription="@string/fab_close_web_view"
+            android:onClick="@{() -> viewModel.closeWebView()}"
+            android:src="@drawable/outline_close_24"
+            android:visibility="gone" />
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </layout>

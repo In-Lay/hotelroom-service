@@ -5,6 +5,7 @@ import android.view.ViewGroup
 import androidx.lifecycle.findViewTreeLifecycleOwner
 import androidx.recyclerview.widget.RecyclerView.Adapter
 import com.inlay.hotelroomservice.databinding.HotelsItemBinding
+import com.inlay.hotelroomservice.presentation.models.hotelsitem.DatesModel
 import com.inlay.hotelroomservice.presentation.models.hotelsitem.HotelsItemUiModel
 import com.inlay.hotelroomservice.presentation.viewmodels.hotels.item.HotelsItemViewModel
 import org.koin.core.component.KoinComponent

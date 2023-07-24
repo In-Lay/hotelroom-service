@@ -3,7 +3,7 @@ package com.inlay.hotelroomservice.data.remote.models.hoteldetails
 import com.squareup.moshi.Json
 
 data class RestaurantsNearbyCardPhoto(
-    @Json(name = "maxHeight") val maxHeight: Int,
-    @Json(name = "maxWidth") val maxWidth: Int,
-    @Json(name = "urlTemplate") val urlTemplate: String
+    @Json(name = "maxHeight") val maxHeight: Int?,
+    @Json(name = "maxWidth") val maxWidth: Int?,
+    @Json(name = "urlTemplate") val urlTemplate: String?
 )

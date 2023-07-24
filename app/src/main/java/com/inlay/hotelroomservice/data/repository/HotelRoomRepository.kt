@@ -19,7 +19,6 @@ interface HotelRoomRepository {
     ): List<HotelsItemUiModel>
 
     suspend fun getHotelDetails(
-        isOnline: Boolean,
         id: String,
         checkInDate: String,
         checkOutDate: String,

@@ -41,7 +41,10 @@ class AppHotelsItemViewModel : HotelsItemViewModel() {
         TODO("Not yet implemented")
     }
 
-    override fun initializeData(hotelsUiModel: HotelsItemUiModel, openDetails: (String) -> Unit) {
+    override fun initializeData(
+        hotelsUiModel: HotelsItemUiModel,
+        openDetails: (String) -> Unit
+    ) {
         _hotelId.value = hotelsUiModel.id
 
         _hotelName.value = if (hotelsUiModel.title[0].isDigit()) hotelsUiModel.title.removeRange(
@@ -54,6 +57,7 @@ class AppHotelsItemViewModel : HotelsItemViewModel() {
         _price.value = hotelsUiModel.price
         _imageUrl.value = hotelsUiModel.photosUrls[0]
         goToDetailsLambda = openDetails
+
     }
 
     companion object {

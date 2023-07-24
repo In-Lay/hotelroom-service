@@ -1,8 +1,8 @@
-package com.inlay.hotelroomservice.data.local.models.hoteldetails
+package com.inlay.hotelroomservice.data.remote.models.hoteldetails
 
 import com.squareup.moshi.Json
 
 data class Excellent(
-    @Json(name = "count") val count: String,
-    @Json(name = "percentage") val percentage: Int
+    @Json(name = "count") val count: String?,
+    @Json(name = "percentage") val percentage: Int?
 )

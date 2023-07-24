@@ -3,6 +3,7 @@ package com.inlay.hotelroomservice.data.mapping
 import com.inlay.hotelroomservice.data.local.models.HotelRatingEntity
 import com.inlay.hotelroomservice.data.local.models.HotelsItemEntity
 import com.inlay.hotelroomservice.data.local.models.HotelsItemWithRatingEntity
+import com.inlay.hotelroomservice.data.remote.models.hoteldetails.AboutContentGeneral
 import com.inlay.hotelroomservice.data.remote.models.hoteldetails.AttractionsNearbyContent
 import com.inlay.hotelroomservice.data.remote.models.hoteldetails.HotelDetailsModel
 import com.inlay.hotelroomservice.data.remote.models.hoteldetails.RestaurantsNearbyContent
@@ -10,9 +11,8 @@ import com.inlay.hotelroomservice.data.remote.models.hotels.BubbleRating
 import com.inlay.hotelroomservice.data.remote.models.hotels.CardPhoto
 import com.inlay.hotelroomservice.data.remote.models.hotels.Data
 import com.inlay.hotelroomservice.data.remote.models.searchlocation.Image
-import com.inlay.hotelroomservice.presentation.models.details.AttractionNearby
 import com.inlay.hotelroomservice.presentation.models.details.HotelDetailsUiModel
-import com.inlay.hotelroomservice.presentation.models.details.RestaurantNearby
+import com.inlay.hotelroomservice.presentation.models.details.NearbyPlace
 import com.inlay.hotelroomservice.presentation.models.hotelsitem.HotelsItemUiModel
 import com.inlay.hotelroomservice.presentation.models.hotelsitem.RatingUiModel
 import com.inlay.hotelroomservice.presentation.models.locations.SearchLocationsImageUiModel
@@ -95,41 +95,59 @@ private fun Image.toSearchLocationsImageUiModel(): SearchLocationsImageUiModel =
 
 
 fun HotelDetailsModel.toUiModel(): HotelDetailsUiModel = HotelDetailsUiModel(
-    title = this.data.title,
-    rating = this.data.rating,
-    numberReviews = this.data.numberReviews,
-    rankingDetails = this.data.rankingDetails,
-    displayPrice = this.data.price.displayPrice.orEmpty(),
-    providerName = this.data.price.providerName,
-    photos = this.data.photos.map { it.urlTemplate },
-    aboutTitle = this.data.about.title,
-    aboutLink = this.data.about.aboutContentGeneral[2].contentAbout[0].content,
-    aboutAmenities = this.data.about.aboutContentGeneral[3].contentAbout.map { it.title },
-    address = this.data.location.address,
-    restaurantsNearby = this.data.restaurantsNearby.restaurantsNearbyContent.map { it.toRestaurantNearby() },
-    attractionsNearby = this.data.attractionsNearby.content.map { it.toAttractionNearby() },
-    latitude = this.data.geoPoint.latitude,
-    longitude = this.data.geoPoint.longitude
+    title = this.data?.title.orEmpty(),
+    rating = this.data?.rating.toString(),
+    numberReviews = this.data?.numberReviews.toString(),
+    rankingDetails = this.data?.rankingDetails.orEmpty(),
+    displayPrice = this.data?.price?.displayPrice.orEmpty(),
+    providerName = this.data?.price?.providerName.orEmpty(),
+    photos = this.data?.photos?.mapNotNull { it.urlTemplate }.orEmpty(),
+    aboutTitle = this.data?.about?.title.orEmpty(),
+    aboutLinks = this.data?.about?.aboutContentGeneral?.getAboutByTitle("Related links").orEmpty(),
+    aboutAmenities = this.data?.about?.aboutContentGeneral?.getAboutByTitle("Amenities").orEmpty(),
+    address = this.data?.location?.address.orEmpty(),
+    restaurantsNearby = this.data?.restaurantsNearby?.restaurantsNearbyContent?.map { it.toRestaurantNearby() }
+        ?: listOf(),
+    attractionsNearby = this.data?.attractionsNearby?.content?.map { it.toAttractionNearby() }
+        ?: listOf(),
+    latitude = this.data?.geoPoint?.latitude ?: 0.0,
+    longitude = this.data?.geoPoint?.longitude ?: 0.0
 )
 
+private fun List<AboutContentGeneral>.getAboutByTitle(title: String): List<String> {
+    return this.filter { aboutContent ->
+        aboutContent.title == title
+    }.flatMap { aboutContent ->
+        aboutContent.contentAbout.mapNotNull { contentAbout ->
+            when (title) {
+                "Related links" -> contentAbout.content
+                "Amenities" -> contentAbout.title
+                else -> null
+            }
+        }
+    }
+}
 
-private fun RestaurantsNearbyContent.toRestaurantNearby(): RestaurantNearby = RestaurantNearby(
-    title = this.title,
-    primaryInfo = this.primaryInfo,
-    distance = this.distance,
-    photoUrlTemplate = this.restaurantsNearbyCardPhoto.urlTemplate,
-    rating = this.bubbleRating.rating,
-    numberReviews = this.bubbleRating.numberReviews
-)
 
-private fun AttractionsNearbyContent.toAttractionNearby(): AttractionNearby = AttractionNearby(
-    title = this.title,
-    primaryInfo = this.primaryInfo,
-    distance = this.distance,
-    photoUrlTemplate = this.cardPhoto.urlTemplate,
-    rating = this.bubbleRating.rating,
-    numberReviews = this.bubbleRating.numberReviews
-)
+private fun RestaurantsNearbyContent.toRestaurantNearby(): NearbyPlace.RestaurantNearby =
+    NearbyPlace.RestaurantNearby(
+        title = this.title.orEmpty(),
+        primaryInfo = this.primaryInfo.orEmpty(),
+        distance = this.distance.orEmpty(),
+        photoUrlTemplate = this.restaurantsNearbyCardPhoto?.urlTemplate.orEmpty(),
+        rating = this.bubbleRating?.rating ?: 0.0,
+        numberReviews = this.bubbleRating?.numberReviews.orEmpty()
+    )
+
+private fun AttractionsNearbyContent.toAttractionNearby(): NearbyPlace.AttractionNearby =
+    NearbyPlace.AttractionNearby(
+        title = this.title.orEmpty(),
+        primaryInfo = this.primaryInfo.orEmpty(),
+        distance = this.distance.orEmpty(),
+        photoUrlTemplate = this.cardPhoto?.urlTemplate.orEmpty(),
+        rating = this.bubbleRating?.rating ?: 0.0,
+        numberReviews = this.bubbleRating?.numberReviews.orEmpty()
+    )
 
 private fun String?.extractNumber(): String? {
     val startIndex = (this?.indexOf(';')?.plus(1)) ?: 0

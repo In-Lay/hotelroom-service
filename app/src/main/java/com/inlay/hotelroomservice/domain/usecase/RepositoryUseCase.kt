@@ -16,7 +16,6 @@ interface RepositoryUseCase {
     ): List<HotelsItemUiModel>
 
     suspend fun getHotelDetailsRepo(
-        isOnline: Boolean,
         id: String,
         checkInDate: String,
         checkOutDate: String,

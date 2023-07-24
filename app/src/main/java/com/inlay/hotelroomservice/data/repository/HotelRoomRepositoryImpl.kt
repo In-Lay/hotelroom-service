@@ -3,6 +3,7 @@ package com.inlay.hotelroomservice.data.repository
 import com.inlay.hotelroomservice.data.mapping.toEntity
 import com.inlay.hotelroomservice.data.mapping.toUiItem
 import com.inlay.hotelroomservice.data.mapping.toUiModel
+import com.inlay.hotelroomservice.data.remote.models.hoteldetails.HotelDetailsModel
 import com.inlay.hotelroomservice.data.remote.models.hotels.HotelsModel
 import com.inlay.hotelroomservice.data.remote.models.searchlocation.SearchLocationModel
 import com.inlay.hotelroomservice.domain.local.LocalDataSource
@@ -77,38 +78,54 @@ class HotelRoomRepositoryImpl(
 
 
     override suspend fun getHotelDetails(
-        isOnline: Boolean,
         id: String,
         checkInDate: String,
         checkOutDate: String,
         currencyCode: String
     ): HotelDetailsUiModel {
-        val hotelDetailsData =
-            remoteDataSource.getHotelDetailsRepo(id, checkInDate, checkOutDate, currencyCode)
+//        val hotelDetailsData =
+//            remoteDataSource.getHotelDetailsRepo(id, checkInDate, checkOutDate, currencyCode)
+//        val emptyModel = HotelDetailsUiModel(
+//            "",
+//            "",
+//            "",
+//            "",
+//            "",
+//            "",
+//            listOf(),
+//            "",
+//            listOf(),
+//            listOf(),
+//            "",
+//            listOf(),
+//            listOf(),
+//            0.0,
+//            0.0
+//        )
+//        return if (hotelDetailsData.isSuccessful) {
+//            hotelDetailsData.body()?.toUiModel() ?: emptyModel
+//        } else emptyModel
+
+        val hotelDetailsData: HotelDetailsModel? by inject()
+
         val emptyModel = HotelDetailsUiModel(
             "",
-            0.0,
-            0,
             "",
             "",
             "",
-            listOf(),
             "",
             "",
             listOf(),
+            "",
+            listOf(),
+            listOf(),
+            "",
             listOf(),
             listOf(),
             0.0,
             0.0
         )
-        return if (isOnline) {
-            if (hotelDetailsData.isSuccessful) {
-                hotelDetailsData.body()?.toUiModel() ?: emptyModel
-            } else {
-                emptyModel
-            }
-        } else {
-            emptyModel
-        }
+
+        return hotelDetailsData?.toUiModel() ?: emptyModel
     }
 }

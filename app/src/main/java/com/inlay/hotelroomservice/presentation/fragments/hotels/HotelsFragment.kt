@@ -55,6 +55,15 @@ class HotelsFragment : Fragment() {
     private fun bindAdapter() {
         lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
+//                hotelsViewModel.hotelsDataList.collectLatest {
+//                    binding.recyclerView.adapter =
+//                        HotelsListAdapter(
+//                            it,
+//                            (activity as MainActivity).goToDetails
+//                        )
+//                    binding.recyclerView.layoutManager = LinearLayoutManager(context)
+//                    binding.recyclerView.setHasFixedSize(false)
+//                }
                 hotelsViewModel.hotelsDataList.collectLatest {
                     binding.recyclerView.adapter =
                         HotelsListAdapter(
