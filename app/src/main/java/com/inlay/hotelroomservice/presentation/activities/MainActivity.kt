@@ -115,13 +115,12 @@ class MainActivity : AppCompatActivity(), DrawerProvider {
     }
 
     val goToDetails: (HotelDetailsSearchModel) -> Unit = {
-        Log.d("DetailsNavLog", "1")
         if (this.isNetworkAvailable()) {
             val bundle = Bundle()
             bundle.putParcelable("HOTEL_DETAILS_SEARCH", it)
 
-            navController.navigate(R.id.fragmentDetails, bundle)
             showProgressBar(true)
+            navController.navigate(R.id.fragmentDetails, bundle)
         } else {
             Toast.makeText(this, "No internet connection!", Toast.LENGTH_SHORT).show()
         }

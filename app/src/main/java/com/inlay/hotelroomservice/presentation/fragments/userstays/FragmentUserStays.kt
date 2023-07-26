@@ -50,6 +50,14 @@ class FragmentUserStays : Fragment() {
         (activity as AppCompatActivity).supportActionBar?.title =
             findNavController().currentDestination?.label
 
+
+
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
         lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 hotelsViewModel.selectedHotelsDataList.collect {
@@ -60,11 +68,5 @@ class FragmentUserStays : Fragment() {
                 }
             }
         }
-
-        return binding.root
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
     }
 }

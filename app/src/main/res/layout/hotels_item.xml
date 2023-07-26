@@ -11,7 +11,6 @@
     </data>
 
     <com.google.android.material.card.MaterialCardView
-
         android:layout_width="match_parent"
         android:layout_height="374dp"
         android:layout_margin="8dp"
@@ -25,15 +24,23 @@
 
             <com.google.android.material.imageview.ShapeableImageView
                 android:id="@+id/hotel_image"
-                android:layout_width="100dp"
-                android:layout_height="0dp"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
                 android:layout_margin="8dp"
                 android:scaleType="centerCrop"
                 app:hotelsItemImageSource="@{viewModel.hotelItemData.photosUrls[0]}"
                 app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/guideline"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:src="@drawable/sample_hotel_item_img_500x300" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.5" />
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/tv_hotel_name"
@@ -87,7 +94,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
-                android:text="@{Double.valueOf(viewModel.hotelItemData.rating.rating).toString()}"
+                android:text="@{viewModel.hotelItemData.rating}"
                 android:textAppearance="?attr/textAppearanceBody1"
                 android:textColor="#C99200"
                 app:layout_constraintBottom_toBottomOf="@id/img_icon_rating"
@@ -100,7 +107,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="4dp"
-                android:text="@{'(' + viewModel.hotelItemData.rating.count + ')'}"
+                android:text="@{'(' + viewModel.hotelItemData.ratingCount + ')'}"
                 app:layout_constraintBottom_toBottomOf="@id/tv_hotel_rating"
                 app:layout_constraintStart_toEndOf="@id/tv_hotel_rating"
                 app:layout_constraintTop_toTopOf="@id/tv_hotel_rating"
@@ -142,5 +149,4 @@
                 app:layout_constraintStart_toStartOf="@id/tv_hotel_price" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </com.google.android.material.card.MaterialCardView>
-
 </layout>

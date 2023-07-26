@@ -1,20 +1,16 @@
 package com.inlay.hotelroomservice.data.mapping
 
-import com.inlay.hotelroomservice.data.local.models.HotelRatingEntity
 import com.inlay.hotelroomservice.data.local.models.HotelsItemEntity
-import com.inlay.hotelroomservice.data.local.models.HotelsItemWithRatingEntity
 import com.inlay.hotelroomservice.data.remote.models.hoteldetails.AboutContentGeneral
 import com.inlay.hotelroomservice.data.remote.models.hoteldetails.AttractionsNearbyContent
 import com.inlay.hotelroomservice.data.remote.models.hoteldetails.HotelDetailsModel
 import com.inlay.hotelroomservice.data.remote.models.hoteldetails.RestaurantsNearbyContent
-import com.inlay.hotelroomservice.data.remote.models.hotels.BubbleRating
 import com.inlay.hotelroomservice.data.remote.models.hotels.CardPhoto
 import com.inlay.hotelroomservice.data.remote.models.hotels.Data
 import com.inlay.hotelroomservice.data.remote.models.searchlocation.Image
 import com.inlay.hotelroomservice.presentation.models.details.HotelDetailsUiModel
 import com.inlay.hotelroomservice.presentation.models.details.NearbyPlace
 import com.inlay.hotelroomservice.presentation.models.hotelsitem.HotelsItemUiModel
-import com.inlay.hotelroomservice.presentation.models.hotelsitem.RatingUiModel
 import com.inlay.hotelroomservice.presentation.models.locations.SearchLocationsImageUiModel
 import com.inlay.hotelroomservice.presentation.models.locations.SearchLocationsUiModel
 
@@ -22,7 +18,8 @@ fun Data.toUiItem(): HotelsItemUiModel = HotelsItemUiModel(
     id = this.id,
     title = this.title.orEmpty(),
     hotelInfo = this.secondaryInfo.orEmpty(),
-    rating = this.bubbleRating?.toUiRatingModel() ?: RatingUiModel("", 0.0),
+    rating = this.bubbleRating?.rating.toString(),
+    ratingCount = this.bubbleRating?.count.toString(),
     price = this.priceForDisplay.orEmpty(),
     photosUrls = this.cardPhotos.toHotelsItemPhotos()
 )
@@ -35,48 +32,24 @@ private fun List<CardPhoto>.toHotelsItemPhotos(): List<String> {
     }
 }
 
-private fun BubbleRating.toUiRatingModel(): RatingUiModel = RatingUiModel(
-    count = count.orEmpty(),
-    rating = rating ?: 0.0
-)
-
-fun HotelsItemWithRatingEntity.toUiItem(): HotelsItemUiModel = HotelsItemUiModel(
-    id = hotelItem.id.toString(),
-    title = hotelItem.title,
-    hotelInfo = hotelItem.hotelInfo,
-    rating = hotelItem.rating.toUiRatingModel(),
-    price = hotelItem.price,
-    photosUrls = hotelItem.cardPhotos.orEmpty()
+fun HotelsItemEntity.toUiItem(): HotelsItemUiModel = HotelsItemUiModel(
+    id = this.id.toString(),
+    title = this.title,
+    hotelInfo = this.hotelInfo,
+    rating = this.rating,
+    ratingCount = this.ratingCount,
+    price = this.price,
+    photosUrls = this.cardPhotos.orEmpty()
 )
 
 fun Data.toEntity(): HotelsItemEntity = HotelsItemEntity(
-//    hotelItem = HotelsItemEntity(
-//        id = this.id.toInt(),
-//        title = this.title.orEmpty(),
-//        hotelInfo = this.secondaryInfo.orEmpty(),
-//        rating = this.bubbleRating?.toEntityRatingModel() ?: HotelRatingEntity(0, "", 0.0),
-//        price = this.priceForDisplay.orEmpty(),
-//        cardPhotos = this.cardPhotos.toHotelsItemPhotos()
-//    ),
-//    rating = this.bubbleRating?.toEntityRatingModel() ?: HotelRatingEntity(0, "", 0.0)
     id = this.id.toInt(),
     title = this.title.orEmpty(),
     hotelInfo = this.secondaryInfo.orEmpty(),
-    rating = this.bubbleRating?.toEntityRatingModel() ?: HotelRatingEntity(0, "", 0.0),
+    rating = this.bubbleRating?.rating.toString(),
+    ratingCount = this.bubbleRating?.count.toString(),
     price = this.priceForDisplay.orEmpty(),
     cardPhotos = this.cardPhotos.toHotelsItemPhotos()
-)
-
-
-private fun HotelRatingEntity.toUiRatingModel(): RatingUiModel = RatingUiModel(
-    count = count,
-    rating = rating
-)
-
-private fun BubbleRating.toEntityRatingModel(): HotelRatingEntity = HotelRatingEntity(
-    ratingId = 0,
-    count = count.orEmpty(),
-    rating = rating ?: 0.0
 )
 
 fun com.inlay.hotelroomservice.data.remote.models.searchlocation.Data.toUiItem(): SearchLocationsUiModel =

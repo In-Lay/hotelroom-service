@@ -95,7 +95,9 @@ class FragmentSearch : Fragment() {
 
         binding.searchView.editText.setOnEditorActionListener { textView, actionId, _ ->
             if (actionId == EditorInfo.IME_ACTION_SEARCH) {
-                searchViewModel.getSearchLocations(textView.text.toString())
+                if (isOnline)
+                    searchViewModel.getSearchLocations(textView.text.toString())
+                else Toast.makeText(context, "No Internet connection!", Toast.LENGTH_SHORT).show()
             }
             true
         }
@@ -120,12 +122,10 @@ class FragmentSearch : Fragment() {
     private val selectItem: (SearchLocationsUiModel) -> Unit = {
         searchViewModel.setCurrentItemModel(it)
         binding.searchBar.setText(it.title)
-//        binding.tvCurrentLocation.text = it.title
         binding.searchView.hide()
     }
 
     private val searchHotels: (SearchDataUiModel) -> Unit = {
-        Toast.makeText(context, "Search", Toast.LENGTH_SHORT).show()
         if (isOnline) {
             //TODO To uncomment
 //            lifecycleScope.launch {
@@ -140,7 +140,7 @@ class FragmentSearch : Fragment() {
 //                }
 //            }
             (activity as MainActivity).goToHotels()
-        } else Toast.makeText(context, "Check Internet connection", Toast.LENGTH_SHORT).show()
+        } else Toast.makeText(context, "No Internet connection!", Toast.LENGTH_SHORT).show()
     }
 
     private val openDatePicker: () -> Unit = {
