@@ -17,9 +17,6 @@ abstract class SearchViewModel : ViewModel() {
     abstract val searchLocationsData: StateFlow<List<SearchLocationsUiModel>>
 
     abstract val selectedItemModel: StateFlow<SearchLocationsUiModel>
-    abstract val selectedItemImage: LiveData<String>
-    abstract val selectedItemTitle: LiveData<String>
-    abstract val selectedItemInfo: LiveData<String>
 
     abstract val dates: LiveData<DatesModel>
     abstract val currencyCode: LiveData<String>

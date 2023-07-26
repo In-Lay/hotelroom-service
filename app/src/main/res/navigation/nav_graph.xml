@@ -28,4 +28,8 @@
         android:id="@+id/fragmentDetails"
         android:name="com.inlay.hotelroomservice.presentation.fragments.details.FragmentDetails"
         android:label="FragmentDetails" />
+    <fragment
+        android:id="@+id/fragmentWebView"
+        android:name="com.inlay.hotelroomservice.presentation.fragments.details.FragmentWebView"
+        android:label="FragmentWebView" />
 </navigation>

@@ -1,13 +1,14 @@
 package com.inlay.hotelroomservice.presentation.models.hotelsitem
 
-import kotlinx.serialization.Serializable
+import android.os.Parcelable
+import kotlinx.parcelize.Parcelize
 
-@Serializable
+@Parcelize
 data class DatesModel(
     val checkInDate: String,
     val checkOutDate: String
 
-) {
+) : Parcelable {
     override fun toString(): String {
         return "$checkInDate - $checkOutDate"
     }

@@ -1,60 +1,64 @@
 package com.inlay.hotelroomservice.presentation.fragments.details
 
-import android.app.Dialog
 import android.os.Build
 import android.os.Bundle
 import android.os.Parcelable
 import android.util.Log
-import android.view.Window
-import android.view.WindowManager
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.DialogFragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.inlay.hotelroomservice.R
 import com.inlay.hotelroomservice.databinding.DialogPlacesNearbyBinding
-import com.inlay.hotelroomservice.presentation.adapters.detailsdialog.PlacesNearbyDialogAdapter
+import com.inlay.hotelroomservice.presentation.adapters.detailsdialog.placesnearby.PlacesNearbyDialogAdapter
 import com.inlay.hotelroomservice.presentation.models.details.NearbyPlace
+
 
 class PlacesNearbyDialog : DialogFragment() {
     private lateinit var binding: DialogPlacesNearbyBinding
-    private lateinit var dialog: Dialog
 
-    override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
-        binding = DialogPlacesNearbyBinding.inflate(layoutInflater)
-        dialog = Dialog(requireContext(), R.style.DialogTheme)
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setStyle(STYLE_NORMAL, R.style.DialogTheme)
+    }
 
-        dialog.setCancelable(true)
-        dialog.setCanceledOnTouchOutside(true)
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
+        binding =
+            DataBindingUtil.inflate(layoutInflater, R.layout.dialog_places_nearby, container, false)
 
         val data = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
             arguments?.getParcelableArrayList("DIALOG_DATA", Parcelable::class.java)
                 .orEmpty() as List<NearbyPlace>
         } else arguments?.getParcelableArrayList("DIALOG_DATA")
-        Log.d(
-            "DetailsLog", "PlacesNearbyDialog: onCreateDialog: data: $data"
-        )
-        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
-        dialog.setContentView(binding.root)
-        dialog.window?.setLayout(
-            WindowManager.LayoutParams.MATCH_PARENT,
-            WindowManager.LayoutParams.MATCH_PARENT
-        )
+
         bindAdapter(data.orEmpty())
 
         binding.imgCloseIcon.setOnClickListener {
-            dialog.dismiss()
+            dialog?.dismiss()
         }
 
-        return dialog
+        return binding.root
+    }
+
+    override fun onStart() {
+        super.onStart()
+        val dialog = dialog
+
+        if (dialog != null) {
+            dialog.setCancelable(true)
+            dialog.setCanceledOnTouchOutside(true)
+        }
     }
 
     private fun bindAdapter(data: List<NearbyPlace>) {
 
         binding.recyclerView.setHasFixedSize(false)
-//            "image" -> {
-//                //            layoutManager.setCarouselStrategy()
-//                binding.recyclerView.layoutManager = CarouselLayoutManager()
-//            }
-
 
         binding.recyclerView.layoutManager = LinearLayoutManager(context)
 
@@ -67,7 +71,6 @@ class PlacesNearbyDialog : DialogFragment() {
                 "DetailsLog", "PlacesNearbyDialog: instance: data: $data"
             )
             arguments = Bundle().apply {
-//                putString("DIALOG_DATA", data)
                 val dataAsParcelable = data as ArrayList<out Parcelable>
                 Log.d(
                     "DetailsLog",

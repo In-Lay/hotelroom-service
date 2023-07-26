@@ -1,4 +1,4 @@
-package com.inlay.hotelroomservice.presentation.adapters.detailsdialog
+package com.inlay.hotelroomservice.presentation.adapters.detailsdialog.placesnearby
 
 import android.view.LayoutInflater
 import android.view.ViewGroup

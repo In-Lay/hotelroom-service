@@ -10,11 +10,22 @@
             type="com.inlay.hotelroomservice.presentation.viewmodels.details.dialog.PlaceNearbyViewModel" />
     </data>
 
+<!--    <com.google.android.material.card.MaterialCardView-->
+<!--        android:id="@+id/card_places_nearby"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="300dp"-->
+<!--        style="?attr/materialCardViewElevatedStyle"-->
+<!--        app:cardCornerRadius="16dp"-->
+<!--        android:layout_margin="8dp"-->
+<!--        android:elevation="10dp">-->
+
     <com.google.android.material.card.MaterialCardView
-        android:id="@+id/card_places_nearby"
+
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="8dp">
+        android:layout_margin="8dp"
+        app:cardCornerRadius="16dp"
+        app:cardElevation="10dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -26,7 +37,7 @@
                 android:layout_height="100dp"
                 android:layout_margin="8dp"
                 android:scaleType="centerCrop"
-                app:detailsRestaurantNearbyImage="@{viewModel.placeNearbyPhoto}"
+                app:detailsImages="@{viewModel.placeNearbyPhoto}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"

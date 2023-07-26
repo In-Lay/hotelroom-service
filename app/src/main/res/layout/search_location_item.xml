@@ -27,10 +27,10 @@
                 android:layout_width="216dp"
                 android:layout_height="180dp"
                 android:scaleType="centerCrop"
-                app:locationsItemImageSource="@{viewModel.imageUrl}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
+                app:locationsItemImageSource="@{viewModel.searchLocationsData.image.urlTemplate}"
                 tools:src="@drawable/sample_hotel_item_img_500x300" />
 
             <com.google.android.material.textview.MaterialTextView
@@ -38,7 +38,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="8dp"
-                android:text="@{viewModel.title}"
+                android:text="@{viewModel.searchLocationsData.title}"
                 android:textAppearance="?attr/textAppearanceBodyLarge"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/img_locations_item"
@@ -50,7 +50,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
                 android:layout_marginBottom="8dp"
-                android:text="@{viewModel.secondaryText}"
+                android:text="@{viewModel.searchLocationsData.secondaryText}"
                 android:textAppearance="?attr/textAppearanceBodySmall"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="@id/tv_locations_title"

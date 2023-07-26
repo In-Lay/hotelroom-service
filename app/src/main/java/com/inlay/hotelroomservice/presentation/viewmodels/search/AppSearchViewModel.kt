@@ -1,6 +1,5 @@
 package com.inlay.hotelroomservice.presentation.viewmodels.search
 
-import android.util.Log
 import androidx.databinding.BindingAdapter
 import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
@@ -41,15 +40,6 @@ class AppSearchViewModel(private val repositoryUseCase: RepositoryUseCase) : Sea
     )
     override val selectedItemModel = _selectedItemModel
 
-    private val _selectedItemImage = MutableStateFlow("")
-    override val selectedItemImage = _selectedItemImage.asLiveData()
-
-    private val _selectedItemTitle = MutableStateFlow("")
-    override val selectedItemTitle = _selectedItemTitle.asLiveData()
-
-    private val _selectedItemInfo = MutableStateFlow("")
-    override val selectedItemInfo = _selectedItemInfo.asLiveData()
-
     private val _dates = MutableStateFlow(DatesModel("", ""))
     override val dates = _dates.asLiveData()
 
@@ -67,7 +57,6 @@ class AppSearchViewModel(private val repositoryUseCase: RepositoryUseCase) : Sea
         openDatePicker: () -> Unit,
         searchHotels: (SearchDataUiModel) -> Unit
     ) {
-        Log.d("SearchTag", "Init")
         _isOnline.value = onlineStatus
         openDatePickerLambda = openDatePicker
         searchHotelsLambda = searchHotels
@@ -78,15 +67,7 @@ class AppSearchViewModel(private val repositoryUseCase: RepositoryUseCase) : Sea
     }
 
     override fun setCurrentItemModel(model: SearchLocationsUiModel) {
-        Log.d("SearchTag", "setCurrentItemModel: model: $model")
         _selectedItemModel.value = model
-        _selectedItemImage.value = model.image?.urlTemplate.orEmpty()
-        _selectedItemTitle.value = model.title
-        Log.d(
-            "SearchTag",
-            "setCurrentItemModel: _selectedItemTitle.value: ${_selectedItemTitle.value}"
-        )
-        _selectedItemInfo.value = model.secondaryText
     }
 
     override fun getSearchLocations(searchInput: String) {
@@ -105,13 +86,10 @@ class AppSearchViewModel(private val repositoryUseCase: RepositoryUseCase) : Sea
     }
 
     override fun openDatePicker() {
-        Log.d("SearchTag", "viewModel: openDatePicker")
         openDatePickerLambda()
-        Log.d("SearchTag", "viewModel: _dates.value: ${_dates.value}")
     }
 
     override fun searchHotels() {
-        Log.d("SearchTag", "viewModel: searchHotels clicked")
         _searchData.value = SearchDataUiModel(
             _selectedItemModel.value.geoId,
             _dates.value.checkInDate,

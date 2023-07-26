@@ -42,7 +42,7 @@
                     android:onClick="@{() -> viewModel.openImageDialog()}"
                     android:scaleType="centerCrop"
                     android:src="@drawable/sample_hotel_item_img_500x300"
-                    app:detailsHotelImage="@{viewModel.hotelImage}"
+                    app:detailsImages="@{viewModel.hotelImage}"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
@@ -51,7 +51,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_margin="8dp"
-                    android:text="@{viewModel.hotelName}"
+                    android:text="@{viewModel.hotelDetailsData.title}"
                     android:textAppearance="?attr/textAppearanceHeadline6"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@id/img_hotel_image"
@@ -65,7 +65,7 @@
                     android:layout_marginStart="8dp"
                     android:layout_marginTop="4dp"
                     android:layout_marginEnd="8dp"
-                    android:text="@{viewModel.hotelAddress}"
+                    android:text="@{viewModel.hotelDetailsData.address}"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@id/img_hotel_image"
                     app:layout_constraintTop_toBottomOf="@id/tv_hotel_name"
@@ -85,7 +85,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="4dp"
-                    android:text="@{viewModel.hotelRating}"
+                    android:text="@{viewModel.hotelDetailsData.rating}"
                     android:textAppearance="?attr/textAppearanceBody1"
                     android:textColor="#C99200"
                     app:layout_constraintBottom_toBottomOf="@id/img_rating_icon"
@@ -98,72 +98,15 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="4dp"
-                    android:text="@{viewModel.hotelRatingCount}"
+                    android:text="@{'(' + viewModel.hotelDetailsData.numberReviews + ')'}"
                     app:layout_constraintBottom_toBottomOf="@id/tv_hotel_rating"
                     app:layout_constraintStart_toEndOf="@id/tv_hotel_rating"
                     app:layout_constraintTop_toTopOf="@id/tv_hotel_rating"
                     tools:text="(1250)" />
 
-                <HorizontalScrollView
-                    android:id="@+id/chips_scroll_view"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginTop="16dp"
-                    android:layout_marginEnd="8dp"
-                    android:scrollbars="none"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/img_hotel_image">
-
-                    <com.google.android.material.chip.ChipGroup
-                        android:id="@+id/chips_amenities"
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        app:singleLine="true">
-
-                        <com.google.android.material.chip.Chip
-                            android:id="@+id/chip_parking"
-                            style="?attr/materialCardViewFilledStyle"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:clickable="false"
-                            android:text="@{viewModel.chipParkingText}"
-                            app:chipIcon="@drawable/outline_directions_car_24"
-                            tools:text="Valet parking" />
-
-                        <com.google.android.material.chip.Chip
-                            android:id="@+id/chip_internet"
-                            style="?attr/materialCardViewFilledStyle"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:clickable="false"
-                            android:text="@{viewModel.chipInternetText}"
-                            app:chipIcon="@drawable/baseline_wifi_24"
-                            tools:text="Wifi" />
-
-                        <com.google.android.material.chip.Chip
-                            android:id="@+id/chip_gym"
-                            style="?attr/materialCardViewFilledStyle"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:clickable="false"
-                            android:text="@{viewModel.chipGymText}"
-                            app:chipIcon="@drawable/baseline_fitness_center_24"
-                            tools:text="Fitness Centre with Gym / Workout Room" />
-
-                        <com.google.android.material.chip.Chip
-                            android:id="@+id/chip_bars"
-                            style="?attr/materialCardViewFilledStyle"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:clickable="false"
-                            android:text="@{viewModel.chipFoodText}"
-                            app:chipIcon="@drawable/outline_restaurant_24"
-                            tools:text="Bar / lounge" />
-
-                    </com.google.android.material.chip.ChipGroup>
-                </HorizontalScrollView>
+                <include
+                    android:id="@+id/details_chip_group"
+                    layout="@layout/details_chip_group" />
 
                 <androidx.cardview.widget.CardView
                     android:id="@+id/card_info"
@@ -175,7 +118,7 @@
                     app:cardCornerRadius="16dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/chips_scroll_view">
+                    app:layout_constraintTop_toBottomOf="@+id/details_chip_group">
 
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="match_parent"
@@ -323,7 +266,7 @@
                             android:layout_height="100dp"
                             android:layout_margin="8dp"
                             android:scaleType="centerCrop"
-                            app:detailsRestaurantNearbyImage="@{viewModel.restaurantNearbyPhoto}"
+                            app:detailsImages="@{viewModel.restaurantNearbyPhoto}"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent"
@@ -334,7 +277,7 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_margin="8dp"
-                            android:text="@{viewModel.restaurantNearbyName}"
+                            android:text="@{viewModel.hotelDetailsData.restaurantsNearby[0].title}"
                             android:textAppearance="?attr/textAppearanceBody1"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toEndOf="@id/img_places_nearby_image"
@@ -346,7 +289,7 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_margin="8dp"
-                            android:text="@{viewModel.restaurantNearbyInfo}"
+                            android:text="@{viewModel.hotelDetailsData.restaurantsNearby[0].primaryInfo}"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toEndOf="@id/img_places_nearby_image"
                             app:layout_constraintTop_toBottomOf="@id/tv_places_nearby_name"
@@ -367,7 +310,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="4dp"
-                            android:text="@{viewModel.restaurantNearbyRating}"
+                            android:text="@{Double.valueOf(viewModel.hotelDetailsData.rating).toString()}"
                             android:textAppearance="?attr/textAppearanceBody1"
                             android:textColor="#C99200"
                             app:layout_constraintStart_toEndOf="@+id/img_restaurant_nearby_rating_icon"
@@ -379,7 +322,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="4dp"
-                            android:text="@{viewModel.restaurantNearbyRatingCount}"
+                            android:text="@{'(' + viewModel.hotelDetailsData.restaurantsNearby[0].numberReviews + ')'}"
                             app:layout_constraintBottom_toBottomOf="@+id/tv_restaurants_nearby_rating"
                             app:layout_constraintStart_toEndOf="@+id/tv_restaurants_nearby_rating"
                             app:layout_constraintTop_toTopOf="@+id/tv_restaurants_nearby_rating"
@@ -390,7 +333,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginEnd="8dp"
-                            android:text="@{viewModel.restaurantNearbyDistance}"
+                            android:text="@{viewModel.hotelDetailsData.restaurantsNearby[0].distance}"
                             app:layout_constraintBottom_toBottomOf="@+id/img_restaurant_nearby_rating_icon"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintTop_toTopOf="@+id/img_restaurant_nearby_rating_icon"
@@ -443,7 +386,7 @@
                             android:layout_height="100dp"
                             android:layout_margin="8dp"
                             android:scaleType="centerCrop"
-                            app:detailsAttractionNearbyImage="@{viewModel.attractionNearbyPhoto}"
+                            app:detailsImages="@{viewModel.attractionNearbyPhoto}"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent"
@@ -454,7 +397,7 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_margin="8dp"
-                            android:text="@{viewModel.attractionNearbyName}"
+                            android:text="@{viewModel.hotelDetailsData.attractionsNearby[0].title}"
                             android:textAppearance="?attr/textAppearanceBody1"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toEndOf="@id/img_attraction_nearby_image"
@@ -466,7 +409,7 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_margin="8dp"
-                            android:text="@{viewModel.attractionNearbyInfo}"
+                            android:text="@{viewModel.hotelDetailsData.attractionsNearby[0].primaryInfo}"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toEndOf="@id/img_attraction_nearby_image"
                             app:layout_constraintTop_toBottomOf="@id/tv_attraction_nearby_name"
@@ -487,7 +430,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="4dp"
-                            android:text="@{viewModel.attractionNearbyRating}"
+                            android:text="@{Double.valueOf(viewModel.hotelDetailsData.rating).toString()}"
                             android:textAppearance="?attr/textAppearanceBody1"
                             android:textColor="#C99200"
                             app:layout_constraintStart_toEndOf="@+id/img_attraction_nearby_rating_icon"
@@ -499,7 +442,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="4dp"
-                            android:text="@{viewModel.attractionNearbyRatingCount}"
+                            android:text="@{'(' + viewModel.hotelDetailsData.attractionsNearby[0].numberReviews + ')'}"
                             app:layout_constraintBottom_toBottomOf="@+id/tv_attraction_nearby_rating"
                             app:layout_constraintStart_toEndOf="@+id/tv_attraction_nearby_rating"
                             app:layout_constraintTop_toTopOf="@+id/tv_attraction_nearby_rating"
@@ -510,7 +453,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginEnd="8dp"
-                            android:text="@{viewModel.attractionNearbyDistance}"
+                            android:text="@{viewModel.hotelDetailsData.attractionsNearby[0].distance}"
                             app:layout_constraintBottom_toBottomOf="@+id/img_attraction_nearby_rating_icon"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintTop_toTopOf="@+id/img_attraction_nearby_rating_icon"
@@ -548,25 +491,7 @@
                         android:layout_height="match_parent"
                         tools:layout="@layout/fragment_map" />
                 </com.google.android.material.card.MaterialCardView>
-                <!-- TODO additional photos-->
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.core.widget.NestedScrollView>
-
-        <WebView
-            android:id="@+id/web_view"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:visibility="gone" />
-
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/fab_close_web_view"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="end|bottom"
-            android:layout_margin="8dp"
-            android:contentDescription="@string/fab_close_web_view"
-            android:onClick="@{() -> viewModel.closeWebView()}"
-            android:src="@drawable/outline_close_24"
-            android:visibility="gone" />
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </layout>

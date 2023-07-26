@@ -5,6 +5,4 @@ data class SearchDataUiModel(
     val checkInDate: String,
     val checkOutDate: String,
     val currencyCode: String
-
-
 )

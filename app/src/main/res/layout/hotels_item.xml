@@ -11,7 +11,7 @@
     </data>
 
     <com.google.android.material.card.MaterialCardView
-        style="?attr/materialCardViewFilledStyle"
+
         android:layout_width="match_parent"
         android:layout_height="374dp"
         android:layout_margin="8dp"
@@ -25,11 +25,11 @@
 
             <com.google.android.material.imageview.ShapeableImageView
                 android:id="@+id/hotel_image"
-                android:layout_width="200dp"
+                android:layout_width="100dp"
                 android:layout_height="0dp"
                 android:layout_margin="8dp"
                 android:scaleType="centerCrop"
-                app:hotelsItemImageSource="@{viewModel.imageUrl}"
+                app:hotelsItemImageSource="@{viewModel.hotelItemData.photosUrls[0]}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
@@ -66,7 +66,7 @@
                 android:layout_marginStart="4dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="8dp"
-                android:text="@{viewModel.hotelInfo}"
+                android:text="@{viewModel.hotelItemData.hotelInfo}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/img_location_icon"
                 app:layout_constraintTop_toBottomOf="@id/tv_hotel_name"
@@ -87,9 +87,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
-                android:textColor="#C99200"
-                android:text="@{viewModel.rating}"
+                android:text="@{Double.valueOf(viewModel.hotelItemData.rating.rating).toString()}"
                 android:textAppearance="?attr/textAppearanceBody1"
+                android:textColor="#C99200"
                 app:layout_constraintBottom_toBottomOf="@id/img_icon_rating"
                 app:layout_constraintStart_toEndOf="@id/img_icon_rating"
                 app:layout_constraintTop_toTopOf="@id/img_icon_rating"
@@ -100,7 +100,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="4dp"
-                android:text="@{viewModel.ratingCount}"
+                android:text="@{'(' + viewModel.hotelItemData.rating.count + ')'}"
                 app:layout_constraintBottom_toBottomOf="@id/tv_hotel_rating"
                 app:layout_constraintStart_toEndOf="@id/tv_hotel_rating"
                 app:layout_constraintTop_toTopOf="@id/tv_hotel_rating"
@@ -112,7 +112,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:layout_marginBottom="64dp"
-                android:text="@{viewModel.price}"
+                android:text="@{viewModel.hotelItemData.price}"
                 android:textAppearance="?attr/textAppearanceHeadline6"
                 app:layout_constraintBottom_toTopOf="@id/btn_add"
                 app:layout_constraintStart_toStartOf="@id/img_icon_rating"
@@ -125,6 +125,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="24dp"
                 android:text="@string/btn_add"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0"
                 app:layout_constraintStart_toStartOf="@id/tv_hotel_price"
                 app:layout_constraintTop_toBottomOf="@id/tv_hotel_price" />
 

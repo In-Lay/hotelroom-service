@@ -19,7 +19,9 @@ import com.inlay.hotelroomservice.databinding.FragmentHotelsBinding
 import com.inlay.hotelroomservice.presentation.DrawerProvider
 import com.inlay.hotelroomservice.presentation.activities.MainActivity
 import com.inlay.hotelroomservice.presentation.adapters.hotels.HotelsListAdapter
+import com.inlay.hotelroomservice.presentation.models.hotelsitem.HotelsDatesAndCurrencyModel
 import com.inlay.hotelroomservice.presentation.viewmodels.hotels.HotelsViewModel
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.activityViewModel
@@ -27,6 +29,8 @@ import org.koin.androidx.viewmodel.ext.android.activityViewModel
 class HotelsFragment : Fragment() {
     private lateinit var binding: FragmentHotelsBinding
     private val hotelsViewModel: HotelsViewModel by activityViewModel()
+    private lateinit var hotelsDatesAndCurrencyModel: HotelsDatesAndCurrencyModel
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -34,6 +38,7 @@ class HotelsFragment : Fragment() {
     ): View {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_hotels, container, false)
         binding.lifecycleOwner = this
+
         val toolbar = binding.toolbar.findViewById<MaterialToolbar>(R.id.toolbar_general)
         (requireActivity() as AppCompatActivity).setSupportActionBar(toolbar)
         (activity as AppCompatActivity).supportActionBar?.setDisplayHomeAsUpEnabled(true)
@@ -43,6 +48,15 @@ class HotelsFragment : Fragment() {
         }
         (activity as AppCompatActivity).supportActionBar?.title =
             findNavController().currentDestination?.label
+
+        lifecycleScope.launch {
+            hotelsViewModel.hotelsDatesAndCurrencyModel.collectLatest {
+                if (it != null) {
+                    hotelsDatesAndCurrencyModel = it
+                }
+            }
+        }
+
         return binding.root
     }
 
@@ -55,19 +69,11 @@ class HotelsFragment : Fragment() {
     private fun bindAdapter() {
         lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
-//                hotelsViewModel.hotelsDataList.collectLatest {
-//                    binding.recyclerView.adapter =
-//                        HotelsListAdapter(
-//                            it,
-//                            (activity as MainActivity).goToDetails
-//                        )
-//                    binding.recyclerView.layoutManager = LinearLayoutManager(context)
-//                    binding.recyclerView.setHasFixedSize(false)
-//                }
                 hotelsViewModel.hotelsDataList.collectLatest {
                     binding.recyclerView.adapter =
                         HotelsListAdapter(
                             it,
+                            hotelsDatesAndCurrencyModel,
                             (activity as MainActivity).goToDetails
                         )
                     binding.recyclerView.layoutManager = LinearLayoutManager(context)

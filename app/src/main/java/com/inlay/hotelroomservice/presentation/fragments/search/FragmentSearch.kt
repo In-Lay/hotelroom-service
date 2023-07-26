@@ -2,11 +2,7 @@ package com.inlay.hotelroomservice.presentation.fragments.search
 
 import android.os.Bundle
 import android.text.Editable
-import android.util.Log
 import android.view.LayoutInflater
-import android.view.Menu
-import android.view.MenuInflater
-import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
@@ -20,8 +16,6 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
-import com.google.android.material.appbar.AppBarLayout
-import com.google.android.material.appbar.CollapsingToolbarLayout
 import com.google.android.material.datepicker.MaterialDatePicker
 import com.inlay.hotelroomservice.R
 import com.inlay.hotelroomservice.databinding.FragmentSearchBinding
@@ -124,10 +118,9 @@ class FragmentSearch : Fragment() {
     }
 
     private val selectItem: (SearchLocationsUiModel) -> Unit = {
-        Log.d("SearchTag", "Item selected")
         searchViewModel.setCurrentItemModel(it)
-        binding.searchBar.text = it.title
-        binding.tvCurrentLocation.text = it.title
+        binding.searchBar.setText(it.title)
+//        binding.tvCurrentLocation.text = it.title
         binding.searchView.hide()
     }
 
@@ -151,10 +144,8 @@ class FragmentSearch : Fragment() {
     }
 
     private val openDatePicker: () -> Unit = {
-        Toast.makeText(context, "Date picker", Toast.LENGTH_SHORT).show()
-        Log.d("SearchTag", "Date picker opened")
-        var checkIn = ""
-        var checkOut = ""
+        var checkIn: String
+        var checkOut: String
         val calendar = Calendar.getInstance()
         calendar.add(Calendar.DAY_OF_YEAR, 1)
         val checkInDate = calendar.timeInMillis
@@ -172,16 +163,9 @@ class FragmentSearch : Fragment() {
         materialDatePicker.addOnPositiveButtonClickListener {
             checkIn = simpleDateFormat.format(it.first)
             checkOut = simpleDateFormat.format(it.second)
-            Log.d(
-                "SearchTag",
-                "materialDatePicker: positive button: checkIn: $checkIn, checkOut: $checkOut"
-            )
             searchViewModel.setDates(DatesModel(checkIn, checkOut))
             materialDatePicker.dismiss()
         }
         materialDatePicker.show(activity?.supportFragmentManager!!, "Date picker")
-        Log.d("SearchTag", "materialDatePicker: isVisible: ${materialDatePicker.isVisible}")
-
-        Log.d("SearchTag", "checkIn: $checkIn, checkOut: $checkOut")
     }
 }

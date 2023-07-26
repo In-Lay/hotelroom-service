@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<HorizontalScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/chips_scroll_view"
+    android:layout_width="0dp"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="8dp"
+    android:layout_marginTop="16dp"
+    android:layout_marginEnd="8dp"
+    android:scrollbars="none"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toBottomOf="@id/img_hotel_image">
+
+    <com.google.android.material.chip.ChipGroup
+        android:id="@+id/chips_amenities"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        app:singleLine="true">
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/chip_parking"
+            style="?attr/materialCardViewFilledStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:clickable="false"
+            android:text="@{viewModel.chipParkingText}"
+            app:chipIcon="@drawable/outline_directions_car_24"
+            tools:text="Valet parking" />
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/chip_internet"
+            style="?attr/materialCardViewFilledStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:clickable="false"
+            android:text="@{viewModel.chipInternetText}"
+            app:chipIcon="@drawable/baseline_wifi_24"
+            tools:text="Wifi" />
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/chip_gym"
+            style="?attr/materialCardViewFilledStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:clickable="false"
+            android:text="@{viewModel.chipGymText}"
+            app:chipIcon="@drawable/baseline_fitness_center_24"
+            tools:text="Fitness Centre with Gym / Workout Room" />
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/chip_bars"
+            style="?attr/materialCardViewFilledStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:clickable="false"
+            android:text="@{viewModel.chipFoodText}"
+            app:chipIcon="@drawable/outline_restaurant_24"
+            tools:text="Bar / lounge" />
+
+    </com.google.android.material.chip.ChipGroup>
+</HorizontalScrollView>

@@ -1,4 +1,4 @@
-package com.inlay.hotelroomservice.presentation.adapters.detailsdialog
+package com.inlay.hotelroomservice.presentation.adapters.detailsdialog.placesnearby
 
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.inlay.hotelroomservice.databinding.PlacesNearbyItemBinding
