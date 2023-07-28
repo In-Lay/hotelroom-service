@@ -4,38 +4,57 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
-import com.google.android.material.appbar.MaterialToolbar
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 import com.inlay.hotelroomservice.R
 import com.inlay.hotelroomservice.databinding.FragmentProfileBinding
 import com.inlay.hotelroomservice.presentation.DrawerProvider
+import com.inlay.hotelroomservice.presentation.viewmodels.profile.ProfileViewModel
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class FragmentProfile : Fragment() {
     private lateinit var binding: FragmentProfileBinding
+    private val viewModel: ProfileViewModel by viewModel()
+    private var isOnline = false
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_profile, container, false)
-        val toolbar = binding.toolbar.findViewById<MaterialToolbar>(R.id.toolbar_general)
 
-        (activity as AppCompatActivity).setSupportActionBar(toolbar)
+        (activity as AppCompatActivity).setSupportActionBar(binding.toolbarGeneral)
         (activity as AppCompatActivity).supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        toolbar.setNavigationIcon(R.drawable.baseline_dehaze_24)
-        toolbar.setNavigationOnClickListener {
+        binding.toolbarGeneral.setNavigationIcon(R.drawable.baseline_dehaze_24)
+        binding.toolbarGeneral.setNavigationOnClickListener {
             (activity as DrawerProvider).getDrawerLayout().openDrawer(GravityCompat.START)
         }
         (activity as AppCompatActivity).supportActionBar?.title =
             findNavController().currentDestination?.label
 
+        binding.viewModel = viewModel
         binding.lifecycleOwner = viewLifecycleOwner
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        val user = Firebase.auth.currentUser
+        viewModel.initializeData(logout, edit, user)
+    }
+
+    private val logout: () -> Unit = {
+        Firebase.auth.signOut()
+        Toast.makeText(context, "Logout", Toast.LENGTH_SHORT).show()
+    }
+
+    private val edit: () -> Unit = {
+        Toast.makeText(context, "Edit", Toast.LENGTH_SHORT).show()
+        findNavController().navigate(R.id.fragmentEditProfile)
     }
 }

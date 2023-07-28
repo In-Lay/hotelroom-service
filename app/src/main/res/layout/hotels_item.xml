@@ -121,16 +121,17 @@
                 android:layout_marginBottom="64dp"
                 android:text="@{viewModel.hotelItemData.price}"
                 android:textAppearance="?attr/textAppearanceHeadline6"
-                app:layout_constraintBottom_toTopOf="@id/btn_add"
+                app:layout_constraintBottom_toTopOf="@id/btn_add_remove"
                 app:layout_constraintStart_toStartOf="@id/img_icon_rating"
                 app:layout_constraintTop_toBottomOf="@id/img_icon_rating"
                 tools:text="250$" />
 
             <com.google.android.material.button.MaterialButton
-                android:id="@+id/btn_add"
+                android:id="@+id/btn_add_remove"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="24dp"
+                android:onClick="@{() -> viewModel.addRemoveStay()}"
                 android:text="@string/btn_add"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0"

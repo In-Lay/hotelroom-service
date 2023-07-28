@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
 import androidx.databinding.DataBindingUtil
@@ -12,13 +13,22 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.appbar.MaterialToolbar
+import com.google.firebase.auth.FirebaseUser
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 import com.inlay.hotelroomservice.R
 import com.inlay.hotelroomservice.databinding.FragmentUserStaysBinding
+import com.inlay.hotelroomservice.extensions.isNetworkAvailable
 import com.inlay.hotelroomservice.presentation.DrawerProvider
 import com.inlay.hotelroomservice.presentation.activities.MainActivity
+import com.inlay.hotelroomservice.presentation.adapters.hotels.HotelsListAdapter
+import com.inlay.hotelroomservice.presentation.models.hotelsitem.HotelsDatesAndCurrencyModel
+import com.inlay.hotelroomservice.presentation.models.hotelsitem.HotelsItemUiModel
 import com.inlay.hotelroomservice.presentation.viewmodels.hotels.HotelsViewModel
 import com.inlay.hotelroomservice.presentation.viewmodels.userstays.UserStaysViewModel
+import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.activityViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -28,6 +38,7 @@ class FragmentUserStays : Fragment() {
     private val viewModel: UserStaysViewModel by viewModel()
     private val hotelsViewModel: HotelsViewModel by activityViewModel()
     private var isLogged = false
+    private lateinit var hotelsDatesAndCurrencyModel: HotelsDatesAndCurrencyModel
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -35,7 +46,15 @@ class FragmentUserStays : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_user_stays, container, false)
-        viewModel.initializeData((activity as MainActivity).goToHotels, false)
+
+        val user = Firebase.auth.currentUser
+        viewModel.initializeData(
+            (activity as MainActivity).goToHotels,
+            goToProfile,
+            isUserLogged(user),
+            user
+        )
+        hotelsViewModel.getStaysRepo(requireContext().isNetworkAvailable())
 
         binding.viewModel = viewModel
         binding.lifecycleOwner = viewLifecycleOwner
@@ -50,7 +69,14 @@ class FragmentUserStays : Fragment() {
         (activity as AppCompatActivity).supportActionBar?.title =
             findNavController().currentDestination?.label
 
+        lifecycleScope.launch {
+            hotelsViewModel.hotelsDatesAndCurrencyModel.collect {
+                if (it != null) {
+                    hotelsDatesAndCurrencyModel = it
+                }
+            }
 
+        }
 
         return binding.root
     }
@@ -60,13 +86,42 @@ class FragmentUserStays : Fragment() {
 
         lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
-                hotelsViewModel.selectedHotelsDataList.collect {
+                hotelsViewModel.selectedHotelsDataList.collectLatest {
                     if (it.isNotEmpty()) {
                         binding.tvEmptyList.visibility = View.GONE
                         binding.recyclerView.visibility = View.VISIBLE
+
+                        binding.recyclerView.setHasFixedSize(false)
+                        binding.recyclerView.layoutManager = LinearLayoutManager(context)
+                        binding.recyclerView.adapter =
+                            HotelsListAdapter(
+                                it,
+                                hotelsDatesAndCurrencyModel,
+                                (activity as MainActivity).goToDetails,
+                                removeStay,
+                                "stays"
+                            )
                     }
                 }
             }
         }
+    }
+
+    private val goToProfile: () -> Unit = {
+        if (!isLogged) findNavController().navigate(R.id.fragmentLogin)
+        else findNavController().navigate(R.id.fragmentProfile)
+    }
+
+    private val removeStay: (HotelsItemUiModel) -> Unit = {
+        lifecycleScope.launch {
+            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                hotelsViewModel.removeStay(it)
+            }
+        }
+        Toast.makeText(context, "Removed", Toast.LENGTH_SHORT).show()
+    }
+
+    private fun isUserLogged(user: FirebaseUser?): Boolean {
+        return user != null
     }
 }

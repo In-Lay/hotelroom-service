@@ -25,18 +25,21 @@ class AppHotelsItemViewModel : HotelsItemViewModel() {
 
     private lateinit var goToDetails: (HotelDetailsSearchModel) -> Unit
 
+    private lateinit var addOrRemoveStay: (HotelsItemUiModel) -> Unit
+
     override fun goToDetails() {
         _hotelDetailsSearchModel.value?.let { goToDetails(it) }
     }
 
-    override fun addToStay() {
-        TODO("Not yet implemented")
+    override fun addRemoveStay() {
+        _hotelItemData.value?.let { addOrRemoveStay(it) }
     }
 
     override fun initializeData(
         hotelsUiModel: HotelsItemUiModel,
         hotelsDatesAndCurrencyModel: HotelsDatesAndCurrencyModel,
-        openDetails: (HotelDetailsSearchModel) -> Unit
+        openDetails: (HotelDetailsSearchModel) -> Unit,
+        addOrRemoveStay: (HotelsItemUiModel) -> Unit
     ) {
         _hotelItemData.value = hotelsUiModel
 
@@ -51,6 +54,8 @@ class AppHotelsItemViewModel : HotelsItemViewModel() {
         ) else hotelsUiModel.title
 
         goToDetails = openDetails
+
+        this.addOrRemoveStay = addOrRemoveStay
     }
 
     companion object {

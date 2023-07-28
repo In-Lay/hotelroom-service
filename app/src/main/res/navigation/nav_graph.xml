@@ -27,9 +27,21 @@
     <fragment
         android:id="@+id/fragmentDetails"
         android:name="com.inlay.hotelroomservice.presentation.fragments.details.FragmentDetails"
-        android:label="FragmentDetails" />
+        android:label="Details" />
     <fragment
         android:id="@+id/fragmentWebView"
         android:name="com.inlay.hotelroomservice.presentation.fragments.details.FragmentWebView"
         android:label="FragmentWebView" />
+    <fragment
+        android:id="@+id/fragmentLogin"
+        android:name="com.inlay.hotelroomservice.presentation.fragments.profile.loginregister.FragmentLogin"
+        android:label="Login" />
+    <fragment
+        android:id="@+id/fragmentRegister"
+        android:name="com.inlay.hotelroomservice.presentation.fragments.profile.loginregister.FragmentRegister"
+        android:label="Register" />
+    <fragment
+        android:id="@+id/fragmentEditProfile"
+        android:name="com.inlay.hotelroomservice.presentation.fragments.profile.editprofile.FragmentEditProfile"
+        android:label="Edit Profile" />
 </navigation>

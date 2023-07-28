@@ -6,18 +6,18 @@ import androidx.lifecycle.findViewTreeLifecycleOwner
 import androidx.recyclerview.widget.RecyclerView.Adapter
 import com.inlay.hotelroomservice.databinding.HotelsItemBinding
 import com.inlay.hotelroomservice.presentation.models.details.HotelDetailsSearchModel
-import com.inlay.hotelroomservice.presentation.models.hotelsitem.DatesModel
 import com.inlay.hotelroomservice.presentation.models.hotelsitem.HotelsDatesAndCurrencyModel
 import com.inlay.hotelroomservice.presentation.models.hotelsitem.HotelsItemUiModel
 import com.inlay.hotelroomservice.presentation.viewmodels.hotels.item.HotelsItemViewModel
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
-import java.util.Currency
 
 class HotelsListAdapter(
     private val hotelsList: List<HotelsItemUiModel>,
     private val hotelsDatesAndCurrencyModel: HotelsDatesAndCurrencyModel,
-    private val goToDetails: (HotelDetailsSearchModel) -> Unit
+    private val goToDetails: (HotelDetailsSearchModel) -> Unit,
+    private val addRemoveStay: (HotelsItemUiModel) -> Unit,
+    private val listType: String
 ) : Adapter<HotelsItemViewHolder>(), KoinComponent {
     private lateinit var binding: HotelsItemBinding
 
@@ -25,7 +25,7 @@ class HotelsListAdapter(
         binding = HotelsItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
 
         binding.lifecycleOwner = parent.findViewTreeLifecycleOwner()
-        return HotelsItemViewHolder(binding)
+        return HotelsItemViewHolder(binding, parent.context)
     }
 
     override fun onBindViewHolder(holder: HotelsItemViewHolder, position: Int) {
@@ -34,9 +34,10 @@ class HotelsListAdapter(
         viewModel.initializeData(
             singleHotelData,
             hotelsDatesAndCurrencyModel,
-            goToDetails
+            goToDetails,
+            addRemoveStay
         )
-        holder.bind(viewModel)
+        holder.bind(viewModel, listType)
     }
 
     override fun getItemCount(): Int {

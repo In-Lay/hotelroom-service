@@ -5,10 +5,11 @@ import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 import com.inlay.hotelroomservice.data.local.dao.HotelsRoomDao
 import com.inlay.hotelroomservice.data.local.models.HotelsItemEntity
+import com.inlay.hotelroomservice.data.local.models.HotelsItemStaysEntity
 import com.inlay.hotelroomservice.data.local.typeconverters.StringListTypeConverter
 
 @Database(
-    entities = [HotelsItemEntity::class],
+    entities = [HotelsItemEntity::class, HotelsItemStaysEntity::class],
     exportSchema = false,
     version = 1
 )

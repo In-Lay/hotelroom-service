@@ -40,4 +40,16 @@ class RepositoryUseCaseImpl(private val hotelRoomRepository: HotelRoomRepository
             currencyCode
         )
     }
+
+    override suspend fun getStaysRepo(isOnline: Boolean): List<HotelsItemUiModel> {
+        return hotelRoomRepository.getStaysRepo(isOnline)
+    }
+
+    override suspend fun addStayRepo(hotelsItem: HotelsItemUiModel) {
+        hotelRoomRepository.addStaysRepo(hotelsItem)
+    }
+
+    override suspend fun removeStayRepo(hotelsItem: HotelsItemUiModel) {
+        hotelRoomRepository.removeStaysRepo(hotelsItem)
+    }
 }

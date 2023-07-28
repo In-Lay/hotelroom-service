@@ -1,6 +1,8 @@
 package com.inlay.hotelroomservice.di
 
 import androidx.room.Room
+import com.google.firebase.database.ktx.database
+import com.google.firebase.ktx.Firebase
 import com.inlay.hotelroomservice.data.getSampleDetailsDataFromAssets
 import com.inlay.hotelroomservice.data.getSampleHotelsDataFromAssets
 import com.inlay.hotelroomservice.data.getSampleLocationsDataFromAssets
@@ -23,10 +25,16 @@ import com.inlay.hotelroomservice.presentation.viewmodels.details.AppDetailsView
 import com.inlay.hotelroomservice.presentation.viewmodels.details.DetailsViewModel
 import com.inlay.hotelroomservice.presentation.viewmodels.details.dialog.AppPlaceNearbyViewModel
 import com.inlay.hotelroomservice.presentation.viewmodels.details.dialog.PlaceNearbyViewModel
+import com.inlay.hotelroomservice.presentation.viewmodels.editprofile.AppEditProfileViewModel
+import com.inlay.hotelroomservice.presentation.viewmodels.editprofile.EditProfileViewModel
 import com.inlay.hotelroomservice.presentation.viewmodels.hotels.AppHotelsViewModel
 import com.inlay.hotelroomservice.presentation.viewmodels.hotels.HotelsViewModel
 import com.inlay.hotelroomservice.presentation.viewmodels.hotels.item.AppHotelsItemViewModel
 import com.inlay.hotelroomservice.presentation.viewmodels.hotels.item.HotelsItemViewModel
+import com.inlay.hotelroomservice.presentation.viewmodels.loginregister.AppLoginRegisterViewModel
+import com.inlay.hotelroomservice.presentation.viewmodels.loginregister.LoginRegisterViewModel
+import com.inlay.hotelroomservice.presentation.viewmodels.profile.AppProfileViewModel
+import com.inlay.hotelroomservice.presentation.viewmodels.profile.ProfileViewModel
 import com.inlay.hotelroomservice.presentation.viewmodels.search.AppSearchViewModel
 import com.inlay.hotelroomservice.presentation.viewmodels.search.SearchViewModel
 import com.inlay.hotelroomservice.presentation.viewmodels.search.item.AppSearchLocationsItemViewModel
@@ -59,7 +67,7 @@ val appModule = module {
     }
     single { get<HotelsRoomDatabase>().hotelsRoomDao() }
 
-
+    single { Firebase.database("https://hotelroom-service-default-rtdb.europe-west1.firebasedatabase.app") }
 
     single { makeMoshi() }
     single { makeHttpClient() }
@@ -99,4 +107,10 @@ val appModule = module {
     viewModel<PlaceNearbyViewModel> { AppPlaceNearbyViewModel() }
 
     viewModel<UserStaysViewModel> { AppUserStaysViewModel() }
+
+    viewModel<ProfileViewModel> { AppProfileViewModel() }
+
+    viewModel<EditProfileViewModel> { AppEditProfileViewModel() }
+
+    viewModel<LoginRegisterViewModel> { AppLoginRegisterViewModel() }
 }

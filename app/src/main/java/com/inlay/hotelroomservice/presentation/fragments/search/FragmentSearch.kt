@@ -16,6 +16,8 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
+import com.google.android.material.appbar.AppBarLayout
+import com.google.android.material.appbar.CollapsingToolbarLayout
 import com.google.android.material.datepicker.MaterialDatePicker
 import com.inlay.hotelroomservice.R
 import com.inlay.hotelroomservice.databinding.FragmentSearchBinding
@@ -54,13 +56,14 @@ class FragmentSearch : Fragment() {
             findNavController().popBackStack()
         }
 
-//        binding.appbarLayout.addOnOffsetChangedListener(AppBarLayout.OnOffsetChangedListener { appBarLayout, verticalOffset ->
+//        binding.appbarLayout.addOnOffsetChangedListener { appBarLayout, verticalOffset ->
 //            val progress: Float = -verticalOffset / appBarLayout.totalScrollRange.toFloat()
 //
 //            // Adjust the width of the SearchView
 //            val layoutParams = binding.searchBar.layoutParams
-//            layoutParams.width = (((binding.supportToolbar.width - binding.supportToolbar.contentInsetStart * 2) * progress).toInt() +
-//                    (appBarLayout.width - binding.supportToolbar.contentInsetStart * 2) * (1 - progress)).toInt()
+//            layoutParams.width =
+//                (((binding.supportToolbar.width - binding.supportToolbar.contentInsetStart * 2) * progress).toInt() +
+//                        (appBarLayout.width - binding.supportToolbar.contentInsetStart * 2) * (1 - progress)).toInt()
 //            binding.searchBar.layoutParams = layoutParams
 //
 //            // Adjust the margins of the SearchView
@@ -72,7 +75,7 @@ class FragmentSearch : Fragment() {
 //                (appBarLayout.height - binding.searchBar.height) / 2 * (1 - progress).toInt()
 //            )
 //            binding.searchBar.requestLayout()
-//        })
+//        }
 
         binding.viewModel = searchViewModel
         binding.lifecycleOwner = this

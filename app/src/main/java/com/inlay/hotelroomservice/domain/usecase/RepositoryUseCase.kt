@@ -21,4 +21,10 @@ interface RepositoryUseCase {
         checkOutDate: String,
         currencyCode: String
     ): HotelDetailsUiModel
+
+    suspend fun getStaysRepo(isOnline: Boolean): List<HotelsItemUiModel>
+
+    suspend fun addStayRepo(hotelsItem: HotelsItemUiModel)
+
+    suspend fun removeStayRepo(hotelsItem: HotelsItemUiModel)
 }

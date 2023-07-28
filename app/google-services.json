@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "735338658249",
+    "project_id": "hotelroom-service",
+    "storage_bucket": "hotelroom-service.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:735338658249:android:b1f416823389d0a4015018",
+        "android_client_info": {
+          "package_name": "com.inlay.hotelroomservice"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "735338658249-3oreudk34kassvi8p2q4498gvnrcf28u.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.inlay.hotelroomservice",
+            "certificate_hash": "7443df9afefc3bf2e36a33eb7540be02c6b5a2ae"
+          }
+        },
+        {
+          "client_id": "735338658249-khemcho5n0ljfrc81q1iolbcoqnpi19v.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAbKSca_SBgZgS3_loXWX0PSdbg0yBcbrQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "735338658249-khemcho5n0ljfrc81q1iolbcoqnpi19v.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

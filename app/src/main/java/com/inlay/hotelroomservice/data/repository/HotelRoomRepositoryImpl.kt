@@ -67,8 +67,6 @@ class HotelRoomRepositoryImpl(
                     it.toUiItem()
                 }
             }.orEmpty()
-
-
         } else {
             localDataSource.fetchRepo().first().map {
                 it.toUiItem()
@@ -127,5 +125,24 @@ class HotelRoomRepositoryImpl(
         )
 
         return hotelDetailsData?.toUiModel() ?: emptyModel
+    }
+
+    override suspend fun getStaysRepo(isOnline: Boolean): List<HotelsItemUiModel> {
+//      return  if (isOnline) {
+//
+//        } else {
+//
+//        }
+        return localDataSource.fetchStaysRepo().first().map { it.toUiItem() }
+    }
+
+    override suspend fun addStaysRepo(hotelsItem: HotelsItemUiModel) {
+        localDataSource.insertStayRepo(hotelsItem.toEntity())
+//        remoteDataSource.
+    }
+
+    override suspend fun removeStaysRepo(hotelsItem: HotelsItemUiModel) {
+        localDataSource.deleteStayRepo(hotelsItem.toEntity())
+//        remoteDataSource.
     }
 }

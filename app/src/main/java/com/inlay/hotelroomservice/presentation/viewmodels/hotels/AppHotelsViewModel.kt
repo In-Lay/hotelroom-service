@@ -68,6 +68,30 @@ class AppHotelsViewModel(
         }
     }
 
+    override fun getStaysRepo(isOnline: Boolean) {
+        viewModelScope.launch(Dispatchers.IO) {
+            _selectedHotelsDataList.value = repositoryUseCase.getStaysRepo(isOnline)
+        }
+    }
+
+    override fun addStay(hotelsItem: HotelsItemUiModel) {
+        val dataList = _selectedHotelsDataList.value.toMutableList()
+        dataList.add(hotelsItem)
+        _selectedHotelsDataList.value = dataList
+        viewModelScope.launch(Dispatchers.IO) {
+            repositoryUseCase.addStayRepo(hotelsItem)
+        }
+    }
+
+    override fun removeStay(hotelsItem: HotelsItemUiModel) {
+        val dataList = _selectedHotelsDataList.value.toMutableList()
+        dataList.remove(hotelsItem)
+        _selectedHotelsDataList.value = dataList
+        viewModelScope.launch(Dispatchers.IO) {
+            repositoryUseCase.removeStayRepo(hotelsItem)
+        }
+    }
+
     private fun getDummyDates(): DatesModel {
         val calendar = Calendar.getInstance()
         calendar.add(Calendar.DAY_OF_YEAR, 1)

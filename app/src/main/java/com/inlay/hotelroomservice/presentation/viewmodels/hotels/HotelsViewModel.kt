@@ -25,4 +25,10 @@ abstract class HotelsViewModel : ViewModel() {
         checkOutDate: String,
         currencyCode: String = "USD"
     )
+
+    abstract fun getStaysRepo(isOnline: Boolean)
+
+    abstract fun addStay(hotelsItem: HotelsItemUiModel)
+
+    abstract fun removeStay(hotelsItem: HotelsItemUiModel)
 }

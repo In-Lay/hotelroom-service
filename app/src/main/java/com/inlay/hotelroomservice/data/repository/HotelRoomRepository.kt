@@ -1,5 +1,6 @@
 package com.inlay.hotelroomservice.data.repository
 
+import com.inlay.hotelroomservice.data.local.models.HotelsItemStaysEntity
 import com.inlay.hotelroomservice.presentation.models.details.HotelDetailsUiModel
 import com.inlay.hotelroomservice.presentation.models.hotelsitem.HotelsItemUiModel
 import com.inlay.hotelroomservice.presentation.models.locations.SearchLocationsUiModel
@@ -23,4 +24,10 @@ interface HotelRoomRepository {
         checkOutDate: String,
         currencyCode: String
     ): HotelDetailsUiModel
+
+    suspend fun getStaysRepo(isOnline: Boolean): List<HotelsItemUiModel>
+
+    suspend fun addStaysRepo(hotelsItem: HotelsItemUiModel)
+
+    suspend fun removeStaysRepo(hotelsItem: HotelsItemUiModel)
 }

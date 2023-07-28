@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
 import androidx.databinding.DataBindingUtil
@@ -20,8 +21,8 @@ import com.inlay.hotelroomservice.presentation.DrawerProvider
 import com.inlay.hotelroomservice.presentation.activities.MainActivity
 import com.inlay.hotelroomservice.presentation.adapters.hotels.HotelsListAdapter
 import com.inlay.hotelroomservice.presentation.models.hotelsitem.HotelsDatesAndCurrencyModel
+import com.inlay.hotelroomservice.presentation.models.hotelsitem.HotelsItemUiModel
 import com.inlay.hotelroomservice.presentation.viewmodels.hotels.HotelsViewModel
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.activityViewModel
@@ -74,12 +75,23 @@ class HotelsFragment : Fragment() {
                         HotelsListAdapter(
                             it,
                             hotelsDatesAndCurrencyModel,
-                            (activity as MainActivity).goToDetails
+                            (activity as MainActivity).goToDetails,
+                            addStay,
+                            "main"
                         )
                     binding.recyclerView.layoutManager = LinearLayoutManager(context)
                     binding.recyclerView.setHasFixedSize(false)
                 }
             }
         }
+    }
+
+    private val addStay: (HotelsItemUiModel) -> Unit = {
+        lifecycleScope.launch {
+            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                hotelsViewModel.addStay(it)
+            }
+        }
+        Toast.makeText(context, "Added", Toast.LENGTH_SHORT).show()
     }
 }
