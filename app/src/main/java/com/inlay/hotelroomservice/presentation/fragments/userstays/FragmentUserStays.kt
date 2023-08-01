@@ -15,6 +15,7 @@ import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.appbar.MaterialToolbar
+import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
@@ -56,6 +57,8 @@ class FragmentUserStays : Fragment() {
         )
         hotelsViewModel.getStaysRepo(requireContext().isNetworkAvailable())
 
+        isLogged = user != null
+
         binding.viewModel = viewModel
         binding.lifecycleOwner = viewLifecycleOwner
 
@@ -75,7 +78,6 @@ class FragmentUserStays : Fragment() {
                     hotelsDatesAndCurrencyModel = it
                 }
             }
-
         }
 
         return binding.root
@@ -83,6 +85,21 @@ class FragmentUserStays : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        if (!isLogged) {
+            val snackBar = Snackbar.make(
+                view,
+                "Note, that data is stored only locally, until you're log in.",
+                Snackbar.LENGTH_SHORT
+            )
+//            snackBar.setAction("Log in") {
+//                findNavController().navigate(R.id.fragmentLogin)
+//            }
+            snackBar.setAction("Dismiss") {
+                snackBar.dismiss()
+            }
+            snackBar.show()
+        }
 
         lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {

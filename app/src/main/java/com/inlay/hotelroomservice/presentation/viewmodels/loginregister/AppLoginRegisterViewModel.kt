@@ -38,16 +38,19 @@ class AppLoginRegisterViewModel : LoginRegisterViewModel() {
     private lateinit var _onClose: () -> Unit
     private lateinit var _onSuggestionClicked: () -> Unit
     private lateinit var _onNavigateToProfile: () -> Unit
+    private lateinit var _signOutOnRememberFalse: (Boolean) -> Unit
 
     override fun initialize(
         close: () -> Unit,
         onSuggestionClicked: () -> Unit,
         navigateToProfile: () -> Unit,
+        signOutOnRememberFalse: (Boolean) -> Unit,
         auth: FirebaseAuth
     ) {
         _onClose = close
         _onSuggestionClicked = onSuggestionClicked
         _onNavigateToProfile = navigateToProfile
+        _signOutOnRememberFalse = signOutOnRememberFalse
 
         _auth.value = auth
     }
@@ -61,27 +64,24 @@ class AppLoginRegisterViewModel : LoginRegisterViewModel() {
     }
 
     override fun onEmailTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
-        Log.d("profileLoginRegisteredTag", "mail: s = $s")
         if (!isEmailValid(s.toString())) {
             _supportEmailText.value = "Invalid Email"
         } else {
             _userMail.value = s.toString()
             _supportEmailText.value = ""
-            Log.d("profileLoginRegisteredTag", "_userMail.value = ${_userMail.value}")
         }
     }
 
     override fun onPasswordTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
-        Log.d("profileLoginRegisteredTag", "password: s = $s")
         _userPassword.value = s.toString()
     }
 
     override fun onFullNameTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
-        Log.d("profileLoginRegisteredTag", "full name: s = $s")
         _userFullName.value = s.toString()
     }
 
     override fun onCheckedChanged(checked: Boolean) {
+        Log.d("profileTag", "checked: $checked")
         _isRememberChecked.value = checked
     }
 
@@ -95,11 +95,9 @@ class AppLoginRegisterViewModel : LoginRegisterViewModel() {
                 ?.addOnCompleteListener {
                     if (it.isSuccessful) {
                         if (_isRememberChecked.value) {
-                            //TODO Add to Datastore
-                            Log.d("profileLoginRegisteredTag", "login")
                             _onNavigateToProfile()
                         } else {
-                            Log.d("profileLoginRegisteredTag", "login")
+                            _signOutOnRememberFalse(_isRememberChecked.value)
                             _onNavigateToProfile()
                         }
                     }
@@ -126,8 +124,6 @@ class AppLoginRegisterViewModel : LoginRegisterViewModel() {
                                 .build()
                         user?.updateProfile(profileUpdate)?.addOnCompleteListener { update ->
                             if (update.isSuccessful) {
-                                //TODO Add to Datastore
-                                Log.d("profileLoginRegisteredTag", "register")
                                 _onNavigateToProfile()
                             }
                         }

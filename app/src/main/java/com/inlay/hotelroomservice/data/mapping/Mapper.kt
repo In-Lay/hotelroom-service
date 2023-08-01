@@ -27,7 +27,7 @@ fun Data.toUiItem(): HotelsItemUiModel = HotelsItemUiModel(
 
 private fun List<CardPhoto>.toHotelsItemPhotos(): List<String> {
     return this.map {
-        val url = it.sizes?.urlTemplate?.replace("{width}", "500")?.replace("{height}", "300")
+        val url = it.sizes?.urlTemplate?.replace("{width}", "1200")?.replace("{height}", "1000")
         url.orEmpty()
     }
 }
@@ -93,7 +93,11 @@ fun HotelDetailsModel.toUiModel(): HotelDetailsUiModel =
         rankingDetails = this.data?.rankingDetails.orEmpty(),
         displayPrice = this.data?.price?.displayPrice.orEmpty(),
         providerName = this.data?.price?.providerName.orEmpty(),
-        photos = this.data?.photos?.mapNotNull { it.urlTemplate }.orEmpty(),
+        photos = this.data?.photos?.mapNotNull {
+            it.urlTemplate?.replace(
+                "{width}", "1200"
+            )?.replace("{height}", "1000")
+        }.orEmpty(),
         aboutTitle = this.data?.about?.title.orEmpty(),
         aboutLinks = this.data?.about?.aboutContentGeneral?.getAboutByTitle("Related links")
             .orEmpty(),
@@ -127,8 +131,10 @@ private fun RestaurantsNearbyContent.toRestaurantNearby(): NearbyPlace.Restauran
         title = this.title.orEmpty(),
         primaryInfo = this.primaryInfo.orEmpty(),
         distance = this.distance.orEmpty(),
-        photoUrlTemplate = this.restaurantsNearbyCardPhoto?.urlTemplate.orEmpty(),
-        rating = this.bubbleRating?.rating ?: 0.0,
+        photoUrlTemplate = this.restaurantsNearbyCardPhoto?.urlTemplate?.replace(
+            "{width}", "500"
+        )?.replace("{height}", "300").orEmpty(),
+        rating = this.bubbleRating?.rating.toString(),
         numberReviews = this.bubbleRating?.numberReviews.orEmpty()
     )
 
@@ -137,8 +143,10 @@ private fun AttractionsNearbyContent.toAttractionNearby(): NearbyPlace.Attractio
         title = this.title.orEmpty(),
         primaryInfo = this.primaryInfo.orEmpty(),
         distance = this.distance.orEmpty(),
-        photoUrlTemplate = this.cardPhoto?.urlTemplate.orEmpty(),
-        rating = this.bubbleRating?.rating ?: 0.0,
+        photoUrlTemplate = this.cardPhoto?.urlTemplate?.replace(
+            "{width}", "500"
+        )?.replace("{height}", "300").orEmpty(),
+        rating = this.bubbleRating?.rating.toString(),
         numberReviews = this.bubbleRating?.numberReviews.orEmpty()
     )
 

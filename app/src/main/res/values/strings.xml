@@ -14,7 +14,7 @@
     <string name="tv_currencies_dropdown_hint">Currencies</string>
     <string name="search">Search Hotels</string>
     <string name="btn_add">Add To Stay</string>
-    <string name="btn_remove">Remove from Stays</string>
+    <string name="btn_remove">Remove</string>
     <string name="details"><u>More Details</u></string>
     <string name="current_location">Current Location</string>
     <string name="search_bar_description">Search for location</string>
@@ -37,7 +37,6 @@
     <string name="log_in">Sign in</string>
     <string name="remember_me">Remember me</string>
     <string name="register_suggestion">Don\'t have an account? <b><font color="#FF0000">Join now</font></b></string>
-    <string name="login_suggestion">Already have an account? <b><font color="#FF0000">Log in now</font></b></string>
     <string name="full_name">Full Name</string>
     <string name="register">Register</string>
     <string name="upload_photo">Upload Photo +</string>
@@ -45,7 +44,8 @@
     <string name="save">Save</string>
     <string name="phone_sample">(581)-307-6902</string>
     <string name="unsaved_changes">Unsaved Changes</string>
-    <string name="apply">Apply</string>
+    <string name="stay">Stay</string>
     <string name="discard">Discard</string>
-    <string name="edit_profile_dialog">You have some unsaved changes. \\nDo you want to apply them?</string>
+    <string name="edit_profile_dialog">You have some unsaved changes. \nDo you want to discard them?</string>
+    <string name="auth_dialog_info">You attempt to change your email.\nIn that case You need to Log in again.</string>
 </resources>

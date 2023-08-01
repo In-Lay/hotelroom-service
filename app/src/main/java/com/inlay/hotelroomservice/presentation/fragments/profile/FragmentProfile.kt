@@ -21,7 +21,6 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 class FragmentProfile : Fragment() {
     private lateinit var binding: FragmentProfileBinding
     private val viewModel: ProfileViewModel by viewModel()
-    private var isOnline = false
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
@@ -50,11 +49,10 @@ class FragmentProfile : Fragment() {
 
     private val logout: () -> Unit = {
         Firebase.auth.signOut()
-        Toast.makeText(context, "Logout", Toast.LENGTH_SHORT).show()
+        findNavController().navigate(R.id.hotelsFragment)
     }
 
     private val edit: () -> Unit = {
-        Toast.makeText(context, "Edit", Toast.LENGTH_SHORT).show()
         findNavController().navigate(R.id.fragmentEditProfile)
     }
 }

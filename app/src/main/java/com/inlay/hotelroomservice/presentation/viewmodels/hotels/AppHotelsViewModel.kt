@@ -1,6 +1,9 @@
 package com.inlay.hotelroomservice.presentation.viewmodels.hotels
 
 import androidx.lifecycle.viewModelScope
+import com.google.firebase.auth.FirebaseUser
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 import com.inlay.hotelroomservice.domain.usecase.RepositoryUseCase
 import com.inlay.hotelroomservice.presentation.models.details.HotelDetailsSearchModel
 import com.inlay.hotelroomservice.presentation.models.hotelsitem.DatesModel
@@ -8,6 +11,7 @@ import com.inlay.hotelroomservice.presentation.models.hotelsitem.HotelsDatesAndC
 import com.inlay.hotelroomservice.presentation.models.hotelsitem.HotelsItemUiModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
 import java.util.Calendar
@@ -16,6 +20,9 @@ class AppHotelsViewModel(
     private val repositoryUseCase: RepositoryUseCase,
     private val dateFormat: SimpleDateFormat
 ) : HotelsViewModel() {
+    private val _user: MutableStateFlow<FirebaseUser?> = MutableStateFlow(null)
+    override val user = _user
+
     private val _isOnline = MutableStateFlow(false)
     override val isOnline = _isOnline
 
@@ -32,6 +39,10 @@ class AppHotelsViewModel(
 
     private val _selectedHotelsDataList = MutableStateFlow(listOf<HotelsItemUiModel>())
     override val selectedHotelsDataList = _selectedHotelsDataList
+
+    init {
+        _user.value = Firebase.auth.currentUser
+    }
 
     override fun initialize(isOnline: Boolean) {
         viewModelScope.launch {

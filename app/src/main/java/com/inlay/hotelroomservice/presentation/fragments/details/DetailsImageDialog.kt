@@ -1,7 +1,6 @@
 package com.inlay.hotelroomservice.presentation.fragments.details
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -34,7 +33,6 @@ class DetailsImageDialog : DialogFragment() {
             false
         )
         val imageUrlList = arguments?.getStringArrayList("IMAGE_URL_DATA").orEmpty()
-        Log.d("DetailsNavLog", "DetailsImageDialog: onCreateView: imageUrlList: $imageUrlList")
         bindAdapter(imageUrlList)
 
         binding.imgCloseIcon.setOnClickListener {

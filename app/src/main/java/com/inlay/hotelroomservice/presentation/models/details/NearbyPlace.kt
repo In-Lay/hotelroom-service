@@ -8,7 +8,7 @@ sealed interface NearbyPlace {
     val primaryInfo: String
     val distance: String
     val photoUrlTemplate: String
-    val rating: Double
+    val rating: String
     val numberReviews: String
 
     @Parcelize
@@ -17,7 +17,7 @@ sealed interface NearbyPlace {
         override val primaryInfo: String,
         override val distance: String,
         override val photoUrlTemplate: String,
-        override val rating: Double,
+        override val rating: String,
         override val numberReviews: String
     ) : NearbyPlace, Parcelable
 
@@ -27,7 +27,7 @@ sealed interface NearbyPlace {
         override val primaryInfo: String,
         override val distance: String,
         override val photoUrlTemplate: String,
-        override val rating: Double,
+        override val rating: String,
         override val numberReviews: String
     ) : NearbyPlace, Parcelable
 }

@@ -24,6 +24,7 @@ abstract class LoginRegisterViewModel : ViewModel() {
         close: () -> Unit,
         onSuggestionClicked: () -> Unit,
         navigateToProfile: () -> Unit,
+        signOutOnRememberFalse: (Boolean) -> Unit,
         auth: FirebaseAuth
     )
 

@@ -18,46 +18,53 @@
             android:id="@+id/toolbar"
             layout="@layout/toolbar_general" />
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/user_profile_layout"
-            android:layout_width="wrap_content"
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/user_profile_card"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:onClick="@{() -> viewModel.goToProfile()}"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/toolbar">
+            app:layout_constraintTop_toBottomOf="@id/toolbar"
+            app:shapeAppearanceOverlay="@style/CardBottomRoundedCorners">
 
-            <com.google.android.material.imageview.ShapeableImageView
-                android:id="@+id/img_user_profile"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:layout_margin="8dp"
-                android:scaleType="centerCrop"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:profileImageSource="@{viewModel.profileImage}"
-                tools:src="@drawable/baseline_person_24" />
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
 
-            <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/tv_profile_header"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="4dp"
-                android:text="@{viewModel.profileHeaderText}"
-                app:layout_constraintStart_toEndOf="@id/img_user_profile"
-                app:layout_constraintTop_toTopOf="@id/img_user_profile"
-                tools:text="Good morning" />
+                <com.google.android.material.imageview.ShapeableImageView
+                    android:id="@+id/img_user_profile"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_margin="8dp"
+                    android:scaleType="centerCrop"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:profileImageSource="@{viewModel.profileImage}"
+                    tools:src="@drawable/baseline_person_24" />
 
-            <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/tv_profile_username"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="4dp"
-                android:text="@{viewModel.profileUsernameText}"
-                android:textAppearance="?attr/textAppearanceHeadline6"
-                app:layout_constraintBottom_toBottomOf="@id/img_user_profile"
-                app:layout_constraintStart_toEndOf="@id/img_user_profile"
-                tools:text="Roman!" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/tv_profile_header"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="4dp"
+                    android:text="@{viewModel.profileHeaderText}"
+                    app:layout_constraintStart_toEndOf="@id/img_user_profile"
+                    app:layout_constraintTop_toTopOf="@id/img_user_profile"
+                    tools:text="Good morning" />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/tv_profile_username"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="4dp"
+                    android:text="@{viewModel.profileUsernameText}"
+                    android:textAppearance="?attr/textAppearanceHeadline6"
+                    app:layout_constraintBottom_toBottomOf="@id/img_user_profile"
+                    app:layout_constraintStart_toEndOf="@id/img_user_profile"
+                    tools:text="Roman!" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </com.google.android.material.card.MaterialCardView>
 
         <TextView
             android:id="@+id/tv_empty_list"
@@ -76,12 +83,11 @@
             android:id="@+id/recycler_view"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:layout_marginTop="8dp"
             android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/user_profile_layout" />
+            app:layout_constraintTop_toBottomOf="@id/user_profile_card" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

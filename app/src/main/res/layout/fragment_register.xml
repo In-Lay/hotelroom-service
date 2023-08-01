@@ -144,17 +144,5 @@
             app:layout_constraintEnd_toEndOf="@id/et_layout_password"
             app:layout_constraintStart_toStartOf="@id/et_layout_password"
             app:layout_constraintTop_toBottomOf="@id/et_layout_password" />
-
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/tv_register_suggestion"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:onClick="@{() -> viewModel.onSuggestionClicked()}"
-            android:text="@string/login_suggestion"
-            android:textAlignment="center"
-            app:layout_constraintEnd_toEndOf="@id/et_layout_password"
-            app:layout_constraintStart_toStartOf="@id/et_layout_password"
-            app:layout_constraintTop_toBottomOf="@id/btn_login" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

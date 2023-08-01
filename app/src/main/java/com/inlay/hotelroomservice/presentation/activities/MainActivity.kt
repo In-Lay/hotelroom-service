@@ -13,11 +13,10 @@ import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import coil.load
+import coil.transform.CircleCropTransformation
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
-import com.google.firebase.storage.FirebaseStorage
-import com.google.firebase.storage.ktx.storage
 import com.inlay.hotelroomservice.R
 import com.inlay.hotelroomservice.databinding.ActivityMainBinding
 import com.inlay.hotelroomservice.extensions.isNetworkAvailable
@@ -30,7 +29,7 @@ class MainActivity : AppCompatActivity(), DrawerProvider {
     private lateinit var binding: ActivityMainBinding
     private lateinit var navController: NavController
     private val hotelsViewModel: HotelsViewModel by viewModel()
-
+    private var signInRememberState = true
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,9 +39,26 @@ class MainActivity : AppCompatActivity(), DrawerProvider {
 
         val currentUser = Firebase.auth.currentUser
 
+
         setupNavigationDrawer()
         setupNavigation()
-        setupHeader(isUserLogged(currentUser), currentUser)
+//        Log.d(
+//            "profileTag",
+//            "onCreate before addAuthStateListener: currentUser: ${currentUser?.email}"
+//        )
+        Firebase.auth.addAuthStateListener {
+//            Log.d(
+//                "profileTag",
+//                "onCreate inside addAuthStateListener: currentUser: ${currentUser?.email}"
+//            )
+            if (it.currentUser != null) {
+                setupHeader(isUserLogged(it.currentUser), it.currentUser)
+            } else setupHeader(isUserLogged(null), null)
+        }
+//        Log.d(
+//            "profileTag",
+//            "onCreate after addAuthStateListener: currentUser: ${currentUser?.email}"
+//        )
 
         hotelsViewModel.initialize(isNetworkAvailable())
 
@@ -60,8 +76,6 @@ class MainActivity : AppCompatActivity(), DrawerProvider {
     }
 
     private fun setupNavigationDrawer() {
-
-
         val navHostFragment =
             supportFragmentManager.findFragmentById(R.id.fragment_container_view) as NavHostFragment
         navController = navHostFragment.navController
@@ -102,13 +116,23 @@ class MainActivity : AppCompatActivity(), DrawerProvider {
         val headerMail = headerView.findViewById<TextView>(R.id.tv_user_mail)
 
         if (!isUserLogged) {
-            headerImage.setImageResource(R.drawable.baseline_person_24)
+            headerImage.load(R.drawable.baseline_person_24) {
+                crossfade(true)
+                transformations(CircleCropTransformation())
+            }
             headerUserName.text = this.resources.getText(R.string.header_profile)
+            headerMail.text = ""
         } else {
+            //TODO After Register Username doesn't show up
             headerUserName.text = user?.displayName
             headerMail.text = user?.email
-            headerImage.load(user?.photoUrl)
+            if (user?.photoUrl == null) headerImage.load(R.drawable.baseline_person_24)
+            else headerImage.load(user.photoUrl) {
+                crossfade(true)
+                transformations(CircleCropTransformation())
+            }
         }
+
         headerImage.setOnClickListener {
             binding.drawerLayout.closeDrawer(GravityCompat.START)
             handleProfileNavigation(isUserLogged)
@@ -129,6 +153,23 @@ class MainActivity : AppCompatActivity(), DrawerProvider {
 
     val goToHotels: () -> Unit = {
         navController.navigate(R.id.hotelsFragment)
+    }
+
+    override fun onDestroy() {
+        //TODO On remember me false doesn't work
+        Log.d("profileTag", "onDestroy: isChecked: $signInRememberState")
+        if (!signInRememberState) {
+            Log.d("profileTag", "onDestroy inside: isChecked: false")
+            Firebase.auth.signOut()
+            val user = Firebase.auth.currentUser
+            Log.d("profileTag", "onDestroy inside: user: $user")
+        }
+        super.onDestroy()
+    }
+
+    val signOutOnRememberFalse: (Boolean) -> Unit = {
+        Log.d("profileTag", "signOutOnRememberFalse: isChecked: $it")
+        signInRememberState = it
     }
 
     val goToDetails: (HotelDetailsSearchModel) -> Unit = {

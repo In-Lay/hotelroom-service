@@ -10,15 +10,6 @@
             type="com.inlay.hotelroomservice.presentation.viewmodels.details.dialog.PlaceNearbyViewModel" />
     </data>
 
-<!--    <com.google.android.material.card.MaterialCardView-->
-<!--        android:id="@+id/card_places_nearby"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="300dp"-->
-<!--        style="?attr/materialCardViewElevatedStyle"-->
-<!--        app:cardCornerRadius="16dp"-->
-<!--        android:layout_margin="8dp"-->
-<!--        android:elevation="10dp">-->
-
     <com.google.android.material.card.MaterialCardView
 
         android:layout_width="match_parent"
@@ -37,7 +28,7 @@
                 android:layout_height="100dp"
                 android:layout_margin="8dp"
                 android:scaleType="centerCrop"
-                app:detailsImages="@{viewModel.placeNearbyPhoto}"
+                app:detailsImages="@{viewModel.placesNearbyData.photoUrlTemplate}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
@@ -48,7 +39,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_margin="8dp"
-                android:text="@{viewModel.placeNearbyName}"
+                android:text="@{viewModel.placesNearbyData.title}"
                 android:textAppearance="?attr/textAppearanceBody1"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/img_places_nearby_image"
@@ -60,7 +51,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_margin="8dp"
-                android:text="@{viewModel.placeNearbyInfo}"
+                android:text="@{viewModel.placesNearbyData.primaryInfo}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/img_places_nearby_image"
                 app:layout_constraintTop_toBottomOf="@id/tv_places_nearby_name"
@@ -81,7 +72,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="4dp"
-                android:text="@{viewModel.placeNearbyRating}"
+                android:text="@{viewModel.placesNearbyData.rating}"
                 android:textAppearance="?attr/textAppearanceBody1"
                 android:textColor="#C99200"
                 app:layout_constraintStart_toEndOf="@+id/img_places_nearby_rating_icon"
@@ -93,7 +84,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="4dp"
-                android:text="@{viewModel.placeNearbyRatingCount}"
+                android:text="@{'('+ viewModel.placesNearbyData.numberReviews +')'}"
                 app:layout_constraintBottom_toBottomOf="@+id/tv_places_nearby_rating"
                 app:layout_constraintStart_toEndOf="@+id/tv_places_nearby_rating"
                 app:layout_constraintTop_toTopOf="@+id/tv_places_nearby_rating"
@@ -104,12 +95,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="8dp"
-                android:text="@{viewModel.placeNearbyDistance}"
+                android:text="@{viewModel.placesNearbyData.distance}"
                 app:layout_constraintBottom_toBottomOf="@+id/img_places_nearby_rating_icon"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/img_places_nearby_rating_icon"
                 tools:text="0.3 km" />
-
         </androidx.constraintlayout.widget.ConstraintLayout>
     </com.google.android.material.card.MaterialCardView>
 </layout>
