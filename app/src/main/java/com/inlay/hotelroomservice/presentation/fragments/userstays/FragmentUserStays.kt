@@ -49,13 +49,14 @@ class FragmentUserStays : Fragment() {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_user_stays, container, false)
 
         val user = Firebase.auth.currentUser
+        val isUserLogged = isUserLogged(user)
         viewModel.initializeData(
             (activity as MainActivity).goToHotels,
             goToProfile,
-            isUserLogged(user),
+            isUserLogged,
             user
         )
-        hotelsViewModel.getStaysRepo(requireContext().isNetworkAvailable())
+        hotelsViewModel.getStaysRepo(requireContext().isNetworkAvailable(), isUserLogged)
 
         isLogged = user != null
 

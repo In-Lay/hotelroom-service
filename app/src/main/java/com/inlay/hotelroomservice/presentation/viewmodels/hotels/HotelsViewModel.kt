@@ -29,7 +29,7 @@ abstract class HotelsViewModel : ViewModel() {
         currencyCode: String = "USD"
     )
 
-    abstract fun getStaysRepo(isOnline: Boolean)
+    abstract fun getStaysRepo(isOnline: Boolean, isLogged: Boolean)
 
     abstract fun addStay(hotelsItem: HotelsItemUiModel)
 

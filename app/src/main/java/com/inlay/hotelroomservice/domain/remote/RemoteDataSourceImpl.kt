@@ -4,6 +4,7 @@ import com.inlay.hotelroomservice.data.remote.apiservice.HotelRoomApiService
 import com.inlay.hotelroomservice.data.remote.models.hoteldetails.HotelDetailsModel
 import com.inlay.hotelroomservice.data.remote.models.hotels.HotelsModel
 import com.inlay.hotelroomservice.data.remote.models.searchlocation.SearchLocationModel
+import com.inlay.hotelroomservice.presentation.models.hotelsitem.HotelsItemUiModel
 import retrofit2.Response
 
 class RemoteDataSourceImpl(private val hotelRoomApiService: HotelRoomApiService) :
@@ -20,6 +21,10 @@ class RemoteDataSourceImpl(private val hotelRoomApiService: HotelRoomApiService)
     ): Response<HotelsModel> {
         return hotelRoomApiService.getHotelsData(geoId, checkInDate, checkOutDate, currencyCode)
     }
+
+//    override suspend fun getStaysRepo(): List<HotelsItemUiModel> {
+//        TODO("Not yet implemented")
+//    }
 
     override suspend fun getHotelDetailsRepo(
         id: String,

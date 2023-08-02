@@ -124,8 +124,10 @@ class MainActivity : AppCompatActivity(), DrawerProvider {
             headerMail.text = ""
         } else {
             //TODO After Register Username doesn't show up
+            // After photo change it doesn't appear
             headerUserName.text = user?.displayName
             headerMail.text = user?.email
+            Log.d("profileTag", "setupHeader: user?.photoUrl: ${user?.photoUrl}")
             if (user?.photoUrl == null) headerImage.load(R.drawable.baseline_person_24)
             else headerImage.load(user.photoUrl) {
                 crossfade(true)

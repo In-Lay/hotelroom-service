@@ -127,11 +127,14 @@ class HotelRoomRepositoryImpl(
         return hotelDetailsData?.toUiModel() ?: emptyModel
     }
 
-    override suspend fun getStaysRepo(isOnline: Boolean): List<HotelsItemUiModel> {
-//      return  if (isOnline) {
-//
+    override suspend fun getStaysRepo(
+        isOnline: Boolean,
+        isLogged: Boolean
+    ): List<HotelsItemUiModel> {
+//      return  if (isOnline && isLogged) {
+//            remoteDataSource.getStaysRepo()
 //        } else {
-//
+//          localDataSource.fetchStaysRepo().first().map { it.toUiItem() }
 //        }
         return localDataSource.fetchStaysRepo().first().map { it.toUiItem() }
     }

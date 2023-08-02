@@ -5,6 +5,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.PickVisualMediaRequest
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.widget.doOnTextChanged
 import androidx.databinding.DataBindingUtil
@@ -29,6 +32,7 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 class FragmentEditProfile : Fragment() {
     private lateinit var binding: FragmentEditProfileBinding
     private val viewModel: EditProfileViewModel by viewModel()
+    private lateinit var pickMedia: ActivityResultLauncher<PickVisualMediaRequest>
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
@@ -70,6 +74,14 @@ class FragmentEditProfile : Fragment() {
             }
         }
 
+        pickMedia = registerForActivityResult(ActivityResultContracts.PickVisualMedia()) {
+            if (it != null) {
+                viewModel.changePhoto(it)
+            } else {
+                Toast.makeText(context, "No photo selected", Toast.LENGTH_SHORT).show()
+            }
+        }
+
         return binding.root
     }
 
@@ -77,8 +89,10 @@ class FragmentEditProfile : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         viewModel.initialize(
-            Firebase.auth.currentUser
-        ) { showAuthDialog() }
+            Firebase.auth.currentUser,
+            showAuthDialog,
+            openPhotoPicker
+        )
 
         lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
@@ -89,7 +103,7 @@ class FragmentEditProfile : Fragment() {
         }
     }
 
-    private fun showAuthDialog() {
+    private val showAuthDialog: () -> Unit = {
         val alertBuilder = MaterialAlertDialogBuilder(requireContext())
         val inflater = layoutInflater
 
@@ -122,5 +136,11 @@ class FragmentEditProfile : Fragment() {
         }
 
         alertBuilder.create().show()
+    }
+
+    private val openPhotoPicker: () -> Unit = {
+        //TODO Try move to activity
+
+        pickMedia.launch(PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly))
     }
 }

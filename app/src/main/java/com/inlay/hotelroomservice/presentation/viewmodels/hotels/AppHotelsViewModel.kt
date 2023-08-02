@@ -79,9 +79,9 @@ class AppHotelsViewModel(
         }
     }
 
-    override fun getStaysRepo(isOnline: Boolean) {
+    override fun getStaysRepo(isOnline: Boolean, isLogged: Boolean) {
         viewModelScope.launch(Dispatchers.IO) {
-            _selectedHotelsDataList.value = repositoryUseCase.getStaysRepo(isOnline)
+            _selectedHotelsDataList.value = repositoryUseCase.getStaysRepo(isOnline, isLogged)
         }
     }
 

@@ -9,14 +9,14 @@
 
     <com.google.android.material.carousel.MaskableFrameLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:foreground="?attr/selectableItemBackground"
         app:shapeAppearance="?attr/shapeAppearanceCornerExtraLarge">
 
         <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/img_details_item_photo"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:scaleType="centerCrop"
             tools:src="@drawable/sample_hotel_item_img_500x300" />
     </com.google.android.material.carousel.MaskableFrameLayout>

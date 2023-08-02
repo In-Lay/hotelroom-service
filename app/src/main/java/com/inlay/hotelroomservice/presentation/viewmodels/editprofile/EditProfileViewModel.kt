@@ -19,10 +19,13 @@ abstract class EditProfileViewModel : ViewModel() {
 
     abstract val emailChanged: StateFlow<Boolean>
     abstract val fullNameChanged: StateFlow<Boolean>
-    abstract val photoChanged: StateFlow<Boolean>
     abstract val changesApplied: StateFlow<Boolean>
 
-    abstract fun initialize(user: FirebaseUser?, showAuthDialog: () -> Unit)
+    abstract fun initialize(
+        user: FirebaseUser?,
+        showAuthDialog: () -> Unit,
+        showPhotoPicker: () -> Unit
+    )
 
     abstract fun onFullNameChanged(s: CharSequence, start: Int, before: Int, count: Int)
     abstract fun onEmailChanged(s: CharSequence, start: Int, before: Int, count: Int)
@@ -31,7 +34,11 @@ abstract class EditProfileViewModel : ViewModel() {
 
     abstract fun save()
 
+    abstract fun changeFullName()
+
     abstract fun changeEmail(email: String, password: String)
+
+    abstract fun changePhoto(uri: Uri)
 
     abstract fun isEmailValid(email: String): Boolean
 }

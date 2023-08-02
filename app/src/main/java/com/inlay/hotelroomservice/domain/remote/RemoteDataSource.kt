@@ -3,6 +3,7 @@ package com.inlay.hotelroomservice.domain.remote
 import com.inlay.hotelroomservice.data.remote.models.hoteldetails.HotelDetailsModel
 import com.inlay.hotelroomservice.data.remote.models.hotels.HotelsModel
 import com.inlay.hotelroomservice.data.remote.models.searchlocation.SearchLocationModel
+import com.inlay.hotelroomservice.presentation.models.hotelsitem.HotelsItemUiModel
 import retrofit2.Response
 
 interface RemoteDataSource {
@@ -14,6 +15,8 @@ interface RemoteDataSource {
         checkOutDate: String,
         currencyCode: String
     ): Response<HotelsModel>
+
+//    suspend fun getStaysRepo(): List<HotelsItemUiModel>
 
     suspend fun getHotelDetailsRepo(
         id: String,

@@ -25,7 +25,7 @@ interface HotelRoomRepository {
         currencyCode: String
     ): HotelDetailsUiModel
 
-    suspend fun getStaysRepo(isOnline: Boolean): List<HotelsItemUiModel>
+    suspend fun getStaysRepo(isOnline: Boolean, isLogged: Boolean): List<HotelsItemUiModel>
 
     suspend fun addStaysRepo(hotelsItem: HotelsItemUiModel)
 

@@ -22,7 +22,7 @@ interface RepositoryUseCase {
         currencyCode: String
     ): HotelDetailsUiModel
 
-    suspend fun getStaysRepo(isOnline: Boolean): List<HotelsItemUiModel>
+    suspend fun getStaysRepo(isOnline: Boolean, isLogged: Boolean): List<HotelsItemUiModel>
 
     suspend fun addStayRepo(hotelsItem: HotelsItemUiModel)
 
