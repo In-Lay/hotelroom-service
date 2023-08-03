@@ -11,7 +11,7 @@ import com.inlay.hotelroomservice.presentation.models.hotelsitem.HotelsDatesAndC
 import com.inlay.hotelroomservice.presentation.models.hotelsitem.HotelsItemUiModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
 import java.util.Calendar
@@ -56,6 +56,8 @@ class AppHotelsViewModel(
                 hotelsDatesAndCurrency.datesModel.checkOutDate,
                 hotelsDatesAndCurrency.currency
             )
+
+            getStaysRepo(_isOnline.value, isUserLogged())
         }
     }
 
@@ -81,25 +83,27 @@ class AppHotelsViewModel(
 
     override fun getStaysRepo(isOnline: Boolean, isLogged: Boolean) {
         viewModelScope.launch(Dispatchers.IO) {
-            _selectedHotelsDataList.value = repositoryUseCase.getStaysRepo(isOnline, isLogged)
+            repositoryUseCase.getStaysRepo(isOnline, isLogged).collectLatest { list ->
+                _selectedHotelsDataList.value = list.mapNotNull { it }
+            }
         }
     }
 
-    override fun addStay(hotelsItem: HotelsItemUiModel) {
+    override fun addStay(hotelsItem: HotelsItemUiModel, isOnline: Boolean, isLogged: Boolean) {
         val dataList = _selectedHotelsDataList.value.toMutableList()
         dataList.add(hotelsItem)
         _selectedHotelsDataList.value = dataList
         viewModelScope.launch(Dispatchers.IO) {
-            repositoryUseCase.addStayRepo(hotelsItem)
+            repositoryUseCase.addStayRepo(hotelsItem, isOnline, isLogged)
         }
     }
 
-    override fun removeStay(hotelsItem: HotelsItemUiModel) {
+    override fun removeStay(hotelsItem: HotelsItemUiModel, isOnline: Boolean, isLogged: Boolean) {
         val dataList = _selectedHotelsDataList.value.toMutableList()
         dataList.remove(hotelsItem)
         _selectedHotelsDataList.value = dataList
         viewModelScope.launch(Dispatchers.IO) {
-            repositoryUseCase.removeStayRepo(hotelsItem)
+            repositoryUseCase.removeStayRepo(hotelsItem, isOnline, isLogged)
         }
     }
 
@@ -113,4 +117,7 @@ class AppHotelsViewModel(
 
         return DatesModel(checkInDate, checkOutDate)
     }
+
+    private fun isUserLogged(): Boolean = _user.value != null
+
 }

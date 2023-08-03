@@ -15,8 +15,12 @@ import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.appbar.MaterialToolbar
+import com.google.firebase.auth.FirebaseUser
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 import com.inlay.hotelroomservice.R
 import com.inlay.hotelroomservice.databinding.FragmentHotelsBinding
+import com.inlay.hotelroomservice.extensions.isNetworkAvailable
 import com.inlay.hotelroomservice.presentation.DrawerProvider
 import com.inlay.hotelroomservice.presentation.activities.MainActivity
 import com.inlay.hotelroomservice.presentation.adapters.hotels.HotelsListAdapter
@@ -31,6 +35,8 @@ class HotelsFragment : Fragment() {
     private lateinit var binding: FragmentHotelsBinding
     private val hotelsViewModel: HotelsViewModel by activityViewModel()
     private lateinit var hotelsDatesAndCurrencyModel: HotelsDatesAndCurrencyModel
+    private var isOnline = false
+    private var isLogged = false
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -57,6 +63,10 @@ class HotelsFragment : Fragment() {
                 }
             }
         }
+        val user = Firebase.auth.currentUser
+
+        isOnline = requireContext().isNetworkAvailable()
+        isLogged = isUserLogged(user)
 
         return binding.root
     }
@@ -89,9 +99,13 @@ class HotelsFragment : Fragment() {
     private val addStay: (HotelsItemUiModel) -> Unit = {
         lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
-                hotelsViewModel.addStay(it)
+                hotelsViewModel.addStay(it, isOnline, isLogged)
             }
         }
         Toast.makeText(context, "Added", Toast.LENGTH_SHORT).show()
+    }
+
+    private fun isUserLogged(user: FirebaseUser?): Boolean {
+        return user != null
     }
 }

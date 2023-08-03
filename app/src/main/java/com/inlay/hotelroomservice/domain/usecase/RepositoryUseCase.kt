@@ -3,6 +3,7 @@ package com.inlay.hotelroomservice.domain.usecase
 import com.inlay.hotelroomservice.presentation.models.details.HotelDetailsUiModel
 import com.inlay.hotelroomservice.presentation.models.hotelsitem.HotelsItemUiModel
 import com.inlay.hotelroomservice.presentation.models.locations.SearchLocationsUiModel
+import kotlinx.coroutines.flow.Flow
 
 interface RepositoryUseCase {
     suspend fun getSearchLocationRepo(location: String): List<SearchLocationsUiModel>
@@ -22,9 +23,9 @@ interface RepositoryUseCase {
         currencyCode: String
     ): HotelDetailsUiModel
 
-    suspend fun getStaysRepo(isOnline: Boolean, isLogged: Boolean): List<HotelsItemUiModel>
+    suspend fun getStaysRepo(isOnline: Boolean, isLogged: Boolean): Flow<List<HotelsItemUiModel?>>
 
-    suspend fun addStayRepo(hotelsItem: HotelsItemUiModel)
+    suspend fun addStayRepo(hotelsItem: HotelsItemUiModel, isOnline: Boolean, isLogged: Boolean)
 
-    suspend fun removeStayRepo(hotelsItem: HotelsItemUiModel)
+    suspend fun removeStayRepo(hotelsItem: HotelsItemUiModel, isOnline: Boolean, isLogged: Boolean)
 }

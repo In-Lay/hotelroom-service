@@ -79,7 +79,7 @@ val appModule = module {
     single { getSampleLocationsDataFromAssets(context = androidContext(), moshi = get()) }
     single { getSampleDetailsDataFromAssets(context = androidContext(), moshi = get()) }
 
-    single<RemoteDataSource> { RemoteDataSourceImpl(hotelRoomApiService = get()) }
+    single<RemoteDataSource> { RemoteDataSourceImpl(hotelRoomApiService = get(), database = get()) }
     single<LocalDataSource> { LocalDataSourceImpl(hotelsRoomDao = get()) }
 
     single<HotelRoomRepository> {

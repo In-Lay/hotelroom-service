@@ -39,6 +39,7 @@ class FragmentUserStays : Fragment() {
     private val viewModel: UserStaysViewModel by viewModel()
     private val hotelsViewModel: HotelsViewModel by activityViewModel()
     private var isLogged = false
+    private var isOnline = false
     private lateinit var hotelsDatesAndCurrencyModel: HotelsDatesAndCurrencyModel
 
     override fun onCreateView(
@@ -47,18 +48,18 @@ class FragmentUserStays : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_user_stays, container, false)
-
         val user = Firebase.auth.currentUser
-        val isUserLogged = isUserLogged(user)
+        isLogged = isUserLogged(user)
+        isOnline = requireContext().isNetworkAvailable()
+
         viewModel.initializeData(
             (activity as MainActivity).goToHotels,
             goToProfile,
-            isUserLogged,
+            isLogged,
             user
         )
-        hotelsViewModel.getStaysRepo(requireContext().isNetworkAvailable(), isUserLogged)
+        hotelsViewModel.getStaysRepo(requireContext().isNetworkAvailable(), isLogged)
 
-        isLogged = user != null
 
         binding.viewModel = viewModel
         binding.lifecycleOwner = viewLifecycleOwner
@@ -133,7 +134,7 @@ class FragmentUserStays : Fragment() {
     private val removeStay: (HotelsItemUiModel) -> Unit = {
         lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
-                hotelsViewModel.removeStay(it)
+                hotelsViewModel.removeStay(it, isOnline, isLogged)
             }
         }
         Toast.makeText(context, "Removed", Toast.LENGTH_SHORT).show()

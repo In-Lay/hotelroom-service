@@ -11,7 +11,9 @@ import com.inlay.hotelroomservice.domain.remote.RemoteDataSource
 import com.inlay.hotelroomservice.presentation.models.details.HotelDetailsUiModel
 import com.inlay.hotelroomservice.presentation.models.hotelsitem.HotelsItemUiModel
 import com.inlay.hotelroomservice.presentation.models.locations.SearchLocationsUiModel
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.flow.map
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 
@@ -76,10 +78,7 @@ class HotelRoomRepositoryImpl(
 
 
     override suspend fun getHotelDetails(
-        id: String,
-        checkInDate: String,
-        checkOutDate: String,
-        currencyCode: String
+        id: String, checkInDate: String, checkOutDate: String, currencyCode: String
     ): HotelDetailsUiModel {
 //        val hotelDetailsData =
 //            remoteDataSource.getHotelDetailsRepo(id, checkInDate, checkOutDate, currencyCode)
@@ -100,12 +99,12 @@ class HotelRoomRepositoryImpl(
 //            0.0,
 //            0.0
 //        )
+        //TODO use .mapNotNull{} instead emptyModel
 //        return if (hotelDetailsData.isSuccessful) {
 //            hotelDetailsData.body()?.toUiModel() ?: emptyModel
 //        } else emptyModel
 
         val hotelDetailsData: HotelDetailsModel? by inject()
-
         val emptyModel = HotelDetailsUiModel(
             "",
             "",
@@ -127,25 +126,34 @@ class HotelRoomRepositoryImpl(
         return hotelDetailsData?.toUiModel() ?: emptyModel
     }
 
+
+    //TODO ReFetch repos after user was offline
     override suspend fun getStaysRepo(
         isOnline: Boolean,
         isLogged: Boolean
-    ): List<HotelsItemUiModel> {
-//      return  if (isOnline && isLogged) {
-//            remoteDataSource.getStaysRepo()
-//        } else {
-//          localDataSource.fetchStaysRepo().first().map { it.toUiItem() }
-//        }
-        return localDataSource.fetchStaysRepo().first().map { it.toUiItem() }
+    ): Flow<List<HotelsItemUiModel?>> {
+        return if (isOnline && isLogged) remoteDataSource.getStaysRepo()
+        else localDataSource.fetchStaysRepo().map { list ->
+            list.map { it.toUiItem() }
+        }
     }
 
-    override suspend fun addStaysRepo(hotelsItem: HotelsItemUiModel) {
-        localDataSource.insertStayRepo(hotelsItem.toEntity())
-//        remoteDataSource.
+    override suspend fun addStaysRepo(
+        hotelsItem: HotelsItemUiModel, isOnline: Boolean, isLogged: Boolean
+    ) {
+
+        if (isOnline && isLogged) {
+            remoteDataSource.addStaysRepo(hotelsItem)
+            localDataSource.insertStayRepo(hotelsItem.toEntity())
+        } else localDataSource.insertStayRepo(hotelsItem.toEntity())
     }
 
-    override suspend fun removeStaysRepo(hotelsItem: HotelsItemUiModel) {
-        localDataSource.deleteStayRepo(hotelsItem.toEntity())
-//        remoteDataSource.
+    override suspend fun removeStaysRepo(
+        hotelsItem: HotelsItemUiModel, isOnline: Boolean, isLogged: Boolean
+    ) {
+        if (isOnline && isLogged) {
+            remoteDataSource.removeStaysRepo(hotelsItem)
+            localDataSource.deleteStayRepo(hotelsItem.toEntity())
+        } else localDataSource.deleteStayRepo(hotelsItem.toEntity())
     }
 }

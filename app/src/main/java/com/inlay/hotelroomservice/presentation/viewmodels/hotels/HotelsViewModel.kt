@@ -31,7 +31,7 @@ abstract class HotelsViewModel : ViewModel() {
 
     abstract fun getStaysRepo(isOnline: Boolean, isLogged: Boolean)
 
-    abstract fun addStay(hotelsItem: HotelsItemUiModel)
+    abstract fun addStay(hotelsItem: HotelsItemUiModel, isOnline: Boolean, isLogged: Boolean)
 
-    abstract fun removeStay(hotelsItem: HotelsItemUiModel)
+    abstract fun removeStay(hotelsItem: HotelsItemUiModel, isOnline: Boolean, isLogged: Boolean)
 }

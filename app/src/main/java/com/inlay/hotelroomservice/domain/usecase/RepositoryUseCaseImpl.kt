@@ -4,6 +4,7 @@ import com.inlay.hotelroomservice.data.repository.HotelRoomRepository
 import com.inlay.hotelroomservice.presentation.models.details.HotelDetailsUiModel
 import com.inlay.hotelroomservice.presentation.models.hotelsitem.HotelsItemUiModel
 import com.inlay.hotelroomservice.presentation.models.locations.SearchLocationsUiModel
+import kotlinx.coroutines.flow.Flow
 
 class RepositoryUseCaseImpl(private val hotelRoomRepository: HotelRoomRepository) :
     RepositoryUseCase {
@@ -19,40 +20,38 @@ class RepositoryUseCaseImpl(private val hotelRoomRepository: HotelRoomRepository
         currencyCode: String
     ): List<HotelsItemUiModel> {
         return hotelRoomRepository.getHotelRepo(
-            isOnline,
-            geoId,
-            checkInDate,
-            checkOutDate,
-            currencyCode
+            isOnline, geoId, checkInDate, checkOutDate, currencyCode
         )
     }
 
     override suspend fun getHotelDetailsRepo(
-        id: String,
-        checkInDate: String,
-        checkOutDate: String,
-        currencyCode: String
+        id: String, checkInDate: String, checkOutDate: String, currencyCode: String
     ): HotelDetailsUiModel {
         return hotelRoomRepository.getHotelDetails(
-            id,
-            checkInDate,
-            checkOutDate,
-            currencyCode
+            id, checkInDate, checkOutDate, currencyCode
         )
     }
 
     override suspend fun getStaysRepo(
         isOnline: Boolean,
         isLogged: Boolean
-    ): List<HotelsItemUiModel> {
+    ): Flow<List<HotelsItemUiModel?>> {
         return hotelRoomRepository.getStaysRepo(isOnline, isLogged)
     }
 
-    override suspend fun addStayRepo(hotelsItem: HotelsItemUiModel) {
-        hotelRoomRepository.addStaysRepo(hotelsItem)
+    override suspend fun addStayRepo(
+        hotelsItem: HotelsItemUiModel,
+        isOnline: Boolean,
+        isLogged: Boolean
+    ) {
+        hotelRoomRepository.addStaysRepo(hotelsItem, isOnline, isLogged)
     }
 
-    override suspend fun removeStayRepo(hotelsItem: HotelsItemUiModel) {
-        hotelRoomRepository.removeStaysRepo(hotelsItem)
+    override suspend fun removeStayRepo(
+        hotelsItem: HotelsItemUiModel,
+        isOnline: Boolean,
+        isLogged: Boolean
+    ) {
+        hotelRoomRepository.removeStaysRepo(hotelsItem, isOnline, isLogged)
     }
 }
