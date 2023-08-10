@@ -1,12 +1,12 @@
-package com.inlay.hotelroomservice.data.local.dao
+package com.inlay.hotelroomservice.data.local.database.dao
 
 import androidx.room.Dao
 import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
-import com.inlay.hotelroomservice.data.local.models.HotelsItemEntity
-import com.inlay.hotelroomservice.data.local.models.HotelsItemStaysEntity
+import com.inlay.hotelroomservice.data.local.database.models.HotelsItemEntity
+import com.inlay.hotelroomservice.data.local.database.models.HotelsItemStaysEntity
 import kotlinx.coroutines.flow.Flow
 
 @Dao

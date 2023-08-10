@@ -1,4 +1,4 @@
-package com.inlay.hotelroomservice.data.local.typeconverters
+package com.inlay.hotelroomservice.data.local.database.typeconverters
 
 import androidx.room.TypeConverter
 

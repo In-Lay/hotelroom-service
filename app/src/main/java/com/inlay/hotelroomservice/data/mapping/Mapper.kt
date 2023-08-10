@@ -1,7 +1,7 @@
 package com.inlay.hotelroomservice.data.mapping
 
-import com.inlay.hotelroomservice.data.local.models.HotelsItemEntity
-import com.inlay.hotelroomservice.data.local.models.HotelsItemStaysEntity
+import com.inlay.hotelroomservice.data.local.database.models.HotelsItemEntity
+import com.inlay.hotelroomservice.data.local.database.models.HotelsItemStaysEntity
 import com.inlay.hotelroomservice.data.remote.models.hoteldetails.AboutContentGeneral
 import com.inlay.hotelroomservice.data.remote.models.hoteldetails.AttractionsNearbyContent
 import com.inlay.hotelroomservice.data.remote.models.hoteldetails.HotelDetailsModel

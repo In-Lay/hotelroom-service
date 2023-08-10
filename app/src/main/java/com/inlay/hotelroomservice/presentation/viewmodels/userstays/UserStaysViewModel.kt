@@ -21,7 +21,9 @@ abstract class UserStaysViewModel : ViewModel() {
         goToHotels: () -> Unit,
         goToProfile: () -> Unit,
         isUserLogged: Boolean,
-        user: FirebaseUser?
+        user: FirebaseUser?,
+        dayTime: String,
+        loginMsg: String
     )
 
     abstract fun goToHotels()

@@ -54,4 +54,29 @@ class RepositoryUseCaseImpl(private val hotelRoomRepository: HotelRoomRepository
     ) {
         hotelRoomRepository.removeStaysRepo(hotelsItem, isOnline, isLogged)
     }
+
+
+    override suspend fun saveLanguage(langCode: String) {
+        hotelRoomRepository.saveLanguage(langCode)
+    }
+
+    override suspend fun saveNightModeState(modeState: Int) {
+        hotelRoomRepository.saveNightModeState(modeState)
+    }
+
+    override suspend fun saveNotificationsState(state: Boolean) {
+        hotelRoomRepository.saveNotificationsState(state)
+    }
+
+    override suspend fun getLanguage(): Flow<String> {
+        return hotelRoomRepository.getLanguage()
+    }
+
+    override suspend fun getNightModeState(): Flow<Int> {
+        return hotelRoomRepository.getNightModeState()
+    }
+
+    override suspend fun getNotificationsState(): Flow<Boolean> {
+        return hotelRoomRepository.getNotificationsState()
+    }
 }

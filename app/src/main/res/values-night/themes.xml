@@ -5,4 +5,62 @@
         <!-- <item name="colorPrimary">@color/my_dark_primary</item> -->
         <item name="font">@font/montserrat</item>
     </style>
+
+    <style name="NavBackButton">
+        <item name="android:src">@drawable/outline_arrow_back_24_white</item>
+    </style>
+
+    <style name="LocationImageView">
+        <item name="android:src">@drawable/outline_location_on_24_white</item>
+    </style>
+
+
+    <style name="ParkingChip" parent="Widget.Material3.CardView.Filled">
+        <item name="chipIcon">@drawable/outline_directions_car_24_white</item>
+    </style>
+
+    <style name="InternetImageView" parent="Widget.Material3.CardView.Filled">
+        <item name="chipIcon">@drawable/outline_wifi_24_white</item>
+    </style>
+
+    <style name="FitnessImageView" parent="Widget.Material3.CardView.Filled">
+        <item name="chipIcon">@drawable/outline_fitness_center_24_white</item>
+    </style>
+
+    <style name="RestaurantImageView" parent="Widget.Material3.CardView.Filled">
+        <item name="chipIcon">@drawable/baseline_restaurant_24_white</item>
+    </style>
+
+    <style name="CloseImageView">
+        <item name="android:src">@drawable/outline_close_24_white</item>
+    </style>
+
+    <style name="NightModeImageView">
+        <item name="android:src">@drawable/baseline_dark_mode_24_white</item>
+    </style>
+
+    <style name="LanguageImageView">
+        <item name="android:src">@drawable/baseline_language_24_white</item>
+    </style>
+
+    <style name="NotificationsImageView">
+        <item name="android:src">@drawable/baseline_notifications_24_white</item>
+    </style>
+
+    <style name="ArrowRightImageView">
+        <item name="android:src">@drawable/baseline_keyboard_arrow_right_24_white</item>
+    </style>
+
+
+    <style name="LogoutImageView">
+        <item name="android:src">@drawable/outline_logout_24_white</item>
+    </style>
+
+    <style name="EditImageView">
+        <item name="android:src">@drawable/outline_edit_24_white</item>
+    </style>
+
+    <style name="PhoneImageView">
+        <item name="android:src">@drawable/outline_phone_24_white</item>
+    </style>
 </resources>

@@ -1,9 +1,9 @@
-package com.inlay.hotelroomservice.data.local.models
+package com.inlay.hotelroomservice.data.local.database.models
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import androidx.room.TypeConverters
-import com.inlay.hotelroomservice.data.local.typeconverters.StringListTypeConverter
+import com.inlay.hotelroomservice.data.local.database.typeconverters.StringListTypeConverter
 
 @Entity(tableName = "stays")
 data class HotelsItemStaysEntity(

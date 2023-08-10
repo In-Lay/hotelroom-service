@@ -23,4 +23,15 @@
         <item>THB</item>
         <item>ILS</item>
     </string-array>
+
+    <string-array name="lang_array">
+        <item>English</item>
+        <item>Українська</item>
+        <item>Русский</item>
+        <item>Español</item>
+        <item>Deutsch</item>
+        <item>Italiano</item>
+        <item>Français</item>
+        <item>中文</item>
+    </string-array>
 </resources>

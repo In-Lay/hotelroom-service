@@ -1,9 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
 
+        <variable
+            name="viewModel"
+            type="com.inlay.hotelroomservice.presentation.viewmodels.settings.SettingsViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -14,13 +18,134 @@
             android:id="@+id/toolbar"
             layout="@layout/toolbar_general" />
 
-        <TextView
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/img_day_night_icon"
+            style="@style/NightModeImageView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/settings_item_title"
-            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginStart="16dp"
+            app:layout_constraintBottom_toBottomOf="@+id/switch_day_night"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/switch_day_night" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tv_day_night_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:text="@string/night_mode"
+            android:textAppearance="?attr/textAppearanceBody1"
+            app:layout_constraintBottom_toBottomOf="@+id/img_day_night_icon"
+            app:layout_constraintStart_toEndOf="@id/img_day_night_icon"
+            app:layout_constraintTop_toTopOf="@+id/img_day_night_icon" />
+
+        <com.google.android.material.materialswitch.MaterialSwitch
+            android:id="@+id/switch_day_night"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:onCheckedChanged="@{(switch, isChecked) -> viewModel.onDarkModeChanged(isChecked)}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/toolbar" />
+
+        <com.google.android.material.divider.MaterialDivider
+            android:id="@+id/divider_day_night"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/toolbar" />
+            app:layout_constraintTop_toBottomOf="@id/switch_day_night" />
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/img_lang_icon"
+            style="@style/LanguageImageView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            app:layout_constraintBottom_toBottomOf="@+id/lang_change_layout"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/lang_change_layout" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tv_lang_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:text="@string/language"
+            android:textAppearance="?attr/textAppearanceBody1"
+            app:layout_constraintBottom_toBottomOf="@+id/lang_change_layout"
+            app:layout_constraintStart_toEndOf="@id/img_lang_icon"
+            app:layout_constraintTop_toTopOf="@id/lang_change_layout" />
+
+        <LinearLayout
+            android:id="@+id/lang_change_layout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:onClick="@{() -> viewModel.openLangDialog()}"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/divider_day_night">
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tv_current_lang"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:textAppearance="?attr/textAppearanceBody1"
+                android:textStyle="bold"
+                tools:text="English" />
+
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/img_arrow_icon"
+                style="@style/ArrowRightImageView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginStart="8dp" />
+        </LinearLayout>
+
+        <com.google.android.material.divider.MaterialDivider
+            android:id="@+id/divider_lang"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/lang_change_layout" />
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/img_notification_icon"
+            style="@style/NotificationsImageView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            app:layout_constraintBottom_toBottomOf="@+id/switch_notifications"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/switch_notifications" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tv_notification_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:text="@string/notifications"
+            android:textAppearance="?attr/textAppearanceBody1"
+            app:layout_constraintBottom_toBottomOf="@+id/img_notification_icon"
+            app:layout_constraintStart_toEndOf="@id/img_notification_icon"
+            app:layout_constraintTop_toTopOf="@+id/img_notification_icon" />
+
+        <com.google.android.material.materialswitch.MaterialSwitch
+            android:id="@+id/switch_notifications"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/divider_lang" />
+
+        <!--        TODO Add Currency and Distance Units Preference; Version, Privacy and Data info-->
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

@@ -1,5 +1,6 @@
 package com.inlay.hotelroomservice.presentation.viewmodels.userstays
 
+import android.content.Context
 import android.net.Uri
 import androidx.databinding.BindingAdapter
 import androidx.lifecycle.asLiveData
@@ -37,7 +38,9 @@ class AppUserStaysViewModel : UserStaysViewModel() {
         goToHotels: () -> Unit,
         goToProfile: () -> Unit,
         isUserLogged: Boolean,
-        user: FirebaseUser?
+        user: FirebaseUser?,
+        dayTime: String,
+        loginMsg: String
     ) {
         _user.value = user
 
@@ -45,10 +48,10 @@ class AppUserStaysViewModel : UserStaysViewModel() {
         _goToProfile = goToProfile
 
         _isUserLogged.value = isUserLogged
-        _profileHeaderText.value = "Good ${getDayTime()}"
+        _profileHeaderText.value = dayTime
         _profileUsernameText.value = if (_isUserLogged.value) {
             "${_user.value?.displayName}!"
-        } else "Please, Log in!"
+        } else loginMsg
         _profileImage.value = if (_isUserLogged.value) _user.value?.photoUrl else null
     }
 
@@ -58,18 +61,6 @@ class AppUserStaysViewModel : UserStaysViewModel() {
 
     override fun goToProfile() {
         _goToProfile()
-    }
-
-    private fun getDayTime(): String {
-        val calendar = Calendar.getInstance()
-        return when (calendar.get(Calendar.HOUR_OF_DAY)) {
-            in 1..4 -> "Night"
-            in 4..9 -> "Morning"
-            in 9..17 -> "Day"
-            in 17..22 -> "Evening"
-            in 22..24 -> "Night"
-            else -> "Day"
-        }
     }
 
     companion object {

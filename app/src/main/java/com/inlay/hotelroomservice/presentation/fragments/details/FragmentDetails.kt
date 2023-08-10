@@ -51,6 +51,8 @@ class FragmentDetails : Fragment() {
         binding.toolbar.setNavigationOnClickListener {
             findNavController().popBackStack()
         }
+        (activity as AppCompatActivity).supportActionBar?.title =
+            findNavController().currentDestination?.label
 
         binding.viewModel = viewModel
         binding.lifecycleOwner = this

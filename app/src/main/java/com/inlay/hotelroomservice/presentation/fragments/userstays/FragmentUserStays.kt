@@ -33,6 +33,7 @@ import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.activityViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import java.util.Calendar
 
 class FragmentUserStays : Fragment() {
     private lateinit var binding: FragmentUserStaysBinding
@@ -56,7 +57,9 @@ class FragmentUserStays : Fragment() {
             (activity as MainActivity).goToHotels,
             goToProfile,
             isLogged,
-            user
+            user,
+            getDayTime(),
+            requireContext().getString(R.string.stays_login_message)
         )
         hotelsViewModel.getStaysRepo(requireContext().isNetworkAvailable(), isLogged)
 
@@ -91,13 +94,13 @@ class FragmentUserStays : Fragment() {
         if (!isLogged) {
             val snackBar = Snackbar.make(
                 view,
-                "Note, that data is stored only locally, until you're log in.",
+                requireContext().getString(R.string.stays_snackbar_text),
                 Snackbar.LENGTH_SHORT
             )
 //            snackBar.setAction("Log in") {
 //                findNavController().navigate(R.id.fragmentLogin)
 //            }
-            snackBar.setAction("Dismiss") {
+            snackBar.setAction(requireContext().getString(R.string.dismiss)) {
                 snackBar.dismiss()
             }
             snackBar.show()
@@ -137,10 +140,23 @@ class FragmentUserStays : Fragment() {
                 hotelsViewModel.removeStay(it, isOnline, isLogged)
             }
         }
-        Toast.makeText(context, "Removed", Toast.LENGTH_SHORT).show()
+        Toast.makeText(context, context?.getString(R.string.removed), Toast.LENGTH_SHORT).show()
     }
 
     private fun isUserLogged(user: FirebaseUser?): Boolean {
         return user != null
+    }
+
+    private fun getDayTime(): String {
+        val calendar = Calendar.getInstance()
+        val context = requireContext()
+        return when (calendar.get(Calendar.HOUR_OF_DAY)) {
+            in 1..4 -> context.getString(R.string.night)
+            in 4..9 -> context.getString(R.string.morning)
+            in 9..17 -> context.getString(R.string.day)
+            in 17..22 -> context.getString(R.string.evening)
+            in 22..24 -> context.getString(R.string.night)
+            else -> context.getString(R.string.day)
+        }
     }
 }

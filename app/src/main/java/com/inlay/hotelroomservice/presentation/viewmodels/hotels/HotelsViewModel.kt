@@ -12,6 +12,10 @@ abstract class HotelsViewModel : ViewModel() {
 
     abstract val isOnline: StateFlow<Boolean>
 
+    abstract val language: StateFlow<String>
+
+    abstract val darkModeState: StateFlow<Int>
+
     abstract val hotelsDatesAndCurrencyModel: StateFlow<HotelsDatesAndCurrencyModel?>
 
     abstract val hotelDetailsSearchModel: StateFlow<HotelDetailsSearchModel?>
@@ -28,6 +32,8 @@ abstract class HotelsViewModel : ViewModel() {
         checkOutDate: String,
         currencyCode: String = "USD"
     )
+
+    abstract fun changeLanguage(languageCode: String)
 
     abstract fun getStaysRepo(isOnline: Boolean, isLogged: Boolean)
 

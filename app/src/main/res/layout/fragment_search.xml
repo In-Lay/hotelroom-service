@@ -56,7 +56,7 @@
                             android:layout_height="wrap_content"
                             android:layout_margin="4dp"
                             android:scaleType="fitXY"
-                            android:src="@drawable/outline_location_on_24"
+                            style="@style/LocationImageView"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
@@ -192,7 +192,6 @@
                         android:text="@string/usd"
                         app:simpleItems="@array/currencies_array" />
                 </com.google.android.material.textfield.TextInputLayout>
-
 
                 <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
                     android:id="@+id/efab_search"

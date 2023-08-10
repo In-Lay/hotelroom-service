@@ -32,4 +32,18 @@ interface HotelRoomRepository {
     suspend fun addStaysRepo(hotelsItem: HotelsItemUiModel, isOnline: Boolean, isLogged: Boolean)
 
     suspend fun removeStaysRepo(hotelsItem: HotelsItemUiModel, isOnline: Boolean, isLogged: Boolean)
+
+
+    suspend fun saveLanguage(langCode: String)
+
+    suspend fun saveNightModeState(modeState: Int)
+
+    suspend fun saveNotificationsState(state: Boolean)
+
+
+    suspend fun getLanguage(): Flow<String>
+
+    suspend fun getNightModeState(): Flow<Int>
+
+    suspend fun getNotificationsState(): Flow<Boolean>
 }

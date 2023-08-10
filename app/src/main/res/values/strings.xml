@@ -1,37 +1,37 @@
 <resources>
-    <string name="app_name">HotelRoom Service</string>
+    <string name="app_name" translatable="false">HotelRoom Service</string>
     <string name="fab_search_description">Search button</string>
     <string name="hotels_item_title">Hotels</string>
     <string name="my_stay_item_title">My Stays</string>
-    <string name="user_stay_empty">Looks like you haven\'t choose any hotel.\n <u>You can browse here</u></string>
+    <string name="user_stay_empty">Looks like you haven\'t chosen any hotel.\n <u>You can browse here</u></string>
     <string name="settings_item_title">Settings</string>
-    <string name="nav_drawer_open">Open Drawer</string>
-    <string name="nav_drawer_close">Close Drawer</string>
+    <string name="nav_drawer_open" translatable="false">Open Drawer</string>
+    <string name="nav_drawer_close" translatable="false">Close Drawer</string>
     <string name="header_profile">Profile</string>
     <string name="searchbar_hint">Search Location</string>
     <string name="btn_pick_dates">Pick dates</string>
     <string name="tv_dates_hint">Dates</string>
     <string name="tv_currencies_dropdown_hint">Currencies</string>
     <string name="search">Search Hotels</string>
-    <string name="btn_add">Add To Stay</string>
+    <string name="btn_add">Add To Stays</string>
     <string name="btn_remove">Remove</string>
     <string name="details"><u>More Details</u></string>
     <string name="current_location">Current Location</string>
     <string name="search_bar_description">Search for location</string>
-    <string name="usd">USD</string>
+    <string name="usd" translatable="false">USD</string>
     <string name="restaurants_nearby">Restaurants Nearby</string>
     <string name="view_all"><u>View All</u></string>
     <string name="attractions_nearby">Attractions Nearby</string>
     <string name="price">Price</string>
     <string name="link">Link</string>
-    <string name="tripadvisor"><u>Tripadvisor</u></string>
+    <string name="tripadvisor" translatable="false"><u>Tripadvisor</u></string>
     <string name="about">About</string>
     <string name="map">Location on Map</string>
-    <string name="fab_close_web_view">Close Web View</string>
+    <string name="fab_close_web_view" translatable="false">Close Web View</string>
     <string name="logout">Log out</string>
     <string name="login_label">Welcome to HotelRoom Service</string>
-    <string name="log_in_info">Please enter your credentials below to Log in into the app.</string>
-    <string name="register_info">Please enter your credentials below to create a new account.</string>
+    <string name="log_in_info">Please enter your credentials below \nto Log in into the app.</string>
+    <string name="register_info">Please enter your credentials below \nto create a new account.</string>
     <string name="email">Email</string>
     <string name="password">Password</string>
     <string name="log_in">Sign in</string>
@@ -42,10 +42,36 @@
     <string name="upload_photo">Upload Photo +</string>
     <string name="phone">Phone</string>
     <string name="save">Save</string>
-    <string name="phone_sample">(581)-307-6902</string>
+    <string name="phone_sample" translatable="false">(581)-307-6902</string>
     <string name="unsaved_changes">Unsaved Changes</string>
     <string name="stay">Stay</string>
     <string name="discard">Discard</string>
     <string name="edit_profile_dialog">You have some unsaved changes. \nDo you want to discard them?</string>
-    <string name="auth_dialog_info">You attempt to change your email.\nIn that case You need to Log in again.</string>
+    <string name="auth_dialog_info">You\'re attempting to change your email.\nIn that case You need to Log in again.</string>
+    <string name="night_mode">Night mode</string>
+    <string name="language">Language</string>
+    <string name="english" translatable="false">English</string>
+    <string name="notifications">Notifications</string>
+    <string name="ask_to_login">Please, Log in!</string>
+    <string name="hotels_fragment_label">Hotels</string>
+    <string name="stays_fragment_label">Stays</string>
+    <string name="search_fragment_label">Search</string>
+    <string name="details_fragment_label">Details</string>
+    <string name="settings_fragment_label">Settings</string>
+    <string name="profile_fragment_label">Profile</string>
+    <string name="edit_profile_fragment_label">Edit Profile</string>
+    <string name="stays_snackbar_text">Note, that data is stored only locally.</string>
+    <string name="dismiss">Dismiss</string>
+    <string name="day">Good day</string>
+    <string name="night">Good night</string>
+    <string name="morning">Good morning</string>
+    <string name="evening">Good evening</string>
+    <string name="stays_login_message">Please, Log in!</string>
+    <string name="current_lang" translatable="false">%1$s</string>
+    <string name="ok">OK</string>
+    <string name="cancel">Cancel</string>
+    <string name="change_language">Change language</string>
+    <string name="change_language_info">App will be restarted, to apply changes.\n\nPlease, note, that some translations might be incorrect.</string>
+    <string name="added">Added</string>
+    <string name="removed">Removed</string>
 </resources>

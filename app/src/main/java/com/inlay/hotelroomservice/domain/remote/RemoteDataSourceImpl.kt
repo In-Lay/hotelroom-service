@@ -34,7 +34,8 @@ class RemoteDataSourceImpl(
 
     override suspend fun getStaysRepo(): Flow<List<HotelsItemUiModel?>> {
         val currentUser = Firebase.auth.currentUser
-        val databaseReference = database.reference.child("userStays").child(currentUser?.uid!!)
+        val databaseReference =
+            currentUser?.uid?.let { database.reference.child("userStays").child(it) }
         val hotelsItemListFlow = MutableStateFlow<List<HotelsItemUiModel?>>(listOf())
 
         val valueEventListener = object : ValueEventListener {
@@ -49,7 +50,7 @@ class RemoteDataSourceImpl(
             }
         }
 
-        databaseReference.addValueEventListener(valueEventListener)
+        databaseReference?.addValueEventListener(valueEventListener)
 
         return hotelsItemListFlow
     }
@@ -74,7 +75,6 @@ class RemoteDataSourceImpl(
             }
 
             override fun onCancelled(error: DatabaseError) {
-                TODO("Not yet implemented")
             }
         })
 

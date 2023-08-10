@@ -5,6 +5,5 @@ import com.squareup.moshi.JsonClass
 
 @JsonClass(generateAdapter = true)
 data class GeneralData(
-//    @Json(name = "sortDisclaimer") val sortDisclaimer: String?,
     @Json(name = "data") val dataList: List<Data>
 )

@@ -4,7 +4,6 @@
         <!-- Customize your light theme here. -->
         <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
         <item name="font">@font/montserrat</item>
-
     </style>
 
 
@@ -30,4 +29,63 @@
     </style>
 
     <style name="Theme.HotelRoomService" parent="Base.Theme.HotelRoomService" />
+
+    <style name="NavBackButton">
+        <item name="android:src">@drawable/outline_arrow_back_24</item>
+    </style>
+
+    <style name="LocationImageView">
+        <item name="android:src">@drawable/outline_location_on_24</item>
+    </style>
+
+
+    <style name="ParkingChip" parent="Widget.Material3.CardView.Filled">
+        <item name="chipIcon">@drawable/outline_directions_car_24</item>
+    </style>
+
+    <style name="InternetImageView" parent="Widget.Material3.CardView.Filled">
+        <item name="chipIcon">@drawable/baseline_wifi_24</item>
+    </style>
+
+    <style name="FitnessImageView" parent="Widget.Material3.CardView.Filled">
+        <item name="chipIcon">@drawable/baseline_fitness_center_24</item>
+    </style>
+
+    <style name="RestaurantImageView" parent="Widget.Material3.CardView.Filled">
+        <item name="chipIcon">@drawable/outline_restaurant_24</item>
+    </style>
+
+    <style name="CloseImageView">
+        <item name="android:src">@drawable/outline_close_24</item>
+    </style>
+
+
+    <style name="NightModeImageView">
+        <item name="android:src">@drawable/baseline_dark_mode_24</item>
+    </style>
+
+    <style name="LanguageImageView">
+        <item name="android:src">@drawable/baseline_language_24</item>
+    </style>
+
+    <style name="NotificationsImageView">
+        <item name="android:src">@drawable/baseline_notifications_24</item>
+    </style>
+
+    <style name="ArrowRightImageView">
+        <item name="android:src">@drawable/baseline_keyboard_arrow_right_24</item>
+    </style>
+
+
+    <style name="LogoutImageView">
+        <item name="android:src">@drawable/outline_logout_24</item>
+    </style>
+
+    <style name="EditImageView">
+        <item name="android:src">@drawable/outline_edit_24</item>
+    </style>
+
+    <style name="PhoneImageView">
+        <item name="android:src">@drawable/outline_phone_24</item>
+    </style>
 </resources>

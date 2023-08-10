@@ -12,11 +12,11 @@
 
         <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/img_close_icon"
+            style="@style/CloseImageView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
-            android:layout_marginTop="10dp"
-            android:src="@drawable/outline_close_24" />
+            android:layout_marginTop="10dp" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recycler_view"

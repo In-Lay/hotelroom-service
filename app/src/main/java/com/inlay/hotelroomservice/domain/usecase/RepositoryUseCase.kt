@@ -28,4 +28,18 @@ interface RepositoryUseCase {
     suspend fun addStayRepo(hotelsItem: HotelsItemUiModel, isOnline: Boolean, isLogged: Boolean)
 
     suspend fun removeStayRepo(hotelsItem: HotelsItemUiModel, isOnline: Boolean, isLogged: Boolean)
+
+
+    suspend fun saveLanguage(langCode: String)
+
+    suspend fun saveNightModeState(modeState: Int)
+
+    suspend fun saveNotificationsState(state: Boolean)
+
+
+    suspend fun getLanguage(): Flow<String>
+
+    suspend fun getNightModeState(): Flow<Int>
+
+    suspend fun getNotificationsState(): Flow<Boolean>
 }

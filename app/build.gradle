@@ -22,6 +22,8 @@ android {
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
+        resConfigs "en", "ru", "ua", "es", "zh", "de", "fr", "it"
+
         Properties properties = new Properties()
         properties.load(project.rootProject.file("local.properties").newDataInputStream())
         buildConfigField "String", "HOTELSROOM_SERVICE_API_KEY", "\"${properties.getProperty("HOTELSROOM_SERVICE_API_KEY")}\""

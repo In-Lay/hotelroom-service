@@ -7,27 +7,27 @@
     <fragment
         android:id="@+id/hotelsFragment"
         android:name="com.inlay.hotelroomservice.presentation.fragments.hotels.HotelsFragment"
-        android:label="Hotels" />
+        android:label="@string/hotels_fragment_label" />
     <fragment
         android:id="@+id/fragmentUserStays"
         android:name="com.inlay.hotelroomservice.presentation.fragments.userstays.FragmentUserStays"
-        android:label="My Stay" />
+        android:label="@string/stays_fragment_label" />
     <fragment
         android:id="@+id/fragmentSettings"
         android:name="com.inlay.hotelroomservice.presentation.fragments.settings.FragmentSettings"
-        android:label="Settings" />
+        android:label="@string/settings_fragment_label" />
     <fragment
         android:id="@+id/fragmentProfile"
         android:name="com.inlay.hotelroomservice.presentation.fragments.profile.FragmentProfile"
-        android:label="Profile" />
+        android:label="@string/profile_fragment_label" />
     <fragment
         android:id="@+id/fragmentSearch"
         android:name="com.inlay.hotelroomservice.presentation.fragments.search.FragmentSearch"
-        android:label="Search" />
+        android:label="@string/search_fragment_label" />
     <fragment
         android:id="@+id/fragmentDetails"
         android:name="com.inlay.hotelroomservice.presentation.fragments.details.FragmentDetails"
-        android:label="Details" />
+        android:label="@string/details_fragment_label" />
     <fragment
         android:id="@+id/fragmentWebView"
         android:name="com.inlay.hotelroomservice.presentation.fragments.details.FragmentWebView"
@@ -43,5 +43,5 @@
     <fragment
         android:id="@+id/fragmentEditProfile"
         android:name="com.inlay.hotelroomservice.presentation.fragments.profile.editprofile.FragmentEditProfile"
-        android:label="Edit Profile" />
+        android:label="@string/edit_profile_fragment_label" />
 </navigation>

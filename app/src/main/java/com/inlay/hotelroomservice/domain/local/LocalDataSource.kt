@@ -1,7 +1,7 @@
 package com.inlay.hotelroomservice.domain.local
 
-import com.inlay.hotelroomservice.data.local.models.HotelsItemEntity
-import com.inlay.hotelroomservice.data.local.models.HotelsItemStaysEntity
+import com.inlay.hotelroomservice.data.local.database.models.HotelsItemEntity
+import com.inlay.hotelroomservice.data.local.database.models.HotelsItemStaysEntity
 import kotlinx.coroutines.flow.Flow
 
 interface LocalDataSource {
@@ -13,4 +13,17 @@ interface LocalDataSource {
     suspend fun deleteStayRepo(repo: HotelsItemStaysEntity)
 
     suspend fun fetchStaysRepo(): Flow<List<HotelsItemStaysEntity>>
+
+    suspend fun saveLanguage(langCode: String)
+
+    suspend fun saveNightModeState(modeState: Int)
+
+    suspend fun saveNotificationsState(state: Boolean)
+
+
+    suspend fun getLanguage(): Flow<String>
+
+    suspend fun getNightModeState(): Flow<Int>
+
+    suspend fun getNotificationsState(): Flow<Boolean>
 }

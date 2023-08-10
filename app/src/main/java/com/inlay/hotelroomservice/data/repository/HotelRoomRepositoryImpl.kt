@@ -18,7 +18,8 @@ import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 
 class HotelRoomRepositoryImpl(
-    private val remoteDataSource: RemoteDataSource, private val localDataSource: LocalDataSource
+    private val remoteDataSource: RemoteDataSource,
+    private val localDataSource: LocalDataSource
 ) : HotelRoomRepository, KoinComponent {
     //Works, uncomment
     override suspend fun getSearchLocationRepo(location: String): List<SearchLocationsUiModel> {
@@ -155,5 +156,29 @@ class HotelRoomRepositoryImpl(
             remoteDataSource.removeStaysRepo(hotelsItem)
             localDataSource.deleteStayRepo(hotelsItem.toEntity())
         } else localDataSource.deleteStayRepo(hotelsItem.toEntity())
+    }
+
+    override suspend fun saveLanguage(langCode: String) {
+        localDataSource.saveLanguage(langCode)
+    }
+
+    override suspend fun saveNightModeState(modeState: Int) {
+        localDataSource.saveNightModeState(modeState)
+    }
+
+    override suspend fun saveNotificationsState(state: Boolean) {
+        localDataSource.saveNotificationsState(state)
+    }
+
+    override suspend fun getLanguage(): Flow<String> {
+        return localDataSource.getLanguage()
+    }
+
+    override suspend fun getNightModeState(): Flow<Int> {
+        return localDataSource.getNightModeState()
+    }
+
+    override suspend fun getNotificationsState(): Flow<Boolean> {
+        return localDataSource.getNotificationsState()
     }
 }

@@ -139,8 +139,6 @@ class FragmentEditProfile : Fragment() {
     }
 
     private val openPhotoPicker: () -> Unit = {
-        //TODO Try move to activity
-
         pickMedia.launch(PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly))
     }
 }

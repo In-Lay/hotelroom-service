@@ -1,5 +1,10 @@
 package com.inlay.hotelroomservice.presentation.activities
 
+import android.app.UiModeManager
+import android.content.Context
+import android.content.res.Configuration
+import android.content.res.Resources
+import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -7,8 +12,11 @@ import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
+import androidx.appcompat.app.AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
@@ -21,15 +29,20 @@ import com.inlay.hotelroomservice.R
 import com.inlay.hotelroomservice.databinding.ActivityMainBinding
 import com.inlay.hotelroomservice.extensions.isNetworkAvailable
 import com.inlay.hotelroomservice.presentation.DrawerProvider
+import com.inlay.hotelroomservice.presentation.LocaleContextWrapper
 import com.inlay.hotelroomservice.presentation.models.details.HotelDetailsSearchModel
 import com.inlay.hotelroomservice.presentation.viewmodels.hotels.HotelsViewModel
+import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import java.util.Locale
+
 
 class MainActivity : AppCompatActivity(), DrawerProvider {
     private lateinit var binding: ActivityMainBinding
     private lateinit var navController: NavController
     private val hotelsViewModel: HotelsViewModel by viewModel()
     private var signInRememberState = true
+    private var language = "en"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,7 +51,55 @@ class MainActivity : AppCompatActivity(), DrawerProvider {
         setContentView(binding.root)
 
         val currentUser = Firebase.auth.currentUser
+        val languageToLoad: String = Resources.getSystem().configuration.locales[0].language
+        language = languageToLoad
 
+        lifecycleScope.launch {
+            hotelsViewModel.language.collect {
+                Log.d(
+                    "SettingsLog",
+                    "MainActivity: attachBaseContext: hotelsViewModel.language: $it"
+                )
+                language = it
+                val locale = Locale(it)
+                val ctxt = LocaleContextWrapper.wrap(this@MainActivity, locale)
+                resources.updateConfiguration(ctxt.resources.configuration, ctxt.resources.displayMetrics)
+            }
+        }
+
+        lifecycleScope.launch {
+            hotelsViewModel.darkModeState.collect {
+                val currentNightMode =
+                    resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK
+                if (it != currentNightMode) {
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+                        val uiModeManager =
+                            getSystemService(Context.UI_MODE_SERVICE) as UiModeManager
+                        if (it == AppCompatDelegate.MODE_NIGHT_YES) uiModeManager.setApplicationNightMode(
+                            UiModeManager.MODE_NIGHT_YES
+                        )
+                        else uiModeManager.setApplicationNightMode(UiModeManager.MODE_NIGHT_NO)
+                    } else {
+                        if (it == AppCompatDelegate.MODE_NIGHT_YES)
+                            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+                        else AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+                    }
+                } else {
+                    val newNightMode = when (currentNightMode) {
+                        Configuration.UI_MODE_NIGHT_NO -> AppCompatDelegate.MODE_NIGHT_NO
+                        Configuration.UI_MODE_NIGHT_YES -> AppCompatDelegate.MODE_NIGHT_YES
+                        else -> MODE_NIGHT_FOLLOW_SYSTEM
+                    }
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+                        val uiModeManager =
+                            getSystemService(Context.UI_MODE_SERVICE) as UiModeManager
+                        uiModeManager.setApplicationNightMode(
+                            newNightMode
+                        )
+                    } else AppCompatDelegate.setDefaultNightMode(newNightMode)
+                }
+            }
+        }
 
         setupNavigationDrawer()
         setupNavigation()
@@ -73,7 +134,24 @@ class MainActivity : AppCompatActivity(), DrawerProvider {
             }
         }
         binding.lifecycleOwner = this
+
+
     }
+
+//    override fun onStart() {
+//        super.onStart()
+//        lifecycleScope.launch {
+//            hotelsViewModel.language.collectLatest {
+//                Log.d(
+//                    "SettingsLog",
+//                    "MainActivity: attachBaseContext: hotelsViewModel.language: $it"
+//                )
+//                language = it
+////                attachBaseContext(this@MainActivity)
+//            }
+//        }
+//
+//    }
 
     private fun setupNavigationDrawer() {
         val navHostFragment =
@@ -155,6 +233,32 @@ class MainActivity : AppCompatActivity(), DrawerProvider {
 
     val goToHotels: () -> Unit = {
         navController.navigate(R.id.hotelsFragment)
+    }
+
+
+    override fun attachBaseContext(newBase: Context?) {
+//        val languageToLoad: String = Resources.getSystem().configuration.locales[0].language
+//        var language = languageToLoad
+
+//        lifecycleScope.launch {
+//            lifecycle.repeatOnLifecycle(Lifecycle.State.RESUMED) {
+//                hotelsViewModel.language.collectLatest {
+//                    Log.d(
+//                        "SettingsLog",
+//                        "MainActivity: attachBaseContext: hotelsViewModel.language: $it"
+//                    )
+//                    language = it
+//
+//                }
+//            }
+//        }
+        Log.d("SettingsLog", "MainActivity: attachBaseContext: language: $language")
+        //TODO get language code from DataStore
+        val locale = Locale(language)
+        Locale.setDefault(locale)
+
+        val context = LocaleContextWrapper.wrap(newBase, locale)
+        super.attachBaseContext(context)
     }
 
     override fun onDestroy() {

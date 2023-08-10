@@ -6,7 +6,9 @@ import com.google.firebase.ktx.Firebase
 import com.inlay.hotelroomservice.data.getSampleDetailsDataFromAssets
 import com.inlay.hotelroomservice.data.getSampleHotelsDataFromAssets
 import com.inlay.hotelroomservice.data.getSampleLocationsDataFromAssets
-import com.inlay.hotelroomservice.data.local.HotelsRoomDatabase
+import com.inlay.hotelroomservice.data.local.database.HotelsRoomDatabase
+import com.inlay.hotelroomservice.data.local.datastore.AppSettingsDataStore
+import com.inlay.hotelroomservice.data.local.datastore.SettingsDataStore
 import com.inlay.hotelroomservice.data.remote.api.HotelRoomApi
 import com.inlay.hotelroomservice.data.remote.apiservice.HotelRoomApiService
 import com.inlay.hotelroomservice.data.remote.apiservice.HotelRoomApiServiceImpl
@@ -39,6 +41,8 @@ import com.inlay.hotelroomservice.presentation.viewmodels.search.AppSearchViewMo
 import com.inlay.hotelroomservice.presentation.viewmodels.search.SearchViewModel
 import com.inlay.hotelroomservice.presentation.viewmodels.search.item.AppSearchLocationsItemViewModel
 import com.inlay.hotelroomservice.presentation.viewmodels.search.item.SearchLocationsItemViewModel
+import com.inlay.hotelroomservice.presentation.viewmodels.settings.AppSettingsViewModel
+import com.inlay.hotelroomservice.presentation.viewmodels.settings.SettingsViewModel
 import com.inlay.hotelroomservice.presentation.viewmodels.userstays.AppUserStaysViewModel
 import com.inlay.hotelroomservice.presentation.viewmodels.userstays.UserStaysViewModel
 import org.koin.android.ext.koin.androidContext
@@ -79,8 +83,15 @@ val appModule = module {
     single { getSampleLocationsDataFromAssets(context = androidContext(), moshi = get()) }
     single { getSampleDetailsDataFromAssets(context = androidContext(), moshi = get()) }
 
+    single<SettingsDataStore> { AppSettingsDataStore(context = androidContext()) }
+
     single<RemoteDataSource> { RemoteDataSourceImpl(hotelRoomApiService = get(), database = get()) }
-    single<LocalDataSource> { LocalDataSourceImpl(hotelsRoomDao = get()) }
+    single<LocalDataSource> {
+        LocalDataSourceImpl(
+            hotelsRoomDao = get(),
+            settingsDataStore = get()
+        )
+    }
 
     single<HotelRoomRepository> {
         HotelRoomRepositoryImpl(
@@ -109,8 +120,8 @@ val appModule = module {
     viewModel<UserStaysViewModel> { AppUserStaysViewModel() }
 
     viewModel<ProfileViewModel> { AppProfileViewModel() }
-
     viewModel<EditProfileViewModel> { AppEditProfileViewModel() }
-
     viewModel<LoginRegisterViewModel> { AppLoginRegisterViewModel() }
+
+    viewModel<SettingsViewModel> { AppSettingsViewModel(repositoryUseCase = get()) }
 }

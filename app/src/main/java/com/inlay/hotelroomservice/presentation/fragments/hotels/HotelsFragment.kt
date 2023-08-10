@@ -102,7 +102,7 @@ class HotelsFragment : Fragment() {
                 hotelsViewModel.addStay(it, isOnline, isLogged)
             }
         }
-        Toast.makeText(context, "Added", Toast.LENGTH_SHORT).show()
+        Toast.makeText(context, context?.getString(R.string.added), Toast.LENGTH_SHORT).show()
     }
 
     private fun isUserLogged(user: FirebaseUser?): Boolean {

@@ -1,5 +1,7 @@
 package com.inlay.hotelroomservice.presentation.viewmodels.hotels
 
+import android.util.Log
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.lifecycle.viewModelScope
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.ktx.auth
@@ -26,6 +28,12 @@ class AppHotelsViewModel(
     private val _isOnline = MutableStateFlow(false)
     override val isOnline = _isOnline
 
+    private val _language = MutableStateFlow("en")
+    override val language = _language
+
+    private val _darkModeState = MutableStateFlow(AppCompatDelegate.MODE_NIGHT_NO)
+    override val darkModeState = _darkModeState
+
     private val _hotelsDatesAndCurrencyModel: MutableStateFlow<HotelsDatesAndCurrencyModel?> =
         MutableStateFlow(null)
     override val hotelsDatesAndCurrencyModel = _hotelsDatesAndCurrencyModel
@@ -42,6 +50,18 @@ class AppHotelsViewModel(
 
     init {
         _user.value = Firebase.auth.currentUser
+        viewModelScope.launch {
+            repositoryUseCase.getLanguage().collect {
+                Log.d("SettingsLog", "AppHotelsViewModel: init: language: $it")
+                _language.value = it
+            }
+        }
+
+        viewModelScope.launch {
+            repositoryUseCase.getNightModeState().collect {
+                _darkModeState.value = it
+            }
+        }
     }
 
     override fun initialize(isOnline: Boolean) {
@@ -58,6 +78,13 @@ class AppHotelsViewModel(
             )
 
             getStaysRepo(_isOnline.value, isUserLogged())
+        }
+    }
+
+    override fun changeLanguage(languageCode: String) {
+        _language.value = languageCode
+        viewModelScope.launch {
+            repositoryUseCase.saveLanguage(languageCode)
         }
     }
 
