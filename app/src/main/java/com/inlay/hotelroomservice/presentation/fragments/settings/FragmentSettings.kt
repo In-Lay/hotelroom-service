@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
+import androidx.core.content.edit
 import androidx.core.view.GravityCompat
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
@@ -33,6 +34,8 @@ class FragmentSettings : Fragment() {
     private val viewModel: SettingsViewModel by viewModel()
     private val hotelsViewModel: HotelsViewModel by activityViewModel()
     private lateinit var currentLocale: Locale
+
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -49,6 +52,10 @@ class FragmentSettings : Fragment() {
         }
         (activity as AppCompatActivity).supportActionBar?.title =
             findNavController().currentDestination?.label
+        Log.d(
+            "SettingsLog",
+            "findNavController().currentDestination?.label: ${findNavController().currentDestination?.label}"
+        )
 
         binding.lifecycleOwner = viewLifecycleOwner
 
@@ -173,6 +180,8 @@ class FragmentSettings : Fragment() {
     }
 
     private fun showChangeLocaleDialog(languageCode: String) {
+        val sharedPreferences =
+            activity?.getSharedPreferences("sharprefs_key", AppCompatActivity.MODE_PRIVATE)
         val dialogBuilder = MaterialAlertDialogBuilder(requireContext())
 
         dialogBuilder.apply {
@@ -183,7 +192,18 @@ class FragmentSettings : Fragment() {
             }
             setPositiveButton(R.string.ok) { _, _ ->
                 hotelsViewModel.changeLanguage(languageCode)
-                SetLocale.setLocale(requireContext(), languageCode)
+
+//                Log.d(
+//                    "SettingsLog",
+//                    "languageCode: $languageCode; sharedPreferences: $sharedPreferences"
+//                )
+//                sharedPreferences?.edit()?.putString("lang_key", languageCode)?.apply()
+
+//                sharedPreferences?.edit {
+//                    this.putString("lang_key", languageCode).apply()
+//                }
+
+//                SetLocale.setLocale(requireContext(), languageCode)
                 (activity as MainActivity).recreate()
             }
         }

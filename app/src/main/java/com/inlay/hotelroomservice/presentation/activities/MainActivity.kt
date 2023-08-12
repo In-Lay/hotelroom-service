@@ -2,6 +2,7 @@ package com.inlay.hotelroomservice.presentation.activities
 
 import android.app.UiModeManager
 import android.content.Context
+import android.content.SharedPreferences
 import android.content.res.Configuration
 import android.content.res.Resources
 import android.os.Build
@@ -14,6 +15,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.appcompat.app.AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM
+import androidx.core.content.edit
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.lifecycle.lifecycleScope
@@ -33,6 +35,7 @@ import com.inlay.hotelroomservice.presentation.LocaleContextWrapper
 import com.inlay.hotelroomservice.presentation.models.details.HotelDetailsSearchModel
 import com.inlay.hotelroomservice.presentation.viewmodels.hotels.HotelsViewModel
 import kotlinx.coroutines.launch
+import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.util.Locale
 
@@ -44,8 +47,22 @@ class MainActivity : AppCompatActivity(), DrawerProvider {
     private var signInRememberState = true
     private var language = "en"
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        val sharedPreferences = getSharedPreferences("sharprefs_key", MODE_PRIVATE)
+
+        val lnag = sharedPreferences.getString("lang_key", "en")
+        Log.d(
+            "SettingsLog",
+            "lnag: $lnag; sharedPreferences: $sharedPreferences"
+        )
+        val locale = Locale(lnag)
+        val ctxt = LocaleContextWrapper.wrap(this@MainActivity, locale)
+        resources.updateConfiguration(
+            ctxt.resources.configuration,
+            ctxt.resources.displayMetrics
+        )
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
@@ -61,9 +78,21 @@ class MainActivity : AppCompatActivity(), DrawerProvider {
                     "MainActivity: attachBaseContext: hotelsViewModel.language: $it"
                 )
                 language = it
-                val locale = Locale(it)
-                val ctxt = LocaleContextWrapper.wrap(this@MainActivity, locale)
-                resources.updateConfiguration(ctxt.resources.configuration, ctxt.resources.displayMetrics)
+//                val locale = Locale(it)
+//
+//                Locale.setDefault(locale)
+//
+//                val configuration = Configuration()
+//                configuration.setLocale(locale)
+//                val newContext = createConfigurationContext(configuration)
+//                applicationContext?.resources?.configuration?.updateFrom(configuration)
+
+//                val ctxt = LocaleContextWrapper.wrap(this@MainActivity, locale)
+//                resources.updateConfiguration(
+//                    ctxt.resources.configuration,
+//                    ctxt.resources.displayMetrics
+//                )
+
             }
         }
 
@@ -158,6 +187,8 @@ class MainActivity : AppCompatActivity(), DrawerProvider {
             supportFragmentManager.findFragmentById(R.id.fragment_container_view) as NavHostFragment
         navController = navHostFragment.navController
 
+        navController.setGraph(R.navigation.nav_graph)
+
         binding.navigationView.setupWithNavController(navController)
     }
 
@@ -236,7 +267,8 @@ class MainActivity : AppCompatActivity(), DrawerProvider {
     }
 
 
-    override fun attachBaseContext(newBase: Context?) {
+//    override fun attachBaseContext(newBase: Context?) {
+//        val hotelsViewModel: HotelsViewModel by inject()
 //        val languageToLoad: String = Resources.getSystem().configuration.locales[0].language
 //        var language = languageToLoad
 
@@ -252,14 +284,15 @@ class MainActivity : AppCompatActivity(), DrawerProvider {
 //                }
 //            }
 //        }
-        Log.d("SettingsLog", "MainActivity: attachBaseContext: language: $language")
-        //TODO get language code from DataStore
-        val locale = Locale(language)
-        Locale.setDefault(locale)
-
-        val context = LocaleContextWrapper.wrap(newBase, locale)
-        super.attachBaseContext(context)
-    }
+//        Log.d("SettingsLog", "MainActivity: attachBaseContext: language: $language")
+//        //TODO get language code from DataStore
+//
+//        val locale = Locale("de")
+//        Locale.setDefault(locale)
+//
+//        val context = LocaleContextWrapper.wrap(newBase, locale)
+//        super.attachBaseContext(context)
+//    }
 
     override fun onDestroy() {
         //TODO On remember me false doesn't work
