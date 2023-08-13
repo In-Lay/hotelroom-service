@@ -1,12 +1,17 @@
 package com.inlay.hotelroomservice.presentation.viewmodels.hotels
 
-import android.util.Log
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.lifecycle.viewModelScope
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
-import com.inlay.hotelroomservice.domain.usecase.RepositoryUseCase
+import com.inlay.hotelroomservice.domain.usecase.datastore.nightmode.GetNightMode
+import com.inlay.hotelroomservice.domain.usecase.hotels.GetHotelsRepo
+import com.inlay.hotelroomservice.domain.usecase.sharedpreferences.GetLanguagePreferences
+import com.inlay.hotelroomservice.domain.usecase.sharedpreferences.SaveLanguagePreferences
+import com.inlay.hotelroomservice.domain.usecase.stays.add.AddStays
+import com.inlay.hotelroomservice.domain.usecase.stays.get.GetStay
+import com.inlay.hotelroomservice.domain.usecase.stays.remove.RemoveStay
 import com.inlay.hotelroomservice.presentation.models.details.HotelDetailsSearchModel
 import com.inlay.hotelroomservice.presentation.models.hotelsitem.DatesModel
 import com.inlay.hotelroomservice.presentation.models.hotelsitem.HotelsDatesAndCurrencyModel
@@ -19,7 +24,13 @@ import java.text.SimpleDateFormat
 import java.util.Calendar
 
 class AppHotelsViewModel(
-    private val repositoryUseCase: RepositoryUseCase,
+    private val getHotelsRepoUseCase: GetHotelsRepo,
+    private val getStay: GetStay,
+    private val addStays: AddStays,
+    private val removeStayUseCase: RemoveStay,
+    private val getLanguagePreferences: GetLanguagePreferences,
+    private val saveLanguagePreferences: SaveLanguagePreferences,
+    private val getNightMode: GetNightMode,
     private val dateFormat: SimpleDateFormat
 ) : HotelsViewModel() {
     private val _user: MutableStateFlow<FirebaseUser?> = MutableStateFlow(null)
@@ -51,14 +62,11 @@ class AppHotelsViewModel(
     init {
         _user.value = Firebase.auth.currentUser
         viewModelScope.launch {
-            repositoryUseCase.getLanguage().collect {
-                Log.d("SettingsLog", "AppHotelsViewModel: init: language: $it")
-                _language.value = it
-            }
+            _language.value = getLanguagePreferences.getLanguage().toString()
         }
 
         viewModelScope.launch {
-            repositoryUseCase.getNightModeState().collect {
+            getNightMode().collect {
                 _darkModeState.value = it
             }
         }
@@ -84,7 +92,7 @@ class AppHotelsViewModel(
     override fun changeLanguage(languageCode: String) {
         _language.value = languageCode
         viewModelScope.launch {
-            repositoryUseCase.saveLanguage(languageCode)
+            saveLanguagePreferences.saveLanguage(languageCode)
         }
     }
 
@@ -96,7 +104,7 @@ class AppHotelsViewModel(
         currencyCode: String
     ) {
         viewModelScope.launch(Dispatchers.IO) {
-            _hotelsDataList.value = repositoryUseCase.getHotelsRepo(
+            _hotelsDataList.value = getHotelsRepoUseCase(
                 isOnline,
                 geoId,
                 checkInDate,
@@ -110,7 +118,7 @@ class AppHotelsViewModel(
 
     override fun getStaysRepo(isOnline: Boolean, isLogged: Boolean) {
         viewModelScope.launch(Dispatchers.IO) {
-            repositoryUseCase.getStaysRepo(isOnline, isLogged).collectLatest { list ->
+            getStay(isOnline, isLogged).collectLatest { list ->
                 _selectedHotelsDataList.value = list.mapNotNull { it }
             }
         }
@@ -121,7 +129,7 @@ class AppHotelsViewModel(
         dataList.add(hotelsItem)
         _selectedHotelsDataList.value = dataList
         viewModelScope.launch(Dispatchers.IO) {
-            repositoryUseCase.addStayRepo(hotelsItem, isOnline, isLogged)
+            addStays(hotelsItem, isOnline, isLogged)
         }
     }
 
@@ -130,7 +138,7 @@ class AppHotelsViewModel(
         dataList.remove(hotelsItem)
         _selectedHotelsDataList.value = dataList
         viewModelScope.launch(Dispatchers.IO) {
-            repositoryUseCase.removeStayRepo(hotelsItem, isOnline, isLogged)
+            removeStayUseCase(hotelsItem, isOnline, isLogged)
         }
     }
 
@@ -146,5 +154,4 @@ class AppHotelsViewModel(
     }
 
     private fun isUserLogged(): Boolean = _user.value != null
-
 }

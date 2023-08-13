@@ -108,15 +108,6 @@
                 android:onTextChanged="@{viewModel.onPasswordTextChanged}" />
         </com.google.android.material.textfield.TextInputLayout>
 
-        <com.google.android.material.checkbox.MaterialCheckBox
-            android:id="@+id/checkbox_remember_me"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:onCheckedChanged="@{(switch, checked) -> viewModel.onCheckedChanged(checked)}"
-            android:text="@string/remember_me"
-            app:layout_constraintStart_toStartOf="@id/et_layout_password"
-            app:layout_constraintTop_toBottomOf="@id/et_layout_password" />
-
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btn_login"
             android:layout_width="0dp"
@@ -128,7 +119,7 @@
             android:text="@string/log_in"
             app:layout_constraintEnd_toEndOf="@id/et_layout_password"
             app:layout_constraintStart_toStartOf="@id/et_layout_password"
-            app:layout_constraintTop_toBottomOf="@id/checkbox_remember_me" />
+            app:layout_constraintTop_toBottomOf="@id/et_layout_password" />
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/tv_register_suggestion"

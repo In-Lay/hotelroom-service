@@ -7,16 +7,15 @@ import androidx.lifecycle.viewModelScope
 import coil.load
 import com.google.android.material.imageview.ShapeableImageView
 import com.inlay.hotelroomservice.R
-import com.inlay.hotelroomservice.domain.usecase.RepositoryUseCase
+import com.inlay.hotelroomservice.domain.usecase.details.GetHotelDetails
 import com.inlay.hotelroomservice.presentation.models.details.HotelDetailsSearchModel
 import com.inlay.hotelroomservice.presentation.models.details.HotelDetailsUiModel
 import com.inlay.hotelroomservice.presentation.models.details.NearbyPlace
-import com.inlay.hotelroomservice.presentation.models.hotelsitem.DatesModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
 import java.util.Locale
 
-class AppDetailsViewModel(private val repositoryUseCase: RepositoryUseCase) : DetailsViewModel() {
+class AppDetailsViewModel(private val getHotelDetails: GetHotelDetails) : DetailsViewModel() {
 
     private val _hotelDetailsData: MutableStateFlow<HotelDetailsUiModel?> = MutableStateFlow(null)
     override val hotelDetailsData: LiveData<HotelDetailsUiModel?> = _hotelDetailsData.asLiveData()
@@ -110,7 +109,7 @@ class AppDetailsViewModel(private val repositoryUseCase: RepositoryUseCase) : De
         hotelDetailsSearchModel: HotelDetailsSearchModel
     ) {
         viewModelScope.launch {
-            _hotelDetailsData.value = repositoryUseCase.getHotelDetailsRepo(
+            _hotelDetailsData.value = getHotelDetails(
                 hotelDetailsSearchModel.id,
                 hotelDetailsSearchModel.dates.checkInDate,
                 hotelDetailsSearchModel.dates.checkOutDate,

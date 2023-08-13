@@ -6,7 +6,7 @@ import androidx.lifecycle.viewModelScope
 import coil.load
 import com.google.android.material.imageview.ShapeableImageView
 import com.google.android.material.shape.CornerFamily
-import com.inlay.hotelroomservice.domain.usecase.RepositoryUseCase
+import com.inlay.hotelroomservice.domain.usecase.location.GetSearchLocationRepo
 import com.inlay.hotelroomservice.presentation.models.SearchDataUiModel
 import com.inlay.hotelroomservice.presentation.models.hotelsitem.DatesModel
 import com.inlay.hotelroomservice.presentation.models.locations.SearchLocationsImageUiModel
@@ -16,7 +16,9 @@ import kotlinx.coroutines.launch
 import java.util.Locale
 
 
-class AppSearchViewModel(private val repositoryUseCase: RepositoryUseCase) : SearchViewModel() {
+class AppSearchViewModel(
+    private val getSearchLocationRepo: GetSearchLocationRepo,
+) : SearchViewModel() {
 
     private val _isOnline = MutableStateFlow(false)
     override val isOnline = _isOnline
@@ -76,7 +78,7 @@ class AppSearchViewModel(private val repositoryUseCase: RepositoryUseCase) : Sea
             _supportText.value = "Enter location"
         } else {
             viewModelScope.launch {
-                _searchLocationsData.value = repositoryUseCase.getSearchLocationRepo(
+                _searchLocationsData.value = getSearchLocationRepo(
                     _searchUserInput.value.lowercase(
                         Locale.ROOT
                     )

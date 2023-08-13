@@ -66,4 +66,5 @@
     <string name="change_language_info">Додаток буде перезапущено, щоб зміни набули чинності.\n\nЗверніть увагу, що місцями переклад може бути некоректним.</string>
     <string name="added">Додано</string>
     <string name="removed">Видалено</string>
+    <string name="logout_info">Ви дійсно хочете вийти?</string>
 </resources>

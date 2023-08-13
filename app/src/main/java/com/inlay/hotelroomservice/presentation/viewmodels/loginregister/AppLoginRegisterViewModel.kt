@@ -1,6 +1,5 @@
 package com.inlay.hotelroomservice.presentation.viewmodels.loginregister
 
-import android.util.Log
 import android.util.Patterns
 import androidx.lifecycle.asLiveData
 import com.google.firebase.auth.FirebaseAuth
@@ -29,28 +28,22 @@ class AppLoginRegisterViewModel : LoginRegisterViewModel() {
     private val _supportFullNameText = MutableStateFlow("")
     override val supportFullNameText = _supportFullNameText.asLiveData()
 
-    private val _isRememberChecked = MutableStateFlow(false)
-    override val isRememberChecked = _isRememberChecked
-
     private val _toastErrorMessage = MutableStateFlow("")
     override val toastErrorMessage = _toastErrorMessage
 
     private lateinit var _onClose: () -> Unit
     private lateinit var _onSuggestionClicked: () -> Unit
     private lateinit var _onNavigateToProfile: () -> Unit
-    private lateinit var _signOutOnRememberFalse: (Boolean) -> Unit
 
     override fun initialize(
         close: () -> Unit,
         onSuggestionClicked: () -> Unit,
         navigateToProfile: () -> Unit,
-        signOutOnRememberFalse: (Boolean) -> Unit,
         auth: FirebaseAuth
     ) {
         _onClose = close
         _onSuggestionClicked = onSuggestionClicked
         _onNavigateToProfile = navigateToProfile
-        _signOutOnRememberFalse = signOutOnRememberFalse
 
         _auth.value = auth
     }
@@ -80,11 +73,6 @@ class AppLoginRegisterViewModel : LoginRegisterViewModel() {
         _userFullName.value = s.toString()
     }
 
-    override fun onCheckedChanged(checked: Boolean) {
-        Log.d("profileTag", "checked: $checked")
-        _isRememberChecked.value = checked
-    }
-
     override fun login() {
         if (_userMail.value.isEmpty()) {
             _supportEmailText.value = "No Email provided"
@@ -94,12 +82,7 @@ class AppLoginRegisterViewModel : LoginRegisterViewModel() {
             _auth.value?.signInWithEmailAndPassword(_userMail.value, _userPassword.value)
                 ?.addOnCompleteListener {
                     if (it.isSuccessful) {
-                        if (_isRememberChecked.value) {
                             _onNavigateToProfile()
-                        } else {
-                            _signOutOnRememberFalse(_isRememberChecked.value)
-                            _onNavigateToProfile()
-                        }
                     }
                 }?.addOnFailureListener {
                     _toastErrorMessage.value = it.message.toString()

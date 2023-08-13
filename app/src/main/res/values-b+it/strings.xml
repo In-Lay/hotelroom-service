@@ -66,4 +66,5 @@
     <string name="change_language_info">L\'app verrà riavviata per applicare le modifiche.\n\nSi prega di notare che alcune traduzioni potrebbero non essere corrette.</string>
     <string name="added">Aggiunto</string>
     <string name="removed">Rimosso</string>
+    <string name="logout_info">Vuoi davvero uscire?</string>
 </resources>

@@ -2,11 +2,11 @@ package com.inlay.hotelroomservice.presentation.viewmodels.settings
 
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.lifecycle.viewModelScope
-import com.inlay.hotelroomservice.domain.usecase.RepositoryUseCase
+import com.inlay.hotelroomservice.domain.usecase.datastore.nightmode.SaveNightMode
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
 
-class AppSettingsViewModel(private val repositoryUseCase: RepositoryUseCase) : SettingsViewModel() {
+class AppSettingsViewModel(private val saveNightMode: SaveNightMode) : SettingsViewModel() {
     private val _langsList = MutableStateFlow(listOf<String>())
     override val langsList = _langsList
 
@@ -27,7 +27,7 @@ class AppSettingsViewModel(private val repositoryUseCase: RepositoryUseCase) : S
             val modeState = if (isChecked) {
                 AppCompatDelegate.MODE_NIGHT_YES
             } else AppCompatDelegate.MODE_NIGHT_NO
-            repositoryUseCase.saveNightModeState(modeState)
+            saveNightMode(modeState)
         }
     }
 }

@@ -8,11 +8,6 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 
 class AppSettingsDataStore(private val context: Context) : SettingsDataStore {
-    override suspend fun saveLanguage(langCode: String) {
-        context.dataStore.edit {
-            it[DataStoreKeys.LANGUAGE_KEY] = langCode
-        }
-    }
 
     override suspend fun saveNightModeState(modeState: Int) {
         context.dataStore.edit {
@@ -27,11 +22,6 @@ class AppSettingsDataStore(private val context: Context) : SettingsDataStore {
     }
 
 
-    override fun getLanguage(): Flow<String> {
-        return context.dataStore.data.map {
-            it[DataStoreKeys.LANGUAGE_KEY] ?: "en"
-        }
-    }
 
     override fun getNightModeState(): Flow<Int> {
         return context.dataStore.data.map {

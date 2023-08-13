@@ -66,4 +66,5 @@
     <string name="change_language_info">Die App wird neu gestartet, um die Änderungen zu übernehmen.\n\nBitte beachten Sie, dass einige Übersetzungen möglicherweise falsch sind.</string>
     <string name="added">Hinzugefügt</string>
     <string name="removed">ENTFERNT</string>
+    <string name="logout_info">Möchten Sie sich wirklich abmelden?</string>
 </resources>

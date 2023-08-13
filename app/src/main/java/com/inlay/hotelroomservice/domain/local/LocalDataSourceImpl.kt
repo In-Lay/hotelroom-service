@@ -31,9 +31,6 @@ class LocalDataSourceImpl(
     }
 
 
-    override suspend fun saveLanguage(langCode: String) {
-        settingsDataStore.saveLanguage(langCode)
-    }
 
     override suspend fun saveNightModeState(modeState: Int) {
         settingsDataStore.saveNightModeState(modeState)
@@ -43,9 +40,6 @@ class LocalDataSourceImpl(
         settingsDataStore.saveNotificationsState(state)
     }
 
-    override suspend fun getLanguage(): Flow<String> {
-        return settingsDataStore.getLanguage()
-    }
 
     override suspend fun getNightModeState(): Flow<Int> {
         return settingsDataStore.getNightModeState()

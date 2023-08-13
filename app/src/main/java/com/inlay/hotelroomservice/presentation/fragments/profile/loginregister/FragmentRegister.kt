@@ -16,7 +16,6 @@ import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import com.inlay.hotelroomservice.R
 import com.inlay.hotelroomservice.databinding.FragmentRegisterBinding
-import com.inlay.hotelroomservice.presentation.activities.MainActivity
 import com.inlay.hotelroomservice.presentation.viewmodels.loginregister.LoginRegisterViewModel
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -39,7 +38,6 @@ class FragmentRegister : Fragment() {
             close,
             navigateToLogin,
             navigateToProfile,
-            (activity as MainActivity).signOutOnRememberFalse,
             auth
         )
 

@@ -18,13 +18,10 @@ abstract class LoginRegisterViewModel : ViewModel() {
 
     abstract val toastErrorMessage: StateFlow<String>
 
-    abstract val isRememberChecked: StateFlow<Boolean>
-
     abstract fun initialize(
         close: () -> Unit,
         onSuggestionClicked: () -> Unit,
         navigateToProfile: () -> Unit,
-        signOutOnRememberFalse: (Boolean) -> Unit,
         auth: FirebaseAuth
     )
 
@@ -35,8 +32,6 @@ abstract class LoginRegisterViewModel : ViewModel() {
     abstract fun onEmailTextChanged(s: CharSequence, start: Int, before: Int, count: Int)
     abstract fun onPasswordTextChanged(s: CharSequence, start: Int, before: Int, count: Int)
     abstract fun onFullNameTextChanged(s: CharSequence, start: Int, before: Int, count: Int)
-
-    abstract fun onCheckedChanged(checked: Boolean)
 
     abstract fun login()
 

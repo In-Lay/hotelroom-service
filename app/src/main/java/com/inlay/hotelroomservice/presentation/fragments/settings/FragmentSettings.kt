@@ -7,7 +7,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
-import androidx.core.content.edit
 import androidx.core.view.GravityCompat
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
@@ -19,7 +18,6 @@ import com.inlay.hotelroomservice.R
 import com.inlay.hotelroomservice.databinding.DialogLanguagesBinding
 import com.inlay.hotelroomservice.databinding.FragmentSettingsBinding
 import com.inlay.hotelroomservice.presentation.DrawerProvider
-import com.inlay.hotelroomservice.presentation.SetLocale
 import com.inlay.hotelroomservice.presentation.activities.MainActivity
 import com.inlay.hotelroomservice.presentation.viewmodels.hotels.HotelsViewModel
 import com.inlay.hotelroomservice.presentation.viewmodels.settings.SettingsViewModel
@@ -74,11 +72,7 @@ class FragmentSettings : Fragment() {
             requireContext().resources.getStringArray(R.array.lang_array).toList()
         )
 
-//        val primaryLocale = context?.resources?.configuration?.locales?.get(0)
-//        val locale = primaryLocale?.displayName
-
         binding.tvCurrentLang.text = currentLocale.displayName
-//        binding.etLang.setText(requireContext().getString(R.string.current_lang, locale))
 
         lifecycleScope.launch {
             hotelsViewModel.darkModeState.collect {
@@ -180,8 +174,6 @@ class FragmentSettings : Fragment() {
     }
 
     private fun showChangeLocaleDialog(languageCode: String) {
-        val sharedPreferences =
-            activity?.getSharedPreferences("sharprefs_key", AppCompatActivity.MODE_PRIVATE)
         val dialogBuilder = MaterialAlertDialogBuilder(requireContext())
 
         dialogBuilder.apply {
@@ -193,17 +185,6 @@ class FragmentSettings : Fragment() {
             setPositiveButton(R.string.ok) { _, _ ->
                 hotelsViewModel.changeLanguage(languageCode)
 
-//                Log.d(
-//                    "SettingsLog",
-//                    "languageCode: $languageCode; sharedPreferences: $sharedPreferences"
-//                )
-//                sharedPreferences?.edit()?.putString("lang_key", languageCode)?.apply()
-
-//                sharedPreferences?.edit {
-//                    this.putString("lang_key", languageCode).apply()
-//                }
-
-//                SetLocale.setLocale(requireContext(), languageCode)
                 (activity as MainActivity).recreate()
             }
         }

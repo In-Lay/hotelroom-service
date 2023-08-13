@@ -72,4 +72,5 @@
     <string name="change_language_info">Приложение будет перезапущено, чтобы изменения вступили в силу.\n\nОбратите внимание, что перевод местами может быть некорректным.</string>
     <string name="added">Добавлено</string>
     <string name="removed">Удалено</string>
+    <string name="logout_info">Вы действительно хотите выйти?</string>
 </resources>

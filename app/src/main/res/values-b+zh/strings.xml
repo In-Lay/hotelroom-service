@@ -66,4 +66,5 @@
     <string name="change_language_info">应用程序将重新启动，以应用更改。\n\n请注意，某些翻译可能有误。</string>
     <string name="added">已添加</string>
     <string name="removed">已删除</string>
+    <string name="logout_info">您真的想注销吗？</string>
 </resources>

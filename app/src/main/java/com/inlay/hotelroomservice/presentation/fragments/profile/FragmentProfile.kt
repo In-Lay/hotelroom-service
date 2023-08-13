@@ -4,12 +4,12 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import com.inlay.hotelroomservice.R
@@ -48,11 +48,29 @@ class FragmentProfile : Fragment() {
     }
 
     private val logout: () -> Unit = {
-        Firebase.auth.signOut()
-        findNavController().navigate(R.id.hotelsFragment)
+        showLogoutDialog()
     }
 
     private val edit: () -> Unit = {
         findNavController().navigate(R.id.fragmentEditProfile)
+    }
+
+    private fun showLogoutDialog() {
+        val dialogBuilder = MaterialAlertDialogBuilder(requireContext())
+
+        dialogBuilder.apply {
+            setTitle(R.string.logout)
+            setMessage(R.string.logout_info)
+            setNegativeButton(R.string.cancel) { dialog, _ ->
+                dialog.dismiss()
+            }
+            setPositiveButton(R.string.logout) { dialog, _ ->
+                Firebase.auth.signOut()
+                dialog.dismiss()
+                findNavController().navigate(R.id.hotelsFragment)
+            }
+        }
+
+        dialogBuilder.create().show()
     }
 }

@@ -72,4 +72,5 @@
     <string name="change_language_info">La aplicación se reiniciará para aplicar los cambios.\n\nTenga en cuenta que algunas traducciones pueden ser incorrectas.</string>
     <string name="added">Agregado</string>
     <string name="removed">Remoto</string>
+    <string name="logout_info">¿Realmente quieres cerrar la sesión?</string>
 </resources>

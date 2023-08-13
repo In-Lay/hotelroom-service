@@ -2,12 +2,9 @@ package com.inlay.hotelroomservice.presentation.activities
 
 import android.app.UiModeManager
 import android.content.Context
-import android.content.SharedPreferences
 import android.content.res.Configuration
-import android.content.res.Resources
 import android.os.Build
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
@@ -15,7 +12,6 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.appcompat.app.AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM
-import androidx.core.content.edit
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.lifecycle.lifecycleScope
@@ -29,9 +25,9 @@ import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import com.inlay.hotelroomservice.R
 import com.inlay.hotelroomservice.databinding.ActivityMainBinding
+import com.inlay.hotelroomservice.domain.usecase.sharedpreferences.GetLanguagePreferences
 import com.inlay.hotelroomservice.extensions.isNetworkAvailable
 import com.inlay.hotelroomservice.presentation.DrawerProvider
-import com.inlay.hotelroomservice.presentation.LocaleContextWrapper
 import com.inlay.hotelroomservice.presentation.models.details.HotelDetailsSearchModel
 import com.inlay.hotelroomservice.presentation.viewmodels.hotels.HotelsViewModel
 import kotlinx.coroutines.launch
@@ -44,57 +40,12 @@ class MainActivity : AppCompatActivity(), DrawerProvider {
     private lateinit var binding: ActivityMainBinding
     private lateinit var navController: NavController
     private val hotelsViewModel: HotelsViewModel by viewModel()
-    private var signInRememberState = true
-    private var language = "en"
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val sharedPreferences = getSharedPreferences("sharprefs_key", MODE_PRIVATE)
-
-        val lnag = sharedPreferences.getString("lang_key", "en")
-        Log.d(
-            "SettingsLog",
-            "lnag: $lnag; sharedPreferences: $sharedPreferences"
-        )
-        val locale = Locale(lnag)
-        val ctxt = LocaleContextWrapper.wrap(this@MainActivity, locale)
-        resources.updateConfiguration(
-            ctxt.resources.configuration,
-            ctxt.resources.displayMetrics
-        )
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
-        val currentUser = Firebase.auth.currentUser
-        val languageToLoad: String = Resources.getSystem().configuration.locales[0].language
-        language = languageToLoad
-
-        lifecycleScope.launch {
-            hotelsViewModel.language.collect {
-                Log.d(
-                    "SettingsLog",
-                    "MainActivity: attachBaseContext: hotelsViewModel.language: $it"
-                )
-                language = it
-//                val locale = Locale(it)
-//
-//                Locale.setDefault(locale)
-//
-//                val configuration = Configuration()
-//                configuration.setLocale(locale)
-//                val newContext = createConfigurationContext(configuration)
-//                applicationContext?.resources?.configuration?.updateFrom(configuration)
-
-//                val ctxt = LocaleContextWrapper.wrap(this@MainActivity, locale)
-//                resources.updateConfiguration(
-//                    ctxt.resources.configuration,
-//                    ctxt.resources.displayMetrics
-//                )
-
-            }
-        }
 
         lifecycleScope.launch {
             hotelsViewModel.darkModeState.collect {
@@ -132,23 +83,12 @@ class MainActivity : AppCompatActivity(), DrawerProvider {
 
         setupNavigationDrawer()
         setupNavigation()
-//        Log.d(
-//            "profileTag",
-//            "onCreate before addAuthStateListener: currentUser: ${currentUser?.email}"
-//        )
+
         Firebase.auth.addAuthStateListener {
-//            Log.d(
-//                "profileTag",
-//                "onCreate inside addAuthStateListener: currentUser: ${currentUser?.email}"
-//            )
             if (it.currentUser != null) {
                 setupHeader(isUserLogged(it.currentUser), it.currentUser)
             } else setupHeader(isUserLogged(null), null)
         }
-//        Log.d(
-//            "profileTag",
-//            "onCreate after addAuthStateListener: currentUser: ${currentUser?.email}"
-//        )
 
         hotelsViewModel.initialize(isNetworkAvailable())
 
@@ -163,24 +103,7 @@ class MainActivity : AppCompatActivity(), DrawerProvider {
             }
         }
         binding.lifecycleOwner = this
-
-
     }
-
-//    override fun onStart() {
-//        super.onStart()
-//        lifecycleScope.launch {
-//            hotelsViewModel.language.collectLatest {
-//                Log.d(
-//                    "SettingsLog",
-//                    "MainActivity: attachBaseContext: hotelsViewModel.language: $it"
-//                )
-//                language = it
-////                attachBaseContext(this@MainActivity)
-//            }
-//        }
-//
-//    }
 
     private fun setupNavigationDrawer() {
         val navHostFragment =
@@ -236,7 +159,7 @@ class MainActivity : AppCompatActivity(), DrawerProvider {
             // After photo change it doesn't appear
             headerUserName.text = user?.displayName
             headerMail.text = user?.email
-            Log.d("profileTag", "setupHeader: user?.photoUrl: ${user?.photoUrl}")
+//            Log.d("profileTag", "setupHeader: user?.photoUrl: ${user?.photoUrl}")
             if (user?.photoUrl == null) headerImage.load(R.drawable.baseline_person_24)
             else headerImage.load(user.photoUrl) {
                 crossfade(true)
@@ -267,48 +190,22 @@ class MainActivity : AppCompatActivity(), DrawerProvider {
     }
 
 
-//    override fun attachBaseContext(newBase: Context?) {
-//        val hotelsViewModel: HotelsViewModel by inject()
-//        val languageToLoad: String = Resources.getSystem().configuration.locales[0].language
-//        var language = languageToLoad
+    override fun attachBaseContext(newBase: Context?) {
+        val getLanguagePreferences: GetLanguagePreferences by inject()
 
-//        lifecycleScope.launch {
-//            lifecycle.repeatOnLifecycle(Lifecycle.State.RESUMED) {
-//                hotelsViewModel.language.collectLatest {
-//                    Log.d(
-//                        "SettingsLog",
-//                        "MainActivity: attachBaseContext: hotelsViewModel.language: $it"
-//                    )
-//                    language = it
-//
-//                }
-//            }
-//        }
-//        Log.d("SettingsLog", "MainActivity: attachBaseContext: language: $language")
-//        //TODO get language code from DataStore
-//
-//        val locale = Locale("de")
-//        Locale.setDefault(locale)
-//
-//        val context = LocaleContextWrapper.wrap(newBase, locale)
-//        super.attachBaseContext(context)
-//    }
+        val languageCode = getLanguagePreferences.getLanguage()
 
-    override fun onDestroy() {
-        //TODO On remember me false doesn't work
-        Log.d("profileTag", "onDestroy: isChecked: $signInRememberState")
-        if (!signInRememberState) {
-            Log.d("profileTag", "onDestroy inside: isChecked: false")
-            Firebase.auth.signOut()
-            val user = Firebase.auth.currentUser
-            Log.d("profileTag", "onDestroy inside: user: $user")
-        }
-        super.onDestroy()
+        super.attachBaseContext(languageCode?.let { getContextForLocale(newBase, it) })
     }
 
-    val signOutOnRememberFalse: (Boolean) -> Unit = {
-        Log.d("profileTag", "signOutOnRememberFalse: isChecked: $it")
-        signInRememberState = it
+    private fun getContextForLocale(context: Context?, languageCode: String): Context? {
+        val locale = Locale(languageCode)
+        Locale.setDefault(locale)
+
+        val configuration = context?.resources?.configuration
+        configuration?.setLocale(locale)
+
+        return configuration?.let { context.createConfigurationContext(it) }
     }
 
     val goToDetails: (HotelDetailsSearchModel) -> Unit = {

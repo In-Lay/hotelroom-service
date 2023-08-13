@@ -158,9 +158,6 @@ class HotelRoomRepositoryImpl(
         } else localDataSource.deleteStayRepo(hotelsItem.toEntity())
     }
 
-    override suspend fun saveLanguage(langCode: String) {
-        localDataSource.saveLanguage(langCode)
-    }
 
     override suspend fun saveNightModeState(modeState: Int) {
         localDataSource.saveNightModeState(modeState)
@@ -170,9 +167,6 @@ class HotelRoomRepositoryImpl(
         localDataSource.saveNotificationsState(state)
     }
 
-    override suspend fun getLanguage(): Flow<String> {
-        return localDataSource.getLanguage()
-    }
 
     override suspend fun getNightModeState(): Flow<Int> {
         return localDataSource.getNightModeState()

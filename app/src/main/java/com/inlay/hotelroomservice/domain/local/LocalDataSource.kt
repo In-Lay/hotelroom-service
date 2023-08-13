@@ -14,14 +14,11 @@ interface LocalDataSource {
 
     suspend fun fetchStaysRepo(): Flow<List<HotelsItemStaysEntity>>
 
-    suspend fun saveLanguage(langCode: String)
 
     suspend fun saveNightModeState(modeState: Int)
 
     suspend fun saveNotificationsState(state: Boolean)
 
-
-    suspend fun getLanguage(): Flow<String>
 
     suspend fun getNightModeState(): Flow<Int>
 

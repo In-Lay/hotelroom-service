@@ -1,5 +1,7 @@
 package com.inlay.hotelroomservice.di
 
+import android.content.Context
+import android.content.SharedPreferences
 import androidx.room.Room
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
@@ -21,8 +23,30 @@ import com.inlay.hotelroomservice.domain.local.LocalDataSource
 import com.inlay.hotelroomservice.domain.local.LocalDataSourceImpl
 import com.inlay.hotelroomservice.domain.remote.RemoteDataSource
 import com.inlay.hotelroomservice.domain.remote.RemoteDataSourceImpl
-import com.inlay.hotelroomservice.domain.usecase.RepositoryUseCase
-import com.inlay.hotelroomservice.domain.usecase.RepositoryUseCaseImpl
+import com.inlay.hotelroomservice.domain.usecase.datastore.nightmode.GetNightMode
+import com.inlay.hotelroomservice.domain.usecase.datastore.nightmode.GetNightModeImpl
+import com.inlay.hotelroomservice.domain.usecase.datastore.nightmode.SaveNightMode
+import com.inlay.hotelroomservice.domain.usecase.datastore.nightmode.SaveNightModeImpl
+import com.inlay.hotelroomservice.domain.usecase.datastore.notifications.GetNotificationsState
+import com.inlay.hotelroomservice.domain.usecase.datastore.notifications.GetNotificationsStateImpl
+import com.inlay.hotelroomservice.domain.usecase.datastore.notifications.SaveNotificationsState
+import com.inlay.hotelroomservice.domain.usecase.datastore.notifications.SaveNotificationsStateImpl
+import com.inlay.hotelroomservice.domain.usecase.details.GetHotelDetails
+import com.inlay.hotelroomservice.domain.usecase.details.GetHotelDetailsImpl
+import com.inlay.hotelroomservice.domain.usecase.hotels.GetHotelsRepo
+import com.inlay.hotelroomservice.domain.usecase.hotels.GetHotelsRepoImpl
+import com.inlay.hotelroomservice.domain.usecase.location.GetSearchLocationRepo
+import com.inlay.hotelroomservice.domain.usecase.location.GetSearchLocationRepoImpl
+import com.inlay.hotelroomservice.domain.usecase.sharedpreferences.GetLanguagePreferences
+import com.inlay.hotelroomservice.domain.usecase.sharedpreferences.GetLanguagePreferencesImpl
+import com.inlay.hotelroomservice.domain.usecase.sharedpreferences.SaveLanguagePreferences
+import com.inlay.hotelroomservice.domain.usecase.sharedpreferences.SaveLanguagePreferencesImpl
+import com.inlay.hotelroomservice.domain.usecase.stays.add.AddStays
+import com.inlay.hotelroomservice.domain.usecase.stays.add.AddStaysImpl
+import com.inlay.hotelroomservice.domain.usecase.stays.get.GetStay
+import com.inlay.hotelroomservice.domain.usecase.stays.get.GetStayImpl
+import com.inlay.hotelroomservice.domain.usecase.stays.remove.RemoveStay
+import com.inlay.hotelroomservice.domain.usecase.stays.remove.RemoveStayImpl
 import com.inlay.hotelroomservice.presentation.viewmodels.details.AppDetailsViewModel
 import com.inlay.hotelroomservice.presentation.viewmodels.details.DetailsViewModel
 import com.inlay.hotelroomservice.presentation.viewmodels.details.dialog.AppPlaceNearbyViewModel
@@ -52,6 +76,7 @@ import retrofit2.Retrofit
 import java.text.SimpleDateFormat
 import java.util.Locale
 
+private const val SHARED_PREFS_KEY = "LANG_SHRED_PREFS_KEY"
 val appModule = module {
 //    single {
 //        get<Application>().packageManager.getApplicationInfo(
@@ -85,6 +110,15 @@ val appModule = module {
 
     single<SettingsDataStore> { AppSettingsDataStore(context = androidContext()) }
 
+    single<SharedPreferences> {
+        androidContext().getSharedPreferences(
+            SHARED_PREFS_KEY,
+            Context.MODE_PRIVATE
+        )
+    }
+    factory<GetLanguagePreferences> { GetLanguagePreferencesImpl(sharedPreferences = get()) }
+    factory<SaveLanguagePreferences> { SaveLanguagePreferencesImpl(sharedPreferences = get()) }
+
     single<RemoteDataSource> { RemoteDataSourceImpl(hotelRoomApiService = get(), database = get()) }
     single<LocalDataSource> {
         LocalDataSourceImpl(
@@ -99,22 +133,49 @@ val appModule = module {
             localDataSource = get()
         )
     }
-    factory<RepositoryUseCase> { RepositoryUseCaseImpl(hotelRoomRepository = get()) }
+
+
+    factory<GetHotelsRepo> { GetHotelsRepoImpl(hotelRoomRepository = get()) }
+
+    factory<GetSearchLocationRepo> { GetSearchLocationRepoImpl(repository = get()) }
+
+    factory<GetHotelDetails> { GetHotelDetailsImpl(repository = get()) }
+
+    factory<GetStay> { GetStayImpl(repository = get()) }
+    factory<AddStays> { AddStaysImpl(repository = get()) }
+    factory<RemoveStay> { RemoveStayImpl(repository = get()) }
+
+    factory<GetNightMode> { GetNightModeImpl(repository = get()) }
+    factory<SaveNightMode> { SaveNightModeImpl(repository = get()) }
+
+    factory<GetNotificationsState> { GetNotificationsStateImpl(repository = get()) }
+    factory<SaveNotificationsState> { SaveNotificationsStateImpl(repository = get()) }
+
 
     single { SimpleDateFormat("yyy-MM-dd", Locale.ENGLISH) }
 
     viewModel<HotelsViewModel> {
         AppHotelsViewModel(
-            repositoryUseCase = get(),
-            dateFormat = get()
+            getHotelsRepoUseCase = get(),
+            getStay = get(),
+            addStays = get(),
+            removeStayUseCase = get(),
+            dateFormat = get(),
+            getLanguagePreferences = get(),
+            saveLanguagePreferences = get(),
+            getNightMode = get()
         )
     }
     viewModel<HotelsItemViewModel> { AppHotelsItemViewModel() }
 
-    viewModel<SearchViewModel> { AppSearchViewModel(repositoryUseCase = get()) }
+    viewModel<SearchViewModel> {
+        AppSearchViewModel(
+            getSearchLocationRepo = get()
+        )
+    }
     viewModel<SearchLocationsItemViewModel> { AppSearchLocationsItemViewModel() }
 
-    viewModel<DetailsViewModel> { AppDetailsViewModel(repositoryUseCase = get()) }
+    viewModel<DetailsViewModel> { AppDetailsViewModel(getHotelDetails = get()) }
     viewModel<PlaceNearbyViewModel> { AppPlaceNearbyViewModel() }
 
     viewModel<UserStaysViewModel> { AppUserStaysViewModel() }
@@ -123,5 +184,5 @@ val appModule = module {
     viewModel<EditProfileViewModel> { AppEditProfileViewModel() }
     viewModel<LoginRegisterViewModel> { AppLoginRegisterViewModel() }
 
-    viewModel<SettingsViewModel> { AppSettingsViewModel(repositoryUseCase = get()) }
+    viewModel<SettingsViewModel> { AppSettingsViewModel(saveNightMode = get()) }
 }
