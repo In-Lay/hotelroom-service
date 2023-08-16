@@ -75,5 +75,9 @@
     <string name="added">Added</string>
     <string name="removed">Removed</string>
     <string name="logout_info">Do you really want to log out?</string>
+    <string name="default_notification_channel_id">Push notifications</string>
+    <string name="notifications_channel_description">Push notifications with inforation</string>
+    <string name="enable_notifications">Enable notifications in settings</string>
+    <string name="enable">Enable</string>
 
 </resources>

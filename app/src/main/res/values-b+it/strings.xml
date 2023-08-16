@@ -67,4 +67,8 @@
     <string name="added">Aggiunto</string>
     <string name="removed">Rimosso</string>
     <string name="logout_info">Vuoi davvero uscire?</string>
+    <string name="default_notification_channel_id">Push Notifiche</string>
+    <string name="notifications_channel_description">Push notifications with inforation</string>
+    <string name="enable_notifications">Enable notifications in settings</string>
+    <string name="enable">Enable</string>
 </resources>

@@ -1,6 +1,11 @@
 package com.inlay.hotelroomservice.presentation.fragments.settings
 
+import android.app.NotificationManager
+import android.content.Context
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
+import android.provider.Settings
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -14,6 +19,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.appbar.MaterialToolbar
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import com.google.android.material.snackbar.Snackbar
 import com.inlay.hotelroomservice.R
 import com.inlay.hotelroomservice.databinding.DialogLanguagesBinding
 import com.inlay.hotelroomservice.databinding.FragmentSettingsBinding
@@ -33,11 +39,19 @@ class FragmentSettings : Fragment() {
     private val hotelsViewModel: HotelsViewModel by activityViewModel()
     private lateinit var currentLocale: Locale
 
+//    override fun onResume() {
+//        super.onResume()
+//        if (!areNotificationsEnabled()) {
+//            viewModel.changeNotificationsState(false)
+//            binding.switchNotifications.isEnabled = false
+//        } else {
+//            viewModel.changeNotificationsState(true)
+//            binding.switchNotifications.isChecked = false
+//        }
+//    }
 
     override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
+        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_settings, container, false)
 
@@ -68,8 +82,7 @@ class FragmentSettings : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         viewModel.initialize(
-            openLangDialog,
-            requireContext().resources.getStringArray(R.array.lang_array).toList()
+            openLangDialog, requireContext().resources.getStringArray(R.array.lang_array).toList()
         )
 
         binding.tvCurrentLang.text = currentLocale.displayName
@@ -79,10 +92,44 @@ class FragmentSettings : Fragment() {
                 binding.switchDayNight.isChecked = it == AppCompatDelegate.MODE_NIGHT_YES
             }
         }
+
+        lifecycleScope.launch {
+            hotelsViewModel.notificationsAvailability.collect {
+                if (!it) {
+//                    viewModel.changeNotificationsState(false)
+                    binding.switchNotifications.isEnabled = false
+                    Snackbar.make(view, R.string.enable_notifications, Snackbar.LENGTH_SHORT)
+                        .setAction(R.string.enable) {
+                            openAppNotificationSettings()
+                        }.show()
+                } else {
+//                    viewModel.changeNotificationsState(true)
+                    binding.switchNotifications.isEnabled = true
+                }
+            }
+        }
+
+        lifecycleScope.launch {
+            viewModel.inAppNotificationsState.collect {
+                binding.switchNotifications.isChecked = it
+            }
+        }
+    }
+
+    private fun areNotificationsEnabled(): Boolean {
+        val notificationManager =
+            context?.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+        return notificationManager.areNotificationsEnabled()
     }
 
     private val openLangDialog: () -> Unit = {
         showLangDialog(currentLocale.displayName.split(" ").first())
+    }
+
+    private fun openAppNotificationSettings() {
+        val intent = Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS)
+        intent.data = Uri.fromParts("package", context?.packageName, null)
+        context?.startActivity(intent)
     }
 
     private fun showLangDialog(selectedLocale: String) {

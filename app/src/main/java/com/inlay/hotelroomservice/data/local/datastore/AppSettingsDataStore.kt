@@ -22,7 +22,6 @@ class AppSettingsDataStore(private val context: Context) : SettingsDataStore {
     }
 
 
-
     override fun getNightModeState(): Flow<Int> {
         return context.dataStore.data.map {
             it[DataStoreKeys.DARK_MODE_KEY] ?: AppCompatDelegate.MODE_NIGHT_NO
@@ -31,7 +30,7 @@ class AppSettingsDataStore(private val context: Context) : SettingsDataStore {
 
     override fun getNotificationsState(): Flow<Boolean> {
         return context.dataStore.data.map {
-            it[DataStoreKeys.NOTIFICATIONS_KEY] ?: false
+            it[DataStoreKeys.NOTIFICATIONS_KEY] ?: true
         }
     }
 }

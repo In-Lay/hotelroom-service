@@ -16,6 +16,8 @@ abstract class HotelsViewModel : ViewModel() {
 
     abstract val darkModeState: StateFlow<Int>
 
+    abstract val notificationsAvailability: StateFlow<Boolean>
+
     abstract val hotelsDatesAndCurrencyModel: StateFlow<HotelsDatesAndCurrencyModel?>
 
     abstract val hotelDetailsSearchModel: StateFlow<HotelDetailsSearchModel?>
@@ -34,6 +36,8 @@ abstract class HotelsViewModel : ViewModel() {
     )
 
     abstract fun changeLanguage(languageCode: String)
+
+    abstract fun changeNotificationsAvailability(notificationsState: Boolean)
 
     abstract fun getStaysRepo(isOnline: Boolean, isLogged: Boolean)
 

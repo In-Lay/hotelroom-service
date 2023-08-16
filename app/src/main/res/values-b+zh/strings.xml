@@ -67,4 +67,8 @@
     <string name="added">已添加</string>
     <string name="removed">已删除</string>
     <string name="logout_info">您真的想注销吗？</string>
+    <string name="default_notification_channel_id">Push 通知</string>
+    <string name="notifications_channel_description">Push notifications with inforation</string>
+    <string name="enable_notifications">Enable notifications in settings</string>
+    <string name="enable">Enable</string>
 </resources>

@@ -6,6 +6,8 @@ import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import com.inlay.hotelroomservice.domain.usecase.datastore.nightmode.GetNightMode
+import com.inlay.hotelroomservice.domain.usecase.datastore.notifications.GetNotificationsState
+import com.inlay.hotelroomservice.domain.usecase.datastore.notifications.SaveNotificationsState
 import com.inlay.hotelroomservice.domain.usecase.hotels.GetHotelsRepo
 import com.inlay.hotelroomservice.domain.usecase.sharedpreferences.GetLanguagePreferences
 import com.inlay.hotelroomservice.domain.usecase.sharedpreferences.SaveLanguagePreferences
@@ -44,6 +46,9 @@ class AppHotelsViewModel(
 
     private val _darkModeState = MutableStateFlow(AppCompatDelegate.MODE_NIGHT_NO)
     override val darkModeState = _darkModeState
+
+    private val _notificationsAvailability = MutableStateFlow(false)
+    override val notificationsAvailability = _notificationsAvailability
 
     private val _hotelsDatesAndCurrencyModel: MutableStateFlow<HotelsDatesAndCurrencyModel?> =
         MutableStateFlow(null)
@@ -94,6 +99,10 @@ class AppHotelsViewModel(
         viewModelScope.launch {
             saveLanguagePreferences.saveLanguage(languageCode)
         }
+    }
+
+    override fun changeNotificationsAvailability(notificationsState: Boolean) {
+        _notificationsAvailability.value = notificationsState
     }
 
     override fun getHotelsRepo(

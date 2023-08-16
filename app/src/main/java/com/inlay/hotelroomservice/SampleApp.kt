@@ -18,6 +18,7 @@ class SampleApp : Application() {
         Firebase.storage
         Firebase.database
 
+
         startKoin {
             androidLogger(Level.INFO)
             androidContext(this@SampleApp)

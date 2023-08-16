@@ -56,8 +56,11 @@ dependencies {
     implementation("com.google.firebase:firebase-database-ktx")
     implementation("com.google.firebase:firebase-auth-ktx")
     implementation("com.google.firebase:firebase-storage-ktx")
+    implementation ("com.google.firebase:firebase-messaging-ktx")
 
     kapt 'org.jetbrains.kotlinx:kotlinx-metadata-jvm:0.6.2'
+
+
 
     //Transition
     implementation "androidx.transition:transition-ktx:1.4.1"

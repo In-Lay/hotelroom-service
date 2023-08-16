@@ -67,6 +67,8 @@ import com.inlay.hotelroomservice.presentation.viewmodels.search.item.AppSearchL
 import com.inlay.hotelroomservice.presentation.viewmodels.search.item.SearchLocationsItemViewModel
 import com.inlay.hotelroomservice.presentation.viewmodels.settings.AppSettingsViewModel
 import com.inlay.hotelroomservice.presentation.viewmodels.settings.SettingsViewModel
+import com.inlay.hotelroomservice.presentation.viewmodels.splash.AppSplashViewModel
+import com.inlay.hotelroomservice.presentation.viewmodels.splash.SplashViewModel
 import com.inlay.hotelroomservice.presentation.viewmodels.userstays.AppUserStaysViewModel
 import com.inlay.hotelroomservice.presentation.viewmodels.userstays.UserStaysViewModel
 import org.koin.android.ext.koin.androidContext
@@ -154,6 +156,9 @@ val appModule = module {
 
     single { SimpleDateFormat("yyy-MM-dd", Locale.ENGLISH) }
 
+
+    viewModel<SplashViewModel> { AppSplashViewModel(saveNotificationsState = get()) }
+
     viewModel<HotelsViewModel> {
         AppHotelsViewModel(
             getHotelsRepoUseCase = get(),
@@ -184,5 +189,11 @@ val appModule = module {
     viewModel<EditProfileViewModel> { AppEditProfileViewModel() }
     viewModel<LoginRegisterViewModel> { AppLoginRegisterViewModel() }
 
-    viewModel<SettingsViewModel> { AppSettingsViewModel(saveNightMode = get()) }
+    viewModel<SettingsViewModel> {
+        AppSettingsViewModel(
+            saveNightMode = get(),
+            getNotificationsState = get(),
+            saveNotificationsState = get()
+        )
+    }
 }

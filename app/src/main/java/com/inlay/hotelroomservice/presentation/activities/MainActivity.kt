@@ -1,14 +1,20 @@
 package com.inlay.hotelroomservice.presentation.activities
 
+import android.Manifest
+import android.app.NotificationManager
 import android.app.UiModeManager
 import android.content.Context
+import android.content.Intent
+import android.content.pm.PackageManager
 import android.content.res.Configuration
 import android.os.Build
 import android.os.Bundle
 import android.view.View
+import android.view.ViewTreeObserver
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
+import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.appcompat.app.AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM
@@ -30,11 +36,13 @@ import com.inlay.hotelroomservice.extensions.isNetworkAvailable
 import com.inlay.hotelroomservice.presentation.DrawerProvider
 import com.inlay.hotelroomservice.presentation.models.details.HotelDetailsSearchModel
 import com.inlay.hotelroomservice.presentation.viewmodels.hotels.HotelsViewModel
+import com.inlay.hotelroomservice.service.NotificationsFirebaseMessagingService
 import kotlinx.coroutines.launch
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.util.Locale
 
+private const val NOTIFICATIONS_PERMISSION_CODE = 101
 
 class MainActivity : AppCompatActivity(), DrawerProvider {
     private lateinit var binding: ActivityMainBinding
@@ -43,9 +51,28 @@ class MainActivity : AppCompatActivity(), DrawerProvider {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
+//        startService(Intent(this, NotificationsFirebaseMessagingService::class.java))
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            val content: View = findViewById(android.R.id.content)
+
+            content.viewTreeObserver.addOnPreDrawListener(object :
+                ViewTreeObserver.OnPreDrawListener {
+                override fun onPreDraw(): Boolean {
+                    return if (checkNotificationsPermission()) {
+                        content.viewTreeObserver.removeOnPreDrawListener(this)
+                        false
+                    } else {
+                        requestNotificationsPermission()
+                        true
+                    }
+                }
+            })
+        }
+
+        hotelsViewModel.changeNotificationsAvailability(areNotificationsEnabled())
 
         lifecycleScope.launch {
             hotelsViewModel.darkModeState.collect {
@@ -104,6 +131,46 @@ class MainActivity : AppCompatActivity(), DrawerProvider {
         }
         binding.lifecycleOwner = this
     }
+
+    override fun onResume() {
+        super.onResume()
+        hotelsViewModel.changeNotificationsAvailability(areNotificationsEnabled())
+    }
+
+    @RequiresApi(Build.VERSION_CODES.TIRAMISU)
+    private fun checkNotificationsPermission(): Boolean {
+        return checkSelfPermission(Manifest.permission.POST_NOTIFICATIONS) == PackageManager.PERMISSION_GRANTED
+    }
+
+    @RequiresApi(Build.VERSION_CODES.TIRAMISU)
+    private fun requestNotificationsPermission() {
+        requestPermissions(
+            arrayOf(Manifest.permission.POST_NOTIFICATIONS),
+            NOTIFICATIONS_PERMISSION_CODE
+        )
+    }
+
+    private fun areNotificationsEnabled(): Boolean {
+        val notificationManager =
+            getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+        return notificationManager.areNotificationsEnabled()
+    }
+
+//    override fun onRequestPermissionsResult(
+//        requestCode: Int,
+//        permissions: Array<out String>,
+//        grantResults: IntArray
+//    ) {
+//        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+//        when (requestCode) {
+//            NOTIFICATIONS_PERMISSION_CODE -> {
+//                if ((grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED)) {
+//                    hotelsViewModel.changeNotificationsState(true)
+//                }
+//                return
+//            }
+//        }
+//    }
 
     private fun setupNavigationDrawer() {
         val navHostFragment =

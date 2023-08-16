@@ -67,4 +67,8 @@
     <string name="added">Додано</string>
     <string name="removed">Видалено</string>
     <string name="logout_info">Ви дійсно хочете вийти?</string>
+    <string name="default_notification_channel_id">Push Повідомлення</string>
+    <string name="notifications_channel_description">Push notifications with inforation</string>
+    <string name="enable_notifications">Enable notifications in settings</string>
+    <string name="enable">Enable</string>
 </resources>
