@@ -16,6 +16,12 @@ import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.gms.maps.CameraUpdateFactory
+import com.google.android.gms.maps.GoogleMap
+import com.google.android.gms.maps.OnMapReadyCallback
+import com.google.android.gms.maps.SupportMapFragment
+import com.google.android.gms.maps.model.LatLng
+import com.google.android.gms.maps.model.MarkerOptions
 import com.google.android.material.carousel.CarouselLayoutManager
 import com.google.android.material.carousel.FullScreenCarouselStrategy
 import com.google.android.material.chip.Chip
@@ -32,7 +38,7 @@ import com.inlay.hotelroomservice.presentation.viewmodels.details.DetailsViewMod
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class FragmentDetails : Fragment() {
+class FragmentDetails : Fragment(), OnMapReadyCallback {
     private lateinit var binding: FragmentDetailsBinding
     private val viewModel: DetailsViewModel by viewModel()
     private lateinit var hotelDetailsSearchModel: HotelDetailsSearchModel
@@ -61,6 +67,9 @@ class FragmentDetails : Fragment() {
             arguments?.getParcelable("HOTEL_DETAILS_SEARCH", HotelDetailsSearchModel::class.java)!!
         } else arguments?.getParcelable("HOTEL_DETAILS_SEARCH")!!
 
+        val mapFragment = childFragmentManager.findFragmentById(R.id.map) as SupportMapFragment
+        mapFragment.getMapAsync(this)
+
         return binding.root
     }
 
@@ -87,6 +96,34 @@ class FragmentDetails : Fragment() {
         viewModel.chipFoodText.observe(viewLifecycleOwner) {
             binding.detailsChipGroup.findViewById<Chip>(R.id.chip_bars).text = it
         }
+    }
+
+    override fun onMapReady(googleMap: GoogleMap) {
+
+        val currentLocation = LatLng(
+            viewModel.hotelDetailsData.value?.latitude!!,
+            viewModel.hotelDetailsData.value?.longitude!!
+        )
+
+        googleMap.apply {
+            mapType = GoogleMap.MAP_TYPE_NORMAL
+            addMarker(
+                MarkerOptions()
+                    .position(currentLocation)
+                    .title(viewModel.hotelDetailsData.value?.title!!)
+            )
+            moveCamera(CameraUpdateFactory.newLatLng(currentLocation))
+            setOnCameraMoveStartedListener {
+                if (it == GoogleMap.OnCameraMoveStartedListener.REASON_GESTURE) binding.scrollView.setShouldInterceptTouchEvent(
+                    true
+                )
+            }
+
+            setOnCameraMoveCanceledListener {
+                binding.scrollView.setShouldInterceptTouchEvent(false)
+            }
+        }
+
     }
 
     private val openImageDialog: () -> Unit = {

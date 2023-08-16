@@ -5,7 +5,6 @@ import androidx.lifecycle.ViewModel
 import com.inlay.hotelroomservice.presentation.models.details.HotelDetailsSearchModel
 import com.inlay.hotelroomservice.presentation.models.details.HotelDetailsUiModel
 import com.inlay.hotelroomservice.presentation.models.details.NearbyPlace
-import com.inlay.hotelroomservice.presentation.models.hotelsitem.DatesModel
 import kotlinx.coroutines.flow.StateFlow
 
 abstract class DetailsViewModel : ViewModel() {
