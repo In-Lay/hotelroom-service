@@ -1,7 +1,5 @@
 package com.inlay.hotelroomservice.presentation.fragments.settings
 
-import android.app.NotificationManager
-import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
@@ -25,6 +23,7 @@ import com.inlay.hotelroomservice.databinding.DialogLanguagesBinding
 import com.inlay.hotelroomservice.databinding.FragmentSettingsBinding
 import com.inlay.hotelroomservice.presentation.DrawerProvider
 import com.inlay.hotelroomservice.presentation.activities.MainActivity
+import com.inlay.hotelroomservice.presentation.fragments.search.Languages
 import com.inlay.hotelroomservice.presentation.viewmodels.hotels.HotelsViewModel
 import com.inlay.hotelroomservice.presentation.viewmodels.settings.SettingsViewModel
 import kotlinx.coroutines.launch
@@ -56,18 +55,21 @@ class FragmentSettings : Fragment() {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_settings, container, false)
 
         val toolbar = binding.toolbar.findViewById<MaterialToolbar>(R.id.toolbar_general)
-        (requireActivity() as AppCompatActivity).setSupportActionBar(toolbar)
-        (requireActivity() as AppCompatActivity).supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        toolbar.setNavigationIcon(R.drawable.baseline_dehaze_24)
-        toolbar.setNavigationOnClickListener {
-            (activity as DrawerProvider).getDrawerLayout().openDrawer(GravityCompat.START)
+
+        (activity as AppCompatActivity).apply {
+            setSupportActionBar(toolbar)
+            supportActionBar?.setDisplayHomeAsUpEnabled(true)
+            supportActionBar?.title =
+                findNavController().currentDestination?.label
         }
-        (activity as AppCompatActivity).supportActionBar?.title =
-            findNavController().currentDestination?.label
-        Log.d(
-            "SettingsLog",
-            "findNavController().currentDestination?.label: ${findNavController().currentDestination?.label}"
-        )
+
+        toolbar.apply {
+            setNavigationIcon(R.drawable.baseline_dehaze_24)
+            setNavigationOnClickListener {
+                (activity as DrawerProvider).getDrawerLayout().openDrawer(GravityCompat.START)
+            }
+            setTitleTextColor(requireContext().getColor(R.color.md_theme_dark_surface))
+        }
 
         binding.lifecycleOwner = viewLifecycleOwner
 
@@ -116,11 +118,11 @@ class FragmentSettings : Fragment() {
         }
     }
 
-    private fun areNotificationsEnabled(): Boolean {
-        val notificationManager =
-            context?.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
-        return notificationManager.areNotificationsEnabled()
-    }
+//    private fun areNotificationsEnabled(): Boolean {
+//        val notificationManager =
+//            context?.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+//        return notificationManager.areNotificationsEnabled()
+//    }
 
     private val openLangDialog: () -> Unit = {
         showLangDialog(currentLocale.displayName.split(" ").first())
@@ -144,42 +146,42 @@ class FragmentSettings : Fragment() {
         binding.lifecycleOwner = viewLifecycleOwner
 
         when (selectedLocale.lowercase(Locale.ROOT)) {
-            "english" -> {
+            Languages.ENGLISH.language -> {
                 dialogBinding.btnEng.isChecked = true
                 localeCode = "en"
             }
 
-            "українська" -> {
+            Languages.UKRAINIAN.language -> {
                 dialogBinding.btnUa.isChecked = true
                 localeCode = "ua"
             }
 
-            "русский" -> {
+            Languages.RUSSIAN.language -> {
                 dialogBinding.btnRu.isChecked = true
                 localeCode = "ru"
             }
 
-            "español" -> {
+            Languages.SPANISH.language -> {
                 dialogBinding.btnEs.isChecked = true
                 localeCode = "es"
             }
 
-            "deutsch" -> {
+            Languages.GERMAN.language -> {
                 dialogBinding.btnDe.isChecked = true
                 localeCode = "de"
             }
 
-            "italiano" -> {
+            Languages.ITALIAN.language -> {
                 dialogBinding.btnIt.isChecked = true
                 localeCode = "it"
             }
 
-            "français" -> {
+            Languages.FRENCH.language -> {
                 dialogBinding.btnFr.isChecked = true
                 localeCode = "fr"
             }
 
-            "中文" -> {
+            Languages.CHINESE.language -> {
                 dialogBinding.btnZh.isChecked = true
                 localeCode = "zh"
             }

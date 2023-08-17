@@ -46,19 +46,25 @@ class FragmentDetails : Fragment(), OnMapReadyCallback {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
-
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_details, null, false)
 
         (activity as MainActivity).showProgressBar(false)
 
-        (activity as AppCompatActivity).setSupportActionBar(binding.toolbar)
-        (activity as AppCompatActivity).supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        (activity as AppCompatActivity).supportActionBar?.setDisplayShowHomeEnabled(true)
-        binding.toolbar.setNavigationOnClickListener {
-            findNavController().popBackStack()
+        (activity as AppCompatActivity).apply {
+            setSupportActionBar(binding.toolbar)
+            supportActionBar?.setDisplayHomeAsUpEnabled(true)
+            supportActionBar?.setDisplayShowHomeEnabled(true)
+            supportActionBar?.title =
+                findNavController().currentDestination?.label
         }
-        (activity as AppCompatActivity).supportActionBar?.title =
-            findNavController().currentDestination?.label
+
+        binding.toolbar.apply {
+            setNavigationIconTint(com.google.android.material.R.attr.iconTint)
+            setNavigationOnClickListener {
+                findNavController().popBackStack()
+            }
+            setTitleTextColor(requireContext().getColor(R.color.md_theme_dark_surface))
+        }
 
         binding.viewModel = viewModel
         binding.lifecycleOwner = this
@@ -66,9 +72,6 @@ class FragmentDetails : Fragment(), OnMapReadyCallback {
         hotelDetailsSearchModel = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
             arguments?.getParcelable("HOTEL_DETAILS_SEARCH", HotelDetailsSearchModel::class.java)!!
         } else arguments?.getParcelable("HOTEL_DETAILS_SEARCH")!!
-
-        val mapFragment = childFragmentManager.findFragmentById(R.id.map) as SupportMapFragment
-        mapFragment.getMapAsync(this)
 
         return binding.root
     }
@@ -96,6 +99,9 @@ class FragmentDetails : Fragment(), OnMapReadyCallback {
         viewModel.chipFoodText.observe(viewLifecycleOwner) {
             binding.detailsChipGroup.findViewById<Chip>(R.id.chip_bars).text = it
         }
+
+        val mapFragment = childFragmentManager.findFragmentById(R.id.map) as SupportMapFragment
+        mapFragment.getMapAsync(this)
     }
 
     override fun onMapReady(googleMap: GoogleMap) {
@@ -180,13 +186,11 @@ class FragmentDetails : Fragment(), OnMapReadyCallback {
         val recyclerView = dialogView.findViewById<RecyclerView>(R.id.recycler_view)
         val buttonClose = dialogView.findViewById<ShapeableImageView>(R.id.img_close_icon)
 
-        recyclerView.setHasFixedSize(false)
-
-        recyclerView.layoutManager = LinearLayoutManager(context)
-
-        val adapter = PlacesNearbyDialogAdapter(data)
-
-        recyclerView.adapter = adapter
+        recyclerView.apply {
+            setHasFixedSize(false)
+            layoutManager = LinearLayoutManager(context)
+            adapter = PlacesNearbyDialogAdapter(data)
+        }
 
         val dialog = dialogBuilder?.create()
 

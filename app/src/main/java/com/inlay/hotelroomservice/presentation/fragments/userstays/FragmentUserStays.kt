@@ -68,14 +68,21 @@ class FragmentUserStays : Fragment() {
         binding.lifecycleOwner = viewLifecycleOwner
 
         val toolbar = binding.toolbar.findViewById<MaterialToolbar>(R.id.toolbar_general)
-        (requireActivity() as AppCompatActivity).setSupportActionBar(toolbar)
-        (activity as AppCompatActivity).supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        toolbar.setNavigationIcon(R.drawable.baseline_dehaze_24)
-        toolbar.setNavigationOnClickListener {
-            (activity as DrawerProvider).getDrawerLayout().openDrawer(GravityCompat.START)
+
+        (activity as AppCompatActivity).apply {
+            setSupportActionBar(toolbar)
+            supportActionBar?.setDisplayHomeAsUpEnabled(true)
+            supportActionBar?.title =
+                findNavController().currentDestination?.label
         }
-        (activity as AppCompatActivity).supportActionBar?.title =
-            findNavController().currentDestination?.label
+
+        toolbar.apply {
+            setNavigationIcon(R.drawable.baseline_dehaze_24)
+            setTitleTextColor(requireContext().getColor(R.color.md_theme_dark_surface))
+            setNavigationOnClickListener {
+                (activity as DrawerProvider).getDrawerLayout().openDrawer(GravityCompat.START)
+            }
+        }
 
         lifecycleScope.launch {
             hotelsViewModel.hotelsDatesAndCurrencyModel.collect {
@@ -97,9 +104,6 @@ class FragmentUserStays : Fragment() {
                 requireContext().getString(R.string.stays_snackbar_text),
                 Snackbar.LENGTH_SHORT
             )
-//            snackBar.setAction("Log in") {
-//                findNavController().navigate(R.id.fragmentLogin)
-//            }
             snackBar.setAction(requireContext().getString(R.string.dismiss)) {
                 snackBar.dismiss()
             }
@@ -111,18 +115,19 @@ class FragmentUserStays : Fragment() {
                 hotelsViewModel.selectedHotelsDataList.collectLatest {
                     if (it.isNotEmpty()) {
                         binding.tvEmptyList.visibility = View.GONE
-                        binding.recyclerView.visibility = View.VISIBLE
-
-                        binding.recyclerView.setHasFixedSize(false)
-                        binding.recyclerView.layoutManager = LinearLayoutManager(context)
-                        binding.recyclerView.adapter =
-                            HotelsListAdapter(
-                                it,
-                                hotelsDatesAndCurrencyModel,
-                                (activity as MainActivity).goToDetails,
-                                removeStay,
-                                "stays"
-                            )
+                        binding.recyclerView.apply {
+                            visibility = View.VISIBLE
+                            setHasFixedSize(false)
+                            layoutManager = LinearLayoutManager(context)
+                            adapter =
+                                HotelsListAdapter(
+                                    it,
+                                    hotelsDatesAndCurrencyModel,
+                                    (activity as MainActivity).goToDetails,
+                                    removeStay,
+                                    "stays"
+                                )
+                        }
                     }
                 }
             }

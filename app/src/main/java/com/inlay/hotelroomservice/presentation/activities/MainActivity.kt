@@ -4,7 +4,6 @@ import android.Manifest
 import android.app.NotificationManager
 import android.app.UiModeManager
 import android.content.Context
-import android.content.Intent
 import android.content.pm.PackageManager
 import android.content.res.Configuration
 import android.os.Build
@@ -36,7 +35,6 @@ import com.inlay.hotelroomservice.extensions.isNetworkAvailable
 import com.inlay.hotelroomservice.presentation.DrawerProvider
 import com.inlay.hotelroomservice.presentation.models.details.HotelDetailsSearchModel
 import com.inlay.hotelroomservice.presentation.viewmodels.hotels.HotelsViewModel
-import com.inlay.hotelroomservice.service.NotificationsFirebaseMessagingService
 import kotlinx.coroutines.launch
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -49,9 +47,9 @@ class MainActivity : AppCompatActivity(), DrawerProvider {
     private lateinit var navController: NavController
     private val hotelsViewModel: HotelsViewModel by viewModel()
 
+    //TODO Change App Icon!!!
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-//        startService(Intent(this, NotificationsFirebaseMessagingService::class.java))
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 

@@ -40,10 +40,18 @@ class FragmentEditProfile : Fragment() {
         binding =
             DataBindingUtil.inflate(inflater, R.layout.fragment_edit_profile, container, false)
         val toolbar = binding.toolbar.findViewById<MaterialToolbar>(R.id.toolbar_general)
-        (requireActivity() as AppCompatActivity).setSupportActionBar(toolbar)
-        (activity as AppCompatActivity).supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        (activity as AppCompatActivity).supportActionBar?.title =
-            findNavController().currentDestination?.label
+
+        (activity as AppCompatActivity).apply {
+            setSupportActionBar(toolbar)
+            supportActionBar?.setDisplayHomeAsUpEnabled(true)
+            supportActionBar?.title =
+                findNavController().currentDestination?.label
+        }
+
+        toolbar.apply {
+            setTitleTextColor(requireContext().getColor(R.color.md_theme_dark_surface))
+            setNavigationIconTint(com.google.android.material.R.attr.iconTint)
+        }
 
         binding.lifecycleOwner = viewLifecycleOwner
 
@@ -125,6 +133,7 @@ class FragmentEditProfile : Fragment() {
                 ""
             }
         }
+
         alertBuilder.setPositiveButton(R.string.log_in) { _, _ ->
             val passwordText = passwordInput.text
 

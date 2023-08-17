@@ -16,8 +16,6 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
-import com.google.android.material.appbar.AppBarLayout
-import com.google.android.material.appbar.CollapsingToolbarLayout
 import com.google.android.material.datepicker.MaterialDatePicker
 import com.inlay.hotelroomservice.R
 import com.inlay.hotelroomservice.databinding.FragmentSearchBinding
@@ -49,11 +47,18 @@ class FragmentSearch : Fragment() {
         searchViewModel.init(isOnline, openDatePicker, searchHotels)
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_search, container, false)
 
-        (requireActivity() as AppCompatActivity).setSupportActionBar(binding.supportToolbar)
-        (requireActivity() as AppCompatActivity).supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        (requireActivity() as AppCompatActivity).supportActionBar?.setDisplayShowHomeEnabled(true)
-        binding.supportToolbar.setNavigationOnClickListener {
-            findNavController().popBackStack()
+        (activity as AppCompatActivity).apply {
+            setSupportActionBar(binding.supportToolbar)
+            supportActionBar?.setDisplayHomeAsUpEnabled(true)
+            supportActionBar?.setDisplayShowHomeEnabled(true)
+        }
+
+        binding.supportToolbar.apply {
+            setNavigationIconTint(com.google.android.material.R.attr.iconTint)
+            setTitleTextColor(requireContext().getColor(R.color.md_theme_dark_surface))
+            setNavigationOnClickListener {
+                findNavController().popBackStack()
+            }
         }
 
 //        binding.appbarLayout.addOnOffsetChangedListener { appBarLayout, verticalOffset ->

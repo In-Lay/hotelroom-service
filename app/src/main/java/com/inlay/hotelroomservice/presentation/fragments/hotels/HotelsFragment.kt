@@ -47,14 +47,22 @@ class HotelsFragment : Fragment() {
         binding.lifecycleOwner = this
 
         val toolbar = binding.toolbar.findViewById<MaterialToolbar>(R.id.toolbar_general)
-        (requireActivity() as AppCompatActivity).setSupportActionBar(toolbar)
-        (activity as AppCompatActivity).supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        toolbar.setNavigationIcon(R.drawable.baseline_dehaze_24)
-        toolbar.setNavigationOnClickListener {
-            (activity as DrawerProvider).getDrawerLayout().openDrawer(GravityCompat.START)
+
+        (activity as AppCompatActivity).apply {
+            setSupportActionBar(toolbar)
+            supportActionBar?.setDisplayHomeAsUpEnabled(true)
+            supportActionBar?.title =
+                findNavController().currentDestination?.label
         }
-        (activity as AppCompatActivity).supportActionBar?.title =
-            findNavController().currentDestination?.label
+
+        toolbar.apply {
+            setNavigationIcon(R.drawable.baseline_dehaze_24)
+            setNavigationOnClickListener {
+                (activity as DrawerProvider).getDrawerLayout().openDrawer(GravityCompat.START)
+            }
+            setNavigationIconTint(com.google.android.material.R.attr.iconTint)
+            setTitleTextColor(requireContext().getColor(R.color.md_theme_dark_surface))
+        }
 
         lifecycleScope.launch {
             hotelsViewModel.hotelsDatesAndCurrencyModel.collectLatest {

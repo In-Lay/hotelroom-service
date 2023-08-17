@@ -157,7 +157,7 @@ val appModule = module {
     single { SimpleDateFormat("yyy-MM-dd", Locale.ENGLISH) }
 
 
-    viewModel<SplashViewModel> { AppSplashViewModel(saveNotificationsState = get()) }
+    viewModel<SplashViewModel> { AppSplashViewModel(getNightMode = get()) }
 
     viewModel<HotelsViewModel> {
         AppHotelsViewModel(

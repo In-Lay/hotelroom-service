@@ -32,12 +32,12 @@
 
                 <com.google.android.material.imageview.ShapeableImageView
                     android:id="@+id/img_edit_icon"
-                    style="@style/EditImageView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="end"
                     android:layout_margin="16dp"
-                    android:onClick="@{() -> viewModel.edit()}" />
+                    android:onClick="@{() -> viewModel.edit()}"
+                    android:src="@drawable/outline_edit_24" />
             </com.google.android.material.appbar.MaterialToolbar>
         </com.google.android.material.appbar.AppBarLayout>
 

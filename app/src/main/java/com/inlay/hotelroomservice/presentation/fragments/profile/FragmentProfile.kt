@@ -27,14 +27,20 @@ class FragmentProfile : Fragment() {
     ): View {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_profile, container, false)
 
-        (activity as AppCompatActivity).setSupportActionBar(binding.toolbarGeneral)
-        (activity as AppCompatActivity).supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        binding.toolbarGeneral.setNavigationIcon(R.drawable.baseline_dehaze_24)
-        binding.toolbarGeneral.setNavigationOnClickListener {
-            (activity as DrawerProvider).getDrawerLayout().openDrawer(GravityCompat.START)
+        (activity as AppCompatActivity).apply {
+            setSupportActionBar(binding.toolbarGeneral)
+            supportActionBar?.setDisplayHomeAsUpEnabled(true)
+            supportActionBar?.title =
+                findNavController().currentDestination?.label
         }
-        (activity as AppCompatActivity).supportActionBar?.title =
-            findNavController().currentDestination?.label
+
+        binding.toolbarGeneral.apply {
+            setNavigationIcon(R.drawable.baseline_dehaze_24)
+            setNavigationOnClickListener {
+                (activity as DrawerProvider).getDrawerLayout().openDrawer(GravityCompat.START)
+            }
+            setTitleTextColor(requireContext().getColor(R.color.md_theme_dark_surface))
+        }
 
         binding.viewModel = viewModel
         binding.lifecycleOwner = viewLifecycleOwner
