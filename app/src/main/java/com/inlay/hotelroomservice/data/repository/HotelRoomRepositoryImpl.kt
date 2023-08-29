@@ -21,21 +21,21 @@ class HotelRoomRepositoryImpl(
     private val remoteDataSource: RemoteDataSource,
     private val localDataSource: LocalDataSource
 ) : HotelRoomRepository, KoinComponent {
-    //Works, uncomment
+    //TODO Works, uncomment
     override suspend fun getSearchLocationRepo(location: String): List<SearchLocationsUiModel> {
         //Network
-//        val searchLocationData = remoteDataSource.getSearchLocationRepo(location)
-//        return if (searchLocationData.isSuccessful) {
-//            searchLocationData.body()?.data?.map {
-//                it.toUiItem()
-//            }.orEmpty()
-//        } else listOf()
+        val searchLocationData = remoteDataSource.getSearchLocationRepo(location)
+        return if (searchLocationData.isSuccessful) {
+            searchLocationData.body()?.data?.map {
+                it.toUiItem()
+            }.orEmpty()
+        } else listOf()
 
         //JSon
-        val searchLocationData: SearchLocationModel? by inject()
-        return searchLocationData?.data?.map {
-            it.toUiItem()
-        }.orEmpty()
+//        val searchLocationData: SearchLocationModel? by inject()
+//        return searchLocationData?.data?.map {
+//            it.toUiItem()
+//        }.orEmpty()
     }
 
     //Works, uncomment
@@ -48,28 +48,29 @@ class HotelRoomRepositoryImpl(
     ): List<HotelsItemUiModel> {
         return if (isOnline) {
             //Network
-//            val hotelsData =
-//                remoteDataSource.getHotelsRepo(geoId, checkInDate, checkOutDate, currencyCode)
-//            if (hotelsData.isSuccessful) {
-//                localDataSource.insertRepo(hotelsData.body()?.generalData?.dataList?.map { it.toEntity() }
-//                    ?: listOf())
-//                hotelsData.body()?.generalData?.dataList?.map { data ->
-//                    data.toUiItem()
-//                } ?: listOf()
-//            } else {
-//                listOf()
-//            }
+            val hotelsData =
+                remoteDataSource.getHotelsRepo(geoId, checkInDate, checkOutDate, currencyCode)
+            if (hotelsData.isSuccessful) {
+                localDataSource.insertRepo(hotelsData.body()?.generalData?.dataList?.map { it.toEntity() }
+                    ?: listOf())
+                hotelsData.body()?.generalData?.dataList?.map { data ->
+                    data.toUiItem()
+                } ?: listOf()
+            } else {
+                listOf()
+            }
 
             //JSon
-            val sampleData: HotelsModel? by inject()
+//            val sampleData: HotelsModel? by inject()
+//
+//            sampleData?.let { data ->
+//                localDataSource.insertRepo(data.generalData?.dataList?.map { it.toEntity() }
+//                    .orEmpty())
+//                data.generalData?.dataList?.map {
+//                    it.toUiItem()
+//                }
+//            }.orEmpty()
 
-            sampleData?.let { data ->
-                localDataSource.insertRepo(data.generalData?.dataList?.map { it.toEntity() }
-                    .orEmpty())
-                data.generalData?.dataList?.map {
-                    it.toUiItem()
-                }
-            }.orEmpty()
         } else {
             localDataSource.fetchRepo().first().map {
                 it.toUiItem()
@@ -81,31 +82,9 @@ class HotelRoomRepositoryImpl(
     override suspend fun getHotelDetails(
         id: String, checkInDate: String, checkOutDate: String, currencyCode: String
     ): HotelDetailsUiModel {
-//        val hotelDetailsData =
-//            remoteDataSource.getHotelDetailsRepo(id, checkInDate, checkOutDate, currencyCode)
-//        val emptyModel = HotelDetailsUiModel(
-//            "",
-//            "",
-//            "",
-//            "",
-//            "",
-//            "",
-//            listOf(),
-//            "",
-//            listOf(),
-//            listOf(),
-//            "",
-//            listOf(),
-//            listOf(),
-//            0.0,
-//            0.0
-//        )
-        //TODO use .mapNotNull{} instead emptyModel
-//        return if (hotelDetailsData.isSuccessful) {
-//            hotelDetailsData.body()?.toUiModel() ?: emptyModel
-//        } else emptyModel
-
-        val hotelDetailsData: HotelDetailsModel? by inject()
+        //Network
+        val hotelDetailsData =
+            remoteDataSource.getHotelDetailsRepo(id, checkInDate, checkOutDate, currencyCode)
         val emptyModel = HotelDetailsUiModel(
             "",
             "",
@@ -124,7 +103,14 @@ class HotelRoomRepositoryImpl(
             0.0
         )
 
-        return hotelDetailsData?.toUiModel() ?: emptyModel
+        return if (hotelDetailsData.isSuccessful) {
+            hotelDetailsData.body().toUiModel()
+        } else emptyModel
+
+        //Json
+//        val hotelDetailsData: HotelDetailsModel? by inject()
+//
+//        return hotelDetailsData.toUiModel()
     }
 
 

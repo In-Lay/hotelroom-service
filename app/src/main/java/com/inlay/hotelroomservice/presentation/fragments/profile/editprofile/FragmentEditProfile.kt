@@ -24,6 +24,7 @@ import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import com.inlay.hotelroomservice.R
 import com.inlay.hotelroomservice.databinding.FragmentEditProfileBinding
+import com.inlay.hotelroomservice.presentation.activities.MainActivity
 import com.inlay.hotelroomservice.presentation.viewmodels.editprofile.EditProfileViewModel
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
@@ -99,7 +100,8 @@ class FragmentEditProfile : Fragment() {
         viewModel.initialize(
             Firebase.auth.currentUser,
             showAuthDialog,
-            openPhotoPicker
+            openPhotoPicker,
+            saveAndGoBack
         )
 
         lifecycleScope.launch {
@@ -149,5 +151,10 @@ class FragmentEditProfile : Fragment() {
 
     private val openPhotoPicker: () -> Unit = {
         pickMedia.launch(PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly))
+    }
+
+    private val saveAndGoBack: () -> Unit = {
+        (activity as MainActivity).setupHeader(true, Firebase.auth.currentUser)
+        findNavController().popBackStack()
     }
 }

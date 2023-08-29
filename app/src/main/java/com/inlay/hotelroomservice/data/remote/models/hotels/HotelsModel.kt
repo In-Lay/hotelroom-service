@@ -7,6 +7,6 @@ import com.squareup.moshi.JsonClass
 data class HotelsModel(
     @Json(name = "status") val status: Boolean,
     @Json(name = "message") val message: String?,
-    @Json(name = "timestamp") val timestamp: Long,
+    @Json(name = "timestamp") val timestamp: Long?,
     @Json(name = "data") val generalData: GeneralData?
 )

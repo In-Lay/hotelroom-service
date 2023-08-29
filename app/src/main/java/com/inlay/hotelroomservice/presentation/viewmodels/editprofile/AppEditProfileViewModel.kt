@@ -38,16 +38,19 @@ class AppEditProfileViewModel : EditProfileViewModel() {
 
     private lateinit var _showAuthDialog: () -> Unit
     private lateinit var _showPhotoPicker: () -> Unit
+    private lateinit var _saveAndGoBack: () -> Unit
 
     override fun initialize(
         user: FirebaseUser?,
         showAuthDialog: () -> Unit,
-        showPhotoPicker: () -> Unit
+        showPhotoPicker: () -> Unit,
+        saveAndGoBack: () -> Unit
     ) {
         _user.value = user
 
         _showAuthDialog = showAuthDialog
         _showPhotoPicker = showPhotoPicker
+        _saveAndGoBack = saveAndGoBack
 
         _userPhoto.value = user?.photoUrl
         _fullName.value = user?.displayName.toString()
@@ -80,12 +83,12 @@ class AppEditProfileViewModel : EditProfileViewModel() {
         if (_changesApplied.value) {
             _toastText.value = "You have changed nothing!"
         } else {
-
             if (fullNameChanged.value) {
                 changeFullName()
             } else if (emailChanged.value) {
                 _showAuthDialog()
             }
+            _saveAndGoBack()
         }
     }
 

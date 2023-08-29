@@ -1,5 +1,6 @@
 package com.inlay.hotelroomservice.presentation.viewmodels.settings
 
+import android.util.Log
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.lifecycle.viewModelScope
 import com.inlay.hotelroomservice.domain.usecase.datastore.nightmode.SaveNightMode
@@ -49,10 +50,12 @@ class AppSettingsViewModel(
     }
 
     override fun onDarkModeChanged(isChecked: Boolean) {
+//        Log.d("SettingsLog", "AppSettingsViewModel: onDarkModeChanged: isChecked: $isChecked")
         viewModelScope.launch {
             val modeState = if (isChecked) {
                 AppCompatDelegate.MODE_NIGHT_YES
             } else AppCompatDelegate.MODE_NIGHT_NO
+//            Log.d("SettingsLog", "AppSettingsViewModel: onDarkModeChanged: modeState: $modeState")
             saveNightMode(modeState)
         }
     }

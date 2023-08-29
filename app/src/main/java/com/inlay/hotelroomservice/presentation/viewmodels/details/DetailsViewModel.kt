@@ -10,6 +10,8 @@ import kotlinx.coroutines.flow.StateFlow
 abstract class DetailsViewModel : ViewModel() {
     abstract val hotelDetailsData: LiveData<HotelDetailsUiModel?>
 
+    abstract val errorMessage:StateFlow<String>
+
     abstract val hotelImagesList: StateFlow<List<String>>
 
     abstract val hotelImage: LiveData<String>

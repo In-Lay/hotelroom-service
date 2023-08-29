@@ -68,7 +68,8 @@
     <string name="removed">Видалено</string>
     <string name="logout_info">Ви дійсно хочете вийти?</string>
     <string name="default_notification_channel_id">Push Повідомлення</string>
-    <string name="notifications_channel_description">Push notifications with inforation</string>
-    <string name="enable_notifications">Enable notifications in settings</string>
-    <string name="enable">Enable</string>
+    <string name="notifications_channel_description">Push сповіщення</string>
+    <string name="enable_notifications">Увімкніть сповіщення в налаштуванняхs</string>
+    <string name="enable">Увімкнути</string>
+    <string name="no_internet_connection">Відсутнє Інтернет з\'єднання!</string>
 </resources>

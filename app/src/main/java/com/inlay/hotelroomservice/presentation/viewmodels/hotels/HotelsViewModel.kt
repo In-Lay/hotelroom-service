@@ -8,6 +8,8 @@ import com.inlay.hotelroomservice.presentation.models.hotelsitem.HotelsItemUiMod
 import kotlinx.coroutines.flow.StateFlow
 
 abstract class HotelsViewModel : ViewModel() {
+    abstract val errorMessage: StateFlow<String>
+
     abstract val user: StateFlow<FirebaseUser?>
 
     abstract val isOnline: StateFlow<Boolean>

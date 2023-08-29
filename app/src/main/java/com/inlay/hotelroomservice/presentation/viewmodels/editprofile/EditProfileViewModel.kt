@@ -24,7 +24,8 @@ abstract class EditProfileViewModel : ViewModel() {
     abstract fun initialize(
         user: FirebaseUser?,
         showAuthDialog: () -> Unit,
-        showPhotoPicker: () -> Unit
+        showPhotoPicker: () -> Unit,
+        saveAndGoBack: () -> Unit
     )
 
     abstract fun onFullNameChanged(s: CharSequence, start: Int, before: Int, count: Int)

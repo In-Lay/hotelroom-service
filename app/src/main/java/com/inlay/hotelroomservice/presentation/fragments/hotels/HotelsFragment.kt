@@ -82,6 +82,16 @@ class HotelsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        lifecycleScope.launch {
+            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.CREATED) {
+                hotelsViewModel.hotelsDataList.collect {
+                    if (requireContext().isNetworkAvailable() && it.isNotEmpty()) binding.progressBar.visibility =
+                        View.GONE
+                    else binding.progressBar.visibility = View.VISIBLE
+                }
+            }
+        }
+
         bindAdapter()
     }
 

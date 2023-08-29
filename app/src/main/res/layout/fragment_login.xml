@@ -81,7 +81,7 @@
                 android:layout_height="wrap_content"
                 android:imeOptions="actionNext"
                 android:inputType="textEmailAddress"
-                android:onTextChanged="@{viewModel.onEmailTextChanged}" />
+                android:onTextChanged="@{viewModel::onEmailTextChanged}" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
@@ -105,7 +105,7 @@
                 android:layout_height="wrap_content"
                 android:imeOptions="actionDone"
                 android:inputType="textPassword"
-                android:onTextChanged="@{viewModel.onPasswordTextChanged}" />
+                android:onTextChanged="@{viewModel::onPasswordTextChanged}" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.button.MaterialButton

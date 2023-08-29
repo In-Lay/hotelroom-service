@@ -1,5 +1,6 @@
 package com.inlay.hotelroomservice.presentation.viewmodels.details
 
+import android.util.Log
 import androidx.databinding.BindingAdapter
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.asLiveData
@@ -12,14 +13,36 @@ import com.inlay.hotelroomservice.presentation.models.details.HotelDetailsSearch
 import com.inlay.hotelroomservice.presentation.models.details.HotelDetailsUiModel
 import com.inlay.hotelroomservice.presentation.models.details.NearbyPlace
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
+import java.net.SocketTimeoutException
 import java.util.Locale
 
 class AppDetailsViewModel(private val getHotelDetails: GetHotelDetails) : DetailsViewModel() {
 
-    private val _hotelDetailsData: MutableStateFlow<HotelDetailsUiModel?> = MutableStateFlow(null)
+    private val _hotelDetailsData: MutableStateFlow<HotelDetailsUiModel?> = MutableStateFlow(
+        HotelDetailsUiModel(
+            "",
+            "0",
+            "0",
+            "",
+            "",
+            "",
+            listOf(),
+            "",
+            listOf(),
+            listOf(),
+            "",
+            listOf(),
+            listOf(),
+            0.0,
+            0.0
+        )
+    )
     override val hotelDetailsData: LiveData<HotelDetailsUiModel?> = _hotelDetailsData.asLiveData()
 
+    private val _errorMessage = MutableStateFlow("")
+    override val errorMessage = _errorMessage
 
     private val _hotelImagesList = MutableStateFlow(listOf<String>())
     override val hotelImagesList = _hotelImagesList
@@ -103,20 +126,26 @@ class AppDetailsViewModel(private val getHotelDetails: GetHotelDetails) : Detail
         openLinkInBrowserLambda = openLinkInBrowser
 
         getDetailsData(hotelDetailsSearchModel)
+
+        Log.d("DetailsTag", "ViewModel: ${_hotelDetailsData.value?.rating}")
     }
 
     private fun getDetailsData(
         hotelDetailsSearchModel: HotelDetailsSearchModel
     ) {
-        viewModelScope.launch {
-            _hotelDetailsData.value = getHotelDetails(
-                hotelDetailsSearchModel.id,
-                hotelDetailsSearchModel.dates.checkInDate,
-                hotelDetailsSearchModel.dates.checkOutDate,
-                hotelDetailsSearchModel.currency
-            )
+        try {
+            viewModelScope.launch {
+                _hotelDetailsData.value = getHotelDetails(
+                    hotelDetailsSearchModel.id,
+                    hotelDetailsSearchModel.dates.checkInDate,
+                    hotelDetailsSearchModel.dates.checkOutDate,
+                    hotelDetailsSearchModel.currency
+                )
 
-            assignDetailsDataToViews()
+                assignDetailsDataToViews()
+            }
+        } catch (e: SocketTimeoutException) {
+            _errorMessage.value = "$e \nan error occurred on servers. Please, try again later."
         }
     }
 

@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.WindowManager
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
@@ -100,25 +101,34 @@ class FragmentDetails : Fragment(), OnMapReadyCallback {
             binding.detailsChipGroup.findViewById<Chip>(R.id.chip_bars).text = it
         }
 
+        lifecycleScope.launch {
+            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                viewModel.errorMessage.collect {
+                    if (it.isNotEmpty()) Toast.makeText(context, it, Toast.LENGTH_SHORT).show()
+                }
+            }
+        }
+
         val mapFragment = childFragmentManager.findFragmentById(R.id.map) as SupportMapFragment
         mapFragment.getMapAsync(this)
     }
 
     override fun onMapReady(googleMap: GoogleMap) {
-
-        val currentLocation = LatLng(
-            viewModel.hotelDetailsData.value?.latitude!!,
-            viewModel.hotelDetailsData.value?.longitude!!
-        )
-
         googleMap.apply {
-            mapType = GoogleMap.MAP_TYPE_NORMAL
-            addMarker(
-                MarkerOptions()
-                    .position(currentLocation)
-                    .title(viewModel.hotelDetailsData.value?.title!!)
-            )
-            moveCamera(CameraUpdateFactory.newLatLng(currentLocation))
+            viewModel.hotelDetailsData.observe(viewLifecycleOwner) {
+                val currentLocation = LatLng(
+                    it?.latitude!!,
+                    it.longitude
+                )
+                mapType = GoogleMap.MAP_TYPE_NORMAL
+                addMarker(
+                    MarkerOptions()
+                        .position(currentLocation)
+                        .title(it.title)
+                )
+                moveCamera(CameraUpdateFactory.newLatLng(currentLocation))
+            }
+
             setOnCameraMoveStartedListener {
                 if (it == GoogleMap.OnCameraMoveStartedListener.REASON_GESTURE) binding.scrollView.setShouldInterceptTouchEvent(
                     true

@@ -16,6 +16,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
+import com.google.android.material.appbar.CollapsingToolbarLayout
 import com.google.android.material.datepicker.MaterialDatePicker
 import com.inlay.hotelroomservice.R
 import com.inlay.hotelroomservice.databinding.FragmentSearchBinding
@@ -33,6 +34,7 @@ import org.koin.androidx.viewmodel.ext.android.activityViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.text.SimpleDateFormat
 import java.util.Calendar
+import kotlin.math.abs
 
 class FragmentSearch : Fragment() {
     private lateinit var binding: FragmentSearchBinding
@@ -51,6 +53,7 @@ class FragmentSearch : Fragment() {
             setSupportActionBar(binding.supportToolbar)
             supportActionBar?.setDisplayHomeAsUpEnabled(true)
             supportActionBar?.setDisplayShowHomeEnabled(true)
+            supportActionBar?.setDisplayShowTitleEnabled(false)
         }
 
         binding.supportToolbar.apply {
@@ -61,26 +64,14 @@ class FragmentSearch : Fragment() {
             }
         }
 
-//        binding.appbarLayout.addOnOffsetChangedListener { appBarLayout, verticalOffset ->
-//            val progress: Float = -verticalOffset / appBarLayout.totalScrollRange.toFloat()
-//
-//            // Adjust the width of the SearchView
-//            val layoutParams = binding.searchBar.layoutParams
-//            layoutParams.width =
-//                (((binding.supportToolbar.width - binding.supportToolbar.contentInsetStart * 2) * progress).toInt() +
-//                        (appBarLayout.width - binding.supportToolbar.contentInsetStart * 2) * (1 - progress)).toInt()
-//            binding.searchBar.layoutParams = layoutParams
-//
-//            // Adjust the margins of the SearchView
-//            val params = binding.searchBar.layoutParams as CollapsingToolbarLayout.LayoutParams
-//            params.setMargins(
-//                (binding.supportToolbar.contentInsetStart * progress).toInt(),
-//                0,
-//                (binding.supportToolbar.contentInsetStart * progress).toInt(),
-//                (appBarLayout.height - binding.searchBar.height) / 2 * (1 - progress).toInt()
-//            )
-//            binding.searchBar.requestLayout()
-//        }
+        binding.appbarLayout.addOnOffsetChangedListener { _, verticalOffset ->
+            val totalScrollRange = binding.appbarLayout.totalScrollRange
+
+            val isCollapsed = abs(verticalOffset) == totalScrollRange
+            if (isCollapsed) {
+                adjustSearchBarPosition()
+            } else resetSearchBarPosition()
+        }
 
         binding.viewModel = searchViewModel
         binding.lifecycleOwner = this
@@ -103,9 +94,10 @@ class FragmentSearch : Fragment() {
 
         binding.searchView.editText.setOnEditorActionListener { textView, actionId, _ ->
             if (actionId == EditorInfo.IME_ACTION_SEARCH) {
-                if (isOnline)
-                    searchViewModel.getSearchLocations(textView.text.toString())
-                else Toast.makeText(context, "No Internet connection!", Toast.LENGTH_SHORT).show()
+                if (isOnline) searchViewModel.getSearchLocations(textView.text.toString())
+                else Toast.makeText(
+                    context, context?.getString(R.string.no_internet_connection), Toast.LENGTH_SHORT
+                ).show()
             }
             true
         }
@@ -113,6 +105,38 @@ class FragmentSearch : Fragment() {
         binding.tvDates.setEndIconOnClickListener {
             openDatePicker()
         }
+    }
+
+    private fun adjustSearchBarPosition() {
+        val searchBarLayoutParams =
+            binding.searchBar.layoutParams as CollapsingToolbarLayout.LayoutParams
+
+        val homeButtonWidth = binding.supportToolbar.navigationIcon?.intrinsicWidth ?: 0
+
+        val maxSearchBarWidth = binding.supportToolbar.width - homeButtonWidth + 50
+
+        searchBarLayoutParams.width = maxSearchBarWidth - 150
+        searchBarLayoutParams.marginStart = homeButtonWidth + 90
+
+        searchBarLayoutParams.topMargin = 10
+        searchBarLayoutParams.bottomMargin = 10
+        searchBarLayoutParams.marginEnd = 10
+
+        binding.searchBar.layoutParams = searchBarLayoutParams
+    }
+
+    private fun resetSearchBarPosition() {
+        val searchBarLayoutParams =
+            binding.searchBar.layoutParams as CollapsingToolbarLayout.LayoutParams
+
+        searchBarLayoutParams.collapseMode = CollapsingToolbarLayout.LayoutParams.COLLAPSE_MODE_PIN
+        searchBarLayoutParams.topMargin = 0
+        searchBarLayoutParams.marginStart = 10
+        searchBarLayoutParams.marginEnd = 10
+        searchBarLayoutParams.bottomMargin = 16
+        searchBarLayoutParams.width = binding.supportToolbar.width - 20
+
+        binding.searchBar.layoutParams = searchBarLayoutParams
     }
 
     private fun bindAdapter() {
@@ -135,20 +159,22 @@ class FragmentSearch : Fragment() {
 
     private val searchHotels: (SearchDataUiModel) -> Unit = {
         if (isOnline) {
-            //TODO To uncomment
-//            lifecycleScope.launch {
-//                viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
-//                    hotelsViewModel.getHotelsRepo(
-//                        isOnline,
-//                        it.geoId ?: "60763",
-//                        it.checkInDate,
-//                        it.checkOutDate,
-//                        it.currencyCode
-//                    )
-//                }
-//            }
+            //TODO Uncomment to Network
+            lifecycleScope.launch {
+                viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                    hotelsViewModel.getHotelsRepo(
+                        isOnline,
+                        it.geoId ?: "60763",
+                        it.checkInDate,
+                        it.checkOutDate,
+                        it.currencyCode
+                    )
+                }
+            }
             (activity as MainActivity).goToHotels()
-        } else Toast.makeText(context, "No Internet connection!", Toast.LENGTH_SHORT).show()
+        } else Toast.makeText(
+            context, context?.getString(R.string.no_internet_connection), Toast.LENGTH_SHORT
+        ).show()
     }
 
     private val openDatePicker: () -> Unit = {
@@ -161,8 +187,8 @@ class FragmentSearch : Fragment() {
         calendar.add(Calendar.DAY_OF_YEAR, 7)
         val checkOutDate = calendar.timeInMillis
 
-        val materialDatePicker =
-            MaterialDatePicker.Builder.dateRangePicker().setTitleText("Select Dates").setSelection(
+        val materialDatePicker = MaterialDatePicker.Builder.dateRangePicker()
+            .setTitleText(context?.getString(R.string.btn_pick_dates)).setSelection(
                 Pair.create(
                     checkInDate, checkOutDate
                 )

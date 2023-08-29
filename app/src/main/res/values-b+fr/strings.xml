@@ -68,7 +68,8 @@
     <string name="removed">Supprimé</string>
     <string name="logout_info">Voulez-vous vraiment vous déconnecter ?</string>
     <string name="default_notification_channel_id">Push notifications</string>
-    <string name="notifications_channel_description">Push notifications with inforation</string>
-    <string name="enable_notifications">Enable notifications in settings</string>
-    <string name="enable">Enable</string>
+    <string name="notifications_channel_description">Push notifications</string>
+    <string name="enable_notifications">Activer les notifications dans les paramètres</string>
+    <string name="enable">Activer</string>
+    <string name="no_internet_connection">Pas de connexion Internet!</string>
 </resources>

@@ -4,7 +4,6 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.provider.Settings
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -135,8 +134,6 @@ class FragmentSettings : Fragment() {
     }
 
     private fun showLangDialog(selectedLocale: String) {
-        Log.d("SettingsLog", "showLangDialog: selectedLocale: $selectedLocale")
-        Log.d("SettingsLog", "showLangDialog: langList: ${viewModel.langsList.value}")
         val dialogBinding = DialogLanguagesBinding.inflate(layoutInflater)
         val dialogBuilder = MaterialAlertDialogBuilder(requireContext())
         var localeCode = "en"

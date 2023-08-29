@@ -6,8 +6,6 @@ import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import com.inlay.hotelroomservice.domain.usecase.datastore.nightmode.GetNightMode
-import com.inlay.hotelroomservice.domain.usecase.datastore.notifications.GetNotificationsState
-import com.inlay.hotelroomservice.domain.usecase.datastore.notifications.SaveNotificationsState
 import com.inlay.hotelroomservice.domain.usecase.hotels.GetHotelsRepo
 import com.inlay.hotelroomservice.domain.usecase.sharedpreferences.GetLanguagePreferences
 import com.inlay.hotelroomservice.domain.usecase.sharedpreferences.SaveLanguagePreferences
@@ -22,6 +20,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
+import java.net.SocketTimeoutException
 import java.text.SimpleDateFormat
 import java.util.Calendar
 
@@ -35,6 +34,9 @@ class AppHotelsViewModel(
     private val getNightMode: GetNightMode,
     private val dateFormat: SimpleDateFormat
 ) : HotelsViewModel() {
+    private val _errorMessage = MutableStateFlow("")
+    override val errorMessage = _errorMessage
+
     private val _user: MutableStateFlow<FirebaseUser?> = MutableStateFlow(null)
     override val user = _user
 
@@ -83,13 +85,14 @@ class AppHotelsViewModel(
             val dummyDates = getDummyDates()
             val hotelsDatesAndCurrency = HotelsDatesAndCurrencyModel(dummyDates, "USD")
             _hotelsDatesAndCurrencyModel.value = hotelsDatesAndCurrency
-            getHotelsRepo(
-                _isOnline.value,
-                hotelsDatesAndCurrency.datesModel.checkInDate,
-                hotelsDatesAndCurrency.datesModel.checkOutDate,
-                hotelsDatesAndCurrency.currency
-            )
 
+            getHotelsRepo(
+                isOnline = _isOnline.value,
+                geoId = "60763",
+                checkInDate = hotelsDatesAndCurrency.datesModel.checkInDate,
+                checkOutDate = hotelsDatesAndCurrency.datesModel.checkOutDate,
+                currencyCode = hotelsDatesAndCurrency.currency
+            )
             getStaysRepo(_isOnline.value, isUserLogged())
         }
     }
@@ -112,16 +115,21 @@ class AppHotelsViewModel(
         checkOutDate: String,
         currencyCode: String
     ) {
-        viewModelScope.launch(Dispatchers.IO) {
-            _hotelsDataList.value = getHotelsRepoUseCase(
-                isOnline,
-                geoId,
-                checkInDate,
-                checkOutDate,
-                currencyCode
-            )
-            val dates = DatesModel(checkInDate, checkOutDate)
-            _hotelsDatesAndCurrencyModel.value = HotelsDatesAndCurrencyModel(dates, currencyCode)
+        try {
+            viewModelScope.launch(Dispatchers.IO) {
+                _hotelsDataList.value = getHotelsRepoUseCase(
+                    isOnline,
+                    geoId,
+                    checkInDate,
+                    checkOutDate,
+                    currencyCode
+                )
+                val dates = DatesModel(checkInDate, checkOutDate)
+                _hotelsDatesAndCurrencyModel.value =
+                    HotelsDatesAndCurrencyModel(dates, currencyCode)
+            }
+        } catch (e: SocketTimeoutException) {
+            _errorMessage.value = "$e \nan error occurred on servers, Please, try again later."
         }
     }
 
@@ -162,5 +170,7 @@ class AppHotelsViewModel(
         return DatesModel(checkInDate, checkOutDate)
     }
 
-    private fun isUserLogged(): Boolean = _user.value != null
+    private fun isUserLogged(): Boolean {
+        return _user.value != null
+    }
 }

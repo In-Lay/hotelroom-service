@@ -86,30 +86,30 @@ private fun Image.toSearchLocationsImageUiModel(): SearchLocationsImageUiModel =
     )
 
 
-fun HotelDetailsModel.toUiModel(): HotelDetailsUiModel =
-    HotelDetailsUiModel(title = this.data?.title.orEmpty(),
-        rating = this.data?.rating.toString(),
-        numberReviews = this.data?.numberReviews.toString(),
-        rankingDetails = this.data?.rankingDetails.orEmpty(),
-        displayPrice = this.data?.price?.displayPrice.orEmpty(),
-        providerName = this.data?.price?.providerName.orEmpty(),
-        photos = this.data?.photos?.mapNotNull {
+fun HotelDetailsModel?.toUiModel(): HotelDetailsUiModel =
+    HotelDetailsUiModel(title = this?.data?.title.orEmpty(),
+        rating = this?.data?.rating.toString(),
+        numberReviews = this?.data?.numberReviews.toString(),
+        rankingDetails = this?.data?.rankingDetails.orEmpty(),
+        displayPrice = this?.data?.price?.displayPrice.orEmpty(),
+        providerName = this?.data?.price?.providerName.orEmpty(),
+        photos = this?.data?.photos?.mapNotNull {
             it.urlTemplate?.replace(
                 "{width}", "1200"
             )?.replace("{height}", "1000")
         }.orEmpty(),
-        aboutTitle = this.data?.about?.title.orEmpty(),
-        aboutLinks = this.data?.about?.aboutContentGeneral?.getAboutByTitle("Related links")
+        aboutTitle = this?.data?.about?.title.orEmpty(),
+        aboutLinks = this?.data?.about?.aboutContentGeneral?.getAboutByTitle("Related links")
             .orEmpty(),
-        aboutAmenities = this.data?.about?.aboutContentGeneral?.getAboutByTitle("Amenities")
+        aboutAmenities = this?.data?.about?.aboutContentGeneral?.getAboutByTitle("Amenities")
             .orEmpty(),
-        address = this.data?.location?.address.orEmpty(),
-        restaurantsNearby = this.data?.restaurantsNearby?.restaurantsNearbyContent?.map { it.toRestaurantNearby() }
+        address = this?.data?.location?.address.orEmpty(),
+        restaurantsNearby = this?.data?.restaurantsNearby?.restaurantsNearbyContent?.map { it.toRestaurantNearby() }
             ?: listOf(),
-        attractionsNearby = this.data?.attractionsNearby?.content?.map { it.toAttractionNearby() }
+        attractionsNearby = this?.data?.attractionsNearby?.content?.map { it.toAttractionNearby() }
             ?: listOf(),
-        latitude = this.data?.geoPoint?.latitude ?: 0.0,
-        longitude = this.data?.geoPoint?.longitude ?: 0.0)
+        latitude = this?.data?.geoPoint?.latitude ?: 0.0,
+        longitude = this?.data?.geoPoint?.longitude ?: 0.0)
 
 private fun List<AboutContentGeneral>.getAboutByTitle(title: String): List<String> {
     return this.filter { aboutContent ->

@@ -8,6 +8,7 @@ import android.content.pm.PackageManager
 import android.content.res.Configuration
 import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.view.ViewTreeObserver
 import android.widget.ImageView
@@ -19,7 +20,9 @@ import androidx.appcompat.app.AppCompatDelegate
 import androidx.appcompat.app.AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
+import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
@@ -74,20 +77,42 @@ class MainActivity : AppCompatActivity(), DrawerProvider {
 
         lifecycleScope.launch {
             hotelsViewModel.darkModeState.collect {
+                Log.d("SettingsLog", "MainActivity: darkModeState: $it")
                 val currentNightMode =
                     resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK
+                Log.d("SettingsLog", "MainActivity: currentNightMode: $currentNightMode")
                 if (it != currentNightMode) {
+                    Log.d(
+                        "SettingsLog",
+                        "MainActivity: Build.VERSION.SDK_INT: ${Build.VERSION.SDK_INT}"
+                    )
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
                         val uiModeManager =
                             getSystemService(Context.UI_MODE_SERVICE) as UiModeManager
-                        if (it == AppCompatDelegate.MODE_NIGHT_YES) uiModeManager.setApplicationNightMode(
-                            UiModeManager.MODE_NIGHT_YES
-                        )
-                        else uiModeManager.setApplicationNightMode(UiModeManager.MODE_NIGHT_NO)
+                        if (it == AppCompatDelegate.MODE_NIGHT_YES) {
+                            Log.d(
+                                "SettingsLog",
+                                "MainActivity: it == AppCompatDelegate.MODE_NIGHT_YES"
+                            )
+                            //TODO SDK >= 34 doesn't work
+                            uiModeManager.setApplicationNightMode(
+                                UiModeManager.MODE_NIGHT_YES
+                            )
+                        } else {
+                            Log.d("SettingsLog", "MainActivity: else")
+                            uiModeManager.setApplicationNightMode(UiModeManager.MODE_NIGHT_NO)
+                        }
                     } else {
-                        if (it == AppCompatDelegate.MODE_NIGHT_YES)
+                        if (it == AppCompatDelegate.MODE_NIGHT_YES) {
+                            Log.d(
+                                "SettingsLog",
+                                "MainActivity: it == AppCompatDelegate.MODE_NIGHT_YES"
+                            )
                             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
-                        else AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+                        } else {
+                            Log.d("SettingsLog", "MainActivity: else")
+                            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+                        }
                     }
                 } else {
                     val newNightMode = when (currentNightMode) {
@@ -95,6 +120,7 @@ class MainActivity : AppCompatActivity(), DrawerProvider {
                         Configuration.UI_MODE_NIGHT_YES -> AppCompatDelegate.MODE_NIGHT_YES
                         else -> MODE_NIGHT_FOLLOW_SYSTEM
                     }
+                    Log.d("SettingsLog", "MainActivity: newNightMode: $newNightMode")
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
                         val uiModeManager =
                             getSystemService(Context.UI_MODE_SERVICE) as UiModeManager
@@ -106,14 +132,15 @@ class MainActivity : AppCompatActivity(), DrawerProvider {
             }
         }
 
-        setupNavigationDrawer()
-        setupNavigation()
-
         Firebase.auth.addAuthStateListener {
             if (it.currentUser != null) {
                 setupHeader(isUserLogged(it.currentUser), it.currentUser)
             } else setupHeader(isUserLogged(null), null)
         }
+
+        setupNavigationDrawer()
+        setupNavigation()
+
 
         hotelsViewModel.initialize(isNetworkAvailable())
 
@@ -127,6 +154,9 @@ class MainActivity : AppCompatActivity(), DrawerProvider {
                 else -> binding.fabSearch.visibility = View.GONE
             }
         }
+
+
+
         binding.lifecycleOwner = this
     }
 
@@ -206,7 +236,7 @@ class MainActivity : AppCompatActivity(), DrawerProvider {
         }
     }
 
-    private fun setupHeader(isUserLogged: Boolean, user: FirebaseUser?) {
+    fun setupHeader(isUserLogged: Boolean, user: FirebaseUser?) {
         val headerView = binding.navigationView.getHeaderView(0)
         val headerImage = headerView.findViewById<ImageView>(R.id.header_image)
         val headerUserName = headerView.findViewById<TextView>(R.id.tv_user_name)
@@ -220,11 +250,8 @@ class MainActivity : AppCompatActivity(), DrawerProvider {
             headerUserName.text = this.resources.getText(R.string.header_profile)
             headerMail.text = ""
         } else {
-            //TODO After Register Username doesn't show up
-            // After photo change it doesn't appear
             headerUserName.text = user?.displayName
             headerMail.text = user?.email
-//            Log.d("profileTag", "setupHeader: user?.photoUrl: ${user?.photoUrl}")
             if (user?.photoUrl == null) headerImage.load(R.drawable.baseline_person_24)
             else headerImage.load(user.photoUrl) {
                 crossfade(true)
@@ -281,7 +308,8 @@ class MainActivity : AppCompatActivity(), DrawerProvider {
             showProgressBar(true)
             navController.navigate(R.id.fragmentDetails, bundle)
         } else {
-            Toast.makeText(this, "No internet connection!", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, getString(R.string.no_internet_connection), Toast.LENGTH_SHORT)
+                .show()
         }
     }
 
