@@ -27,7 +27,7 @@ abstract class HotelsViewModel : ViewModel() {
     abstract val hotelsDataList: StateFlow<List<HotelsItemUiModel>>
     abstract val selectedHotelsDataList: StateFlow<List<HotelsItemUiModel>>
 
-    abstract fun initialize(isOnline: Boolean)
+    abstract fun initialize(isOnline: Boolean, firebaseUser: FirebaseUser?)
 
     abstract fun getHotelsRepo(
         isOnline: Boolean,

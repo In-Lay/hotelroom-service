@@ -22,6 +22,7 @@ import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
+import com.google.firebase.storage.ktx.storage
 import com.inlay.hotelroomservice.R
 import com.inlay.hotelroomservice.databinding.FragmentEditProfileBinding
 import com.inlay.hotelroomservice.presentation.activities.MainActivity
@@ -66,6 +67,7 @@ class FragmentEditProfile : Fragment() {
             }
             setNegativeButton(R.string.discard) { dialog, _ ->
                 dialog.dismiss()
+                (activity as MainActivity).setupHeader(true, Firebase.auth.currentUser)
                 findNavController().popBackStack()
             }
             setMessage(R.string.edit_profile_dialog)
@@ -77,6 +79,7 @@ class FragmentEditProfile : Fragment() {
                     if (!changesApplied) {
                         dialogBuilder?.create()?.show()
                     } else {
+                        (activity as MainActivity).setupHeader(true, Firebase.auth.currentUser)
                         findNavController().popBackStack()
                     }
                 }
@@ -85,7 +88,8 @@ class FragmentEditProfile : Fragment() {
 
         pickMedia = registerForActivityResult(ActivityResultContracts.PickVisualMedia()) {
             if (it != null) {
-                viewModel.changePhoto(it)
+                val fireStoreReference = Firebase.storage.reference
+                viewModel.changePhoto(it, fireStoreReference)
             } else {
                 Toast.makeText(context, "No photo selected", Toast.LENGTH_SHORT).show()
             }
@@ -100,8 +104,7 @@ class FragmentEditProfile : Fragment() {
         viewModel.initialize(
             Firebase.auth.currentUser,
             showAuthDialog,
-            openPhotoPicker,
-            saveAndGoBack
+            openPhotoPicker
         )
 
         lifecycleScope.launch {
@@ -153,8 +156,8 @@ class FragmentEditProfile : Fragment() {
         pickMedia.launch(PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly))
     }
 
-    private val saveAndGoBack: () -> Unit = {
-        (activity as MainActivity).setupHeader(true, Firebase.auth.currentUser)
-        findNavController().popBackStack()
-    }
+//    private val saveAndGoBack: () -> Unit = {
+//        (activity as MainActivity).setupHeader(true, Firebase.auth.currentUser)
+//        findNavController().popBackStack()
+//    }
 }

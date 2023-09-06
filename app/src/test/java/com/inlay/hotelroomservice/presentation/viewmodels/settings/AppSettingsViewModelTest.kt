@@ -1,46 +1,43 @@
 package com.inlay.hotelroomservice.presentation.viewmodels.settings
 
 import androidx.appcompat.app.AppCompatDelegate
-import androidx.arch.core.executor.testing.InstantTaskExecutorRule
+import com.inlay.hotelroomservice.CoroutineTestRule
 import com.inlay.hotelroomservice.domain.usecase.datastore.nightmode.SaveNightMode
 import com.inlay.hotelroomservice.domain.usecase.datastore.notifications.GetNotificationsState
 import com.inlay.hotelroomservice.domain.usecase.datastore.notifications.SaveNotificationsState
 import io.mockk.coEvery
 import io.mockk.coVerify
 import io.mockk.mockk
-import kotlinx.coroutines.flow.FlowCollector
+import io.mockk.verify
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.flow.MutableSharedFlow
+import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.test.advanceUntilIdle
 import kotlinx.coroutines.test.runTest
 import org.junit.Assert
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
-import org.mockito.Mock
-import org.mockito.MockitoAnnotations
-import org.mockito.Spy
-import org.mockito.kotlin.verify
 
-internal class SettingsViewModelTest {
-    @get:Rule
-    val instantTaskExecutorRule = InstantTaskExecutorRule()
-
+internal class AppSettingsViewModelTest {
     @get:Rule
     val coroutineRule = CoroutineTestRule()
 
-    @Mock
-    private lateinit var mockSaveNightMode: SaveNightMode
+    private val mockSaveNightMode: SaveNightMode = mockk(relaxed = true)
 
-    @Mock
-    private lateinit var mockGetNotificationsState: GetNotificationsState
+    private val mockGetNotificationsState: GetNotificationsState = mockk(relaxed = true)
 
-    @Mock
-    private lateinit var mockSaveNotificationsState: SaveNotificationsState
+    private val mockSaveNotificationsState: SaveNotificationsState = mockk(relaxed = true)
 
     private lateinit var viewModel: AppSettingsViewModel
 
+    private val sharedFlow = MutableSharedFlow<Boolean>()
+
     @Before
     fun setup() {
-        MockitoAnnotations.openMocks(this)
+        coEvery { mockGetNotificationsState.invoke() } returns sharedFlow.asSharedFlow()
+        sharedFlow.tryEmit(true)
         viewModel = AppSettingsViewModel(
             mockSaveNightMode,
             mockGetNotificationsState,
@@ -57,7 +54,7 @@ internal class SettingsViewModelTest {
         assert(viewModel.langsList.value == languagesList)
 
         viewModel.openLangDialog()
-        io.mockk.verify { openLangDialogMock.invoke() }
+        verify { openLangDialogMock.invoke() }
     }
 
     @Test
@@ -67,35 +64,23 @@ internal class SettingsViewModelTest {
 
         viewModel.openLangDialog()
 
-        io.mockk.verify { openLangDialogMock.invoke() }
+        verify { openLangDialogMock.invoke() }
     }
 
+    @OptIn(ExperimentalCoroutinesApi::class)
     @Test
     fun `changeNotificationsState updates notifications state and calls saveNotificationsState`() =
         runTest {
             val newState = true
-           viewModel.changeNotificationsState(newState)
+            viewModel.changeNotificationsState(newState)
             val state = viewModel.inAppNotificationsState.first()
             Assert.assertEquals(newState, state)
-//            coEvery { viewModel.changeNotificationsState(newState) }
 
-//            val collectedData = mutableListOf<Boolean>()
-//            val flowCollector: FlowCollector<Boolean> =
-//                FlowCollector { value -> collectedData.add(value) }
-//
-//            viewModel.inAppNotificationsState.collect(flowCollector)
-
-
-
-//            viewModel.inAppNotificationsState.collect {
-//                assert(it == newState)
-//            }
-//            assert(viewModel.inAppNotificationsState.value == newState)
-//            coVerify {
-//                verify(mockSaveNotificationsState).invoke(newState)
-//            }
+            advanceUntilIdle()
+            coVerify { mockSaveNotificationsState.invoke(newState) }
         }
 
+    @OptIn(ExperimentalCoroutinesApi::class)
     @Test
     fun `onDarkModeChanged updates night mode and calls saveNightMode`() =
         runTest {
@@ -104,9 +89,11 @@ internal class SettingsViewModelTest {
 
             viewModel.onDarkModeChanged(isChecked)
 
-            verify(mockSaveNightMode).invoke(expectedMode)
+            advanceUntilIdle()
+            coVerify { mockSaveNightMode.invoke(expectedMode) }
         }
 
+    @OptIn(ExperimentalCoroutinesApi::class)
     @Test
     fun `onNotificationsSwitchChanged calls saveNotificationsState`() =
         runTest {
@@ -114,6 +101,7 @@ internal class SettingsViewModelTest {
 
             viewModel.onNotificationsSwitchChanged(isChecked)
 
-            verify(mockSaveNotificationsState).invoke(isChecked)
+            advanceUntilIdle()
+            coVerify { mockSaveNotificationsState.invoke(isChecked) }
         }
 }

@@ -53,6 +53,7 @@ import com.inlay.hotelroomservice.presentation.viewmodels.details.dialog.AppPlac
 import com.inlay.hotelroomservice.presentation.viewmodels.details.dialog.PlaceNearbyViewModel
 import com.inlay.hotelroomservice.presentation.viewmodels.editprofile.AppEditProfileViewModel
 import com.inlay.hotelroomservice.presentation.viewmodels.editprofile.EditProfileViewModel
+import com.inlay.hotelroomservice.presentation.viewmodels.editprofile.GetAuthUser
 import com.inlay.hotelroomservice.presentation.viewmodels.hotels.AppHotelsViewModel
 import com.inlay.hotelroomservice.presentation.viewmodels.hotels.HotelsViewModel
 import com.inlay.hotelroomservice.presentation.viewmodels.hotels.item.AppHotelsItemViewModel
@@ -156,6 +157,7 @@ val appModule = module {
 
     single { SimpleDateFormat("yyy-MM-dd", Locale.ENGLISH) }
 
+    factory { GetAuthUser() }
 
     viewModel<SplashViewModel> { AppSplashViewModel(getNightMode = get()) }
 
@@ -186,7 +188,7 @@ val appModule = module {
     viewModel<UserStaysViewModel> { AppUserStaysViewModel() }
 
     viewModel<ProfileViewModel> { AppProfileViewModel() }
-    viewModel<EditProfileViewModel> { AppEditProfileViewModel() }
+    viewModel<EditProfileViewModel> { AppEditProfileViewModel(getAuthUser = get()) }
     viewModel<LoginRegisterViewModel> { AppLoginRegisterViewModel() }
 
     viewModel<SettingsViewModel> {

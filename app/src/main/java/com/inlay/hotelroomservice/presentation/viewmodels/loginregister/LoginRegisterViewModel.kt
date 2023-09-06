@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.coroutines.flow.StateFlow
+import org.jetbrains.annotations.VisibleForTesting
 
 abstract class LoginRegisterViewModel : ViewModel() {
     abstract val auth: StateFlow<FirebaseAuth?>
@@ -38,4 +39,7 @@ abstract class LoginRegisterViewModel : ViewModel() {
     abstract fun register()
 
     abstract fun isEmailValid(email: String): Boolean
+
+    @VisibleForTesting
+    abstract fun changeUserCredentials(userMail: String, userPassword: String, userFullName: String?)
 }

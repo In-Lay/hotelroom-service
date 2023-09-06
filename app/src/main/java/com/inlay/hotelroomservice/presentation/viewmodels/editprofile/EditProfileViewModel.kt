@@ -4,7 +4,9 @@ import android.net.Uri
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import com.google.firebase.auth.FirebaseUser
+import com.google.firebase.storage.StorageReference
 import kotlinx.coroutines.flow.StateFlow
+import org.jetbrains.annotations.TestOnly
 
 abstract class EditProfileViewModel : ViewModel() {
     abstract val user: StateFlow<FirebaseUser?>
@@ -24,8 +26,7 @@ abstract class EditProfileViewModel : ViewModel() {
     abstract fun initialize(
         user: FirebaseUser?,
         showAuthDialog: () -> Unit,
-        showPhotoPicker: () -> Unit,
-        saveAndGoBack: () -> Unit
+        showPhotoPicker: () -> Unit
     )
 
     abstract fun onFullNameChanged(s: CharSequence, start: Int, before: Int, count: Int)
@@ -39,7 +40,17 @@ abstract class EditProfileViewModel : ViewModel() {
 
     abstract fun changeEmail(email: String, password: String)
 
-    abstract fun changePhoto(uri: Uri)
+    abstract fun changePhoto(uri: Uri, fireStoreReference: StorageReference)
 
     abstract fun isEmailValid(email: String): Boolean
+
+    @TestOnly
+    abstract fun changeUserData(user: FirebaseUser, userMail: String, userName: String)
+
+    @TestOnly
+    abstract fun editChangesState(
+        isEmailChanged: Boolean,
+        isFullNameChanged: Boolean,
+        isChangesApplied: Boolean
+    )
 }

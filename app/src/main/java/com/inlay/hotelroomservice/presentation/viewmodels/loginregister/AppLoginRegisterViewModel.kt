@@ -1,13 +1,16 @@
 package com.inlay.hotelroomservice.presentation.viewmodels.loginregister
 
 import android.util.Patterns
+import androidx.core.util.PatternsCompat
 import androidx.lifecycle.asLiveData
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.UserProfileChangeRequest
 import kotlinx.coroutines.flow.MutableStateFlow
+import org.jetbrains.annotations.VisibleForTesting
 
 class AppLoginRegisterViewModel : LoginRegisterViewModel() {
-    private val _auth: MutableStateFlow<FirebaseAuth?> = MutableStateFlow(null)
+    @VisibleForTesting
+    internal val _auth: MutableStateFlow<FirebaseAuth?> = MutableStateFlow(null)
     override val auth = _auth
 
     private val _userMail = MutableStateFlow("")
@@ -82,7 +85,7 @@ class AppLoginRegisterViewModel : LoginRegisterViewModel() {
             _auth.value?.signInWithEmailAndPassword(_userMail.value, _userPassword.value)
                 ?.addOnCompleteListener {
                     if (it.isSuccessful) {
-                            _onNavigateToProfile()
+                        _onNavigateToProfile()
                     }
                 }?.addOnFailureListener {
                     _toastErrorMessage.value = it.message.toString()
@@ -102,22 +105,34 @@ class AppLoginRegisterViewModel : LoginRegisterViewModel() {
                 ?.addOnCompleteListener {
                     if (it.isSuccessful) {
                         val user = _auth.value?.currentUser
-                        val profileUpdate =
-                            UserProfileChangeRequest.Builder().setDisplayName(_userFullName.value)
-                                .build()
-                        user?.updateProfile(profileUpdate)?.addOnCompleteListener { update ->
+                        val builder = UserProfileChangeRequest.Builder()
+                        builder.displayName = _userFullName.value
+
+                        user?.updateProfile(builder.build())?.addOnCompleteListener { update ->
                             if (update.isSuccessful) {
                                 _onNavigateToProfile()
                             }
                         }
                     }
                 }?.addOnFailureListener {
-                    _toastErrorMessage.value = it.message.toString()
-                }
+                _toastErrorMessage.value = it.message.toString()
+            }
         }
     }
 
+    @VisibleForTesting
+    override fun changeUserCredentials(
+        userMail: String,
+        userPassword: String,
+        userFullName: String?
+    ) {
+        _userMail.value = userMail
+        _userPassword.value = userPassword
+        if (userFullName != null)
+            _userFullName.value = userFullName
+    }
+
     override fun isEmailValid(email: String): Boolean {
-        return Patterns.EMAIL_ADDRESS.matcher(email).matches()
+        return PatternsCompat.EMAIL_ADDRESS.matcher(email).matches()
     }
 }

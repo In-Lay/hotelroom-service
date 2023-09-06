@@ -142,7 +142,7 @@ class MainActivity : AppCompatActivity(), DrawerProvider {
         setupNavigation()
 
 
-        hotelsViewModel.initialize(isNetworkAvailable())
+        hotelsViewModel.initialize(isNetworkAvailable(), Firebase.auth.currentUser)
 
         binding.fabSearch.setOnClickListener {
             navController.navigate(R.id.fragmentSearch)

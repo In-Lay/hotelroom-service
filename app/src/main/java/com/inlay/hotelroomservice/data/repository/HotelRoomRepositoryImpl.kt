@@ -114,7 +114,6 @@ class HotelRoomRepositoryImpl(
     }
 
 
-    //TODO ReFetch repos after user was offline
     override suspend fun getStaysRepo(
         isOnline: Boolean,
         isLogged: Boolean
@@ -128,7 +127,6 @@ class HotelRoomRepositoryImpl(
     override suspend fun addStaysRepo(
         hotelsItem: HotelsItemUiModel, isOnline: Boolean, isLogged: Boolean
     ) {
-
         if (isOnline && isLogged) {
             remoteDataSource.addStaysRepo(hotelsItem)
             localDataSource.insertStayRepo(hotelsItem.toEntity())

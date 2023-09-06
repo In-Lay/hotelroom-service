@@ -27,6 +27,7 @@ import com.inlay.hotelroomservice.presentation.models.SearchDataUiModel
 import com.inlay.hotelroomservice.presentation.models.hotelsitem.DatesModel
 import com.inlay.hotelroomservice.presentation.models.locations.SearchLocationsUiModel
 import com.inlay.hotelroomservice.presentation.viewmodels.hotels.HotelsViewModel
+import com.inlay.hotelroomservice.presentation.viewmodels.search.AppSearchViewModel
 import com.inlay.hotelroomservice.presentation.viewmodels.search.SearchViewModel
 import kotlinx.coroutines.launch
 import org.koin.android.ext.android.inject

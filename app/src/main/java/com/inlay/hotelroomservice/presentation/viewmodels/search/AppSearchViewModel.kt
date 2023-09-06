@@ -1,6 +1,8 @@
 package com.inlay.hotelroomservice.presentation.viewmodels.search
 
 import androidx.databinding.BindingAdapter
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
 import coil.load
@@ -13,6 +15,7 @@ import com.inlay.hotelroomservice.presentation.models.locations.SearchLocationsI
 import com.inlay.hotelroomservice.presentation.models.locations.SearchLocationsUiModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
+import org.jetbrains.annotations.VisibleForTesting
 import java.util.Locale
 
 
@@ -34,10 +37,7 @@ class AppSearchViewModel(
 
     private val _selectedItemModel = MutableStateFlow(
         SearchLocationsUiModel(
-            "",
-            "",
-            "",
-            SearchLocationsImageUiModel("", "")
+            "", "", "", SearchLocationsImageUiModel("", "")
         )
     )
     override val selectedItemModel = _selectedItemModel
@@ -48,16 +48,17 @@ class AppSearchViewModel(
     private val _currencyCode = MutableStateFlow("")
     override val currencyCode = _currencyCode.asLiveData()
 
-    private val _searchData = MutableStateFlow(SearchDataUiModel("", "", "", ""))
+    //    @VisibleForTesting
+    //internal
+    @VisibleForTesting
+    internal val _searchData = MutableStateFlow(SearchDataUiModel("", "", "", ""))
     override val searchData = _searchData
 
     private lateinit var openDatePickerLambda: () -> Unit
     private lateinit var searchHotelsLambda: (SearchDataUiModel) -> Unit
 
     override fun init(
-        onlineStatus: Boolean,
-        openDatePicker: () -> Unit,
-        searchHotels: (SearchDataUiModel) -> Unit
+        onlineStatus: Boolean, openDatePicker: () -> Unit, searchHotels: (SearchDataUiModel) -> Unit
     ) {
         _isOnline.value = onlineStatus
         openDatePickerLambda = openDatePicker
@@ -65,7 +66,10 @@ class AppSearchViewModel(
     }
 
     override fun setDates(dates: DatesModel) {
+        println("dates: $dates")
         _dates.value = dates
+        println("_dates.value: ${_dates.value}")
+        println("dates.value: ${this.dates.value}")
     }
 
     override fun setCurrentItemModel(model: SearchLocationsUiModel) {
@@ -98,22 +102,32 @@ class AppSearchViewModel(
             _dates.value.checkOutDate,
             _currencyCode.value
         )
-        if (searchData.value.checkInDate.isEmpty() || searchData.value.checkOutDate.isEmpty()) {
+
+        if (_searchData.value.checkInDate.isEmpty() || _searchData.value.checkOutDate.isEmpty()) {
             _supportText.value = "Pick dates"
         } else {
             searchHotelsLambda(_searchData.value)
         }
     }
 
+    @VisibleForTesting
+    override fun setSearchData(
+        selectedItemModel: SearchLocationsUiModel,
+        dates: DatesModel,
+        currencyCode: String
+    ) {
+        _selectedItemModel.value = selectedItemModel
+        _dates.value = dates
+        _currencyCode.value = currencyCode
+    }
+
     companion object {
         @JvmStatic
         @BindingAdapter("toolbarImageSource")
         fun loadImage(view: ShapeableImageView, imgSource: String?) {
-            view.shapeAppearanceModel = view.shapeAppearanceModel
-                .toBuilder()
+            view.shapeAppearanceModel = view.shapeAppearanceModel.toBuilder()
                 .setBottomRightCorner(CornerFamily.ROUNDED, 50F)
-                .setBottomLeftCorner(CornerFamily.ROUNDED, 50F)
-                .build()
+                .setBottomLeftCorner(CornerFamily.ROUNDED, 50F).build()
             if (imgSource.isNullOrEmpty()) {
                 view.load(com.inlay.hotelroomservice.R.drawable.sample_locations_image)
             } else {

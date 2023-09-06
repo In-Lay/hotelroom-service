@@ -1,22 +1,33 @@
 package com.inlay.hotelroomservice.presentation.viewmodels.loginregister
 
+import android.util.Patterns
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
+import androidx.core.util.PatternsCompat
+import androidx.lifecycle.Observer
+import com.google.android.gms.tasks.OnCompleteListener
+import com.google.android.gms.tasks.OnFailureListener
+import com.google.android.gms.tasks.Task
+import com.google.firebase.auth.AuthResult
 import com.google.firebase.auth.FirebaseAuth
-import io.mockk.coEvery
-import io.mockk.coVerify
+import com.google.firebase.auth.FirebaseUser
+import com.google.firebase.auth.UserProfileChangeRequest
+import com.inlay.hotelroomservice.CoroutineTestRule
 import io.mockk.every
 import io.mockk.mockk
-import io.mockk.spyk
+import io.mockk.mockkObject
+import io.mockk.mockkStatic
 import io.mockk.verify
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.test.advanceUntilIdle
+import kotlinx.coroutines.test.runCurrent
 import kotlinx.coroutines.test.runTest
 import org.junit.Assert.assertEquals
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.junit.jupiter.api.Assertions.assertFalse
-import org.junit.jupiter.api.Assertions.assertTrue
-import org.mockito.Mock
-import org.mockito.MockitoAnnotations
+import java.util.regex.Pattern
 
 
 internal class LoginRegisterViewModelTest {
@@ -30,35 +41,23 @@ internal class LoginRegisterViewModelTest {
         }
     }
 
-    //    @Test
-//    fun login() {
-//    }
-//
-////    @org.junit.jupiter.api.Test
-//    @Test
-//    fun register() {
-//    }
-//
-//    @Test
-//    fun isEmailValid() {
-//    }
-
     @get:Rule
     val instantTaskExecutorRule = InstantTaskExecutorRule()
 
-    private val emailValidator = mockk<EmailValidator>()
+    @get:Rule
+    val coroutineRule = CoroutineTestRule()
 
-    @Mock
-    private lateinit var mockAuth: FirebaseAuth
+    private val emailValidator = mockk<EmailValidator>(relaxed = true)
+
+
+    private val mockAuth: FirebaseAuth = mockk(relaxed = true)
+    private val firebaseUserMock = mockk<FirebaseUser>(relaxed = true)
 
     private lateinit var viewModel: AppLoginRegisterViewModel
 
     @Before
     fun setUp() {
-        MockitoAnnotations.openMocks(this)
-        mockAuth = mockk()
-        viewModel = spyk(AppLoginRegisterViewModel())
-        viewModel.initialize({}, {}, {}, mockAuth)
+        viewModel = AppLoginRegisterViewModel()
     }
 
     @Test
@@ -67,65 +66,275 @@ internal class LoginRegisterViewModelTest {
     }
 
     @Test
-    fun `test MutableLiveData fields are initialized properly`() {
-        assertEquals("", viewModel.userMail.value)
-        assertEquals("", viewModel.userPassword.value)
-        assertEquals("", viewModel.userFullName.value)
-        assertEquals("", viewModel.toastErrorMessage.value)
-        assertEquals("", viewModel.supportPasswordText.value)
-        // Add similar assertions for other fields
+    fun `test isEmailValid returns true for valid email`() {
+        val validEmail = "samplemail@gmail.com"
+
+        assertEquals(true, emailValidator.isEmailValid(validEmail))
     }
 
-//    @Test
-//    fun `test onEmailTextChanged sets supportEmailText correctly`() {
-////        mockkStatic(Patterns::class)
-////        every { Patterns.EMAIL_ADDRESS.matcher(any()) } returns mockk {
-////            every { matches() } returns true
-////        }
-//        every { emailValidator.isEmailValid(any()) } returns false
-//
-//        viewModel.onEmailTextChanged("invalid-email", 0, 0, 0)
-//        assertEquals("Invalid Email", viewModel.supportEmailText.value)
-//
-//        every { emailValidator.isEmailValid(any()) } returns true
-//
-//        viewModel.onEmailTextChanged("valid@email.com", 0, 0, 0)
-//        assertEquals("", viewModel.supportEmailText.value)
-//
-////        unmockkStatic(Patterns::class)
-//    }
+    @Test
+    fun `test isEmailValid returns false for invalid email`() {
+        val invalidEmail = "invalid-email"
+
+        val result = emailValidator.isEmailValid(invalidEmail)
+
+        assertFalse(result)
+    }
+
+    @OptIn(ExperimentalCoroutinesApi::class)
+    @Test
+    fun `test onEmailTextChanged sets supportEmailText correctly`() = runTest {
+        val invalidEmail = "invalid-email"
+
+        viewModel.onEmailTextChanged(invalidEmail, 0, 0, invalidEmail.length)
+
+        val observer = Observer<String> {}
+        viewModel.supportEmailText.observeForever(observer)
+        runCurrent()
+        assertEquals("Invalid Email", viewModel.supportEmailText.value)
+
+        viewModel.supportEmailText.removeObserver(observer)
+    }
+
 
     @Test
-    fun `test register method with failure shows error message`() {
+    fun `test login method with success navigates to profile`() = runTest {
+        val userMail = "email@example.com"
+        val userPassword = "password"
+        val navigateToProfileMock = mockk<() -> Unit>(relaxed = true)
+
+        viewModel.initialize({}, {}, navigateToProfileMock, mockAuth)
+
+        val mockAuthResult = mockk<AuthResult>(relaxed = true)
+        val taskMock = mockk<Task<AuthResult>>(relaxed = true)
+
+        every { taskMock.isSuccessful } returns true
+        every { taskMock.result } returns mockAuthResult
+        every { mockAuth.signInWithEmailAndPassword(any(), any()) } returns taskMock
+
+        every { taskMock.addOnCompleteListener(any<OnCompleteListener<AuthResult>>()) } answers {
+            val listener = arg<OnCompleteListener<AuthResult>>(0)
+            listener.onComplete(taskMock)
+            taskMock
+        }
+
+        every { taskMock.addOnFailureListener(any()) } returns taskMock
+
+        viewModel.changeUserCredentials(userMail, userPassword, null)
+        viewModel.login()
+
+        verify { navigateToProfileMock.invoke() }
+    }
+
+    @OptIn(ExperimentalCoroutinesApi::class)
+    @Test
+    fun `test login method with failure shows error message`() = runTest {
+        val userMail = "email@example.com"
+        val userPassword = "password"
+
+        viewModel._auth.tryEmit(mockAuth)
+
+        val mockAuthResult: AuthResult = mockk(relaxed = true)
+        val task: Task<AuthResult> = mockk(relaxed = true)
+
+        every { task.isSuccessful } returns false
+        every { task.result } returns mockAuthResult
+        every { mockAuth.signInWithEmailAndPassword(any(), any()) } returns task
+
+        every { task.addOnCompleteListener(any<OnCompleteListener<AuthResult>>()) } returns task
+
+        every { task.addOnFailureListener(any()) } answers {
+            val listener = arg<OnFailureListener>(0)
+            listener.onFailure(Exception("Failure"))
+            task
+        }
+
+        viewModel.changeUserCredentials(userMail, userPassword, null)
+        viewModel.login()
+
+        advanceUntilIdle()
+        assertEquals("Failure", viewModel.toastErrorMessage.first())
+    }
+
+    @OptIn(ExperimentalCoroutinesApi::class)
+    @Test
+    fun `test login method with empty email`() = runTest {
+        val userMail = ""
+        val userPassword = "password"
+        val errorText = "No Email provided"
+
+        viewModel.changeUserCredentials(userMail, userPassword, null)
+        viewModel.login()
+
+        val observer = Observer<String> {}
+        viewModel.supportEmailText.observeForever(observer)
+        runCurrent()
+
+        assertEquals(errorText, viewModel.supportEmailText.value)
+
+        viewModel.supportEmailText.removeObserver(observer)
+    }
+
+    @OptIn(ExperimentalCoroutinesApi::class)
+    @Test
+    fun `test login method with empty password`() = runTest {
+        val userMail = "email@example.com"
+        val userPassword = ""
+        val errorText = "No Password provided"
+
+        viewModel.changeUserCredentials(userMail, userPassword, null)
+        viewModel.login()
+
+        val observer = Observer<String> {}
+        viewModel.supportPasswordText.observeForever(observer)
+        runCurrent()
+
+        assertEquals(errorText, viewModel.supportPasswordText.value)
+
+        viewModel.supportPasswordText.removeObserver(observer)
+    }
+
+    @Test
+    fun `test register method with success navigates to profile`() = runTest {
         val userMail = "email@example.com"
         val userPassword = "password"
         val userFullName = "John Doe"
 
-        every { viewModel.userMail.value } returns userMail
-        every { viewModel.userPassword.value } returns userPassword
-        every { viewModel.userFullName.value } returns userFullName
+        val navigateToProfileMock = mockk<() -> Unit>(relaxed = true)
 
-        coEvery { mockAuth.createUserWithEmailAndPassword(userMail, userPassword) } returns mockk {
-            every { isSuccessful } returns false
-            every { exception } returns mockk(relaxed = true) {
-                every { message } returns "Registration failed"
-            }
+        viewModel.initialize({}, {}, navigateToProfileMock, mockAuth)
+
+        val mockAuthResult = mockk<AuthResult>(relaxed = true)
+        val taskMock = mockk<Task<AuthResult>>(relaxed = true)
+
+        every { taskMock.isSuccessful } returns true
+        every { taskMock.result } returns mockAuthResult
+        every { mockAuth.createUserWithEmailAndPassword(any(), any()) } returns taskMock
+
+        every { taskMock.addOnCompleteListener(any<OnCompleteListener<AuthResult>>()) } answers {
+            val listener = arg<OnCompleteListener<AuthResult>>(0)
+            listener.onComplete(taskMock)
+            taskMock
         }
 
+        every { taskMock.addOnFailureListener(any()) } returns taskMock
+
+        val profileUpdateBuilder = mockk<UserProfileChangeRequest.Builder>(relaxed = true)
+
+        every { profileUpdateBuilder.displayName } returns userFullName
+
+        val updateTaskMock = mockk<Task<Void>>(relaxed = true)
+        val updateTaskResult = mockk<Void>(relaxed = true)
+
+        every { mockAuth.currentUser } returns firebaseUserMock
+
+        every { updateTaskMock.isSuccessful } returns true
+        every { updateTaskMock.result } returns updateTaskResult
+        every { firebaseUserMock.updateProfile(any()) } returns updateTaskMock
+
+        every { updateTaskMock.addOnCompleteListener(any<OnCompleteListener<Void>>()) } answers {
+            val listener = arg<OnCompleteListener<Void>>(0)
+            listener.onComplete(updateTaskMock)
+            updateTaskMock
+        }
+
+        every { updateTaskMock.addOnFailureListener(any()) } returns updateTaskMock
+
+        viewModel.changeUserCredentials(userMail, userPassword, userFullName)
+
         viewModel.register()
 
-        coVerify { mockAuth.createUserWithEmailAndPassword(userMail, userPassword) }
-        assertEquals("Registration failed", viewModel.toastErrorMessage.value)
+        verify { navigateToProfileMock.invoke() }
     }
 
+    @OptIn(ExperimentalCoroutinesApi::class)
     @Test
-    fun `test register method with empty password sets supportPasswordText`() {
-        every { viewModel.userMail.value } returns "email@example.com"
-        every { viewModel.userFullName.value } returns "John Doe"
+    fun `test register method with failure shows error message`() = runTest {
+
+        val userMail = "email@example.com"
+        val userPassword = "password"
+        val userFullName = "John Doe"
+        viewModel._auth.tryEmit(mockAuth)
+
+        val mockAuthResult: AuthResult = mockk(relaxed = true)
+
+        val task: Task<AuthResult> = mockk(relaxed = true)
+
+        every { task.isSuccessful } returns false
+        every { task.result } returns mockAuthResult
+        every { mockAuth.createUserWithEmailAndPassword(any(), any()) } returns task
+
+        every { task.addOnCompleteListener(any<OnCompleteListener<AuthResult>>()) } returns task
+
+        every { task.addOnFailureListener(any()) } answers {
+            val listener = arg<OnFailureListener>(0)
+
+            listener.onFailure(Exception("Failure"))
+            task
+        }
+        viewModel.changeUserCredentials(userMail, userPassword, userFullName)
+        viewModel.register()
+
+        advanceUntilIdle()
+        assertEquals("Failure", viewModel.toastErrorMessage.first())
+    }
+
+    @OptIn(ExperimentalCoroutinesApi::class)
+    @Test
+    fun `test register method with empty email sets supportEmailText`() = runTest {
+        val email = ""
+        val password = "password"
+        val name = "John Doe"
+        viewModel.changeUserCredentials(email, password, name)
 
         viewModel.register()
 
+        val stringObserver = Observer<String> {}
+        viewModel.supportEmailText.observeForever(stringObserver)
+
+        runCurrent()
+        assertEquals("No Email provided", viewModel.supportEmailText.value)
+
+        viewModel.supportEmailText.removeObserver(stringObserver)
+    }
+
+    @OptIn(ExperimentalCoroutinesApi::class)
+    @Test
+    fun `test register method with empty password sets supportPasswordText`() = runTest {
+        val email = "email@example.com"
+        val password = ""
+        val name = "John Doe"
+        viewModel.changeUserCredentials(email, password, name)
+
+        viewModel.register()
+
+        val stringObserver = Observer<String> {}
+        viewModel.supportPasswordText.observeForever(stringObserver)
+
+        runCurrent()
         assertEquals("No Password provided", viewModel.supportPasswordText.value)
+
+        viewModel.supportPasswordText.removeObserver(stringObserver)
+    }
+
+
+    @OptIn(ExperimentalCoroutinesApi::class)
+    @Test
+    fun `test register method with empty password sets supportFullNameText`() = runTest {
+        val email = "email@example.com"
+        val password = "password"
+        val name = ""
+        viewModel.changeUserCredentials(email, password, name)
+
+        viewModel.register()
+
+        val stringObserver = Observer<String> {}
+        viewModel.supportFullNameText.observeForever(stringObserver)
+
+        runCurrent()
+        assertEquals("No Full Name provided", viewModel.supportFullNameText.value)
+
+        viewModel.supportFullNameText.removeObserver(stringObserver)
     }
 
     @Test
@@ -146,25 +355,5 @@ internal class LoginRegisterViewModelTest {
         viewModel.onSuggestionClicked()
 
         verify { onSuggestionClickedMockk.invoke() }
-    }
-
-    @Test
-    fun `test isEmailValid returns true for valid email`() {
-        val emailValidator = EmailValidator()
-        val validEmail = "email@example.com"
-
-        val result = emailValidator.isEmailValid(validEmail)
-
-        assertTrue(result)
-    }
-
-    @Test
-    fun `test isEmailValid returns false for invalid email`() {
-        val emailValidator = EmailValidator()
-        val invalidEmail = "invalid-email"
-
-        val result = emailValidator.isEmailValid(invalidEmail)
-
-        assertFalse(result)
     }
 }

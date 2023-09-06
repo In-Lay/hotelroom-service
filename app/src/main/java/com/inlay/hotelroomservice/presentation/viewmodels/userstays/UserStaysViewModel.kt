@@ -15,8 +15,6 @@ abstract class UserStaysViewModel : ViewModel() {
     abstract val profileUsernameText: LiveData<String>
     abstract val profileImage: LiveData<Uri?>
 
-    abstract val userProfileData: StateFlow<String>
-
     abstract fun initializeData(
         goToHotels: () -> Unit,
         goToProfile: () -> Unit,

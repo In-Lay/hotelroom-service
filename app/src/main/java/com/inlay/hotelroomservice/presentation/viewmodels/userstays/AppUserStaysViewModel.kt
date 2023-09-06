@@ -28,9 +28,6 @@ class AppUserStaysViewModel : UserStaysViewModel() {
     private val _isUserLogged = MutableStateFlow(false)
     override val isUserLogged = _isUserLogged
 
-    private val _userProfileData = MutableStateFlow("")
-    override val userProfileData = _userProfileData
-
     private lateinit var _goToHotels: () -> Unit
     private lateinit var _goToProfile: () -> Unit
 

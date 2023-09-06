@@ -3,8 +3,6 @@ package com.inlay.hotelroomservice.presentation.viewmodels.hotels
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.lifecycle.viewModelScope
 import com.google.firebase.auth.FirebaseUser
-import com.google.firebase.auth.ktx.auth
-import com.google.firebase.ktx.Firebase
 import com.inlay.hotelroomservice.domain.usecase.datastore.nightmode.GetNightMode
 import com.inlay.hotelroomservice.domain.usecase.hotels.GetHotelsRepo
 import com.inlay.hotelroomservice.domain.usecase.sharedpreferences.GetLanguagePreferences
@@ -20,6 +18,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
+import org.jetbrains.annotations.VisibleForTesting
 import java.net.SocketTimeoutException
 import java.text.SimpleDateFormat
 import java.util.Calendar
@@ -67,7 +66,6 @@ class AppHotelsViewModel(
     override val selectedHotelsDataList = _selectedHotelsDataList
 
     init {
-        _user.value = Firebase.auth.currentUser
         viewModelScope.launch {
             _language.value = getLanguagePreferences.getLanguage().toString()
         }
@@ -79,22 +77,23 @@ class AppHotelsViewModel(
         }
     }
 
-    override fun initialize(isOnline: Boolean) {
-        viewModelScope.launch {
-            _isOnline.value = isOnline
-            val dummyDates = getDummyDates()
-            val hotelsDatesAndCurrency = HotelsDatesAndCurrencyModel(dummyDates, "USD")
-            _hotelsDatesAndCurrencyModel.value = hotelsDatesAndCurrency
+    override fun initialize(isOnline: Boolean, firebaseUser: FirebaseUser?) {
+        _user.value = firebaseUser
+        _isOnline.value = isOnline
 
-            getHotelsRepo(
-                isOnline = _isOnline.value,
-                geoId = "60763",
-                checkInDate = hotelsDatesAndCurrency.datesModel.checkInDate,
-                checkOutDate = hotelsDatesAndCurrency.datesModel.checkOutDate,
-                currencyCode = hotelsDatesAndCurrency.currency
-            )
-            getStaysRepo(_isOnline.value, isUserLogged())
-        }
+        val dummyDates = getDummyDates()
+        val hotelsDatesAndCurrency = HotelsDatesAndCurrencyModel(dummyDates, "USD")
+        _hotelsDatesAndCurrencyModel.value = hotelsDatesAndCurrency
+
+        getHotelsRepo(
+            isOnline = _isOnline.value,
+            geoId = "60763",
+            checkInDate = hotelsDatesAndCurrency.datesModel.checkInDate,
+            checkOutDate = hotelsDatesAndCurrency.datesModel.checkOutDate,
+            currencyCode = hotelsDatesAndCurrency.currency
+        )
+
+        getStaysRepo(_isOnline.value, isUserLogged())
     }
 
     override fun changeLanguage(languageCode: String) {
@@ -118,11 +117,7 @@ class AppHotelsViewModel(
         try {
             viewModelScope.launch(Dispatchers.IO) {
                 _hotelsDataList.value = getHotelsRepoUseCase(
-                    isOnline,
-                    geoId,
-                    checkInDate,
-                    checkOutDate,
-                    currencyCode
+                    isOnline, geoId, checkInDate, checkOutDate, currencyCode
                 )
                 val dates = DatesModel(checkInDate, checkOutDate)
                 _hotelsDatesAndCurrencyModel.value =

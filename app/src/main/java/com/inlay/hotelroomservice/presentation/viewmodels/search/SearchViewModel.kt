@@ -6,6 +6,7 @@ import com.inlay.hotelroomservice.presentation.models.SearchDataUiModel
 import com.inlay.hotelroomservice.presentation.models.hotelsitem.DatesModel
 import com.inlay.hotelroomservice.presentation.models.locations.SearchLocationsUiModel
 import kotlinx.coroutines.flow.StateFlow
+import org.jetbrains.annotations.VisibleForTesting
 
 abstract class SearchViewModel : ViewModel() {
     abstract val isOnline: StateFlow<Boolean>
@@ -38,4 +39,11 @@ abstract class SearchViewModel : ViewModel() {
     abstract fun openDatePicker()
 
     abstract fun setDates(dates: DatesModel)
+
+    @VisibleForTesting
+    abstract fun setSearchData(
+        selectedItemModel: SearchLocationsUiModel,
+        dates: DatesModel,
+        currencyCode: String
+    )
 }

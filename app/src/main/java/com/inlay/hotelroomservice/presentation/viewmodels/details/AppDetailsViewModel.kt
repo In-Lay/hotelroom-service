@@ -127,7 +127,7 @@ class AppDetailsViewModel(private val getHotelDetails: GetHotelDetails) : Detail
 
         getDetailsData(hotelDetailsSearchModel)
 
-        Log.d("DetailsTag", "ViewModel: ${_hotelDetailsData.value?.rating}")
+//        Log.d("DetailsTag", "ViewModel: ${_hotelDetailsData.value?.rating}")
     }
 
     private fun getDetailsData(
