@@ -14,6 +14,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import androidx.transition.TransitionInflater
 import com.google.android.material.appbar.MaterialToolbar
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.snackbar.Snackbar
@@ -36,17 +37,6 @@ class FragmentSettings : Fragment() {
     private val viewModel: SettingsViewModel by viewModel()
     private val hotelsViewModel: HotelsViewModel by activityViewModel()
     private lateinit var currentLocale: Locale
-
-//    override fun onResume() {
-//        super.onResume()
-//        if (!areNotificationsEnabled()) {
-//            viewModel.changeNotificationsState(false)
-//            binding.switchNotifications.isEnabled = false
-//        } else {
-//            viewModel.changeNotificationsState(true)
-//            binding.switchNotifications.isChecked = false
-//        }
-//    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
@@ -76,6 +66,9 @@ class FragmentSettings : Fragment() {
 
         currentLocale = context?.resources?.configuration?.locales?.get(0)!!
 
+        val transitionInflater = TransitionInflater.from(requireContext())
+        enterTransition = transitionInflater.inflateTransition(R.transition.fade)
+
         return binding.root
     }
 
@@ -97,14 +90,12 @@ class FragmentSettings : Fragment() {
         lifecycleScope.launch {
             hotelsViewModel.notificationsAvailability.collect {
                 if (!it) {
-//                    viewModel.changeNotificationsState(false)
                     binding.switchNotifications.isEnabled = false
                     Snackbar.make(view, R.string.enable_notifications, Snackbar.LENGTH_SHORT)
                         .setAction(R.string.enable) {
                             openAppNotificationSettings()
                         }.show()
                 } else {
-//                    viewModel.changeNotificationsState(true)
                     binding.switchNotifications.isEnabled = true
                 }
             }
@@ -116,12 +107,6 @@ class FragmentSettings : Fragment() {
             }
         }
     }
-
-//    private fun areNotificationsEnabled(): Boolean {
-//        val notificationManager =
-//            context?.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
-//        return notificationManager.areNotificationsEnabled()
-//    }
 
     private val openLangDialog: () -> Unit = {
         showLangDialog(currentLocale.displayName.split(" ").first())
@@ -216,7 +201,8 @@ class FragmentSettings : Fragment() {
             dialog.dismiss()
         }
 
-        dialogBuilder.create().show()
+        val dialog = dialogBuilder.create()
+        dialog.show()
     }
 
     private fun showChangeLocaleDialog(languageCode: String) {

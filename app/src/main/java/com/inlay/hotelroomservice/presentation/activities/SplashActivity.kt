@@ -1,15 +1,17 @@
 package com.inlay.hotelroomservice.presentation.activities
 
-import android.Manifest
 import android.annotation.SuppressLint
+import android.app.ActivityOptions
 import android.content.Intent
 import android.content.res.Configuration
 import android.os.Build
 import android.os.Bundle
-import android.util.Log
+import android.transition.TransitionInflater
+import android.view.Window
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.lifecycle.lifecycleScope
+import com.inlay.hotelroomservice.R
 import com.inlay.hotelroomservice.databinding.ActivitySplashBinding
 import com.inlay.hotelroomservice.presentation.viewmodels.splash.SplashViewModel
 import kotlinx.coroutines.CoroutineScope
@@ -26,39 +28,45 @@ class SplashActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val intent = Intent(this@SplashActivity, MainActivity::class.java)
+
+        window.requestFeature(Window.FEATURE_ACTIVITY_TRANSITIONS)
+        val transitionInflater = TransitionInflater.from(this)
+        window.exitTransition = transitionInflater.inflateTransition(R.transition.fade_long)
+
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
-            startActivity(intent)
-        }
 
-        binding = ActivitySplashBinding.inflate(layoutInflater)
-        binding.lifecycleOwner = this
-        setContentView(binding.root)
+            startActivity(intent, ActivityOptions.makeSceneTransitionAnimation(this).toBundle())
+        } else {
+            binding = ActivitySplashBinding.inflate(layoutInflater)
+            binding.lifecycleOwner = this
+            setContentView(binding.root)
 
-        lifecycleScope.launch {
-            viewModel.nightModeState.collect {
-                val currentNightMode =
-                    resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK
-                if (it != currentNightMode) {
+            lifecycleScope.launch {
+                viewModel.nightModeState.collect {
+                    val currentNightMode =
+                        resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK
+                    if (it != currentNightMode) {
 
-                    if (it == AppCompatDelegate.MODE_NIGHT_YES) AppCompatDelegate.setDefaultNightMode(
-                        AppCompatDelegate.MODE_NIGHT_YES
-                    )
-                    else AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
-                } else {
-                    val newNightMode = when (currentNightMode) {
-                        Configuration.UI_MODE_NIGHT_NO -> AppCompatDelegate.MODE_NIGHT_NO
-                        Configuration.UI_MODE_NIGHT_YES -> AppCompatDelegate.MODE_NIGHT_YES
-                        else -> AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM
+                        if (it == AppCompatDelegate.MODE_NIGHT_YES) AppCompatDelegate.setDefaultNightMode(
+                            AppCompatDelegate.MODE_NIGHT_YES
+                        )
+                        else AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+                    } else {
+                        val newNightMode = when (currentNightMode) {
+                            Configuration.UI_MODE_NIGHT_NO -> AppCompatDelegate.MODE_NIGHT_NO
+                            Configuration.UI_MODE_NIGHT_YES -> AppCompatDelegate.MODE_NIGHT_YES
+                            else -> AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM
+                        }
+                        AppCompatDelegate.setDefaultNightMode(newNightMode)
                     }
-                    AppCompatDelegate.setDefaultNightMode(newNightMode)
                 }
             }
-        }
 
-        CoroutineScope(Dispatchers.IO).launch {
-            delay(1000)
-            startActivity(intent)
-            finish()
+            CoroutineScope(Dispatchers.IO).launch {
+                delay(1000)
+                startActivity(intent)
+                finish()
+            }
         }
     }
 }

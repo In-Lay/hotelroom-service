@@ -3,11 +3,9 @@ package com.inlay.hotelroomservice.data.repository
 import com.inlay.hotelroomservice.data.mapping.toEntity
 import com.inlay.hotelroomservice.data.mapping.toUiItem
 import com.inlay.hotelroomservice.data.mapping.toUiModel
-import com.inlay.hotelroomservice.data.remote.models.hoteldetails.HotelDetailsModel
-import com.inlay.hotelroomservice.data.remote.models.hotels.HotelsModel
-import com.inlay.hotelroomservice.data.remote.models.searchlocation.SearchLocationModel
 import com.inlay.hotelroomservice.domain.local.LocalDataSource
 import com.inlay.hotelroomservice.domain.remote.RemoteDataSource
+import com.inlay.hotelroomservice.presentation.models.AppResult
 import com.inlay.hotelroomservice.presentation.models.details.HotelDetailsUiModel
 import com.inlay.hotelroomservice.presentation.models.hotelsitem.HotelsItemUiModel
 import com.inlay.hotelroomservice.presentation.models.locations.SearchLocationsUiModel
@@ -15,13 +13,12 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.map
 import org.koin.core.component.KoinComponent
-import org.koin.core.component.inject
 
 class HotelRoomRepositoryImpl(
-    private val remoteDataSource: RemoteDataSource,
-    private val localDataSource: LocalDataSource
+    private val remoteDataSource: RemoteDataSource, private val localDataSource: LocalDataSource
 ) : HotelRoomRepository, KoinComponent {
     //TODO Works, uncomment
+
     override suspend fun getSearchLocationRepo(location: String): List<SearchLocationsUiModel> {
         //Network
         val searchLocationData = remoteDataSource.getSearchLocationRepo(location)
@@ -45,7 +42,7 @@ class HotelRoomRepositoryImpl(
         checkInDate: String,
         checkOutDate: String,
         currencyCode: String
-    ): List<HotelsItemUiModel> {
+    ): AppResult<List<HotelsItemUiModel>, Int> {
         return if (isOnline) {
             //Network
             val hotelsData =
@@ -53,11 +50,12 @@ class HotelRoomRepositoryImpl(
             if (hotelsData.isSuccessful) {
                 localDataSource.insertRepo(hotelsData.body()?.generalData?.dataList?.map { it.toEntity() }
                     ?: listOf())
-                hotelsData.body()?.generalData?.dataList?.map { data ->
+
+                AppResult.Success(hotelsData.body()?.generalData?.dataList?.map { data ->
                     data.toUiItem()
-                } ?: listOf()
+                } ?: listOf())
             } else {
-                listOf()
+                AppResult.Error(hotelsData.code())
             }
 
             //JSon
@@ -72,40 +70,23 @@ class HotelRoomRepositoryImpl(
 //            }.orEmpty()
 
         } else {
-            localDataSource.fetchRepo().first().map {
+            AppResult.Success(localDataSource.fetchRepo().first().map {
                 it.toUiItem()
-            }
+            })
         }
     }
 
 
     override suspend fun getHotelDetails(
         id: String, checkInDate: String, checkOutDate: String, currencyCode: String
-    ): HotelDetailsUiModel {
+    ): AppResult<HotelDetailsUiModel, Int> {
         //Network
         val hotelDetailsData =
             remoteDataSource.getHotelDetailsRepo(id, checkInDate, checkOutDate, currencyCode)
-        val emptyModel = HotelDetailsUiModel(
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            listOf(),
-            "",
-            listOf(),
-            listOf(),
-            "",
-            listOf(),
-            listOf(),
-            0.0,
-            0.0
-        )
 
         return if (hotelDetailsData.isSuccessful) {
-            hotelDetailsData.body().toUiModel()
-        } else emptyModel
+            AppResult.Success(hotelDetailsData.body().toUiModel())
+        } else AppResult.Error(hotelDetailsData.code())
 
         //Json
 //        val hotelDetailsData: HotelDetailsModel? by inject()
@@ -113,10 +94,8 @@ class HotelRoomRepositoryImpl(
 //        return hotelDetailsData.toUiModel()
     }
 
-
     override suspend fun getStaysRepo(
-        isOnline: Boolean,
-        isLogged: Boolean
+        isOnline: Boolean, isLogged: Boolean
     ): Flow<List<HotelsItemUiModel?>> {
         return if (isOnline && isLogged) remoteDataSource.getStaysRepo()
         else localDataSource.fetchStaysRepo().map { list ->

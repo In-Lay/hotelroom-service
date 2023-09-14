@@ -2,7 +2,10 @@ package com.inlay.hotelroomservice.data.remote
 
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
+import okhttp3.Interceptor
 import okhttp3.OkHttpClient
+import okhttp3.Protocol
+import okhttp3.Response
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
@@ -28,9 +31,23 @@ fun makeHttpClient(): OkHttpClient {
         .setLevel(HttpLoggingInterceptor.Level.BODY)
 
     return OkHttpClient.Builder()
-        .addInterceptor(loggingInterceptor)
-        .writeTimeout(120, TimeUnit.SECONDS)
-        .readTimeout(120, TimeUnit.SECONDS)
-        .connectTimeout(120, TimeUnit.SECONDS)
+        .addNetworkInterceptor(loggingInterceptor)
+        .addInterceptor(Interceptor {
+            try {
+                val response = it.proceed(it.request())
+                response
+            } catch (e: Exception) {
+                val builder = Response.Builder()
+                    .message(e.message!!)
+                    .code(493)
+                    .protocol(Protocol.HTTP_1_1)
+                    .request(it.request())
+
+                builder.build()
+            }
+        })
+        .writeTimeout(60, TimeUnit.SECONDS)
+        .readTimeout(60, TimeUnit.SECONDS)
+        .connectTimeout(60, TimeUnit.SECONDS)
         .build()
 }

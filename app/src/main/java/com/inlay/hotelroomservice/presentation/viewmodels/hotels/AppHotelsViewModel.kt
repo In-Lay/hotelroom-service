@@ -10,6 +10,7 @@ import com.inlay.hotelroomservice.domain.usecase.sharedpreferences.SaveLanguageP
 import com.inlay.hotelroomservice.domain.usecase.stays.add.AddStays
 import com.inlay.hotelroomservice.domain.usecase.stays.get.GetStay
 import com.inlay.hotelroomservice.domain.usecase.stays.remove.RemoveStay
+import com.inlay.hotelroomservice.presentation.models.AppResult
 import com.inlay.hotelroomservice.presentation.models.details.HotelDetailsSearchModel
 import com.inlay.hotelroomservice.presentation.models.hotelsitem.DatesModel
 import com.inlay.hotelroomservice.presentation.models.hotelsitem.HotelsDatesAndCurrencyModel
@@ -18,8 +19,6 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
-import org.jetbrains.annotations.VisibleForTesting
-import java.net.SocketTimeoutException
 import java.text.SimpleDateFormat
 import java.util.Calendar
 
@@ -114,17 +113,23 @@ class AppHotelsViewModel(
         checkOutDate: String,
         currencyCode: String
     ) {
-        try {
-            viewModelScope.launch(Dispatchers.IO) {
-                _hotelsDataList.value = getHotelsRepoUseCase(
-                    isOnline, geoId, checkInDate, checkOutDate, currencyCode
-                )
-                val dates = DatesModel(checkInDate, checkOutDate)
-                _hotelsDatesAndCurrencyModel.value =
-                    HotelsDatesAndCurrencyModel(dates, currencyCode)
+        viewModelScope.launch(Dispatchers.IO) {
+            val data = getHotelsRepoUseCase(
+                isOnline, geoId, checkInDate, checkOutDate, currencyCode
+            )
+            when (data) {
+                is AppResult.Success -> {
+                    _hotelsDataList.value = data.data
+                    val dates = DatesModel(checkInDate, checkOutDate)
+                    _hotelsDatesAndCurrencyModel.value =
+                        HotelsDatesAndCurrencyModel(dates, currencyCode)
+                }
+
+                is AppResult.Error -> {
+                    _errorMessage.value = data.error.toString()
+                }
             }
-        } catch (e: SocketTimeoutException) {
-            _errorMessage.value = "$e \nan error occurred on servers, Please, try again later."
+
         }
     }
 

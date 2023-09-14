@@ -8,9 +8,11 @@ import android.content.pm.PackageManager
 import android.content.res.Configuration
 import android.os.Build
 import android.os.Bundle
+import android.transition.TransitionInflater
 import android.util.Log
 import android.view.View
 import android.view.ViewTreeObserver
+import android.view.Window
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
@@ -20,14 +22,13 @@ import androidx.appcompat.app.AppCompatDelegate
 import androidx.appcompat.app.AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
-import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
-import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import coil.load
 import coil.transform.CircleCropTransformation
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
@@ -50,9 +51,19 @@ class MainActivity : AppCompatActivity(), DrawerProvider {
     private lateinit var navController: NavController
     private val hotelsViewModel: HotelsViewModel by viewModel()
 
+
     //TODO Change App Icon!!!
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        Log.d("TimeoutLog", "onCreate")
+
+        //TODO No animations between activities
+        window.requestFeature(Window.FEATURE_ACTIVITY_TRANSITIONS)
+        window.allowEnterTransitionOverlap = true
+        val transitionInflater = TransitionInflater.from(this)
+        window.enterTransition = transitionInflater.inflateTransition(R.transition.fade_long)
+
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
@@ -77,40 +88,24 @@ class MainActivity : AppCompatActivity(), DrawerProvider {
 
         lifecycleScope.launch {
             hotelsViewModel.darkModeState.collect {
-                Log.d("SettingsLog", "MainActivity: darkModeState: $it")
                 val currentNightMode =
                     resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK
-                Log.d("SettingsLog", "MainActivity: currentNightMode: $currentNightMode")
                 if (it != currentNightMode) {
-                    Log.d(
-                        "SettingsLog",
-                        "MainActivity: Build.VERSION.SDK_INT: ${Build.VERSION.SDK_INT}"
-                    )
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
                         val uiModeManager =
                             getSystemService(Context.UI_MODE_SERVICE) as UiModeManager
                         if (it == AppCompatDelegate.MODE_NIGHT_YES) {
-                            Log.d(
-                                "SettingsLog",
-                                "MainActivity: it == AppCompatDelegate.MODE_NIGHT_YES"
-                            )
-                            //TODO SDK >= 34 doesn't work
+
                             uiModeManager.setApplicationNightMode(
                                 UiModeManager.MODE_NIGHT_YES
                             )
                         } else {
-                            Log.d("SettingsLog", "MainActivity: else")
                             uiModeManager.setApplicationNightMode(UiModeManager.MODE_NIGHT_NO)
                         }
                     } else {
                         if (it == AppCompatDelegate.MODE_NIGHT_YES) {
-                            Log.d(
-                                "SettingsLog",
-                                "MainActivity: it == AppCompatDelegate.MODE_NIGHT_YES"
-                            )
                             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
                         } else {
-                            Log.d("SettingsLog", "MainActivity: else")
                             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
                         }
                     }
@@ -120,7 +115,6 @@ class MainActivity : AppCompatActivity(), DrawerProvider {
                         Configuration.UI_MODE_NIGHT_YES -> AppCompatDelegate.MODE_NIGHT_YES
                         else -> MODE_NIGHT_FOLLOW_SYSTEM
                     }
-                    Log.d("SettingsLog", "MainActivity: newNightMode: $newNightMode")
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
                         val uiModeManager =
                             getSystemService(Context.UI_MODE_SERVICE) as UiModeManager
@@ -144,7 +138,11 @@ class MainActivity : AppCompatActivity(), DrawerProvider {
 
         hotelsViewModel.initialize(isNetworkAvailable(), Firebase.auth.currentUser)
 
+//        val fadeTransition: Transition = Fade()
+//        val rootScene: ViewGroup = binding.fragmentContainerView
+//        val hotelsScene: Scene = Scene.getSceneForLayout(rootScene, R.layout.fragment_hotels, this)
         binding.fabSearch.setOnClickListener {
+//            TransitionManager.go(hotelsScene, fadeTransition)
             navController.navigate(R.id.fragmentSearch)
         }
 
@@ -155,14 +153,35 @@ class MainActivity : AppCompatActivity(), DrawerProvider {
             }
         }
 
-
+        observeAndShowErrors()
 
         binding.lifecycleOwner = this
+    }
+
+    override fun onStart() {
+        super.onStart()
+        Log.d("TimeoutLog", "onStart: ")
     }
 
     override fun onResume() {
         super.onResume()
         hotelsViewModel.changeNotificationsAvailability(areNotificationsEnabled())
+        Log.d("TimeoutLog", "onResume: ")
+    }
+
+    override fun recreate() {
+        super.recreate()
+        Log.d("TimeoutLog", "recreate: ")
+    }
+
+    override fun onStop() {
+        super.onStop()
+        Log.d("TimeoutLog", "onStop: ")
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        Log.d("TimeoutLog", "onDestroy: ")
     }
 
     @RequiresApi(Build.VERSION_CODES.TIRAMISU)
@@ -317,6 +336,30 @@ class MainActivity : AppCompatActivity(), DrawerProvider {
         if (status) binding.progressBar.visibility = View.VISIBLE
         else binding.progressBar.visibility = View.GONE
 
+    }
+
+    private fun observeAndShowErrors() {
+        lifecycleScope.launch {
+            hotelsViewModel.errorMessage.collect {
+                if (it.isNotEmpty()) {
+                    showErrorDialog(it)
+                }
+            }
+        }
+    }
+
+    private fun showErrorDialog(errorCode: String) {
+        val dialogBuilder = MaterialAlertDialogBuilder(this)
+
+        dialogBuilder.apply {
+            setTitle(R.string.server_error)
+            setPositiveButton(R.string.dismiss) { dialog, _ ->
+                dialog.dismiss()
+            }
+            setMessage(R.string.server_error_message)
+        }
+
+        dialogBuilder.create().show()
     }
 
     private fun isUserLogged(user: FirebaseUser?): Boolean {

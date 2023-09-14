@@ -1,6 +1,7 @@
 package com.inlay.hotelroomservice.domain.usecase.hotels
 
 import com.inlay.hotelroomservice.data.repository.HotelRoomRepository
+import com.inlay.hotelroomservice.presentation.models.AppResult
 import com.inlay.hotelroomservice.presentation.models.hotelsitem.HotelsItemUiModel
 
 class GetHotelsRepoImpl(private val hotelRoomRepository: HotelRoomRepository) : GetHotelsRepo {
@@ -10,7 +11,7 @@ class GetHotelsRepoImpl(private val hotelRoomRepository: HotelRoomRepository) : 
         checkInDate: String,
         checkOutDate: String,
         currencyCode: String
-    ): List<HotelsItemUiModel> {
+    ): AppResult<List<HotelsItemUiModel>, Int> {
         return hotelRoomRepository.getHotelRepo(
             isOnline, geoId, checkInDate, checkOutDate, currencyCode
         )

@@ -67,18 +67,12 @@ class PlacesNearbyDialog : DialogFragment() {
 
     companion object {
         fun instance(data: List<NearbyPlace>) = PlacesNearbyDialog().apply {
-            Log.d(
-                "DetailsLog", "PlacesNearbyDialog: instance: data: $data"
-            )
+
             arguments = Bundle().apply {
                 val dataAsParcelable = data as ArrayList<out Parcelable>
-                Log.d(
-                    "DetailsLog",
-                    "PlacesNearbyDialog: instance: dataAsParcelable: $dataAsParcelable"
-                )
+
                 putParcelableArrayList("DIALOG_DATA", dataAsParcelable)
             }
         }
     }
-
 }

@@ -9,6 +9,7 @@ import coil.load
 import com.google.android.material.imageview.ShapeableImageView
 import com.inlay.hotelroomservice.R
 import com.inlay.hotelroomservice.domain.usecase.details.GetHotelDetails
+import com.inlay.hotelroomservice.presentation.models.AppResult
 import com.inlay.hotelroomservice.presentation.models.details.HotelDetailsSearchModel
 import com.inlay.hotelroomservice.presentation.models.details.HotelDetailsUiModel
 import com.inlay.hotelroomservice.presentation.models.details.NearbyPlace
@@ -133,19 +134,24 @@ class AppDetailsViewModel(private val getHotelDetails: GetHotelDetails) : Detail
     private fun getDetailsData(
         hotelDetailsSearchModel: HotelDetailsSearchModel
     ) {
-        try {
-            viewModelScope.launch {
-                _hotelDetailsData.value = getHotelDetails(
-                    hotelDetailsSearchModel.id,
-                    hotelDetailsSearchModel.dates.checkInDate,
-                    hotelDetailsSearchModel.dates.checkOutDate,
-                    hotelDetailsSearchModel.currency
-                )
+        viewModelScope.launch {
+            val data = getHotelDetails(
+                hotelDetailsSearchModel.id,
+                hotelDetailsSearchModel.dates.checkInDate,
+                hotelDetailsSearchModel.dates.checkOutDate,
+                hotelDetailsSearchModel.currency
+            )
+            when (data) {
+                is AppResult.Success -> {
+                    _hotelDetailsData.value = data.data
 
-                assignDetailsDataToViews()
+                    assignDetailsDataToViews()
+                }
+
+                is AppResult.Error -> {
+                    _errorMessage.value = data.error.toString()
+                }
             }
-        } catch (e: SocketTimeoutException) {
-            _errorMessage.value = "$e \nan error occurred on servers. Please, try again later."
         }
     }
 

@@ -1,5 +1,6 @@
 package com.inlay.hotelroomservice.data.repository
 
+import com.inlay.hotelroomservice.presentation.models.AppResult
 import com.inlay.hotelroomservice.presentation.models.details.HotelDetailsUiModel
 import com.inlay.hotelroomservice.presentation.models.hotelsitem.HotelsItemUiModel
 import com.inlay.hotelroomservice.presentation.models.locations.SearchLocationsUiModel
@@ -16,23 +17,20 @@ interface HotelRoomRepository {
         checkInDate: String,
         checkOutDate: String,
         currencyCode: String = "USD"
-    ): List<HotelsItemUiModel>
+    ): AppResult<List<HotelsItemUiModel>, Int>
 
     suspend fun getHotelDetails(
         id: String,
         checkInDate: String,
         checkOutDate: String,
         currencyCode: String
-    ): HotelDetailsUiModel
-
-//    suspend fun getStaysRepo(isOnline: Boolean, isLogged: Boolean): List<HotelsItemUiModel>
+    ): AppResult<HotelDetailsUiModel, Int>
 
     suspend fun getStaysRepo(isOnline: Boolean, isLogged: Boolean): Flow<List<HotelsItemUiModel?>>
 
     suspend fun addStaysRepo(hotelsItem: HotelsItemUiModel, isOnline: Boolean, isLogged: Boolean)
 
     suspend fun removeStaysRepo(hotelsItem: HotelsItemUiModel, isOnline: Boolean, isLogged: Boolean)
-
 
 
     suspend fun saveNightModeState(modeState: Int)

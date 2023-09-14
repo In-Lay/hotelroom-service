@@ -17,6 +17,7 @@ import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.transition.TransitionInflater
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
@@ -74,6 +75,10 @@ class FragmentDetails : Fragment(), OnMapReadyCallback {
             arguments?.getParcelable("HOTEL_DETAILS_SEARCH", HotelDetailsSearchModel::class.java)!!
         } else arguments?.getParcelable("HOTEL_DETAILS_SEARCH")!!
 
+
+        val transitionInflater = TransitionInflater.from(requireContext())
+        enterTransition = transitionInflater.inflateTransition(R.transition.fade_long)
+
         return binding.root
     }
 
@@ -121,10 +126,12 @@ class FragmentDetails : Fragment(), OnMapReadyCallback {
                     it.longitude
                 )
                 mapType = GoogleMap.MAP_TYPE_NORMAL
+                val marker = MarkerOptions()
+                    .position(currentLocation)
+                    .title(it.title)
+                googleMap.clear()
                 addMarker(
-                    MarkerOptions()
-                        .position(currentLocation)
-                        .title(it.title)
+                    marker
                 )
                 moveCamera(CameraUpdateFactory.newLatLng(currentLocation))
             }

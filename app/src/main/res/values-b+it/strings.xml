@@ -72,4 +72,8 @@
     <string name="enable_notifications">Abilita le notifiche nelle impostazioni</string>
     <string name="enable">Abilita</string>
     <string name="no_internet_connection">Nessuna connessione internet!</string>
+    <string name="server_error">493 si è verificato un errore sui server</string>
+    <string name="server_error_message">L\'errore si è verificato sui server. \nPer favore riprova più tardi.</string>
+    <string name="no_photo_selected">Nessuna foto selezionata</string>
+    <string name="invalid_email">E-mail non valido</string>
 </resources>

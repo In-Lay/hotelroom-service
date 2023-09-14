@@ -25,12 +25,8 @@ class FragmentMap : Fragment(), OnMapReadyCallback {
         return binding.root
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-    }
 
     override fun onMapReady(googleMap: GoogleMap) {
         map = googleMap
-
     }
 }

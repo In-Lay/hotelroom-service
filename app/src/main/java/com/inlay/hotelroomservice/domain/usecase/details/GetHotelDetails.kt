@@ -1,5 +1,6 @@
 package com.inlay.hotelroomservice.domain.usecase.details
 
+import com.inlay.hotelroomservice.presentation.models.AppResult
 import com.inlay.hotelroomservice.presentation.models.details.HotelDetailsUiModel
 
 interface GetHotelDetails {
@@ -8,5 +9,5 @@ interface GetHotelDetails {
         checkInDate: String,
         checkOutDate: String,
         currencyCode: String
-    ): HotelDetailsUiModel
+    ): AppResult<HotelDetailsUiModel, Int>
 }

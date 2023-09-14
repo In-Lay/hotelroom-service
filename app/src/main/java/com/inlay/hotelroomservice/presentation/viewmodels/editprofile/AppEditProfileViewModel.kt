@@ -160,6 +160,7 @@ class AppEditProfileViewModel(private val getAuthUser: GetAuthUser) : EditProfil
         _fullName.value = userName
     }
 
+    @TestOnly
     override fun editChangesState(
         isEmailChanged: Boolean,
         isFullNameChanged: Boolean,

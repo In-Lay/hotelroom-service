@@ -72,4 +72,8 @@
     <string name="enable_notifications">Activer les notifications dans les paramètres</string>
     <string name="enable">Activer</string>
     <string name="no_internet_connection">Pas de connexion Internet!</string>
+    <string name="server_error">493 une erreur s\'est produite sur les serveurs</string>
+    <string name="server_error_message">L\'erreur s\'est produite sur les serveurs. \nVeuillez réessayer plus tard.</string>
+    <string name="no_photo_selected">Aucune photo sélectionnée</string>
+    <string name="invalid_email">Email invalide</string>
 </resources>

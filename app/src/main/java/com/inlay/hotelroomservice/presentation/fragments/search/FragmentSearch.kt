@@ -16,6 +16,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.transition.TransitionInflater
 import com.google.android.material.appbar.CollapsingToolbarLayout
 import com.google.android.material.datepicker.MaterialDatePicker
 import com.inlay.hotelroomservice.R
@@ -27,7 +28,6 @@ import com.inlay.hotelroomservice.presentation.models.SearchDataUiModel
 import com.inlay.hotelroomservice.presentation.models.hotelsitem.DatesModel
 import com.inlay.hotelroomservice.presentation.models.locations.SearchLocationsUiModel
 import com.inlay.hotelroomservice.presentation.viewmodels.hotels.HotelsViewModel
-import com.inlay.hotelroomservice.presentation.viewmodels.search.AppSearchViewModel
 import com.inlay.hotelroomservice.presentation.viewmodels.search.SearchViewModel
 import kotlinx.coroutines.launch
 import org.koin.android.ext.android.inject
@@ -76,6 +76,10 @@ class FragmentSearch : Fragment() {
 
         binding.viewModel = searchViewModel
         binding.lifecycleOwner = this
+
+        val transitionInflater = TransitionInflater.from(requireContext())
+        enterTransition = transitionInflater.inflateTransition(R.transition.fade)
+
         return binding.root
     }
 
@@ -109,6 +113,7 @@ class FragmentSearch : Fragment() {
     }
 
     private fun adjustSearchBarPosition() {
+        //TODO Make smooth searchbar shrinking
         val searchBarLayoutParams =
             binding.searchBar.layoutParams as CollapsingToolbarLayout.LayoutParams
 
@@ -160,7 +165,6 @@ class FragmentSearch : Fragment() {
 
     private val searchHotels: (SearchDataUiModel) -> Unit = {
         if (isOnline) {
-            //TODO Uncomment to Network
             lifecycleScope.launch {
                 viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
                     hotelsViewModel.getHotelsRepo(

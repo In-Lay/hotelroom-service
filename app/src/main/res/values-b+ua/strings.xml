@@ -72,4 +72,8 @@
     <string name="enable_notifications">Увімкніть сповіщення в налаштуванняхs</string>
     <string name="enable">Увімкнути</string>
     <string name="no_internet_connection">Відсутнє Інтернет з\'єднання!</string>
+    <string name="server_error">493 сталася помилка на серверах</string>
+    <string name="server_error_message">Помилка сталася на серверах. \nБудь-ласка спробуйте пізніше.</string>
+    <string name="no_photo_selected">Фото не вибрано</string>
+    <string name="invalid_email">Невірний Email</string>
 </resources>
