@@ -35,7 +35,6 @@ import org.koin.androidx.viewmodel.ext.android.activityViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.text.SimpleDateFormat
 import java.util.Calendar
-import kotlin.math.abs
 
 class FragmentSearch : Fragment() {
     private lateinit var binding: FragmentSearchBinding
@@ -43,11 +42,14 @@ class FragmentSearch : Fragment() {
     private val hotelsViewModel: HotelsViewModel by activityViewModel()
     private val simpleDateFormat: SimpleDateFormat by inject()
     private var isOnline = false
+    private var oldOffset = 0
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
         isOnline = requireContext().isNetworkAvailable()
         searchViewModel.init(isOnline, openDatePicker, searchHotels)
+
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_search, container, false)
 
         (activity as AppCompatActivity).apply {
@@ -68,15 +70,16 @@ class FragmentSearch : Fragment() {
         binding.appbarLayout.addOnOffsetChangedListener { _, verticalOffset ->
             val totalScrollRange = binding.appbarLayout.totalScrollRange
 
-            val isCollapsed = abs(verticalOffset) == totalScrollRange
-            if (isCollapsed) {
-                adjustSearchBarPosition()
-            } else resetSearchBarPosition()
+            if (oldOffset == verticalOffset && verticalOffset == 0) {
+                adjustSearchBarPosition(verticalOffset, totalScrollRange)
+            } else if (oldOffset != verticalOffset)
+                adjustSearchBarPosition(verticalOffset, totalScrollRange)
         }
 
         binding.viewModel = searchViewModel
         binding.lifecycleOwner = this
 
+        //TODO Possible Animation-related crash
         val transitionInflater = TransitionInflater.from(requireContext())
         enterTransition = transitionInflater.inflateTransition(R.transition.fade)
 
@@ -112,35 +115,32 @@ class FragmentSearch : Fragment() {
         }
     }
 
-    private fun adjustSearchBarPosition() {
-        //TODO Make smooth searchbar shrinking
-        val searchBarLayoutParams =
-            binding.searchBar.layoutParams as CollapsingToolbarLayout.LayoutParams
+    private fun adjustSearchBarPosition(offset: Int, maxScrollRange: Int) {
+        val tOffset = oldOffset
+        oldOffset = if (oldOffset == offset) oldOffset else offset
 
-        val homeButtonWidth = binding.supportToolbar.navigationIcon?.intrinsicWidth ?: 0
-
-        val maxSearchBarWidth = binding.supportToolbar.width - homeButtonWidth + 50
-
-        searchBarLayoutParams.width = maxSearchBarWidth - 150
-        searchBarLayoutParams.marginStart = homeButtonWidth + 90
-
-        searchBarLayoutParams.topMargin = 10
-        searchBarLayoutParams.bottomMargin = 10
-        searchBarLayoutParams.marginEnd = 10
-
-        binding.searchBar.layoutParams = searchBarLayoutParams
-    }
-
-    private fun resetSearchBarPosition() {
         val searchBarLayoutParams =
             binding.searchBar.layoutParams as CollapsingToolbarLayout.LayoutParams
 
         searchBarLayoutParams.collapseMode = CollapsingToolbarLayout.LayoutParams.COLLAPSE_MODE_PIN
-        searchBarLayoutParams.topMargin = 0
-        searchBarLayoutParams.marginStart = 10
+
+        val homeButtonWidth = binding.supportToolbar.navigationIcon?.intrinsicWidth ?: 0
+
+        if (oldOffset < 0) {
+            searchBarLayoutParams.width += ((-1) * (tOffset - offset) / 2.9).toInt()
+            searchBarLayoutParams.marginStart -= ((-1) * (tOffset - offset) / 2.9).toInt()
+        } else if (oldOffset == 0) {
+            searchBarLayoutParams.width = binding.supportToolbar.width - 20
+            searchBarLayoutParams.marginStart = 10
+        } else if (oldOffset == maxScrollRange * (-1)) {
+            searchBarLayoutParams.width =
+                (binding.supportToolbar.width - homeButtonWidth + 50) - 150
+            searchBarLayoutParams.marginStart = homeButtonWidth + 90
+        }
+
+        searchBarLayoutParams.topMargin = 10
+        searchBarLayoutParams.bottomMargin = 10
         searchBarLayoutParams.marginEnd = 10
-        searchBarLayoutParams.bottomMargin = 16
-        searchBarLayoutParams.width = binding.supportToolbar.width - 20
 
         binding.searchBar.layoutParams = searchBarLayoutParams
     }

@@ -10,6 +10,8 @@ import android.transition.TransitionInflater
 import android.view.Window
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
+import androidx.core.app.ActivityCompat
+import androidx.core.app.ActivityOptionsCompat
 import androidx.lifecycle.lifecycleScope
 import com.inlay.hotelroomservice.R
 import com.inlay.hotelroomservice.databinding.ActivitySplashBinding
@@ -29,13 +31,18 @@ class SplashActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         val intent = Intent(this@SplashActivity, MainActivity::class.java)
 
+        //TODO Transition between Activities doesn't work
         window.requestFeature(Window.FEATURE_ACTIVITY_TRANSITIONS)
         val transitionInflater = TransitionInflater.from(this)
         window.exitTransition = transitionInflater.inflateTransition(R.transition.fade_long)
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
-
-            startActivity(intent, ActivityOptions.makeSceneTransitionAnimation(this).toBundle())
+            val bundle =
+                ActivityOptionsCompat.makeCustomAnimation(this, R.anim.fade_in, R.anim.fade_out)
+                    .toBundle()
+            startActivity(intent, bundle)
+            overrideActivityTransition(OVERRIDE_TRANSITION_CLOSE, R.anim.fade_in, R.anim.fade_out)
+//            startActivity(intent, ActivityOptions.makeSceneTransitionAnimation(this).toBundle())
         } else {
             binding = ActivitySplashBinding.inflate(layoutInflater)
             binding.lifecycleOwner = this
@@ -65,7 +72,8 @@ class SplashActivity : AppCompatActivity() {
             CoroutineScope(Dispatchers.IO).launch {
                 delay(1000)
                 startActivity(intent)
-                finish()
+//                finish()
+                ActivityCompat.finishAfterTransition(this@SplashActivity)
             }
         }
     }

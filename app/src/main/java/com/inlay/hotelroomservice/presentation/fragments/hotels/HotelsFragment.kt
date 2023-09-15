@@ -77,6 +77,7 @@ class HotelsFragment : Fragment() {
         isOnline = requireContext().isNetworkAvailable()
         isLogged = isUserLogged(user)
 
+        //TODO Possible Animation-related Crash
         val transitionInflater = TransitionInflater.from(requireContext())
         enterTransition = transitionInflater.inflateTransition(R.transition.fade)
 
