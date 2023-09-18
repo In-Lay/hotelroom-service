@@ -1,5 +1,6 @@
 package com.inlay.hotelroomservice.service
 
+import android.annotation.SuppressLint
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.app.PendingIntent
@@ -19,6 +20,7 @@ import org.koin.android.ext.android.inject
 
 private const val CHANNEL_ID = "default_notification_channel_id"
 
+@SuppressLint("MissingFirebaseInstanceTokenRefresh")
 class NotificationsFirebaseMessagingService : FirebaseMessagingService() {
     private val getNotificationsState: GetNotificationsState by inject()
     override fun onMessageReceived(message: RemoteMessage) {
@@ -35,20 +37,6 @@ class NotificationsFirebaseMessagingService : FirebaseMessagingService() {
             }
         }
     }
-
-    override fun onNewToken(token: String) {
-        super.onNewToken(token)
-    }
-
-    //    @SuppressLint("RemoteViewLayout")
-//    private fun getRemoteViews(title: String, message: String) {
-//        val remoteViews =
-//            RemoteViews("com.inlay.hotelroomservice.service", R.layout.push_notification)
-//
-//        remoteViews.setTextViewText(R.id.tv_notification_title, title)
-//        remoteViews.setTextViewText(R.id.tv_notification_message, message)
-//        remoteViews.setImageViewResource(R.id.img_notification_icon, R.mipmap.ic_launcher_round)
-//    }
 
     private fun generateNotification(title: String, message: String) {
         val intent = Intent(this, MainActivity::class.java)

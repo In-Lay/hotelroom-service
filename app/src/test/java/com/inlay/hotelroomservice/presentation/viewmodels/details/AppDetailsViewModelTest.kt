@@ -3,16 +3,13 @@ package com.inlay.hotelroomservice.presentation.viewmodels.details
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.inlay.hotelroomservice.CoroutineTestRule
 import com.inlay.hotelroomservice.domain.usecase.details.GetHotelDetails
-import com.inlay.hotelroomservice.domain.usecase.hotels.GetHotelsRepo
 import com.inlay.hotelroomservice.presentation.models.details.HotelDetailsSearchModel
-import com.inlay.hotelroomservice.presentation.models.details.HotelDetailsUiModel
 import com.inlay.hotelroomservice.presentation.models.hotelsitem.DatesModel
 import io.mockk.mockk
 import io.mockk.verify
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
-import org.junit.jupiter.api.Assertions.*
 
 
 internal class AppDetailsViewModelTest {

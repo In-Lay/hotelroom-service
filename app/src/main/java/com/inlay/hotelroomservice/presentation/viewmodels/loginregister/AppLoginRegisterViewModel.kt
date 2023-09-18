@@ -1,6 +1,5 @@
 package com.inlay.hotelroomservice.presentation.viewmodels.loginregister
 
-import android.util.Patterns
 import androidx.core.util.PatternsCompat
 import androidx.lifecycle.asLiveData
 import com.google.firebase.auth.FirebaseAuth

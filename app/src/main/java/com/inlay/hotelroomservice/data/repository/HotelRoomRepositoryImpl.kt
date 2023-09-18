@@ -12,30 +12,20 @@ import com.inlay.hotelroomservice.presentation.models.locations.SearchLocationsU
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.map
-import org.koin.core.component.KoinComponent
 
 class HotelRoomRepositoryImpl(
     private val remoteDataSource: RemoteDataSource, private val localDataSource: LocalDataSource
-) : HotelRoomRepository, KoinComponent {
-    //TODO Works, uncomment
+) : HotelRoomRepository {
 
     override suspend fun getSearchLocationRepo(location: String): List<SearchLocationsUiModel> {
-        //Network
         val searchLocationData = remoteDataSource.getSearchLocationRepo(location)
         return if (searchLocationData.isSuccessful) {
             searchLocationData.body()?.data?.map {
                 it.toUiItem()
             }.orEmpty()
         } else listOf()
-
-        //JSon
-//        val searchLocationData: SearchLocationModel? by inject()
-//        return searchLocationData?.data?.map {
-//            it.toUiItem()
-//        }.orEmpty()
     }
 
-    //Works, uncomment
     override suspend fun getHotelRepo(
         isOnline: Boolean,
         geoId: String,
@@ -44,7 +34,6 @@ class HotelRoomRepositoryImpl(
         currencyCode: String
     ): AppResult<List<HotelsItemUiModel>, Int> {
         return if (isOnline) {
-            //Network
             val hotelsData =
                 remoteDataSource.getHotelsRepo(geoId, checkInDate, checkOutDate, currencyCode)
             if (hotelsData.isSuccessful) {
@@ -57,18 +46,6 @@ class HotelRoomRepositoryImpl(
             } else {
                 AppResult.Error(hotelsData.code())
             }
-
-            //JSon
-//            val sampleData: HotelsModel? by inject()
-//
-//            sampleData?.let { data ->
-//                localDataSource.insertRepo(data.generalData?.dataList?.map { it.toEntity() }
-//                    .orEmpty())
-//                data.generalData?.dataList?.map {
-//                    it.toUiItem()
-//                }
-//            }.orEmpty()
-
         } else {
             AppResult.Success(localDataSource.fetchRepo().first().map {
                 it.toUiItem()
@@ -87,11 +64,6 @@ class HotelRoomRepositoryImpl(
         return if (hotelDetailsData.isSuccessful) {
             AppResult.Success(hotelDetailsData.body().toUiModel())
         } else AppResult.Error(hotelDetailsData.code())
-
-        //Json
-//        val hotelDetailsData: HotelDetailsModel? by inject()
-//
-//        return hotelDetailsData.toUiModel()
     }
 
     override suspend fun getStaysRepo(

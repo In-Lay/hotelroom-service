@@ -2,11 +2,9 @@ package com.inlay.hotelroomservice.presentation.fragments.details
 
 import android.os.Build
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.WindowManager
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
@@ -24,15 +22,12 @@ import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
-import com.google.android.material.carousel.CarouselLayoutManager
-import com.google.android.material.carousel.FullScreenCarouselStrategy
 import com.google.android.material.chip.Chip
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.imageview.ShapeableImageView
 import com.inlay.hotelroomservice.R
 import com.inlay.hotelroomservice.databinding.FragmentDetailsBinding
 import com.inlay.hotelroomservice.presentation.activities.MainActivity
-import com.inlay.hotelroomservice.presentation.adapters.detailsdialog.detailsimage.DetailsImageAdapter
 import com.inlay.hotelroomservice.presentation.adapters.detailsdialog.placesnearby.PlacesNearbyDialogAdapter
 import com.inlay.hotelroomservice.presentation.models.details.HotelDetailsSearchModel
 import com.inlay.hotelroomservice.presentation.models.details.NearbyPlace
@@ -45,6 +40,7 @@ class FragmentDetails : Fragment(), OnMapReadyCallback {
     private val viewModel: DetailsViewModel by viewModel()
     private lateinit var hotelDetailsSearchModel: HotelDetailsSearchModel
 
+    @Suppress("DEPRECATION")
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
@@ -76,7 +72,6 @@ class FragmentDetails : Fragment(), OnMapReadyCallback {
         } else arguments?.getParcelable("HOTEL_DETAILS_SEARCH")!!
 
 
-        //TODO Possible Animation-related crash
         val transitionInflater = TransitionInflater.from(requireContext())
         enterTransition = transitionInflater.inflateTransition(R.transition.fade_long)
 
@@ -155,10 +150,7 @@ class FragmentDetails : Fragment(), OnMapReadyCallback {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.hotelImagesList.collect {
                     val dialog = DetailsImageDialog.instance(it)
-
                     dialog.show(parentFragmentManager, "DETAILS_IMAGE_DIALOG")
-
-//                    showImageDialog(it)
                 }
             }
         }
@@ -168,10 +160,6 @@ class FragmentDetails : Fragment(), OnMapReadyCallback {
         lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.restaurantsNearby.collect {
-//                    val dialog =
-//                        PlacesNearbyDialog.instance(it)
-//
-//                    dialog.show(parentFragmentManager, "PLACES_NEARBY_DIALOG")
                     showPlacesNearbyDialog(it)
                 }
             }
@@ -182,10 +170,7 @@ class FragmentDetails : Fragment(), OnMapReadyCallback {
         lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.attractionsNearby.collect {
-//                    val dialog =
-//                        PlacesNearbyDialog.instance(it)
-//
-//                    dialog.show(parentFragmentManager, "PLACES_NEARBY_DIALOG")
+
                     showPlacesNearbyDialog(it)
                 }
             }
@@ -218,45 +203,6 @@ class FragmentDetails : Fragment(), OnMapReadyCallback {
         dialog?.setCancelable(true)
         dialog?.setCanceledOnTouchOutside(true)
 
-        dialog?.show()
-    }
-
-    private fun showImageDialog(data: List<String>) {
-        Log.d("detailsDialogTag", "showImageDialog: data: $data")
-        val dialogBuilder = context?.let { MaterialAlertDialogBuilder(it) }
-        val inflater = layoutInflater
-//TODO Coil don't load images
-        val dialogView = inflater.inflate(R.layout.dialog_details_image, null)
-
-        dialogBuilder?.setView(dialogView)
-
-        val recyclerView = dialogView.findViewById<RecyclerView>(R.id.recycler_view)
-        val buttonClose = dialogView.findViewById<ShapeableImageView>(R.id.img_close_icon)
-
-        val carouselLayoutManager = CarouselLayoutManager()
-        carouselLayoutManager.setCarouselStrategy(FullScreenCarouselStrategy())
-
-        recyclerView.layoutManager = carouselLayoutManager
-
-//        recyclerView.layoutManager =
-//            LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
-
-        recyclerView.setHasFixedSize(false)
-
-        val adapter = DetailsImageAdapter(data)
-        recyclerView.adapter = adapter
-
-        val dialog = dialogBuilder?.create()
-
-        buttonClose.setOnClickListener {
-            dialog?.dismiss()
-        }
-        dialog?.setCancelable(true)
-        dialog?.setCanceledOnTouchOutside(true)
-        dialog?.window?.setLayout(
-            WindowManager.LayoutParams.MATCH_PARENT,
-            WindowManager.LayoutParams.MATCH_PARENT
-        )
         dialog?.show()
     }
 

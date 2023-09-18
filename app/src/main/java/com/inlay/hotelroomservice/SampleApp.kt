@@ -1,8 +1,6 @@
 package com.inlay.hotelroomservice
 
 import android.app.Application
-import android.os.Build
-import com.google.firebase.FirebaseApp
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase

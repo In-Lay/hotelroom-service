@@ -1,8 +1,6 @@
 package com.inlay.hotelroomservice.presentation.viewmodels.search
 
 import androidx.databinding.BindingAdapter
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
 import coil.load
@@ -48,8 +46,6 @@ class AppSearchViewModel(
     private val _currencyCode = MutableStateFlow("")
     override val currencyCode = _currencyCode.asLiveData()
 
-    //    @VisibleForTesting
-    //internal
     @VisibleForTesting
     internal val _searchData = MutableStateFlow(SearchDataUiModel("", "", "", ""))
     override val searchData = _searchData
@@ -66,10 +62,7 @@ class AppSearchViewModel(
     }
 
     override fun setDates(dates: DatesModel) {
-        println("dates: $dates")
         _dates.value = dates
-        println("_dates.value: ${_dates.value}")
-        println("dates.value: ${this.dates.value}")
     }
 
     override fun setCurrentItemModel(model: SearchLocationsUiModel) {
@@ -129,9 +122,13 @@ class AppSearchViewModel(
                 .setBottomRightCorner(CornerFamily.ROUNDED, 50F)
                 .setBottomLeftCorner(CornerFamily.ROUNDED, 50F).build()
             if (imgSource.isNullOrEmpty()) {
-                view.load(com.inlay.hotelroomservice.R.drawable.sample_locations_image)
+                view.load(com.inlay.hotelroomservice.R.drawable.sample_locations_image) {
+                    allowHardware(false)
+                }
             } else {
-                view.load(imgSource)
+                view.load(imgSource) {
+                    allowHardware(false)
+                }
             }
         }
     }

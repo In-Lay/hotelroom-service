@@ -81,14 +81,6 @@ import java.util.Locale
 
 private const val SHARED_PREFS_KEY = "LANG_SHRED_PREFS_KEY"
 val appModule = module {
-//    single {
-//        get<Application>().packageManager.getApplicationInfo(
-//            get<Application>().packageName,
-//            PackageManager.GET_META_DATA
-//        )
-//    }
-//
-//    single { get<ApplicationInfo>().metaData["HOTELSROOM_SERVICE_API_KEY"] }
 
     single {
         Room.databaseBuilder(

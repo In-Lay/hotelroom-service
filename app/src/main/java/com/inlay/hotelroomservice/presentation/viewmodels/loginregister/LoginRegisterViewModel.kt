@@ -41,5 +41,9 @@ abstract class LoginRegisterViewModel : ViewModel() {
     abstract fun isEmailValid(email: String): Boolean
 
     @VisibleForTesting
-    abstract fun changeUserCredentials(userMail: String, userPassword: String, userFullName: String?)
+    abstract fun changeUserCredentials(
+        userMail: String,
+        userPassword: String,
+        userFullName: String?
+    )
 }

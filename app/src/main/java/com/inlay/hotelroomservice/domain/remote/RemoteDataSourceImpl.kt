@@ -1,6 +1,5 @@
 package com.inlay.hotelroomservice.domain.remote
 
-import android.util.Log
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.DataSnapshot
@@ -66,12 +65,6 @@ class RemoteDataSourceImpl(
                     .addOnSuccessListener {
                         hotelsItemReference.removeEventListener(this)
                     }
-                //Updates item
-//                else {
-//                    snapshot.children.forEach {
-//                        it.ref.setValue(hotelsItem)
-//                    }
-//                }
             }
 
             override fun onCancelled(error: DatabaseError) {
@@ -87,7 +80,6 @@ class RemoteDataSourceImpl(
         val itemId = findItemIdToDelete(currentUser, databaseReference, hotelsItem)
 
         if (itemId.isNullOrEmpty()) {
-            Log.d("firebaseLog", "removeStaysRepo: itemId.isNullOrEmpty: $itemId")
         } else databaseReference.child(itemId)
             .removeValue()
     }

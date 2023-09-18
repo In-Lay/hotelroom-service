@@ -79,7 +79,6 @@ class FragmentSearch : Fragment() {
         binding.viewModel = searchViewModel
         binding.lifecycleOwner = this
 
-        //TODO Possible Animation-related crash
         val transitionInflater = TransitionInflater.from(requireContext())
         enterTransition = transitionInflater.inflateTransition(R.transition.fade)
 

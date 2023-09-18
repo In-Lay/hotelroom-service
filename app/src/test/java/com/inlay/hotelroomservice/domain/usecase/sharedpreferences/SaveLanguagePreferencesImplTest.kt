@@ -8,7 +8,6 @@ import io.mockk.verify
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
-import org.junit.jupiter.api.Assertions.*
 
 
 internal class SaveLanguagePreferencesImplTest {

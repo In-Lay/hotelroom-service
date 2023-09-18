@@ -146,7 +146,5 @@
             android:onCheckedChanged="@{(switch, isChecked) -> viewModel.onNotificationsSwitchChanged(isChecked)}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/divider_lang" />
-
-        <!--        TODO Add Currency and Distance Units Preference; Version, Privacy and Data info-->
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

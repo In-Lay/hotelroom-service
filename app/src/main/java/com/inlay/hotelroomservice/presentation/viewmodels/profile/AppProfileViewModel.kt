@@ -45,8 +45,6 @@ class AppProfileViewModel : ProfileViewModel() {
         @JvmStatic
         @BindingAdapter("profileImageSrc")
         fun loadImage(view: ShapeableImageView, url: Uri?) {
-//            view.shapeAppearanceModel =
-//                view.shapeAppearanceModel.toBuilder().setAllCornerSizes(85F).build()
             if (url == null) {
                 view.load(R.drawable.baseline_person_24)
                 {

@@ -1,8 +1,6 @@
 package com.inlay.hotelroomservice.presentation.viewmodels.loginregister
 
-import android.util.Patterns
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
-import androidx.core.util.PatternsCompat
 import androidx.lifecycle.Observer
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.android.gms.tasks.OnFailureListener
@@ -14,8 +12,6 @@ import com.google.firebase.auth.UserProfileChangeRequest
 import com.inlay.hotelroomservice.CoroutineTestRule
 import io.mockk.every
 import io.mockk.mockk
-import io.mockk.mockkObject
-import io.mockk.mockkStatic
 import io.mockk.verify
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.first
@@ -27,7 +23,6 @@ import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.junit.jupiter.api.Assertions.assertFalse
-import java.util.regex.Pattern
 
 
 internal class LoginRegisterViewModelTest {

@@ -1,6 +1,5 @@
 package com.inlay.hotelroomservice.presentation.viewmodels.details
 
-import android.util.Log
 import androidx.databinding.BindingAdapter
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.asLiveData
@@ -14,9 +13,7 @@ import com.inlay.hotelroomservice.presentation.models.details.HotelDetailsSearch
 import com.inlay.hotelroomservice.presentation.models.details.HotelDetailsUiModel
 import com.inlay.hotelroomservice.presentation.models.details.NearbyPlace
 import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
-import java.net.SocketTimeoutException
 import java.util.Locale
 
 class AppDetailsViewModel(private val getHotelDetails: GetHotelDetails) : DetailsViewModel() {
@@ -127,8 +124,6 @@ class AppDetailsViewModel(private val getHotelDetails: GetHotelDetails) : Detail
         openLinkInBrowserLambda = openLinkInBrowser
 
         getDetailsData(hotelDetailsSearchModel)
-
-//        Log.d("DetailsTag", "ViewModel: ${_hotelDetailsData.value?.rating}")
     }
 
     private fun getDetailsData(
@@ -230,8 +225,12 @@ class AppDetailsViewModel(private val getHotelDetails: GetHotelDetails) : Detail
             view.shapeAppearanceModel =
                 view.shapeAppearanceModel.toBuilder().setAllCornerSizes(50F).build()
             if (source.isNullOrEmpty()) {
-                view.load(R.drawable.sample_hotel_item_img_500x300)
-            } else view.load(source)
+                view.load(R.drawable.sample_hotel_item_img_500x300) {
+                    allowHardware(false)
+                }
+            } else view.load(source) {
+                allowHardware(false)
+            }
         }
     }
 }

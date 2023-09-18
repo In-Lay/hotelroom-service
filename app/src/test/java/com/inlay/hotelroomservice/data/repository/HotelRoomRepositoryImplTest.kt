@@ -4,7 +4,6 @@ package com.inlay.hotelroomservice.data.repository
 import com.inlay.hotelroomservice.CoroutineTestRule
 import com.inlay.hotelroomservice.data.local.database.models.HotelsItemEntity
 import com.inlay.hotelroomservice.data.local.database.models.HotelsItemStaysEntity
-import com.inlay.hotelroomservice.data.mapping.toEntity
 import com.inlay.hotelroomservice.data.mapping.toUiItem
 import com.inlay.hotelroomservice.data.remote.models.hoteldetails.HotelDetailsModel
 import com.inlay.hotelroomservice.data.remote.models.hotels.HotelsModel

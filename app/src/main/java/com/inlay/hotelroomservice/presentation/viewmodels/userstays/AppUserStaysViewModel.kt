@@ -1,6 +1,5 @@
 package com.inlay.hotelroomservice.presentation.viewmodels.userstays
 
-import android.content.Context
 import android.net.Uri
 import androidx.databinding.BindingAdapter
 import androidx.lifecycle.asLiveData
@@ -10,7 +9,6 @@ import com.google.android.material.imageview.ShapeableImageView
 import com.google.firebase.auth.FirebaseUser
 import com.inlay.hotelroomservice.R
 import kotlinx.coroutines.flow.MutableStateFlow
-import java.util.Calendar
 
 class AppUserStaysViewModel : UserStaysViewModel() {
     private val _user: MutableStateFlow<FirebaseUser?> = MutableStateFlow(null)
@@ -64,8 +62,6 @@ class AppUserStaysViewModel : UserStaysViewModel() {
         @JvmStatic
         @BindingAdapter("profileImageSource")
         fun loadImage(view: ShapeableImageView, src: Uri?) {
-//            view.shapeAppearanceModel =
-//                view.shapeAppearanceModel.toBuilder().setAllCornerSizes(85F).build()
             if (src == null) {
                 view.load(R.drawable.baseline_person_24) {
                     crossfade(true)

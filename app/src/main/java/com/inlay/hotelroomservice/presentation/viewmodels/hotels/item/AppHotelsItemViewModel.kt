@@ -10,7 +10,6 @@ import com.inlay.hotelroomservice.presentation.models.details.HotelDetailsSearch
 import com.inlay.hotelroomservice.presentation.models.hotelsitem.HotelsDatesAndCurrencyModel
 import com.inlay.hotelroomservice.presentation.models.hotelsitem.HotelsItemUiModel
 import kotlinx.coroutines.flow.MutableStateFlow
-import org.jetbrains.annotations.VisibleForTesting
 
 class AppHotelsItemViewModel : HotelsItemViewModel() {
     private val _hotelItemData: MutableStateFlow<HotelsItemUiModel?> = MutableStateFlow(null)

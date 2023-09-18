@@ -1,19 +1,13 @@
 package com.inlay.hotelroomservice.presentation.activities
 
 import android.annotation.SuppressLint
-import android.app.ActivityOptions
 import android.content.Intent
 import android.content.res.Configuration
 import android.os.Build
 import android.os.Bundle
-import android.transition.TransitionInflater
-import android.view.Window
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
-import androidx.core.app.ActivityCompat
-import androidx.core.app.ActivityOptionsCompat
 import androidx.lifecycle.lifecycleScope
-import com.inlay.hotelroomservice.R
 import com.inlay.hotelroomservice.databinding.ActivitySplashBinding
 import com.inlay.hotelroomservice.presentation.viewmodels.splash.SplashViewModel
 import kotlinx.coroutines.CoroutineScope
@@ -29,24 +23,17 @@ class SplashActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        binding = ActivitySplashBinding.inflate(layoutInflater)
+        binding.lifecycleOwner = this
+        setContentView(binding.root)
+
         val intent = Intent(this@SplashActivity, MainActivity::class.java)
 
-        //TODO Transition between Activities doesn't work
-        window.requestFeature(Window.FEATURE_ACTIVITY_TRANSITIONS)
-        val transitionInflater = TransitionInflater.from(this)
-        window.exitTransition = transitionInflater.inflateTransition(R.transition.fade_long)
-
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
-            val bundle =
-                ActivityOptionsCompat.makeCustomAnimation(this, R.anim.fade_in, R.anim.fade_out)
-                    .toBundle()
-            startActivity(intent, bundle)
-            overrideActivityTransition(OVERRIDE_TRANSITION_CLOSE, R.anim.fade_in, R.anim.fade_out)
-//            startActivity(intent, ActivityOptions.makeSceneTransitionAnimation(this).toBundle())
+            startActivity(intent)
+            finish()
         } else {
-            binding = ActivitySplashBinding.inflate(layoutInflater)
-            binding.lifecycleOwner = this
-            setContentView(binding.root)
 
             lifecycleScope.launch {
                 viewModel.nightModeState.collect {
@@ -68,12 +55,10 @@ class SplashActivity : AppCompatActivity() {
                     }
                 }
             }
-
             CoroutineScope(Dispatchers.IO).launch {
                 delay(1000)
                 startActivity(intent)
-//                finish()
-                ActivityCompat.finishAfterTransition(this@SplashActivity)
+                finish()
             }
         }
     }

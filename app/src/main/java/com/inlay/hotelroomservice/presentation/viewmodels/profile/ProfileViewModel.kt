@@ -4,7 +4,6 @@ import android.net.Uri
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import com.google.firebase.auth.FirebaseUser
-import kotlinx.coroutines.flow.StateFlow
 
 abstract class ProfileViewModel : ViewModel() {
     abstract val userName: LiveData<String>

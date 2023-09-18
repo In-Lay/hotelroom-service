@@ -9,7 +9,6 @@ import android.content.res.Configuration
 import android.os.Build
 import android.os.Bundle
 import android.transition.TransitionInflater
-import android.util.Log
 import android.view.View
 import android.view.ViewTreeObserver
 import android.view.Window
@@ -51,14 +50,8 @@ class MainActivity : AppCompatActivity(), DrawerProvider {
     private lateinit var navController: NavController
     private val hotelsViewModel: HotelsViewModel by viewModel()
 
-
-    //TODO Change App Icon!!!
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        Log.d("TimeoutLog", "onCreate")
-
-        //TODO No animations between activities
         window.requestFeature(Window.FEATURE_ACTIVITY_TRANSITIONS)
         window.allowEnterTransitionOverlap = true
         val transitionInflater = TransitionInflater.from(this)
@@ -138,11 +131,7 @@ class MainActivity : AppCompatActivity(), DrawerProvider {
 
         hotelsViewModel.initialize(isNetworkAvailable(), Firebase.auth.currentUser)
 
-//        val fadeTransition: Transition = Fade()
-//        val rootScene: ViewGroup = binding.fragmentContainerView
-//        val hotelsScene: Scene = Scene.getSceneForLayout(rootScene, R.layout.fragment_hotels, this)
         binding.fabSearch.setOnClickListener {
-//            TransitionManager.go(hotelsScene, fadeTransition)
             navController.navigate(R.id.fragmentSearch)
         }
 
@@ -158,30 +147,9 @@ class MainActivity : AppCompatActivity(), DrawerProvider {
         binding.lifecycleOwner = this
     }
 
-    override fun onStart() {
-        super.onStart()
-        Log.d("TimeoutLog", "onStart: ")
-    }
-
     override fun onResume() {
         super.onResume()
         hotelsViewModel.changeNotificationsAvailability(areNotificationsEnabled())
-        Log.d("TimeoutLog", "onResume: ")
-    }
-
-    override fun recreate() {
-        super.recreate()
-        Log.d("TimeoutLog", "recreate: ")
-    }
-
-    override fun onStop() {
-        super.onStop()
-        Log.d("TimeoutLog", "onStop: ")
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        Log.d("TimeoutLog", "onDestroy: ")
     }
 
     @RequiresApi(Build.VERSION_CODES.TIRAMISU)
@@ -202,22 +170,6 @@ class MainActivity : AppCompatActivity(), DrawerProvider {
             getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
         return notificationManager.areNotificationsEnabled()
     }
-
-//    override fun onRequestPermissionsResult(
-//        requestCode: Int,
-//        permissions: Array<out String>,
-//        grantResults: IntArray
-//    ) {
-//        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-//        when (requestCode) {
-//            NOTIFICATIONS_PERMISSION_CODE -> {
-//                if ((grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED)) {
-//                    hotelsViewModel.changeNotificationsState(true)
-//                }
-//                return
-//            }
-//        }
-//    }
 
     private fun setupNavigationDrawer() {
         val navHostFragment =
@@ -342,13 +294,13 @@ class MainActivity : AppCompatActivity(), DrawerProvider {
         lifecycleScope.launch {
             hotelsViewModel.errorMessage.collect {
                 if (it.isNotEmpty()) {
-                    showErrorDialog(it)
+                    showErrorDialog()
                 }
             }
         }
     }
 
-    private fun showErrorDialog(errorCode: String) {
+    private fun showErrorDialog() {
         val dialogBuilder = MaterialAlertDialogBuilder(this)
 
         dialogBuilder.apply {
