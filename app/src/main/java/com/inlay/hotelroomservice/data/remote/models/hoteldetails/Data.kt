@@ -10,11 +10,9 @@ data class Data(
     @Json(name = "rankingDetails") val rankingDetails: String?,
     @Json(name = "price") val price: Price?,
     @Json(name = "about") val about: About?,
-    @Json(name = "reviews") val reviews: Reviews?,
     @Json(name = "location") val location: Location?,
     @Json(name = "geoPoint") val geoPoint: GeoPoint?,
     @Json(name = "restaurantsNearby") val restaurantsNearby: RestaurantsNearby?,
     @Json(name = "attractionsNearby") val attractionsNearby: AttractionsNearby?,
-    @Json(name = "qA") val qA: QA?,
     @Json(name = "amenitiesScreen") val amenitiesScreen: List<AmenitiesScreen>
 )

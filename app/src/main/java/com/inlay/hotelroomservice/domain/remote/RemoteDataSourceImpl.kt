@@ -79,9 +79,7 @@ class RemoteDataSourceImpl(
         val databaseReference = database.reference.child("userStays").child(currentUser?.uid!!)
         val itemId = findItemIdToDelete(currentUser, databaseReference, hotelsItem)
 
-        if (itemId.isNullOrEmpty()) {
-        } else databaseReference.child(itemId)
-            .removeValue()
+        if (!itemId.isNullOrEmpty()) databaseReference.child(itemId).removeValue()
     }
 
     override suspend fun findItemIdToDelete(

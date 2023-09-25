@@ -115,8 +115,4 @@
     <style name="EditImageView">
         <item name="android:src">@drawable/outline_edit_24</item>
     </style>
-
-    <style name="PhoneImageView">
-        <item name="android:src">@drawable/outline_phone_24</item>
-    </style>
 </resources>

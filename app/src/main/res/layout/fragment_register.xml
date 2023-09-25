@@ -15,11 +15,11 @@
 
         <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/img_close_icon"
+            style="@style/NavBackButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
             android:onClick="@{() -> viewModel.close()}"
-            style="@style/NavBackButton"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 

@@ -8,7 +8,6 @@ import com.inlay.hotelroomservice.databinding.DetailsPhotoItemBinding
 class DetailsImageViewHolder(private val binding: DetailsPhotoItemBinding) :
     ViewHolder(binding.root) {
     fun bind(url: String?) {
-        Log.d("detailsDialogTag", "bind: url: $url")
         binding.imgDetailsItemPhoto.load(
             url
         )
