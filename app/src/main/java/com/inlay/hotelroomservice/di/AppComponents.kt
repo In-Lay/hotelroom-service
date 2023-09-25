@@ -5,9 +5,6 @@ import android.content.SharedPreferences
 import androidx.room.Room
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
-import com.inlay.hotelroomservice.data.getSampleDetailsDataFromAssets
-import com.inlay.hotelroomservice.data.getSampleHotelsDataFromAssets
-import com.inlay.hotelroomservice.data.getSampleLocationsDataFromAssets
 import com.inlay.hotelroomservice.data.local.database.HotelsRoomDatabase
 import com.inlay.hotelroomservice.data.local.datastore.AppSettingsDataStore
 import com.inlay.hotelroomservice.data.local.datastore.SettingsDataStore
@@ -98,10 +95,6 @@ val appModule = module {
     single { makeNetworkService(moshi = get(), client = get()) }
     single { get<Retrofit>().create(HotelRoomApi::class.java) }
     single<HotelRoomApiService> { HotelRoomApiServiceImpl(hotelRoomApi = get()) }
-
-    single { getSampleHotelsDataFromAssets(moshi = get(), context = androidContext()) }
-    single { getSampleLocationsDataFromAssets(context = androidContext(), moshi = get()) }
-    single { getSampleDetailsDataFromAssets(context = androidContext(), moshi = get()) }
 
     single<SettingsDataStore> { AppSettingsDataStore(context = androidContext()) }
 

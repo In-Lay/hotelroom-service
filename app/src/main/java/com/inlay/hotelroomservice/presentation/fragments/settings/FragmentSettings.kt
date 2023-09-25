@@ -45,11 +45,14 @@ class FragmentSettings : Fragment() {
 
         val toolbar = binding.toolbar.findViewById<MaterialToolbar>(R.id.toolbar_general)
 
-        (activity as AppCompatActivity).apply {
-            setSupportActionBar(toolbar)
-            supportActionBar?.setDisplayHomeAsUpEnabled(true)
-            supportActionBar?.title =
-                findNavController().currentDestination?.label
+        if (activity is AppCompatActivity) {
+            (activity as AppCompatActivity).apply {
+                setSupportActionBar(toolbar)
+                supportActionBar?.setDisplayHomeAsUpEnabled(true)
+                supportActionBar?.title =
+                    findNavController().currentDestination?.label
+            }
+
         }
 
         toolbar.apply {
@@ -214,10 +217,11 @@ class FragmentSettings : Fragment() {
             setNegativeButton(R.string.dismiss) { dialog, _ ->
                 dialog.dismiss()
             }
-            setPositiveButton(R.string.ok) { _, _ ->
+            setPositiveButton(R.string.change) { _, _ ->
                 hotelsViewModel.changeLanguage(languageCode)
 
-                (activity as MainActivity).recreate()
+                if (activity is MainActivity)
+                    (activity as MainActivity).recreate()
             }
         }
 

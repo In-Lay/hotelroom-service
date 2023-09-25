@@ -190,6 +190,7 @@
                     app:layout_constraintTop_toBottomOf="@id/tv_dates">
 
                     <com.google.android.material.textfield.MaterialAutoCompleteTextView
+                        android:id="@+id/atv_currencies"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:inputType="none"

@@ -4,167 +4,176 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-        <import type="java.util.List"/>
+
+        <import type="java.util.List" />
+
         <variable
             name="viewModel"
             type="com.inlay.hotelroomservice.presentation.viewmodels.settings.SettingsViewModel" />
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <ScrollView
+        android:id="@+id/lang_dialog_scroll_view"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent">
 
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/tv_lang_en"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="24dp"
-            android:text="@{viewModel.langsList[0]}"
-            android:textAppearance="?attr/textAppearanceHeadline6"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:text="English" />
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/lang_dialog_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/tv_lang_ua"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="36dp"
-            android:text="@{viewModel.langsList[1]}"
-            android:textAppearance="?attr/textAppearanceHeadline6"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tv_lang_en"
-            tools:text="Ukrainian" />
-
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/tv_lang_ru"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="36dp"
-            android:text="@{viewModel.langsList[2]}"
-            android:textAppearance="?attr/textAppearanceHeadline6"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tv_lang_ua"
-            tools:text="Russian" />
-
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/tv_lang_es"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="36dp"
-            android:text="@{viewModel.langsList[3]}"
-            android:textAppearance="?attr/textAppearanceHeadline6"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tv_lang_ru"
-            tools:text="Spanish" />
-
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/tv_lang_de"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="36dp"
-            android:text="@{viewModel.langsList[4]}"
-            android:textAppearance="?attr/textAppearanceHeadline6"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tv_lang_es"
-            tools:text="German" />
-
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/tv_lang_it"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="36dp"
-            android:text="@{viewModel.langsList[5]}"
-            android:textAppearance="?attr/textAppearanceHeadline6"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tv_lang_de"
-            tools:text="Italian" />
-
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/tv_lang_fr"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="36dp"
-            android:text="@{viewModel.langsList[6]}"
-            android:textAppearance="?attr/textAppearanceHeadline6"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tv_lang_it"
-            tools:text="French" />
-
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/tv_lang_zh"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="36dp"
-            android:text="@{viewModel.langsList[7]}"
-            android:textAppearance="?attr/textAppearanceHeadline6"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tv_lang_fr"
-            tools:text="Chinese" />
-
-        <RadioGroup
-            android:id="@+id/rado_group"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
-
-            <com.google.android.material.radiobutton.MaterialRadioButton
-                android:id="@+id/btn_eng"
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tv_lang_en"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="8dp" />
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="24dp"
+                android:text="@{viewModel.langsList[0]}"
+                android:textAppearance="?attr/textAppearanceHeadline6"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="English" />
 
-            <com.google.android.material.radiobutton.MaterialRadioButton
-                android:id="@+id/btn_ua"
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tv_lang_ua"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="8dp" />
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="36dp"
+                android:text="@{viewModel.langsList[1]}"
+                android:textAppearance="?attr/textAppearanceHeadline6"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_lang_en"
+                tools:text="Ukrainian" />
 
-            <com.google.android.material.radiobutton.MaterialRadioButton
-                android:id="@+id/btn_ru"
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tv_lang_ru"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="8dp" />
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="36dp"
+                android:text="@{viewModel.langsList[2]}"
+                android:textAppearance="?attr/textAppearanceHeadline6"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_lang_ua"
+                tools:text="Russian" />
 
-            <com.google.android.material.radiobutton.MaterialRadioButton
-                android:id="@+id/btn_es"
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tv_lang_es"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="8dp" />
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="36dp"
+                android:text="@{viewModel.langsList[3]}"
+                android:textAppearance="?attr/textAppearanceHeadline6"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_lang_ru"
+                tools:text="Spanish" />
 
-            <com.google.android.material.radiobutton.MaterialRadioButton
-                android:id="@+id/btn_de"
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tv_lang_de"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="8dp" />
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="36dp"
+                android:text="@{viewModel.langsList[4]}"
+                android:textAppearance="?attr/textAppearanceHeadline6"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_lang_es"
+                tools:text="German" />
 
-            <com.google.android.material.radiobutton.MaterialRadioButton
-                android:id="@+id/btn_it"
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tv_lang_it"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="8dp" />
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="36dp"
+                android:text="@{viewModel.langsList[5]}"
+                android:textAppearance="?attr/textAppearanceHeadline6"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_lang_de"
+                tools:text="Italian" />
 
-            <com.google.android.material.radiobutton.MaterialRadioButton
-                android:id="@+id/btn_fr"
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tv_lang_fr"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="8dp" />
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="36dp"
+                android:text="@{viewModel.langsList[6]}"
+                android:textAppearance="?attr/textAppearanceHeadline6"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_lang_it"
+                tools:text="French" />
 
-            <com.google.android.material.radiobutton.MaterialRadioButton
-                android:id="@+id/btn_zh"
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tv_lang_zh"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="8dp" />
-        </RadioGroup>
-    </androidx.constraintlayout.widget.ConstraintLayout>
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="36dp"
+                android:text="@{viewModel.langsList[7]}"
+                android:textAppearance="?attr/textAppearanceHeadline6"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_lang_fr"
+                tools:text="Chinese" />
+
+            <RadioGroup
+                android:id="@+id/rado_group"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <com.google.android.material.radiobutton.MaterialRadioButton
+                    android:id="@+id/btn_eng"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="8dp" />
+
+                <com.google.android.material.radiobutton.MaterialRadioButton
+                    android:id="@+id/btn_ua"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="8dp" />
+
+                <com.google.android.material.radiobutton.MaterialRadioButton
+                    android:id="@+id/btn_ru"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="8dp" />
+
+                <com.google.android.material.radiobutton.MaterialRadioButton
+                    android:id="@+id/btn_es"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="8dp" />
+
+                <com.google.android.material.radiobutton.MaterialRadioButton
+                    android:id="@+id/btn_de"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="8dp" />
+
+                <com.google.android.material.radiobutton.MaterialRadioButton
+                    android:id="@+id/btn_it"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="8dp" />
+
+                <com.google.android.material.radiobutton.MaterialRadioButton
+                    android:id="@+id/btn_fr"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="8dp" />
+
+                <com.google.android.material.radiobutton.MaterialRadioButton
+                    android:id="@+id/btn_zh"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="8dp" />
+            </RadioGroup>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
 </layout>

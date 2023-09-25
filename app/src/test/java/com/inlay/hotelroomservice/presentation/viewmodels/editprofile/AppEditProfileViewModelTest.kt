@@ -19,10 +19,10 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.advanceUntilIdle
 import kotlinx.coroutines.test.runCurrent
 import kotlinx.coroutines.test.runTest
+import org.junit.Assert.assertEquals
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
-import org.junit.jupiter.api.Assertions.*
 
 internal class AppEditProfileViewModelTest {
     @get:Rule
@@ -190,7 +190,6 @@ internal class AppEditProfileViewModelTest {
     @OptIn(ExperimentalCoroutinesApi::class)
     @Test
     fun changeFullName() = runTest {
-        println("changeFullName test start")
         val profileUpdateBuilder = mockk<UserProfileChangeRequest.Builder>(relaxed = true)
 
         every { profileUpdateBuilder.displayName } returns "New User Name"
@@ -223,7 +222,6 @@ internal class AppEditProfileViewModelTest {
     @OptIn(ExperimentalCoroutinesApi::class)
     @Test
     fun `changeEmail with successful auth`() = runTest {
-        println("start of the test")
         val userMail = "userMail@mail.com"
         val userPassword = "password"
 

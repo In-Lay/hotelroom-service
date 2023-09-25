@@ -285,9 +285,8 @@ class MainActivity : AppCompatActivity(), DrawerProvider {
     }
 
     fun showProgressBar(status: Boolean) {
-        if (status) binding.progressBar.visibility = View.VISIBLE
-        else binding.progressBar.visibility = View.GONE
-
+        if (status) binding.activityProgressBar.visibility = View.VISIBLE
+        else binding.activityProgressBar.visibility = View.GONE
     }
 
     private fun observeAndShowErrors() {

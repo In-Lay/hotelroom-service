@@ -6,6 +6,7 @@
     </data>
 
     <androidx.appcompat.widget.LinearLayoutCompat
+        android:id="@+id/places_nearby_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">

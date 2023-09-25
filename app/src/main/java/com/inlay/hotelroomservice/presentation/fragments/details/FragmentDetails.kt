@@ -46,14 +46,16 @@ class FragmentDetails : Fragment(), OnMapReadyCallback {
     ): View {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_details, null, false)
 
-        (activity as MainActivity).showProgressBar(false)
+        if (activity is MainActivity || activity is AppCompatActivity) {
+            (activity as MainActivity).showProgressBar(false)
 
-        (activity as AppCompatActivity).apply {
-            setSupportActionBar(binding.toolbar)
-            supportActionBar?.setDisplayHomeAsUpEnabled(true)
-            supportActionBar?.setDisplayShowHomeEnabled(true)
-            supportActionBar?.title =
-                findNavController().currentDestination?.label
+            (activity as AppCompatActivity).apply {
+                setSupportActionBar(binding.toolbar)
+                supportActionBar?.setDisplayHomeAsUpEnabled(true)
+                supportActionBar?.setDisplayShowHomeEnabled(true)
+                supportActionBar?.title =
+                    findNavController().currentDestination?.label
+            }
         }
 
         binding.toolbar.apply {

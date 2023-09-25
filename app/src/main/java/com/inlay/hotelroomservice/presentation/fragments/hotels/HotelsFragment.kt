@@ -103,7 +103,7 @@ class HotelsFragment : Fragment() {
         lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 hotelsViewModel.hotelsDataList.collectLatest {
-                    binding.recyclerView.adapter =
+                    binding.hotelsRecyclerView.adapter =
                         HotelsListAdapter(
                             it,
                             hotelsDatesAndCurrencyModel,
@@ -111,8 +111,8 @@ class HotelsFragment : Fragment() {
                             addStay,
                             "main"
                         )
-                    binding.recyclerView.layoutManager = LinearLayoutManager(context)
-                    binding.recyclerView.setHasFixedSize(false)
+                    binding.hotelsRecyclerView.layoutManager = LinearLayoutManager(context)
+                    binding.hotelsRecyclerView.setHasFixedSize(false)
                 }
             }
         }

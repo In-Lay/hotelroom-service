@@ -52,11 +52,13 @@ class FragmentSearch : Fragment() {
 
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_search, container, false)
 
-        (activity as AppCompatActivity).apply {
-            setSupportActionBar(binding.supportToolbar)
-            supportActionBar?.setDisplayHomeAsUpEnabled(true)
-            supportActionBar?.setDisplayShowHomeEnabled(true)
-            supportActionBar?.setDisplayShowTitleEnabled(false)
+        if (activity is AppCompatActivity) {
+            (activity as AppCompatActivity).apply {
+                setSupportActionBar(binding.supportToolbar)
+                supportActionBar?.setDisplayHomeAsUpEnabled(true)
+                supportActionBar?.setDisplayShowHomeEnabled(true)
+                supportActionBar?.setDisplayShowTitleEnabled(false)
+            }
         }
 
         binding.supportToolbar.apply {

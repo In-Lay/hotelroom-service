@@ -76,4 +76,5 @@
     <string name="server_error_message">L\'errore si è verificato sui server. \nPer favore riprova più tardi.</string>
     <string name="no_photo_selected">Nessuna foto selezionata</string>
     <string name="invalid_email">E-mail non valido</string>
+    <string name="change">Cambia</string>
 </resources>

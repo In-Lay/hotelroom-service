@@ -76,4 +76,5 @@
     <string name="server_error_message">Der Fehler ist auf Servern aufgetreten. \nBitte versuchen Sie es später noch einmal.</string>
     <string name="no_photo_selected">Kein Foto ausgewählt</string>
     <string name="invalid_email">Ungültige E-Mail</string>
+    <string name="change">ändern</string>
 </resources>

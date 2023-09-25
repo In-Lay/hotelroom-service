@@ -76,4 +76,5 @@
     <string name="server_error_message">服务器出现错误。\n请稍后再试。</string>
     <string name="no_photo_selected">未选择照片</string>
     <string name="invalid_email">无效电子邮件</string>
+    <string name="change">语言</string>
 </resources>

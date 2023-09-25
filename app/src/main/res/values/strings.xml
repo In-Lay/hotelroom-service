@@ -84,5 +84,6 @@
     <string name="server_error_message">The error occurred on servers. \nPlease, try again later.</string>
     <string name="no_photo_selected">No photo selected</string>
     <string name="invalid_email">Invalid Email</string>
+    <string name="change">Change</string>
 
 </resources>

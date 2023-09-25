@@ -21,8 +21,8 @@ android {
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        resourceConfigurations += ['en', 'ru', 'ua', 'es', 'zh', 'de', 'fr', 'it']
 
-        resConfigs "en", "ru", "ua", "es", "zh", "de", "fr", "it"
 
         Properties properties = new Properties()
         properties.load(project.rootProject.file("local.properties").newDataInputStream())
@@ -51,6 +51,7 @@ android {
 
     testOptions {
         unitTests.returnDefaultValues = true
+        animationsDisabled = true
     }
     testOptions {
         unitTests {
@@ -67,17 +68,7 @@ dependencies {
     implementation("com.google.firebase:firebase-storage-ktx")
     implementation("com.google.firebase:firebase-messaging-ktx")
     implementation 'androidx.test:core-ktx:1.5.0'
-    testImplementation 'org.junit.jupiter:junit-jupiter'
-    testImplementation 'org.junit.jupiter:junit-jupiter'
-    testImplementation 'org.junit.jupiter:junit-jupiter'
-    testImplementation 'org.junit.jupiter:junit-jupiter'
-    testImplementation 'org.junit.jupiter:junit-jupiter'
-    testImplementation 'org.junit.jupiter:junit-jupiter'
-    testImplementation 'org.junit.jupiter:junit-jupiter'
-    androidTestImplementation 'org.junit.jupiter:junit-jupiter'
-    androidTestImplementation 'org.junit.jupiter:junit-jupiter'
-    androidTestImplementation 'org.junit.jupiter:junit-jupiter'
-    androidTestImplementation 'org.junit.jupiter:junit-jupiter'
+    implementation 'androidx.test.espresso:espresso-contrib:3.5.1'
 
     kapt 'org.jetbrains.kotlinx:kotlinx-metadata-jvm:0.7.0'
 
@@ -100,7 +91,7 @@ dependencies {
     //Room
     implementation "androidx.room:room-runtime:2.5.2"
     implementation "androidx.room:room-ktx:2.5.2"
-    kapt "androidx.room:room-compiler:2.5.2"
+    ksp("androidx.room:room-compiler:2.5.2")
 
     //Retrofit
     implementation 'com.squareup.retrofit2:retrofit:2.9.0'
@@ -143,5 +134,8 @@ dependencies {
     testImplementation 'io.mockk:mockk:1.13.7'
     testImplementation 'org.robolectric:robolectric:4.9'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
+    androidTestImplementation 'androidx.test:runner:1.5.2'
+    androidTestImplementation 'androidx.test:rules:1.5.0'
     debugImplementation "androidx.fragment:fragment-testing:1.6.1"
+    androidTestImplementation 'androidx.test.espresso:espresso-contrib:3.5.1'
 }

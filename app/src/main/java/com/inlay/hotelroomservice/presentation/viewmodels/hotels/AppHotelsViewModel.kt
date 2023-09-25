@@ -83,6 +83,7 @@ class AppHotelsViewModel(
         val dummyDates = getDummyDates()
         val hotelsDatesAndCurrency = HotelsDatesAndCurrencyModel(dummyDates, "USD")
         _hotelsDatesAndCurrencyModel.value = hotelsDatesAndCurrency
+
         getHotelsRepo(
             isOnline = _isOnline.value,
             geoId = "60763",
